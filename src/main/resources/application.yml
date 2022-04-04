@@ -12,3 +12,8 @@ spring:
     host: localhost
     port: 6379
     timeout: 5000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nju_testing
+    username: root
+    password: wzmzmhk0707
