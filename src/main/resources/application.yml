@@ -14,6 +14,6 @@ spring:
     timeout: 5000
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/nju_testing
+    url: jdbc:mysql://localhost:3306/nju_testing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: wzmzmhk0707
+    password: root
