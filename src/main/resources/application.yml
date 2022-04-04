@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+usr.:
+  jwt:
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    expire: 172800
+    header: token
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 5000
