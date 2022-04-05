@@ -59,7 +59,7 @@ public class ShiroConfig {
 
 
         // inject redisCacheManager
-        securityManager.setCacheManager(redisCacheManager);
+        //securityManager.setCacheManager(redisCacheManager);
         return securityManager;
     }
 
