@@ -14,15 +14,4 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    @Override
-    public List<User> selectUserByName(String username) {
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("username", username);
-        return baseMapper.selectList(wrapper);
-    }
-
-    @Override
-    public List<User> selectAllUsers() {
-        return this.baseMapper.selectList(null);
-    }
 }
