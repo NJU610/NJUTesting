@@ -14,6 +14,11 @@ spring:
     timeout: 5000
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/nju_testing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/nju_testing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: root
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: nju_testing
