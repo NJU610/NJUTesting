@@ -99,4 +99,24 @@ public class CommonResult<T> implements Serializable {
         return error(serviceException.getCode(), serviceException.getMessage());
     }
 
+    /**
+     * 项目返回数据格式，新建CommonResult<T>后，通过Convert方法转化为MyResult<T>
+     *
+     */
+    @Data
+    static public class MyResult<T> implements Serializable {
+        private boolean success;
+        private Integer code;
+        private T data;
+        private String errorMessage;
+    }
+
+    public MyResult<T> convert() {
+        MyResult<T> result = new MyResult<>();
+        result.setSuccess(isSuccess());
+        result.setCode(code);
+        result.setData(data);
+        result.setErrorMessage(msg);
+        return result;
+    }
 }
