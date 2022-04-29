@@ -24,6 +24,8 @@ public interface AdminAuthService extends SecurityAuthFrameworkService {
      */
     String login(@Valid AuthLoginReqVO reqVO, String userIp, String userAgent);
 
+    String mobileLogin(AuthMobileLoginReqVO reqVO, String userIp, String userAgent);
+
     /**
      * 社交登录，使用 code 授权码
      *
@@ -52,4 +54,9 @@ public interface AdminAuthService extends SecurityAuthFrameworkService {
      */
     void socialBind(Long userId, @Valid AuthSocialBindReqVO reqVO);
 
+    void sendSmsCode(Long loginUserId, AuthSendSmsReqVO reqVO);
+
+    String smsLogin(AuthSmsLoginReqVO reqVO, String clientIP, String userAgent);
+
+    void resetPassword(AuthResetPasswordReqVO reqVO);
 }

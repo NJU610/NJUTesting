@@ -398,4 +398,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         return userMapper.selectListByStatus(status);
     }
 
+    @Override
+    public AdminUserDO getUserByMobile(String mobile) { return userMapper.selectByMobile(mobile); }
+
 }

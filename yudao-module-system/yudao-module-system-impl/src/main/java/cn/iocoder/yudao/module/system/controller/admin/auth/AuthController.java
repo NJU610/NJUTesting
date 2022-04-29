@@ -5,6 +5,7 @@ import cn.iocoder.yudao.framework.common.enums.UserTypeEnum;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.util.collection.SetUtils;
 import cn.iocoder.yudao.framework.operatelog.core.annotations.OperateLog;
+import cn.iocoder.yudao.framework.security.core.annotations.PreAuthenticated;
 import cn.iocoder.yudao.module.system.controller.admin.auth.vo.auth.*;
 import cn.iocoder.yudao.module.system.convert.auth.AuthConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.MenuDO;
@@ -55,10 +56,44 @@ public class AuthController {
     @PostMapping("/login")
     @ApiOperation("使用账号密码登录")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO) {
+    public CommonResult.MyResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO) {
         String token = authService.login(reqVO, getClientIP(), getUserAgent());
         // 返回结果
-        return success(AuthLoginRespVO.builder().token(token).build());
+        return success(AuthLoginRespVO.builder().token(token).build()).convert();
+    }
+
+    @PostMapping("/mobile-login")
+    @ApiOperation("使用手机号密码登录")
+    @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
+    public CommonResult.MyResult<AuthMobileLoginRespVO> login(@RequestBody @Valid AuthMobileLoginReqVO reqVO) {
+        String token = authService.mobileLogin(reqVO, getClientIP(), getUserAgent());
+        // 返回结果
+        return success(AuthMobileLoginRespVO.builder().token(token).build()).convert();
+    }
+
+    @PostMapping("/sms-login")
+    @ApiOperation("使用手机 + 验证码登录")
+    @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
+    public CommonResult.MyResult<AuthLoginRespVO> smsLogin(@RequestBody @Valid AuthSmsLoginReqVO reqVO) {
+        String token = authService.smsLogin(reqVO, getClientIP(), getUserAgent());
+        // 返回结果
+        return success(AuthLoginRespVO.builder().token(token).build()).convert();
+    }
+
+    @PostMapping("/send-sms-code")
+    @ApiOperation(value = "发送手机验证码")
+    @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
+    public CommonResult.MyResult<Boolean> sendSmsCode(@RequestBody @Valid AuthSendSmsReqVO reqVO) {
+        authService.sendSmsCode(getLoginUserId(), reqVO);
+        return success(true).convert();
+    }
+
+    @PostMapping("/reset-password")
+    @ApiOperation(value = "重置密码", notes = "用户忘记密码时使用")
+    @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
+    public CommonResult<Boolean> resetPassword(@RequestBody @Valid AuthResetPasswordReqVO reqVO) {
+        authService.resetPassword(reqVO);
+        return success(true);
     }
 
     @GetMapping("/get-permission-info")

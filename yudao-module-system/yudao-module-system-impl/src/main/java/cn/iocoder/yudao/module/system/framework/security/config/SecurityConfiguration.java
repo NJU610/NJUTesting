@@ -20,8 +20,12 @@ public class SecurityConfiguration {
             public void customize(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
                 // 登录的接口，可匿名访问
                 registry.antMatchers(buildAdminApi("/system/login")).anonymous();
+                registry.antMatchers(buildAdminApi("/system/mobile-login")).anonymous();
+                registry.antMatchers(buildAdminApi("/system/sms-login")).anonymous();
+                registry.antMatchers(buildAdminApi("/system/reset-password")).anonymous();
                 // 验证码的接口
                 registry.antMatchers(buildAdminApi("/system/captcha/**")).anonymous();
+                registry.antMatchers(buildAdminApi("/system/send-sms-code")).anonymous();
                 // 获得租户编号的接口
                 registry.antMatchers(buildAdminApi("/system/tenant/get-id-by-name")).anonymous();
                 // 短信回调 API

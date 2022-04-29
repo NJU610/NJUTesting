@@ -16,9 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum SmsSceneEnum implements IntArrayValuable {
 
-    MEMBER_LOGIN(1, "user-sms-login", "会员用户 - 手机号登陆"),
-    MEMBER_UPDATE_MOBILE(2, "user-sms-reset-password", "会员用户 - 修改手机"),
-    MEMBER_FORGET_PASSWORD(3, "user-sms-update-mobile", "会员用户 - 忘记密码");
+    MEMBER_LOGIN(1, "user-sms-login", "手机号登陆"),
+    MEMBER_UPDATE_MOBILE(2, "user-sms-reset-password", "修改手机"),
+    MEMBER_FORGET_PASSWORD(3, "user-sms-update-mobile", "忘记密码"),
+    ADMIN_LOGIN(4, "admin-user-sms-login", "手机号登陆"),
+    ADMIN_FORGET_PASSWORD(5, "admin-sms-reset-password", "忘记密码");
 
     // 如果未来希望管理后台支持手机验证码登陆，可以通过添加 ADMIN_MEMBER_LOGIN 枚举
 

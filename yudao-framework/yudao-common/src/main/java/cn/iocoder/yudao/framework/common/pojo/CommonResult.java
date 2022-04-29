@@ -106,7 +106,7 @@ public class CommonResult<T> implements Serializable {
     @Data
     static public class MyResult<T> implements Serializable {
         private boolean success;
-        private Integer code;
+        private Integer errorCode;
         private T data;
         private String errorMessage;
     }
@@ -114,7 +114,7 @@ public class CommonResult<T> implements Serializable {
     public MyResult<T> convert() {
         MyResult<T> result = new MyResult<>();
         result.setSuccess(isSuccess());
-        result.setCode(code);
+        result.setErrorCode(code);
         result.setData(data);
         result.setErrorMessage(msg);
         return result;

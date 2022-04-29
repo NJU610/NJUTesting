@@ -200,4 +200,11 @@ public interface AdminUserService {
      */
     List<AdminUserDO> getUsersByStatus(Integer status);
 
+    /**
+     * 通过手机号查询用户
+     *
+     * @param mobile 手机号码
+     * @return 用户对象信息
+     */
+    AdminUserDO getUserByMobile(String mobile);
 }
