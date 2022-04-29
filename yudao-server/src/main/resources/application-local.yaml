@@ -61,6 +61,12 @@ spring:
     port: 6379 # 端口
     database: 0 # 数据库索引
 
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: nju_testing
+
 --- #################### 定时任务相关配置 ####################
 
 # Quartz 配置项，对应 QuartzProperties 配置类
