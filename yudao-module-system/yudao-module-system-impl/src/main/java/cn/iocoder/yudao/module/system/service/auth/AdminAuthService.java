@@ -59,4 +59,6 @@ public interface AdminAuthService extends SecurityAuthFrameworkService {
     String smsLogin(AuthSmsLoginReqVO reqVO, String clientIP, String userAgent);
 
     void resetPassword(AuthResetPasswordReqVO reqVO);
+
+    String register(AuthRegisterReqVO reqVO, String clientIP, String userAgent);
 }

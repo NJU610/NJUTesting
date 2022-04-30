@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
@@ -91,9 +92,31 @@ public class AuthController {
     @PostMapping("/reset-password")
     @ApiOperation(value = "重置密码", notes = "用户忘记密码时使用")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult<Boolean> resetPassword(@RequestBody @Valid AuthResetPasswordReqVO reqVO) {
+    public CommonResult.MyResult<Boolean> resetPassword(@RequestBody @Valid AuthResetPasswordReqVO reqVO) {
         authService.resetPassword(reqVO);
-        return success(true);
+        return success(true).convert();
+    }
+
+    @PostMapping("/register")
+    @ApiOperation(value = "注册", notes = "用户注册")
+    @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
+    public CommonResult.MyResult<AuthRegisterRespVO> register(@RequestBody @Valid AuthRegisterReqVO reqVO) {
+        String token = authService.register(reqVO, getClientIP(), getUserAgent());
+        return success(AuthRegisterRespVO.builder().token(token).build()).convert();
+    }
+
+
+    @GetMapping("/menus")
+    @ApiOperation("获得登录用户的菜单列表")
+    public CommonResult.MyResult<List<AuthSimpleMenuRespVO>> listSimpleMenus() {
+        // 获得用户拥有的菜单列表
+        List<MenuDO> menuList = permissionService.getRoleMenuListFromCache(
+                getLoginUserRoleIds(),
+                SetUtils.asSet(MenuTypeEnum.MENU.getType()),
+                SetUtils.asSet(CommonStatusEnum.ENABLE.getStatus(), CommonStatusEnum.DISABLE.getStatus()));
+        // 数组复制
+        List<MenuDO> menuListCopy = new ArrayList<>(menuList);
+        return success(AuthConvert.INSTANCE.convert(menuListCopy)).convert();
     }
 
     @GetMapping("/get-permission-info")

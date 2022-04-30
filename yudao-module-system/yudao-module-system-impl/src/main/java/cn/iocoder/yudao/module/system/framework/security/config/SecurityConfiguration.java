@@ -23,6 +23,7 @@ public class SecurityConfiguration {
                 registry.antMatchers(buildAdminApi("/system/mobile-login")).anonymous();
                 registry.antMatchers(buildAdminApi("/system/sms-login")).anonymous();
                 registry.antMatchers(buildAdminApi("/system/reset-password")).anonymous();
+                registry.antMatchers(buildAdminApi("/system/register")).anonymous();
                 // 验证码的接口
                 registry.antMatchers(buildAdminApi("/system/captcha/**")).anonymous();
                 registry.antMatchers(buildAdminApi("/system/send-sms-code")).anonymous();

@@ -367,4 +367,21 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         }
         return adminUserDO;
     }
+
+    public String register(AuthRegisterReqVO reqVO, String clientIP, String userAgent) {
+        //
+        smsCodeApi.useSmsCode(AuthConvert.INSTANCE.convert(reqVO, SmsSceneEnum.ADMIN_REGISTER.getScene(), clientIP));
+
+        // 注册用户
+        Long user = userService.createUser(AuthConvert.INSTANCE.convert(reqVO));
+        AdminUserDO adminUserDO= userService.getUser(user);
+        if (user == null) {
+            throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
+        }
+        // 执行登陆
+        LoginUser loginUser = AuthConvert.INSTANCE.convert(adminUserDO);
+
+        // 缓存登录用户到 Redis 中，返回 sessionId 编号
+        return createUserSessionAfterLoginSuccess(loginUser, LoginLogTypeEnum.LOGIN_USERNAME, clientIP, userAgent);
+    }
 }

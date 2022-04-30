@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 public class AuthSendSmsReqVO {
 
-    @ApiModelProperty(value = "手机号", example = "15601691234")
+    @ApiModelProperty(value = "手机号", required = true, example = "15601691234")
     @Mobile
     private String mobile;
 
-    @ApiModelProperty(value = "发送场景", example = "4", notes = "4为登录验证码，5位忘记密码验证码")
+    @ApiModelProperty(value = "发送场景", required = true, example = "4", notes = "4为登录验证码，5为忘记密码验证码,6为注册验证码")
     @NotNull(message = "发送场景不能为空")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;
