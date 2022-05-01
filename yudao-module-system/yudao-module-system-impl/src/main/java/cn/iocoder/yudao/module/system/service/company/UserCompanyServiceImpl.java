@@ -36,6 +36,7 @@ public class UserCompanyServiceImpl implements UserCompanyService {
     @Override
     public Long createUserCompany(UserCompanyCreateReqVO createReqVO) {
         this.validateUserUnExists(createReqVO.getUserId());
+        this.validateCompanyExists(createReqVO.getCompanyId());
         // 插入
         UserCompanyDO userCompany = UserCompanyConvert.INSTANCE.convert(createReqVO);
         userCompanyMapper.insert(userCompany);
@@ -47,6 +48,7 @@ public class UserCompanyServiceImpl implements UserCompanyService {
     public void updateUserCompany(UserCompanyUpdateReqVO updateReqVO) {
         // 校验存在
         this.validateUserExists(updateReqVO.getUserId());
+        this.validateCompanyExists(updateReqVO.getCompanyId());
         // 更新
         UserCompanyDO userCompany = UserCompanyConvert.INSTANCE.convert(updateReqVO);
         userCompanyMapper.UpdateByUser(userCompany);
@@ -88,7 +90,7 @@ public class UserCompanyServiceImpl implements UserCompanyService {
 
     public Long createUserCompanyByCode(UserCompanyCreateByCodeReqVO createReqVO) {
         this.validateUserUnExists(createReqVO.getUserId());
-        
+
         CompanyDO company = companyMapper.selectByCode(createReqVO.getCode());
         if (company == null) {
             throw exception(COMPANY_NOT_EXISTS);
@@ -108,6 +110,20 @@ public class UserCompanyServiceImpl implements UserCompanyService {
     public void validateUserUnExists(Long userId) {
         if (userCompanyMapper.existsByUser(userId)) {
             throw exception(USER_COMPANY_EXISTS);
+        }
+    }
+
+    public void validateCompanyExists(Long companyId) {
+        CompanyDO company = companyMapper.selectById(companyId);
+        if (company == null) {
+            throw exception(COMPANY_NOT_EXISTS);
+        }
+    }
+
+    public void validateCompanyExistsByCode(String code) {
+        CompanyDO company = companyMapper.selectByCode(code);
+        if (company == null) {
+            throw exception(COMPANY_NOT_EXISTS);
         }
     }
 }

@@ -7,9 +7,8 @@ import javax.validation.constraints.NotNull;
 
 @ApiModel("管理后台 - 用户公司关联创建 Request VO")
 @Data
-@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UserCompanyCreateReqVO extends UserCompanyBaseVO {
+public class UserCompanyCreateReqVO{
     @ApiModelProperty(value = "用户编号", required = true)
     @NotNull(message = "用户编号不能为空")
     private Long userId;
