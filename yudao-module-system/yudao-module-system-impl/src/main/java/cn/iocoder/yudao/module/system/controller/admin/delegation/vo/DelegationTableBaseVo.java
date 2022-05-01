@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @Data
-public class DelegationTableBaseVo extends DelegationBaseVO {
+public class DelegationTableBaseVo {
 
     @ApiModelProperty(value = "表名", required = true)
     @NotNull(message = "表名不能为空")

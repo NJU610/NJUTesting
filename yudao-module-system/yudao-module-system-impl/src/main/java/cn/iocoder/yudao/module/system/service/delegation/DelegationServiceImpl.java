@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.DELEGATION_NOT_EXISTS;
-import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.DELEGATION_TABLE_NOT_EXISTS;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
  * 委托 Service 实现类
@@ -41,6 +40,10 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Override
     public Long createDelegation(DelegationCreateReqVO createReqVO) {
+        // 检验名称是否重复
+        if (createReqVO.getName() != null) {
+            this.validateDelegationNameDuplicate(SecurityFrameworkUtils.getLoginUserId(), createReqVO.getName());
+        }
         // 插入
         DelegationDO delegation = DelegationConvert.INSTANCE.convert(createReqVO);
         delegationMapper.insert(delegation);
@@ -89,6 +92,11 @@ public class DelegationServiceImpl implements DelegationService {
     public void updateDelegation(DelegationUpdateReqVO updateReqVO) {
         // 校验存在
         this.validateDelegationExists(updateReqVO.getId());
+
+        // 检验名称是否重复
+        if (updateReqVO.getName() != null) {
+            this.validateDelegationNameDuplicate(SecurityFrameworkUtils.getLoginUserId(), updateReqVO.getName());
+        }
         // 更新
         DelegationDO updateObj = DelegationConvert.INSTANCE.convert(updateReqVO);
         delegationMapper.updateById(updateObj);
@@ -148,6 +156,17 @@ public class DelegationServiceImpl implements DelegationService {
         mongoTemplate.updateFirst(query, update, tableName);
     }
 
+    //判断委托名称不重复
+    public void validateDelegationNameDuplicate(Long creatorId, String name) {
+        QueryWrapperX<DelegationDO> queryWrapper = new QueryWrapperX<>();
+        queryWrapper.eqIfPresent("creator_id", creatorId)
+                .eqIfPresent("name", name)
+                .eqIfPresent("deleted", false);
+        if (delegationMapper.selectCount(queryWrapper) > 0) {
+            throw exception(DELEGATION_NAME_DUPLICATE);
+        }
+    }
+
     private void validateDelegationTableExists(String tableId, String tableName) {
         CommonObject obj = mongoTemplate.findById(tableId, CommonObject.class, tableName);
         if (obj == null || obj.getDeleted()) {
@@ -180,7 +199,8 @@ public class DelegationServiceImpl implements DelegationService {
     @Override
     public List<DelegationDO> getDelegationsNotAccepted() {
         QueryWrapperX<DelegationDO> queryWrapper = new QueryWrapperX<>();
-        queryWrapper.isNull("acceptor_id");
+        queryWrapper.eqIfPresent("deleted", false)
+                .isNull("acceptor_id");
         return delegationMapper.selectList(queryWrapper);
     }
 
