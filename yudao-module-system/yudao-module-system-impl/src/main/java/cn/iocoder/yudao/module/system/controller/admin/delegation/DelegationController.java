@@ -1,6 +1,8 @@
 package cn.iocoder.yudao.module.system.controller.admin.delegation;
 
 import cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowCreateVO;
+import cn.iocoder.yudao.module.system.service.flow.FlowService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -35,13 +37,25 @@ public class DelegationController {
     @Resource
     private DelegationService delegationService;
 
+    @Resource
+    private FlowService flowService;
+
     @PostMapping("/create")
     @ApiOperation("创建委托")
     @PreAuthorize("@ss.hasPermission('system:delegation:create')")
     public CommonResult<Long> createDelegation(@Valid @RequestBody DelegationCreateReqVO createReqVO) {
         Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
         createReqVO.setCreatorId(loginUserId);
-        return success(delegationService.createDelegation(createReqVO));
+        Long delegationId = delegationService.createDelegation(createReqVO);
+
+        // 创建flow
+        FlowCreateVO flowCreateVO = new FlowCreateVO();
+        flowCreateVO.setDelegationId(delegationId);
+        flowCreateVO.setCreatorId(loginUserId);
+        flowCreateVO.setLaunchTime(createReqVO.getLaunchTime());
+        flowService.createFlow(flowCreateVO);
+
+        return success(delegationId);
     }
 
     @PostMapping("/create/table")
@@ -73,6 +87,9 @@ public class DelegationController {
     @PreAuthorize("@ss.hasPermission('system:delegation:delete')")
     public CommonResult<Boolean> deleteDelegation(@RequestParam("id") Long id) {
         delegationService.deleteDelegation(id);
+
+        // 删除flow
+        flowService.deleteFlowByCreator(id);
         return success(true);
     }
 

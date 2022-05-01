@@ -126,7 +126,11 @@ public interface ErrorCodeConstants {
 
     // ========== 委托 1002020000 ==========
     ErrorCode DELEGATION_NOT_EXISTS = new ErrorCode(1002020000, "委托不存在");
-    ErrorCode DELEGATION_TABLE_NOT_EXISTS = new ErrorCode(1002020001, "委托表格不存在");
+    ErrorCode DELEGATION_NAME_DUPLICATE = new ErrorCode(1002020001, "委托名称不能重复");
+    ErrorCode DELEGATION_TABLE_NOT_EXISTS = new ErrorCode(1002020002, "委托表格不存在");
+
+    // ========== 项目流程 1002021000 ==========
+    ErrorCode FLOW_NOT_EXISTS = new ErrorCode(1002021000, "项目流程不存在");
 
     // ========== 公司认证模块 1002022000 =========
     ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002022000, "公司不存在");
