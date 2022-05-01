@@ -120,14 +120,18 @@ public interface ErrorCodeConstants {
     ErrorCode SOCIAL_USER_UNBIND_NOT_SELF = new ErrorCode(1002018001, "社交解绑失败，非当前用户绑定");
     ErrorCode SOCIAL_USER_NOT_FOUND = new ErrorCode(1002018002, "社交授权失败，找不到对应的用户");
 
-    // ========== 系统铭感词 1002019000 =========
+    // ========== 系统敏感词 1002019000 =========
     ErrorCode SENSITIVE_WORD_NOT_EXISTS = new ErrorCode(1002019000, "系统敏感词在所有标签中都不存在");
     ErrorCode SENSITIVE_WORD_EXISTS = new ErrorCode(1002019001, "系统敏感词已在标签中存在");
 
-    // ========== 公司认证模块 1002020000 =========
-    ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002020000, "公司不存在");
-    ErrorCode USER_COMPANY_NOT_EXISTS = new ErrorCode(1002020001, "用户公司关联不存在");
-    ErrorCode COMPANY_NAME_EXISTS = new ErrorCode(1002020002, "公司名已存在");
-    ErrorCode USER_COMPANY_EXISTS = new ErrorCode(1002020003, "用户公司关联已存在");
+    // ========== 委托 1002020000 ==========
+    ErrorCode DELEGATION_NOT_EXISTS = new ErrorCode(1002020000, "委托不存在");
+    ErrorCode DELEGATION_TABLE_NOT_EXISTS = new ErrorCode(1002020001, "委托表格不存在");
+
+    // ========== 公司认证模块 1002022000 =========
+    ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002022000, "公司不存在");
+    ErrorCode USER_COMPANY_NOT_EXISTS = new ErrorCode(1002022001, "用户公司关联不存在");
+    ErrorCode COMPANY_NAME_EXISTS = new ErrorCode(1002022002, "公司名已存在");
+    ErrorCode USER_COMPANY_EXISTS = new ErrorCode(1002022003, "用户公司关联已存在");
 
 }
