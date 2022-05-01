@@ -124,4 +124,10 @@ public interface ErrorCodeConstants {
     ErrorCode SENSITIVE_WORD_NOT_EXISTS = new ErrorCode(1002019000, "系统敏感词在所有标签中都不存在");
     ErrorCode SENSITIVE_WORD_EXISTS = new ErrorCode(1002019001, "系统敏感词已在标签中存在");
 
+    // ========== 公司认证模块 1002020000 =========
+    ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002020000, "公司不存在");
+    ErrorCode USER_COMPANY_NOT_EXISTS = new ErrorCode(1002020001, "用户公司关联不存在");
+    ErrorCode COMPANY_NAME_EXISTS = new ErrorCode(1002020002, "公司名已存在");
+    ErrorCode USER_COMPANY_EXISTS = new ErrorCode(1002020003, "用户公司关联已存在");
+
 }
