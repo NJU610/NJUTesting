@@ -13,6 +13,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Builder
 public class FlowCreateVO extends FlowBaseVO {
 
     @ApiModelProperty(value = "创建时间", required = true)

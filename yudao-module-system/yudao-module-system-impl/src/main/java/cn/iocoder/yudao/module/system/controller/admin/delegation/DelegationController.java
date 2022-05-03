@@ -42,32 +42,29 @@ public class DelegationController {
 
     @PostMapping("/create")
     @ApiOperation("创建委托")
-    @PreAuthorize("@ss.hasPermission('system:delegation:create')")
     public CommonResult<Long> createDelegation(@Valid @RequestBody DelegationCreateReqVO createReqVO) {
         Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
         createReqVO.setCreatorId(loginUserId);
         Long delegationId = delegationService.createDelegation(createReqVO);
 
         // 创建flow
-        FlowCreateVO flowCreateVO = new FlowCreateVO();
-        flowCreateVO.setDelegationId(delegationId);
-        flowCreateVO.setCreatorId(loginUserId);
-        flowCreateVO.setLaunchTime(createReqVO.getLaunchTime());
+        FlowCreateVO flowCreateVO = FlowCreateVO.builder()
+                .delegationId(delegationId)
+                .creatorId(loginUserId)
+                .launchTime(createReqVO.getLaunchTime())
+                .build();
         flowService.createFlow(flowCreateVO);
-
         return success(delegationId);
     }
 
     @PostMapping("/create/table")
     @ApiOperation("创建软件项目委托测试申请表、委托测试软件功能列表")
-    @PreAuthorize("@ss.hasPermission('system:delegation:create')")
     public CommonResult<String> createDelegationTable(@Valid @RequestBody DelegationCreateTableReqVo createTableReqVo) {
         return success(delegationService.createDelegationTable(createTableReqVo));
     }
 
     @PutMapping("/update")
     @ApiOperation("更新委托")
-    @PreAuthorize("@ss.hasPermission('system:delegation:update')")
     public CommonResult<Boolean> updateDelegation(@Valid @RequestBody DelegationUpdateReqVO updateReqVO) {
         delegationService.updateDelegation(updateReqVO);
         return success(true);
@@ -75,7 +72,6 @@ public class DelegationController {
 
     @PutMapping("/update/table")
     @ApiOperation("更新委托表格")
-    @PreAuthorize("@ss.hasPermission('system:delegation:update')")
     public CommonResult<Boolean> updateDelegationTable(@Valid @RequestBody DelegationUpdateTableReqVo updateTableReqVo) {
         delegationService.updateDelegationTable(updateTableReqVo);
         return success(true);
@@ -84,7 +80,6 @@ public class DelegationController {
     @DeleteMapping("/delete")
     @ApiOperation("删除委托")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
-    @PreAuthorize("@ss.hasPermission('system:delegation:delete')")
     public CommonResult<Boolean> deleteDelegation(@RequestParam("id") Long id) {
         delegationService.deleteDelegation(id);
 
@@ -96,7 +91,6 @@ public class DelegationController {
     @GetMapping("/get")
     @ApiOperation("根据ID获得委托")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<DelegationRespVO> getDelegation(@RequestParam("id") Long id) {
         DelegationDO delegation = delegationService.getDelegation(id);
         return success(DelegationConvert.INSTANCE.convert(delegation));
@@ -104,7 +98,6 @@ public class DelegationController {
 
     @GetMapping("/get/current-user")
     @ApiOperation("获得当前用户的所有委托")
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<List<DelegationRespVO>> getDelegationByCurrentUser() {
         List<DelegationDO> delegations = delegationService.getDelegationsByCurrentUser();
         List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
@@ -113,7 +106,6 @@ public class DelegationController {
 
     @GetMapping("/get/creator")
     @ApiOperation("根据用户ID获得特定用户的所有委托")
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<List<DelegationRespVO>> getDelegationByCreator(@RequestParam("id") Long id) {
         List<DelegationDO> delegations = delegationService.getDelegationsByCreator(id);
         List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
@@ -122,7 +114,6 @@ public class DelegationController {
 
     @GetMapping("/get/not-accepted")
     @ApiOperation("获得未被接收的所有委托")
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<List<DelegationRespVO>> getDelegationNotAccepted() {
         List<DelegationDO> delegations = delegationService.getDelegationsNotAccepted();
         List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
@@ -131,7 +122,6 @@ public class DelegationController {
 
     @GetMapping("/get/table")
     @ApiOperation("获得软件项目委托测试申请表、委托测试软件功能列表")
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<String> getDelegationTable(@RequestParam("id") String id, @RequestParam("table") String table) {
         return success(delegationService.getDelegationTable(id, table));
     }
@@ -139,7 +129,6 @@ public class DelegationController {
     @GetMapping("/list")
     @ApiOperation("获得委托列表")
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<List<DelegationRespVO>> getDelegationList(@RequestParam("ids") Collection<Long> ids) {
         List<DelegationDO> list = delegationService.getDelegationList(ids);
         return success(DelegationConvert.INSTANCE.convertList(list));
@@ -147,7 +136,6 @@ public class DelegationController {
 
     @GetMapping("/page")
     @ApiOperation("获得委托分页")
-    @PreAuthorize("@ss.hasPermission('system:delegation:query')")
     public CommonResult<PageResult<DelegationRespVO>> getDelegationPage(@Valid DelegationPageReqVO pageVO) {
         PageResult<DelegationDO> pageResult = delegationService.getDelegationPage(pageVO);
         return success(DelegationConvert.INSTANCE.convertPage(pageResult));
@@ -155,7 +143,6 @@ public class DelegationController {
 
     @GetMapping("/export-excel")
     @ApiOperation("导出委托 Excel")
-    @PreAuthorize("@ss.hasPermission('system:delegation:export')")
     @OperateLog(type = EXPORT)
     public void exportDelegationExcel(@Valid DelegationExportReqVO exportReqVO,
               HttpServletResponse response) throws IOException {

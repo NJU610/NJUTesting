@@ -38,7 +38,6 @@ public class FlowController {
 
     @PutMapping("/update")
     @ApiOperation("更新项目流程")
-    @PreAuthorize("@ss.hasPermission('system:flow:update')")
     public CommonResult<Boolean> updateFlow(@Valid @RequestBody FlowUpdateReqVO updateReqVO) {
         flowService.updateFlow(updateReqVO);
         return success(true);
@@ -47,7 +46,6 @@ public class FlowController {
     @GetMapping("/get/condition")
     @ApiOperation("根据条件获得项目流程")
     @ApiImplicitParam(name = "condition", value = "条件", required = true, dataTypeClass = Map.class)
-    @PreAuthorize("@ss.hasPermission('system:flow:query')")
     public CommonResult<List<FlowRespVO>> getFlowsByCondition(@RequestParam Map<String, Object> condition) {
         List<FlowDO> flows = flowService.getFlowsByCondition(condition);
         return success(FlowConvert.INSTANCE.convertList(flows));
@@ -55,7 +53,6 @@ public class FlowController {
 
     @GetMapping("/get/all")
     @ApiOperation("获得全部项目流程")
-    @PreAuthorize("@ss.hasPermission('system:flow:query')")
     public CommonResult<List<FlowRespVO>> getAllFlows() {
         List<FlowDO> flows = flowService.getAllFlows();
         return success(FlowConvert.INSTANCE.convertList(flows));
@@ -64,7 +61,6 @@ public class FlowController {
     @GetMapping("/list")
     @ApiOperation("获得项目流程列表")
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
-    @PreAuthorize("@ss.hasPermission('system:flow:query')")
     public CommonResult<List<FlowRespVO>> getFlowList(@RequestParam("ids") Collection<Long> ids) {
         List<FlowDO> list = flowService.getFlowList(ids);
         return success(FlowConvert.INSTANCE.convertList(list));
@@ -72,7 +68,6 @@ public class FlowController {
 
     @GetMapping("/page")
     @ApiOperation("获得项目流程分页")
-    @PreAuthorize("@ss.hasPermission('system:flow:query')")
     public CommonResult<PageResult<FlowRespVO>> getFlowPage(@Valid FlowPageReqVO pageVO) {
         PageResult<FlowDO> pageResult = flowService.getFlowPage(pageVO);
         return success(FlowConvert.INSTANCE.convertPage(pageResult));
@@ -80,7 +75,6 @@ public class FlowController {
 
     @GetMapping("/export-excel")
     @ApiOperation("导出项目流程 Excel")
-    @PreAuthorize("@ss.hasPermission('system:flow:export')")
     @OperateLog(type = EXPORT)
     public void exportFlowExcel(@Valid FlowExportReqVO exportReqVO,
               HttpServletResponse response) throws IOException {
