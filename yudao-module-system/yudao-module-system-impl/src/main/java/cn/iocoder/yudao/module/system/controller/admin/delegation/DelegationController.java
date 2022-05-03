@@ -106,6 +106,7 @@ public class DelegationController {
 
     @GetMapping("/get/creator")
     @ApiOperation("根据用户ID获得特定用户的所有委托")
+    @ApiImplicitParam(name = "id", value = "用户编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<List<DelegationRespVO>> getDelegationByCreator(@RequestParam("id") Long id) {
         List<DelegationDO> delegations = delegationService.getDelegationsByCreator(id);
         List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
@@ -122,6 +123,10 @@ public class DelegationController {
 
     @GetMapping("/get/table")
     @ApiOperation("获得软件项目委托测试申请表、委托测试软件功能列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "表编号", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "table", value = "表名", required = true, example = "table2", dataTypeClass = String.class),
+    })
     public CommonResult<String> getDelegationTable(@RequestParam("id") String id, @RequestParam("table") String table) {
         return success(delegationService.getDelegationTable(id, table));
     }

@@ -38,10 +38,10 @@ public interface FlowService {
     /**
      * 根据条件获得项目流程
      *
-     * @param condition 条件
+     * @param queryVO 查询条件
      * @return 项目流程列表
      */
-    List<FlowDO> getFlowsByCondition(Map<String, Object> condition);
+    List<FlowDO> getFlowsByCondition(FlowQueryVO queryVO);
 
     /**
      * 获得全部项目流程

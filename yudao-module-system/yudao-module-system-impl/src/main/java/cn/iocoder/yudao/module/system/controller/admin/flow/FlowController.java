@@ -45,9 +45,8 @@ public class FlowController {
 
     @GetMapping("/get/condition")
     @ApiOperation("根据条件获得项目流程")
-    @ApiImplicitParam(name = "condition", value = "条件", required = true, dataTypeClass = Map.class)
-    public CommonResult<List<FlowRespVO>> getFlowsByCondition(@RequestParam Map<String, Object> condition) {
-        List<FlowDO> flows = flowService.getFlowsByCondition(condition);
+    public CommonResult<List<FlowRespVO>> getFlowsByCondition(@Valid FlowQueryVO queryVO) {
+        List<FlowDO> flows = flowService.getFlowsByCondition(queryVO);
         return success(FlowConvert.INSTANCE.convertList(flows));
     }
 

@@ -60,16 +60,8 @@ public class FlowServiceImpl implements FlowService {
     }
 
     @Override
-    public List<FlowDO> getFlowsByCondition(Map<String, Object> condition) {
-        QueryWrapperX<FlowDO> queryWrapper = new QueryWrapperX<>();
-        for (Map.Entry<String, Object> entry : condition.entrySet()) {
-            if (entry.getValue() == null) {;
-                queryWrapper.isNull(entry.getKey());
-            } else {
-                queryWrapper.eq(entry.getKey(), entry.getValue());
-            }
-        }
-        return flowMapper.selectList(queryWrapper);
+    public List<FlowDO> getFlowsByCondition(FlowQueryVO queryVO) {
+        return flowMapper.selectList(queryVO);
     }
 
     @Override
