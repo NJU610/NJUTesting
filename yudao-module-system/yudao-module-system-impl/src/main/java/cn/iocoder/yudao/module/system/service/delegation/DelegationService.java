@@ -22,14 +22,6 @@ public interface DelegationService {
     Long createDelegation(@Valid DelegationCreateReqVO createReqVO);
 
     /**
-     * 创建软件项目委托测试申请表、委托测试软件功能列表
-     *
-     * @param createTableReqVo 创建信息(委托ID，表名，数据)
-     * @return 编号
-     */
-    String createDelegationTable(DelegationCreateTableReqVo createTableReqVo);
-
-    /**
      * 更新委托
      *
      * @param updateReqVO 更新信息
@@ -37,11 +29,25 @@ public interface DelegationService {
     void updateDelegation(@Valid DelegationUpdateReqVO updateReqVO);
 
     /**
-     * 更新软件项目委托测试申请表、委托测试软件功能列表
+     * 提交委托
+     *
+     * @param  id 编号
+     */
+    void submitDelegation(Long id);
+
+    /**
+     * 保存软件项目委托测试申请表
      *
      * @param updateReqVO 更新信息
      */
-    void updateDelegationTable(@Valid DelegationUpdateTableReqVo updateReqVO);
+    void saveDelegationTable2(@Valid DelegationSaveTableReqVo updateReqVO);
+
+    /**
+     * 保存委托测试软件功能列表
+     *
+     * @param updateReqVO 更新信息
+     */
+    void saveDelegationTable3(@Valid DelegationSaveTableReqVo updateReqVO);
 
     /**
      * 删除委托
@@ -56,14 +62,14 @@ public interface DelegationService {
      * @param id 编号
      * @return 委托
      */
-    DelegationDO getDelegation(Long id);
+    DelegationRespVO getDelegation(Long id);
 
     /**
      * 获得当前用户所有委托
      *
      * @return 委托列表
      */
-    List<DelegationDO> getDelegationsByCurrentUser();
+    List<DelegationRespVO> getDelegationsByCurrentUser();
 
     /**
      * 获取特定用户所有委托
@@ -71,22 +77,30 @@ public interface DelegationService {
      * @param userId 用户编号
      * @return 委托列表
      */
-    List<DelegationDO> getDelegationsByCreator(Long userId);
+    List<DelegationRespVO> getDelegationsByCreator(Long userId);
 
     /**
      * 获取未被接收的委托
      *
      * @return 委托列表
      */
-    List<DelegationDO> getDelegationsNotAccepted();
+    List<DelegationRespVO> getDelegationsNotAccepted();
 
     /**
-     * 获取软件项目委托测试申请表、委托测试软件功能列表
+     * 获取软件项目委托测试申请表
      *
-     * @param id 表编号
+     * @param id 表格编号
      * @return 委托列表
      */
-    String getDelegationTable(String id, String tableName);
+    String getDelegationTable2(String id);
+
+    /**
+     * 委托测试软件功能列表
+     *
+     * @param id 表格编号
+     * @return 委托列表
+     */
+    String getDelegationTable3(String id);
 
     /**
      * 获得委托列表
@@ -94,7 +108,7 @@ public interface DelegationService {
      * @param ids 编号
      * @return 委托列表
      */
-    List<DelegationDO> getDelegationList(Collection<Long> ids);
+    List<DelegationRespVO> getDelegationList(Collection<Long> ids);
 
     /**
      * 获得委托分页

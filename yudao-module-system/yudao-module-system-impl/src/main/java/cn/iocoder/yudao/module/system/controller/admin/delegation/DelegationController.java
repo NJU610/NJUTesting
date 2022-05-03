@@ -6,7 +6,6 @@ import cn.iocoder.yudao.module.system.service.flow.FlowService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.*;
 
 import javax.validation.*;
@@ -28,7 +27,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
 import cn.iocoder.yudao.module.system.service.delegation.DelegationService;
 
-@Api(tags = "管理后台 - 委托")
+@Api(tags = "委托")
 @RestController
 @RequestMapping("/system/delegation")
 @Validated
@@ -41,44 +40,47 @@ public class DelegationController {
     private FlowService flowService;
 
     @PostMapping("/create")
-    @ApiOperation("创建委托")
+    @ApiOperation(value = "创建委托",
+            notes = "用户使用。创建新委托，需要填写委托名称name字段。返回值为委托的id。")
     public CommonResult<Long> createDelegation(@Valid @RequestBody DelegationCreateReqVO createReqVO) {
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
-        createReqVO.setCreatorId(loginUserId);
-        Long delegationId = delegationService.createDelegation(createReqVO);
-
-        // 创建flow
-        FlowCreateVO flowCreateVO = FlowCreateVO.builder()
-                .delegationId(delegationId)
-                .creatorId(loginUserId)
-                .launchTime(createReqVO.getLaunchTime())
-                .build();
-        flowService.createFlow(flowCreateVO);
-        return success(delegationId);
-    }
-
-    @PostMapping("/create/table")
-    @ApiOperation("创建软件项目委托测试申请表、委托测试软件功能列表")
-    public CommonResult<String> createDelegationTable(@Valid @RequestBody DelegationCreateTableReqVo createTableReqVo) {
-        return success(delegationService.createDelegationTable(createTableReqVo));
+        return success(delegationService.createDelegation(createReqVO));
     }
 
     @PutMapping("/update")
-    @ApiOperation("更新委托")
+    @ApiOperation(value = "更新委托",
+            notes = "用户使用。只需要传入委托的id和要更新的字段，其他字段可以为空。返回值为是否更新成功")
     public CommonResult<Boolean> updateDelegation(@Valid @RequestBody DelegationUpdateReqVO updateReqVO) {
         delegationService.updateDelegation(updateReqVO);
         return success(true);
     }
 
-    @PutMapping("/update/table")
-    @ApiOperation("更新委托表格")
-    public CommonResult<Boolean> updateDelegationTable(@Valid @RequestBody DelegationUpdateTableReqVo updateTableReqVo) {
-        delegationService.updateDelegationTable(updateTableReqVo);
+    @PutMapping("/save/table2")
+    @ApiOperation(value = "保存软件项目委托测试申请表",
+            notes = "用户使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含表格内容。返回值为是否更新成功")
+    public CommonResult<Boolean> saveDelegationTable2(@Valid @RequestBody DelegationSaveTableReqVo saveTableReqVo) {
+        delegationService.saveDelegationTable2(saveTableReqVo);
+        return success(true);
+    }
+
+    @PutMapping("/save/table3")
+    @ApiOperation(value = "保存委托测试软件功能列表",
+            notes = "用户使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含表格内容。返回值为是否更新成功")
+    public CommonResult<Boolean> saveDelegationTable3(@Valid @RequestBody DelegationSaveTableReqVo saveTableReqVo) {
+        delegationService.saveDelegationTable3(saveTableReqVo);
+        return success(true);
+    }
+
+    @PutMapping("/submit")
+    @ApiOperation(value = "表格填写完毕，提交委托",
+            notes = "用户使用。需要填写id字段，其中id为委托id。返回值为是否提交成功。需要前端检验数据是否填写完整")
+    public CommonResult<Boolean> submitDelegation(@Valid @RequestBody DelegationSubmitVo submitVo) {
+        delegationService.submitDelegation(submitVo.getId());
         return success(true);
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation("删除委托")
+    @ApiOperation(value = "根据id删除委托",
+            notes = "用户使用。需要填写id字段。其中id为委托id。会自动删除对应的流程和表格。返回值为是否删除成功")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     public CommonResult<Boolean> deleteDelegation(@RequestParam("id") Long id) {
         delegationService.deleteDelegation(id);
@@ -89,54 +91,62 @@ public class DelegationController {
     }
 
     @GetMapping("/get")
-    @ApiOperation("根据ID获得委托")
+    @ApiOperation(value = "根据id获得委托",
+            notes = "管理员使用。需要填写id字段。其中id为委托id。返回值为委托信息，包含委托当前状态。")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<DelegationRespVO> getDelegation(@RequestParam("id") Long id) {
-        DelegationDO delegation = delegationService.getDelegation(id);
-        return success(DelegationConvert.INSTANCE.convert(delegation));
+        DelegationRespVO delegation = delegationService.getDelegation(id);
+        return success(delegation);
     }
 
     @GetMapping("/get/current-user")
-    @ApiOperation("获得当前用户的所有委托")
+    @ApiOperation(value = "获得当前用户的所有委托",
+            notes = "用户使用。获得当前用户所有未被删除的委托。返回值为委托列表，包含委托当前状态。")
     public CommonResult<List<DelegationRespVO>> getDelegationByCurrentUser() {
-        List<DelegationDO> delegations = delegationService.getDelegationsByCurrentUser();
-        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
-        return success(delegationRespVOS);
+        List<DelegationRespVO> delegations = delegationService.getDelegationsByCurrentUser();
+        return success(delegations);
     }
 
-    @GetMapping("/get/creator")
-    @ApiOperation("根据用户ID获得特定用户的所有委托")
+    @GetMapping("/get/creator-id")
+    @ApiOperation(value = "根据用户ID获得特定用户的所有委托",
+            notes = "管理员使用。需要填写id字段。其中id为用户id。返回值为委托列表，包含委托当前状态。")
     @ApiImplicitParam(name = "id", value = "用户编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<List<DelegationRespVO>> getDelegationByCreator(@RequestParam("id") Long id) {
-        List<DelegationDO> delegations = delegationService.getDelegationsByCreator(id);
-        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
-        return success(delegationRespVOS);
+        List<DelegationRespVO> delegations = delegationService.getDelegationsByCreator(id);
+        return success(delegations);
     }
 
     @GetMapping("/get/not-accepted")
-    @ApiOperation("获得未被接收的所有委托")
+    @ApiOperation(value = "获得未被接收的所有委托",
+            notes = "管理员使用。获得所有未被接收的委托。返回值为委托列表，包含委托当前状态。")
     public CommonResult<List<DelegationRespVO>> getDelegationNotAccepted() {
-        List<DelegationDO> delegations = delegationService.getDelegationsNotAccepted();
-        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
-        return success(delegationRespVOS);
+        List<DelegationRespVO> delegations = delegationService.getDelegationsNotAccepted();
+        return success(delegations);
     }
 
-    @GetMapping("/get/table")
-    @ApiOperation("获得软件项目委托测试申请表、委托测试软件功能列表")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "表编号", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "table", value = "表名", required = true, example = "table2", dataTypeClass = String.class),
-    })
-    public CommonResult<String> getDelegationTable(@RequestParam("id") String id, @RequestParam("table") String table) {
-        return success(delegationService.getDelegationTable(id, table));
+    @GetMapping("/get/table2")
+    @ApiOperation(value = "获得软件项目委托测试申请表",
+            notes = "用户使用。需要填写id字段。其中id为表格id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
+    @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
+    public CommonResult<String> getDelegationTable2(@RequestParam("id") String id) {
+        return success(delegationService.getDelegationTable2(id));
+    }
+
+    @GetMapping("/get/table3")
+    @ApiOperation(value = "获得委托测试软件功能列表",
+            notes = "用户使用。需要填写id字段。其中id为表格id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
+    @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
+    public CommonResult<String> getDelegationTable3(@RequestParam("id") String id) {
+        return success(delegationService.getDelegationTable3(id));
     }
 
     @GetMapping("/list")
-    @ApiOperation("获得委托列表")
+    @ApiOperation(value = "获得委托列表",
+            notes = "管理员使用。根据需要填写多个委托id，获得所有委托。返回值为委托列表，包含委托当前状态。")
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
     public CommonResult<List<DelegationRespVO>> getDelegationList(@RequestParam("ids") Collection<Long> ids) {
-        List<DelegationDO> list = delegationService.getDelegationList(ids);
-        return success(DelegationConvert.INSTANCE.convertList(list));
+        List<DelegationRespVO> list = delegationService.getDelegationList(ids);
+        return success(list);
     }
 
     @GetMapping("/page")

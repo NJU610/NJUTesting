@@ -4,10 +4,15 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowCreateVO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
+import cn.iocoder.yudao.module.system.convert.flow.FlowConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
 import cn.iocoder.yudao.module.system.dal.mongo.delegation.CommonObject;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.flow.FlowMapper;
+import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,9 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
@@ -36,6 +39,9 @@ public class DelegationServiceImpl implements DelegationService {
     private DelegationMapper delegationMapper;
 
     @Resource
+    private FlowMapper flowMapper;
+
+    @Resource
     private MongoTemplate mongoTemplate;
 
     @Override
@@ -44,48 +50,25 @@ public class DelegationServiceImpl implements DelegationService {
         if (createReqVO.getName() != null) {
             this.validateDelegationNameDuplicate(SecurityFrameworkUtils.getLoginUserId(), createReqVO.getName());
         }
+
+        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
+        Date now = new Date();
         // 插入
         DelegationDO delegation = DelegationConvert.INSTANCE.convert(createReqVO);
+        delegation.setLaunchTime(now);
+        delegation.setCreatorId(loginUserId);
         delegationMapper.insert(delegation);
+        // 插入流程
+        FlowCreateVO flowCreateVO = FlowCreateVO.builder()
+                .delegationId(delegation.getId())
+                .creatorId(loginUserId)
+                .launchTime(now)
+                .build();
+        FlowDO flow = FlowConvert.INSTANCE.convert(flowCreateVO);
+        flow.setState(FlowStateEnum.DELEGATE_WRITING.getState());
+        flowMapper.insert(flow);
         // 返回
         return delegation.getId();
-    }
-
-    @Override
-    public String createDelegationTable(DelegationCreateTableReqVo createTableReqVo) {
-        // 校验存在
-        Long delegationId = createTableReqVo.getDelegationId();
-        this.validateDelegationExists(delegationId);
-
-        String tableName = createTableReqVo.getTableName();
-        Map<String, Object> data = createTableReqVo.getData();
-
-        CommonObject obj = new CommonObject();
-        obj.setId(null);
-        mongoTemplate.insert(obj, tableName);
-
-        if (data != null && !data.isEmpty()) {
-            Query query = new Query();
-            query.addCriteria(new Criteria().andOperator(
-                    Criteria.where("_id").is(obj.getId())
-            ));
-            Update update = new Update();
-            for (Map.Entry<String, Object> entry : data.entrySet()) {
-                update.set(entry.getKey(), entry.getValue());
-            }
-            mongoTemplate.upsert(query, update, tableName);
-        }
-
-        DelegationDO delegation = new DelegationDO();
-        delegation.setId(delegationId);
-        if (tableName.equals("table2")) {
-            delegation.setTable2Id(obj.getId());
-        } else if (tableName.equals("table3")) {
-            delegation.setTable3Id(obj.getId());
-        }
-        delegationMapper.updateById(delegation);
-
-        return obj.getId();
     }
 
     @Override
@@ -103,14 +86,62 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
-    public void updateDelegationTable(DelegationUpdateTableReqVo updateReqVO) {
+    public void submitDelegation(Long id) {
         // 校验存在
-        String tableId = updateReqVO.getId();
-        String tableName = updateReqVO.getTableName();
-        this.validateDelegationTableExists(tableId, tableName);
+        this.validateDelegationExists(id);
 
-        Map<String, Object> data = updateReqVO.getData();
+        QueryWrapperX<FlowDO> queryWrapper = new QueryWrapperX<>();
+        queryWrapper.eqIfPresent("delegation_id", id)
+                .eqIfPresent("deleted", false);
+        FlowDO flowDO = flowMapper.selectOne(queryWrapper);
+        flowDO.setState(FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState());
+        flowMapper.updateById(flowDO);
+    }
 
+    @Override
+    public void saveDelegationTable2(DelegationSaveTableReqVo updateReqVO) {
+        // 校验存在
+        Long delegationId = updateReqVO.getDelegationId();
+        this.validateDelegationExists(delegationId);
+
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
+        if (delegationDO.getTable2Id() == null) {
+            delegationDO.setTable2Id(createDelegationTable("table2", updateReqVO.getData()));
+        } else {
+            upsertDelegationTable("table2", delegationDO.getTable2Id(), updateReqVO.getData());
+        }
+
+        delegationMapper.updateById(delegationDO);
+    }
+
+    @Override
+    public void saveDelegationTable3(DelegationSaveTableReqVo updateReqVO) {
+        // 校验存在
+        Long delegationId = updateReqVO.getDelegationId();
+        this.validateDelegationExists(delegationId);
+
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
+        if (delegationDO.getTable3Id() == null) {
+            delegationDO.setTable3Id(createDelegationTable("table3", updateReqVO.getData()));
+        } else {
+            upsertDelegationTable("table3", delegationDO.getTable3Id(), updateReqVO.getData());
+        }
+
+        delegationMapper.updateById(delegationDO);
+    }
+
+    private String createDelegationTable(String tableName, Map<String, Object> data) {
+        CommonObject obj = new CommonObject();
+        obj.setId(null);
+        mongoTemplate.insert(obj, tableName);
+        String tableId = obj.getId();
+
+        upsertDelegationTable(tableName, tableId, data);
+
+        return tableId;
+    }
+
+    private void upsertDelegationTable(String tableName, String tableId, Map<String, Object> data) {
         if (data != null && !data.isEmpty()) {
             Query query = new Query();
             query.addCriteria(new Criteria().andOperator(
@@ -122,7 +153,6 @@ public class DelegationServiceImpl implements DelegationService {
             }
             mongoTemplate.upsert(query, update, tableName);
         }
-
     }
 
     @Override
@@ -181,41 +211,68 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
-    public DelegationDO getDelegation(Long id) {
-        return delegationMapper.selectById(id);
+    public DelegationRespVO getDelegation(Long id) {
+        return convert(delegationMapper.selectById(id));
     }
 
     @Override
-    public List<DelegationDO> getDelegationsByCurrentUser() {
+    public List<DelegationRespVO> getDelegationsByCurrentUser() {
         Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
-        return delegationMapper.selectList("creator_id", loginUserId);
+        return convert(delegationMapper.selectList("creator_id", loginUserId));
     }
 
     @Override
-    public List<DelegationDO> getDelegationsByCreator(Long creatorId) {
-        return delegationMapper.selectList("creator_id", creatorId);
+    public List<DelegationRespVO> getDelegationsByCreator(Long creatorId) {
+        return convert(delegationMapper.selectList("creator_id", creatorId));
     }
 
     @Override
-    public List<DelegationDO> getDelegationsNotAccepted() {
+    public List<DelegationRespVO> getDelegationsNotAccepted() {
         QueryWrapperX<DelegationDO> queryWrapper = new QueryWrapperX<>();
         queryWrapper.eqIfPresent("deleted", false)
                 .isNull("acceptor_id");
-        return delegationMapper.selectList(queryWrapper);
+        return convert(delegationMapper.selectList(queryWrapper));
+    }
+
+    private DelegationRespVO convert(DelegationDO delegationDO) {
+        DelegationRespVO delegationRespVO = DelegationConvert.INSTANCE.convert(delegationDO);
+        QueryWrapperX<FlowDO> queryWrapper = new QueryWrapperX<>();
+        queryWrapper.eqIfPresent("delegation_id", delegationDO.getId())
+                .eqIfPresent("deleted", false);
+        FlowDO flowDO = flowMapper.selectOne(queryWrapper);
+        delegationRespVO.setState(flowDO.getState());
+        return delegationRespVO;
+    }
+
+    private List<DelegationRespVO> convert(List<DelegationDO> delegationDOList) {
+        List<DelegationRespVO> delegationRespVOList = new ArrayList<>();
+        for (DelegationDO delegationDO : delegationDOList) {
+            delegationRespVOList.add(convert(delegationDO));
+        }
+        return delegationRespVOList;
     }
 
     @Override
-    public String getDelegationTable(String id, String tableName) {
+    public String getDelegationTable2(String id) {
         Query query = new Query();
         query.addCriteria(new Criteria().andOperator(
                 Criteria.where("_id").is(id)
         ));
-        return mongoTemplate.findOne(query, String.class, tableName);
+        return mongoTemplate.findOne(query, String.class, "table2");
     }
 
     @Override
-    public List<DelegationDO> getDelegationList(Collection<Long> ids) {
-        return delegationMapper.selectBatchIds(ids);
+    public String getDelegationTable3(String id) {
+        Query query = new Query();
+        query.addCriteria(new Criteria().andOperator(
+                Criteria.where("_id").is(id)
+        ));
+        return mongoTemplate.findOne(query, String.class, "table3");
+    }
+
+    @Override
+    public List<DelegationRespVO> getDelegationList(Collection<Long> ids) {
+        return convert(delegationMapper.selectBatchIds(ids));
     }
 
     @Override
