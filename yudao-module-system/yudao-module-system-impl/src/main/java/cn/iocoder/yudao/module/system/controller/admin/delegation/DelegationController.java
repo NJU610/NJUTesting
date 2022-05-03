@@ -49,10 +49,11 @@ public class DelegationController {
         Long delegationId = delegationService.createDelegation(createReqVO);
 
         // 创建flow
-        FlowCreateVO flowCreateVO = new FlowCreateVO();
-        flowCreateVO.setDelegationId(delegationId);
-        flowCreateVO.setCreatorId(loginUserId);
-        flowCreateVO.setLaunchTime(createReqVO.getLaunchTime());
+        FlowCreateVO flowCreateVO = FlowCreateVO.builder()
+                .creatorId(loginUserId)
+                .delegationId(delegationId)
+                .launchTime(createReqVO.getLaunchTime())
+                .build();
         flowService.createFlow(flowCreateVO);
 
         return success(delegationId);

@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getUse
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserRoleIds;
 
-@Api(tags = "管理后台 - 认证")
+@Api(tags = "认证")
 @RestController
 @RequestMapping("/system") // 暂时不跟 /auth 结尾
 @Validated
@@ -55,60 +55,60 @@ public class AuthController {
     private SocialUserService socialUserService;
 
     @PostMapping("/login")
-    @ApiOperation("使用账号密码登录")
+    @ApiOperation(value = "使用账号密码登录", notes = "使用账号密码登录")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult.MyResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO) {
+    public CommonResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO) {
         String token = authService.login(reqVO, getClientIP(), getUserAgent());
         // 返回结果
-        return success(AuthLoginRespVO.builder().token(token).build()).convert();
+        return success(AuthLoginRespVO.builder().token(token).build());
     }
 
     @PostMapping("/mobile-login")
-    @ApiOperation("使用手机号密码登录")
+    @ApiOperation(value = "使用手机号密码登录", notes = "使用手机号密码登录")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult.MyResult<AuthMobileLoginRespVO> login(@RequestBody @Valid AuthMobileLoginReqVO reqVO) {
+    public CommonResult<AuthMobileLoginRespVO> login(@RequestBody @Valid AuthMobileLoginReqVO reqVO) {
         String token = authService.mobileLogin(reqVO, getClientIP(), getUserAgent());
         // 返回结果
-        return success(AuthMobileLoginRespVO.builder().token(token).build()).convert();
+        return success(AuthMobileLoginRespVO.builder().token(token).build());
     }
 
     @PostMapping("/sms-login")
-    @ApiOperation("使用手机 + 验证码登录")
+    @ApiOperation(value = "使用手机 + 验证码登录", notes = "使用手机 + 验证码登录, 提前调用’/send-sms-code‘接口获得验证码")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult.MyResult<AuthLoginRespVO> smsLogin(@RequestBody @Valid AuthSmsLoginReqVO reqVO) {
+    public CommonResult<AuthSmsLoginRespVO> smsLogin(@RequestBody @Valid AuthSmsLoginReqVO reqVO) {
         String token = authService.smsLogin(reqVO, getClientIP(), getUserAgent());
         // 返回结果
-        return success(AuthLoginRespVO.builder().token(token).build()).convert();
+        return success(AuthSmsLoginRespVO.builder().token(token).build());
     }
 
     @PostMapping("/send-sms-code")
-    @ApiOperation(value = "发送手机验证码")
+    @ApiOperation(value = "发送手机验证码", notes = "发送手机验证码, 注册账号，忘记密码，手机验证登录时使用")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult.MyResult<Boolean> sendSmsCode(@RequestBody @Valid AuthSendSmsReqVO reqVO) {
+    public CommonResult<Boolean> sendSmsCode(@RequestBody @Valid AuthSendSmsReqVO reqVO) {
         authService.sendSmsCode(getLoginUserId(), reqVO);
-        return success(true).convert();
+        return success(true);
     }
 
     @PostMapping("/reset-password")
     @ApiOperation(value = "重置密码", notes = "用户忘记密码时使用")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult.MyResult<Boolean> resetPassword(@RequestBody @Valid AuthResetPasswordReqVO reqVO) {
+    public CommonResult<Boolean> resetPassword(@RequestBody @Valid AuthResetPasswordReqVO reqVO) {
         authService.resetPassword(reqVO);
-        return success(true).convert();
+        return success(true);
     }
 
     @PostMapping("/register")
-    @ApiOperation(value = "注册", notes = "用户注册")
+    @ApiOperation(value = "注册", notes = "用户注册时使用")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
-    public CommonResult.MyResult<AuthRegisterRespVO> register(@RequestBody @Valid AuthRegisterReqVO reqVO) {
+    public CommonResult<AuthRegisterRespVO> register(@RequestBody @Valid AuthRegisterReqVO reqVO) {
         String token = authService.register(reqVO, getClientIP(), getUserAgent());
-        return success(AuthRegisterRespVO.builder().token(token).build()).convert();
+        return success(AuthRegisterRespVO.builder().token(token).build());
     }
 
 
     @GetMapping("/menus")
-    @ApiOperation("获得登录用户的菜单列表")
-    public CommonResult.MyResult<List<AuthSimpleMenuRespVO>> listSimpleMenus() {
+    @ApiOperation(value = "获得登录用户的菜单列表", notes = "用户登录后获取动态菜单")
+    public CommonResult<List<AuthSimpleMenuRespVO>> listSimpleMenus() {
         // 获得用户拥有的菜单列表
         List<MenuDO> menuList = permissionService.getRoleMenuListFromCache(
                 getLoginUserRoleIds(),
@@ -116,7 +116,7 @@ public class AuthController {
                 SetUtils.asSet(CommonStatusEnum.ENABLE.getStatus(), CommonStatusEnum.DISABLE.getStatus()));
         // 数组复制
         List<MenuDO> menuListCopy = new ArrayList<>(menuList);
-        return success(AuthConvert.INSTANCE.convert(menuListCopy)).convert();
+        return success(AuthConvert.INSTANCE.convert(menuListCopy));
     }
 
     @GetMapping("/get-permission-info")
