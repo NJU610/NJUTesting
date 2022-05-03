@@ -5,7 +5,7 @@ import java.util.*;
 import io.swagger.annotations.*;
 import javax.validation.constraints.*;
 
-@ApiModel("管理后台 - 公司更新 Request VO")
+@ApiModel("公司更新 Request VO")
 @Data
 @ToString(callSuper = true)
 public class CompanyUpdateReqVO{
@@ -19,7 +19,7 @@ public class CompanyUpdateReqVO{
     @ApiModelProperty(value = "公司联系方式")
     private String phone;
 
-    @ApiModelProperty(value = "公司编码，认证公司时使用， 非必要时无需传入，后台自动生成")
+    @ApiModelProperty(value = "公司编码，认证公司时使用")
     private String code;
 
     @ApiModelProperty(value = "编号", required = true)

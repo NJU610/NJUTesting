@@ -4,7 +4,7 @@ import lombok.*;
 import io.swagger.annotations.*;
 import javax.validation.constraints.*;
 
-@ApiModel("管理后台 - 用户公司关联更新 Request VO")
+@ApiModel("用户公司关联更新 Request VO")
 @Data
 @ToString(callSuper = true)
 public class UserCompanyUpdateReqVO{

@@ -26,7 +26,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.company.CompanyDO;
 import cn.iocoder.yudao.module.system.convert.company.CompanyConvert;
 import cn.iocoder.yudao.module.system.service.company.CompanyService;
 
-@Api(tags = "管理后台 - 公司")
+@Api(tags = "公司")
 @RestController
 @RequestMapping("/system/company")
 @Validated
@@ -36,20 +36,20 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping("/create")
-    @ApiOperation("创建公司")
+    @ApiOperation(value = "创建公司", notes = "管理员使用，用于创建公司")
     public CommonResult<Long> createCompany(@Valid @RequestBody CompanyCreateReqVO createReqVO) {
         return success(companyService.createCompany(createReqVO));
     }
 
     @PutMapping("/update")
-    @ApiOperation("更新公司")
+    @ApiOperation(value = "更新公司", notes = "管理员使用，用于更新公司，除id字段外，其余字段传入者会更新，未传入者不会更新")
     public CommonResult<Boolean> updateCompany(@Valid @RequestBody CompanyUpdateReqVO updateReqVO) {
         companyService.updateCompany(updateReqVO);
         return success(true);
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation("删除公司")
+    @ApiOperation(value = "删除公司", notes = "管理员使用，用于删除公司")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     public CommonResult<Boolean> deleteCompany(@RequestParam("id") Long id) {
         companyService.deleteCompany(id);
@@ -57,7 +57,7 @@ public class CompanyController {
     }
 
     @GetMapping("/get")
-    @ApiOperation("获得公司")
+    @ApiOperation(value = "获得公司", notes = "管理员使用，用于获得公司信息")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<CompanyRespVO> getCompany(@RequestParam("id") Long id) {
         CompanyDO company = companyService.getCompany(id);
@@ -65,7 +65,7 @@ public class CompanyController {
     }
 
     @GetMapping("/list")
-    @ApiOperation("获得公司列表")
+    @ApiOperation(value = "获得公司列表", notes = "管理员使用，用于获得传入编号列表的公司信息")
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
     public CommonResult<List<CompanyRespVO>> getCompanyList(@RequestParam("ids") Collection<Long> ids) {
         List<CompanyDO> list = companyService.getCompanyList(ids);
@@ -73,14 +73,14 @@ public class CompanyController {
     }
 
     @GetMapping("/page")
-    @ApiOperation("获得公司分页")
+    @ApiOperation(value = "获得公司分页", notes = "管理员使用，用于获得公司信息分页, 可选参数作为查询条件")
     public CommonResult<PageResult<CompanyRespVO>> getCompanyPage(@Valid CompanyPageReqVO pageVO) {
         PageResult<CompanyDO> pageResult = companyService.getCompanyPage(pageVO);
         return success(CompanyConvert.INSTANCE.convertPage(pageResult));
     }
 
     @GetMapping("/export-excel")
-    @ApiOperation("导出公司 Excel")
+    @ApiOperation(value = "导出公司 Excel", notes = "管理员使用，用于导出公司 Excel")
     @OperateLog(type = EXPORT)
     public void exportCompanyExcel(@Valid CompanyExportReqVO exportReqVO,
               HttpServletResponse response) throws IOException {

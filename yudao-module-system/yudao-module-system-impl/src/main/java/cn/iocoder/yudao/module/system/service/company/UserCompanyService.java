@@ -4,6 +4,7 @@ import java.util.*;
 import javax.validation.*;
 
 import cn.iocoder.yudao.module.system.controller.admin.company.vo.*;
+import cn.iocoder.yudao.module.system.dal.dataobject.company.CompanyDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.company.UserCompanyDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 
@@ -69,4 +70,6 @@ public interface UserCompanyService {
     List<UserCompanyDO> getUserCompanyList(UserCompanyExportReqVO exportReqVO);
 
     Long createUserCompanyByCode(UserCompanyCreateByCodeReqVO createReqVO);
+
+    CompanyDO getCompanyByUser(Long userId);
 }

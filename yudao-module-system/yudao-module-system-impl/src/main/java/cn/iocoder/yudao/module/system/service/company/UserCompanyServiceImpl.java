@@ -2,7 +2,11 @@ package cn.iocoder.yudao.module.system.service.company;
 
 import cn.iocoder.yudao.module.system.controller.admin.company.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.company.CompanyDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.yudao.module.system.dal.mysql.company.CompanyMapper;
+import cn.iocoder.yudao.module.system.enums.permission.RoleCodeEnum;
+import cn.iocoder.yudao.module.system.service.permission.PermissionService;
+import cn.iocoder.yudao.module.system.service.permission.RoleService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +20,7 @@ import cn.iocoder.yudao.module.system.convert.userCompany.UserCompanyConvert;
 import cn.iocoder.yudao.module.system.dal.mysql.company.UserCompanyMapper;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -32,6 +37,12 @@ public class UserCompanyServiceImpl implements UserCompanyService {
 
     @Resource
     private CompanyMapper companyMapper;
+
+    @Resource
+    private RoleService roleService;
+
+    @Resource
+    private PermissionService permissionService;
 
     @Override
     public Long createUserCompany(UserCompanyCreateReqVO createReqVO) {
@@ -58,8 +69,11 @@ public class UserCompanyServiceImpl implements UserCompanyService {
     public void deleteUserCompany(Long id) {
         // 校验存在
         this.validateUserCompanyExists(id);
+        UserCompanyDO userCompany = userCompanyMapper.selectById(id);
         // 删除
         userCompanyMapper.deleteById(id);
+        // 恢复为普通用户
+        assignNormalUserRole(userCompany.getUserId());
     }
 
     private void validateUserCompanyExists(Long id) {
@@ -88,7 +102,11 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         return userCompanyMapper.selectList(exportReqVO);
     }
 
+    @Override
     public Long createUserCompanyByCode(UserCompanyCreateByCodeReqVO createReqVO) {
+        if (createReqVO.getUserId() == null) {
+            createReqVO.setUserId(getLoginUserId());
+        }
         this.validateUserUnExists(createReqVO.getUserId());
 
         CompanyDO company = companyMapper.selectByCode(createReqVO.getCode());
@@ -98,6 +116,7 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         UserCompanyDO userCompany = UserCompanyDO.builder().userId(createReqVO.getUserId()).companyId(company.getId()).build();
         userCompanyMapper.insert(userCompany);
 
+        assignCustomerRole(getLoginUserId());
         return userCompany.getId();
     }
 
@@ -126,4 +145,24 @@ public class UserCompanyServiceImpl implements UserCompanyService {
             throw exception(COMPANY_NOT_EXISTS);
         }
     }
+
+    public CompanyDO getCompanyByUser(Long userId) {
+        UserCompanyDO userCompany = userCompanyMapper.selectByUser(userId);
+        if (userCompany == null) {
+            throw exception(USER_COMPANY_NOT_EXISTS);
+        }
+        return companyMapper.selectById(userCompany.getCompanyId());
+    }
+
+    public void assignCustomerRole(Long id){
+        RoleDO customer = roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode());
+        RoleDO normal_user = roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode());
+        permissionService.assignUserRole(id, new HashSet<>(Arrays.asList(customer.getId(), normal_user.getId())));
+    }
+
+    public void assignNormalUserRole(Long id){
+        RoleDO normal_user = roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode());
+        permissionService.assignUserRole(id, new HashSet<>(Collections.singletonList(normal_user.getId())));
+    }
+
 }

@@ -140,4 +140,6 @@ public interface RoleService {
      */
     void validRoles(Collection<Long> ids);
 
+    RoleDO getRoleByCode(String code);
+
 }

@@ -24,7 +24,7 @@ public class CompanyBaseVO {
     @NotNull(message = "公司联系方式不能为空")
     private String phone;
 
-    @ApiModelProperty(value = "公司编码，认证公司时使用， 非必要时无需传入，后台自动生成", required = false)
+    @ApiModelProperty(value = "公司编码，认证公司时使用， 非必要时无需传入，后台自动生成，为8位字母数字", required = false)
     private String code;
 
 }
