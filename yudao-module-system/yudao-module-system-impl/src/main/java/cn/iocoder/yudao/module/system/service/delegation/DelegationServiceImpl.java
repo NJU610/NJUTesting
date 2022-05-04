@@ -254,6 +254,9 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Override
     public String getDelegationTable2(String id) {
+        // 校验存在
+        this.validateDelegationTableExists(id, "table2");
+        // 获取
         Query query = new Query();
         query.addCriteria(new Criteria().andOperator(
                 Criteria.where("_id").is(id)
@@ -263,6 +266,9 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Override
     public String getDelegationTable3(String id) {
+        // 校验存在
+        this.validateDelegationTableExists(id, "table3");
+        // 获取
         Query query = new Query();
         query.addCriteria(new Criteria().andOperator(
                 Criteria.where("_id").is(id)

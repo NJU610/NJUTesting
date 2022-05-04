@@ -45,19 +45,4 @@ public interface FlowMapper extends BaseMapperX<FlowDO> {
                 .orderByDesc(FlowDO::getId));
     }
 
-    default List<FlowDO> selectList(FlowQueryVO reqVO) {
-        return selectList(new LambdaQueryWrapperX<FlowDO>()
-                .betweenIfPresent(FlowDO::getLaunchTime, reqVO.getBeginLaunchTime(), reqVO.getEndLaunchTime())
-                .eqIfPresent(FlowDO::getId, reqVO.getId())
-                .eqIfPresent(FlowDO::getCreatorId, reqVO.getCreatorId())
-                .eqIfPresent(FlowDO::getDelegationId, reqVO.getDelegationId())
-                .eqIfPresent(FlowDO::getContractId, reqVO.getContractId())
-                .eqIfPresent(FlowDO::getSampleId, reqVO.getSampleId())
-                .eqIfPresent(FlowDO::getSolutionId, reqVO.getSolutionId())
-                .eqIfPresent(FlowDO::getReportId, reqVO.getReportId())
-                .eqIfPresent(FlowDO::getState, reqVO.getState())
-                .betweenIfPresent(FlowDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
-                .orderByDesc(FlowDO::getId));
-    }
-
 }

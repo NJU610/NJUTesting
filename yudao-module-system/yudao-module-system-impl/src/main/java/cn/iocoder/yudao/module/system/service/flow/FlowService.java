@@ -36,12 +36,12 @@ public interface FlowService {
     void deleteFlowByCreator(Long delegationId);
 
     /**
-     * 根据条件获得项目流程
+     * 获得项目流程
      *
-     * @param queryVO 查询条件
-     * @return 项目流程列表
+     * @param id 编号
+     * @return 项目流程
      */
-    List<FlowDO> getFlowsByCondition(FlowQueryVO queryVO);
+    FlowDO getFlow(Long id);
 
     /**
      * 获得全部项目流程

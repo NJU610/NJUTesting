@@ -15,19 +15,19 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class FlowBaseVO {
 
-    @ApiModelProperty(value = "合同编号")
+    @ApiModelProperty(value = "合同编号", example = "1")
     private Long contractId;
 
-    @ApiModelProperty(value = "样品编号")
+    @ApiModelProperty(value = "样品编号", example = "1")
     private Long sampleId;
 
-    @ApiModelProperty(value = "方案编号")
+    @ApiModelProperty(value = "方案编号", example = "1")
     private Long solutionId;
 
-    @ApiModelProperty(value = "报告编号")
+    @ApiModelProperty(value = "报告编号", example = "1")
     private Long reportId;
 
-    @ApiModelProperty(value = "当前状态")
+    @ApiModelProperty(value = "当前状态", example = "10")
     private Integer state;
 
 }

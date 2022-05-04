@@ -53,15 +53,18 @@ public class FlowServiceImpl implements FlowService {
         flowMapper.delete(queryWrapper);
     }
 
+    @Override
+    public FlowDO getFlow(Long id) {
+        // 校验存在
+        this.validateFlowExists(id);
+        // 获得
+        return flowMapper.selectById(id);
+    }
+
     private void validateFlowExists(Long id) {
         if (flowMapper.selectById(id) == null) {
             throw exception(FLOW_NOT_EXISTS);
         }
-    }
-
-    @Override
-    public List<FlowDO> getFlowsByCondition(FlowQueryVO queryVO) {
-        return flowMapper.selectList(queryVO);
     }
 
     @Override

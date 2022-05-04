@@ -27,7 +27,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
 import cn.iocoder.yudao.module.system.convert.flow.FlowConvert;
 import cn.iocoder.yudao.module.system.service.flow.FlowService;
 
-@Api(tags = "管理后台 - 项目流程")
+@Api(tags = "项目流程")
 @RestController
 @RequestMapping("/system/flow")
 @Validated
@@ -37,28 +37,33 @@ public class FlowController {
     private FlowService flowService;
 
     @PutMapping("/update")
-    @ApiOperation("更新项目流程")
+    @ApiOperation(value = "根据id更新项目流程",
+            notes = "管理员使用。需要填写流程id和要更新的字段，返回值为是否更新成功")
     public CommonResult<Boolean> updateFlow(@Valid @RequestBody FlowUpdateReqVO updateReqVO) {
         flowService.updateFlow(updateReqVO);
         return success(true);
     }
 
-    @GetMapping("/get/condition")
-    @ApiOperation("根据条件获得项目流程")
-    public CommonResult<List<FlowRespVO>> getFlowsByCondition(@Valid FlowQueryVO queryVO) {
-        List<FlowDO> flows = flowService.getFlowsByCondition(queryVO);
-        return success(FlowConvert.INSTANCE.convertList(flows));
+    @GetMapping("/get")
+    @ApiOperation(value = "根据id获得项目流程",
+            notes = "管理员使用。需要传入流程id，返回值为对应流程信息")
+    @ApiImplicitParam(name = "id", value = "流程编号", required = true, example = "1024", dataTypeClass = Long.class)
+    public CommonResult<FlowRespVO> getFlow(@RequestParam("id") Long id) {
+        FlowRespVO flowRespVO = FlowConvert.INSTANCE.convert(flowService.getFlow(id));
+        return success(flowRespVO);
     }
 
     @GetMapping("/get/all")
-    @ApiOperation("获得全部项目流程")
+    @ApiOperation(value = "获得全部项目流程",
+            notes = "管理员使用。返回值为全部项目流程列表")
     public CommonResult<List<FlowRespVO>> getAllFlows() {
         List<FlowDO> flows = flowService.getAllFlows();
         return success(FlowConvert.INSTANCE.convertList(flows));
     }
 
     @GetMapping("/list")
-    @ApiOperation("获得项目流程列表")
+    @ApiOperation(value = "获得项目流程列表",
+            notes = "管理员使用。根据需要传入多个流程id，返回值为项目流程列表")
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
     public CommonResult<List<FlowRespVO>> getFlowList(@RequestParam("ids") Collection<Long> ids) {
         List<FlowDO> list = flowService.getFlowList(ids);
@@ -66,7 +71,8 @@ public class FlowController {
     }
 
     @GetMapping("/page")
-    @ApiOperation("获得项目流程分页")
+    @ApiOperation(value = "获得项目流程分页",
+            notes = "管理员使用。需要填写页码pageNo和每页条数pageSize，再根据需要填写其他查询字段。返回值为项目流程分页")
     public CommonResult<PageResult<FlowRespVO>> getFlowPage(@Valid FlowPageReqVO pageVO) {
         PageResult<FlowDO> pageResult = flowService.getFlowPage(pageVO);
         return success(FlowConvert.INSTANCE.convertPage(pageResult));
