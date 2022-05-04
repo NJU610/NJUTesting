@@ -20,13 +20,13 @@ public class AuthLoginReqVO {
 
     @ApiModelProperty(value = "账号。账号为4-16位数字以及密码", required = true, example = "username")
     @NotEmpty(message = "登录账号不能为空")
-    @Length(min = 8, max = 16, message = "账号长度为 8-16 位")
+    @Length(min = 4, max = 16, message = "账号长度为 8-16 位")
     @Pattern(regexp = "^[A-Za-z0-9]+$", message = "账号格式为数字以及字母")
     private String username;
 
     @ApiModelProperty(value = "密码。密码为8-16位，包含数字及字母", required = true, example = "password123")
     @NotEmpty(message = "密码不能为空")
-    @Length(min = 8, max = 16, message = "密码长度为 8-16 位")
+    @Length(min = 4, max = 16, message = "密码长度为 8-16 位")
     private String password;
 
     @ApiModelProperty(value = "验证码。验证码开启时，需要传递", required = true, example = "1024", notes = "验证码开启时，需要传递")

@@ -387,7 +387,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         if (user == null) {
             throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        assignNormalUserRole();
+        assignNormalUserRole(user);
         // 执行登陆
         LoginUser loginUser = AuthConvert.INSTANCE.convert(adminUserDO);
 
@@ -395,8 +395,8 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         return createUserSessionAfterLoginSuccess(loginUser, LoginLogTypeEnum.LOGIN_USERNAME, clientIP, userAgent);
     }
 
-    public void assignNormalUserRole(){
+    public void assignNormalUserRole(Long id){
         RoleDO role = roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode());
-        permissionService.assignUserRole(getLoginUserId(), Collections.singleton(role.getId()));
+        permissionService.assignUserRole(id, Collections.singleton(role.getId()));
     }
 }

@@ -52,6 +52,7 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         UserCompanyDO userCompany = UserCompanyConvert.INSTANCE.convert(createReqVO);
         userCompanyMapper.insert(userCompany);
         // 返回
+        assignCustomerRole(userCompany.getUserId());
         return userCompany.getId();
     }
 
@@ -113,10 +114,12 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         if (company == null) {
             throw exception(COMPANY_NOT_EXISTS);
         }
-        UserCompanyDO userCompany = UserCompanyDO.builder().userId(createReqVO.getUserId()).companyId(company.getId()).build();
+        UserCompanyDO userCompany = UserCompanyDO.builder()
+                .userId(createReqVO.getUserId() == null ? getLoginUserId() : createReqVO.getUserId())
+                .companyId(company.getId()).build();
         userCompanyMapper.insert(userCompany);
 
-        assignCustomerRole(getLoginUserId());
+        assignCustomerRole(userCompany.getUserId());
         return userCompany.getId();
     }
 

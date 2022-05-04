@@ -327,5 +327,6 @@ public class RoleServiceImpl implements RoleService {
         if (!CommonStatusEnum.ENABLE.getStatus().equals(roleDO.getStatus())) {
             throw exception(ROLE_IS_DISABLE, roleDO.getName());
         }
+        return roleDO;
     }
 }
