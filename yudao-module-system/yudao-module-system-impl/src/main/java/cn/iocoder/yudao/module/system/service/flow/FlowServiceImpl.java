@@ -47,7 +47,7 @@ public class FlowServiceImpl implements FlowService {
     }
 
     @Override
-    public void deleteFlowByCreator(Long delegationId) {
+    public void deleteFlowByDelegation(Long delegationId) {
         QueryWrapperX<FlowDO> queryWrapper = new QueryWrapperX<>();
         queryWrapper.eqIfPresent("delegation_id", delegationId);
         flowMapper.delete(queryWrapper);

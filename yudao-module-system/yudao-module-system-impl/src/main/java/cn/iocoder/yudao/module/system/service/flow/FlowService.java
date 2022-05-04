@@ -33,7 +33,7 @@ public interface FlowService {
      *
      * @param delegationId 委托编号
      */
-    void deleteFlowByCreator(Long delegationId);
+    void deleteFlowByDelegation(Long delegationId);
 
     /**
      * 获得项目流程

@@ -9,14 +9,10 @@ import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
 import cn.iocoder.yudao.module.system.convert.flow.FlowConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
-import cn.iocoder.yudao.module.system.dal.mongo.delegation.CommonObject;
+import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.dal.mysql.flow.FlowMapper;
 import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -42,7 +38,7 @@ public class DelegationServiceImpl implements DelegationService {
     private FlowMapper flowMapper;
 
     @Resource
-    private MongoTemplate mongoTemplate;
+    private TableMongoRepository tableMongoRepository;
 
     @Override
     public Long createDelegation(DelegationCreateReqVO createReqVO) {
@@ -106,9 +102,9 @@ public class DelegationServiceImpl implements DelegationService {
 
         DelegationDO delegationDO = delegationMapper.selectById(delegationId);
         if (delegationDO.getTable2Id() == null) {
-            delegationDO.setTable2Id(createDelegationTable("table2", updateReqVO.getData()));
+            delegationDO.setTable2Id(tableMongoRepository.create("table2", updateReqVO.getData()));
         } else {
-            upsertDelegationTable("table2", delegationDO.getTable2Id(), updateReqVO.getData());
+            tableMongoRepository.upsert("table2", delegationDO.getTable2Id(), updateReqVO.getData());
         }
 
         delegationMapper.updateById(delegationDO);
@@ -122,37 +118,12 @@ public class DelegationServiceImpl implements DelegationService {
 
         DelegationDO delegationDO = delegationMapper.selectById(delegationId);
         if (delegationDO.getTable3Id() == null) {
-            delegationDO.setTable3Id(createDelegationTable("table3", updateReqVO.getData()));
+            delegationDO.setTable3Id(tableMongoRepository.create("table3", updateReqVO.getData()));
         } else {
-            upsertDelegationTable("table3", delegationDO.getTable3Id(), updateReqVO.getData());
+            tableMongoRepository.upsert("table3", delegationDO.getTable3Id(), updateReqVO.getData());
         }
 
         delegationMapper.updateById(delegationDO);
-    }
-
-    private String createDelegationTable(String tableName, Map<String, Object> data) {
-        CommonObject obj = new CommonObject();
-        obj.setId(null);
-        mongoTemplate.insert(obj, tableName);
-        String tableId = obj.getId();
-
-        upsertDelegationTable(tableName, tableId, data);
-
-        return tableId;
-    }
-
-    private void upsertDelegationTable(String tableName, String tableId, Map<String, Object> data) {
-        if (data != null && !data.isEmpty()) {
-            Query query = new Query();
-            query.addCriteria(new Criteria().andOperator(
-                    Criteria.where("_id").is(tableId)
-            ));
-            Update update = new Update();
-            for (Map.Entry<String, Object> entry : data.entrySet()) {
-                update.set(entry.getKey(), entry.getValue());
-            }
-            mongoTemplate.upsert(query, update, tableName);
-        }
     }
 
     @Override
@@ -163,27 +134,14 @@ public class DelegationServiceImpl implements DelegationService {
         // 删除表格
         DelegationDO delegationDO = delegationMapper.selectById(id);
         if (delegationDO.getTable2Id() != null) {
-            deleteTable(delegationDO.getTable2Id(), "table2");
+            tableMongoRepository.delete("table2", delegationDO.getTable2Id());
         }
         if (delegationDO.getTable3Id() != null) {
-            deleteTable(delegationDO.getTable3Id(), "table3");
+            tableMongoRepository.delete("table3", delegationDO.getTable3Id());
         }
 
         // 删除
         delegationMapper.deleteById(id);
-    }
-
-    private void deleteTable(String tableId, String tableName) {
-        // 校验存在
-        this.validateDelegationTableExists(tableId, tableName);
-        // 删除
-        Query query = new Query();
-        query.addCriteria(new Criteria().andOperator(
-                Criteria.where("_id").is(tableId)
-        ));
-        Update update = new Update();
-        update.set("deleted", true);
-        mongoTemplate.updateFirst(query, update, tableName);
     }
 
     //判断委托名称不重复
@@ -197,13 +155,6 @@ public class DelegationServiceImpl implements DelegationService {
         }
     }
 
-    private void validateDelegationTableExists(String tableId, String tableName) {
-        CommonObject obj = mongoTemplate.findById(tableId, CommonObject.class, tableName);
-        if (obj == null || obj.getDeleted()) {
-            throw exception(DELEGATION_TABLE_NOT_EXISTS);
-        }
-    }
-
     private void validateDelegationExists(Long id) {
         if (delegationMapper.selectById(id) == null) {
             throw exception(DELEGATION_NOT_EXISTS);
@@ -212,6 +163,8 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Override
     public DelegationRespVO getDelegation(Long id) {
+        // 校验存在
+        this.validateDelegationExists(id);
         return convert(delegationMapper.selectById(id));
     }
 
@@ -235,6 +188,9 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     private DelegationRespVO convert(DelegationDO delegationDO) {
+        if (delegationDO == null) {
+            return null;
+        }
         DelegationRespVO delegationRespVO = DelegationConvert.INSTANCE.convert(delegationDO);
         QueryWrapperX<FlowDO> queryWrapper = new QueryWrapperX<>();
         queryWrapper.eqIfPresent("delegation_id", delegationDO.getId())
@@ -245,6 +201,9 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     private List<DelegationRespVO> convert(List<DelegationDO> delegationDOList) {
+        if (delegationDOList == null) {
+            return null;
+        }
         List<DelegationRespVO> delegationRespVOList = new ArrayList<>();
         for (DelegationDO delegationDO : delegationDOList) {
             delegationRespVOList.add(convert(delegationDO));
@@ -254,26 +213,12 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Override
     public String getDelegationTable2(String id) {
-        // 校验存在
-        this.validateDelegationTableExists(id, "table2");
-        // 获取
-        Query query = new Query();
-        query.addCriteria(new Criteria().andOperator(
-                Criteria.where("_id").is(id)
-        ));
-        return mongoTemplate.findOne(query, String.class, "table2");
+        return tableMongoRepository.get("table2", id);
     }
 
     @Override
     public String getDelegationTable3(String id) {
-        // 校验存在
-        this.validateDelegationTableExists(id, "table3");
-        // 获取
-        Query query = new Query();
-        query.addCriteria(new Criteria().andOperator(
-                Criteria.where("_id").is(id)
-        ));
-        return mongoTemplate.findOne(query, String.class, "table3");
+        return tableMongoRepository.get("table3", id);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package cn.iocoder.yudao.module.system.controller.admin.delegation;
 
-import cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils;
-import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowCreateVO;
 import cn.iocoder.yudao.module.system.service.flow.FlowService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -86,7 +84,7 @@ public class DelegationController {
         delegationService.deleteDelegation(id);
 
         // 删除flow
-        flowService.deleteFlowByCreator(id);
+        flowService.deleteFlowByDelegation(id);
         return success(true);
     }
 
