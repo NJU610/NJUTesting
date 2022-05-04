@@ -150,10 +150,11 @@ public class DelegationController {
     }
 
     @GetMapping("/page")
-    @ApiOperation("获得委托分页")
+    @ApiOperation(value = "获得委托分页",
+            notes = "管理员和用户使用。需要填写页码pageNo和每页条数pageSize，再根据需要填写其他查询字段。返回值为委托分页，包含委托当前状态。")
     public CommonResult<PageResult<DelegationRespVO>> getDelegationPage(@Valid DelegationPageReqVO pageVO) {
-        PageResult<DelegationDO> pageResult = delegationService.getDelegationPage(pageVO);
-        return success(DelegationConvert.INSTANCE.convertPage(pageResult));
+        PageResult<DelegationRespVO> pageResult = delegationService.getDelegationPage(pageVO);
+        return success(pageResult);
     }
 
     @GetMapping("/export-excel")

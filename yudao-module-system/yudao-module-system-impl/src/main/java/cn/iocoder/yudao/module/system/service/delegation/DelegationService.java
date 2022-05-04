@@ -116,7 +116,7 @@ public interface DelegationService {
      * @param pageReqVO 分页查询
      * @return 委托分页
      */
-    PageResult<DelegationDO> getDelegationPage(DelegationPageReqVO pageReqVO);
+    PageResult<DelegationRespVO> getDelegationPage(DelegationPageReqVO pageReqVO);
 
     /**
      * 获得委托列表, 用于 Excel 导出

@@ -276,8 +276,16 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
-    public PageResult<DelegationDO> getDelegationPage(DelegationPageReqVO pageReqVO) {
-        return delegationMapper.selectPage(pageReqVO);
+    public PageResult<DelegationRespVO> getDelegationPage(DelegationPageReqVO pageReqVO) {
+        // 获取分页结果
+        PageResult<DelegationDO> pageDOResult = delegationMapper.selectPage(pageReqVO);
+        List<DelegationDO> list = pageDOResult.getList();
+        // 转换
+        PageResult<DelegationRespVO> pageResult = new PageResult<>();
+        List<DelegationRespVO> delegationRespVOList = convert(list);
+        pageResult.setList(delegationRespVOList);
+        pageResult.setTotal(pageDOResult.getTotal());
+        return pageResult;
     }
 
     @Override
