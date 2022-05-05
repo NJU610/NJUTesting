@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.module.system.dal.dataobject.operation;
+package cn.iocoder.yudao.module.system.dal.dataobject.flow;
 
 import lombok.*;
 import java.util.*;
@@ -10,14 +10,14 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
  *
  * @author qjy
  */
-@TableName("system_operation")
+@TableName("system_flow_log")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OperationDO extends BaseDO {
+public class FlowLogDO extends BaseDO {
 
     /**
      * 操作编号
@@ -32,6 +32,14 @@ public class OperationDO extends BaseDO {
      * 操作人编号
      */
     private Long operatorId;
+    /**
+     * 原状态
+     */
+    private int fromState;
+    /**
+     * 目标状态
+     */
+    private int toState;
     /**
      * 操作时间
      */

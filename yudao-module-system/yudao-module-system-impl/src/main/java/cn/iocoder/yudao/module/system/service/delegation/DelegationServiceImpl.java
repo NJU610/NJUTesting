@@ -13,6 +13,8 @@ import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.dal.mysql.flow.FlowMapper;
 import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
+import cn.iocoder.yudao.module.system.service.operation.FlowLogService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -40,6 +42,10 @@ public class DelegationServiceImpl implements DelegationService {
     @Resource
     private TableMongoRepository tableMongoRepository;
 
+    @Resource
+    @Lazy
+    private FlowLogService flowLogService;
+
     @Override
     public Long createDelegation(DelegationCreateReqVO createReqVO) {
         // 检验名称是否重复
@@ -63,6 +69,7 @@ public class DelegationServiceImpl implements DelegationService {
         FlowDO flow = FlowConvert.INSTANCE.convert(flowCreateVO);
         flow.setState(FlowStateEnum.DELEGATE_WRITING.getState());
         flowMapper.insert(flow);
+        flowLogService.saveLog(flow.getId(), null, FlowStateEnum.DELEGATE_WRITING);
         // 返回
         return delegation.getId();
     }

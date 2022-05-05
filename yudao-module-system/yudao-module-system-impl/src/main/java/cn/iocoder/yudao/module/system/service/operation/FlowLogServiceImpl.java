@@ -1,13 +1,11 @@
 package cn.iocoder.yudao.module.system.service.operation;
 
-import cn.iocoder.yudao.module.system.controller.admin.contract.vo.ContractRespVO;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationRespVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.contract.ContractDO;
-import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
-import cn.iocoder.yudao.module.system.dal.dataobject.operation.OperationDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
-import cn.iocoder.yudao.module.system.dal.mysql.operation.OperationMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.flow.FlowLogMapper;
 import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
 import cn.iocoder.yudao.module.system.service.contract.ContractService;
 import cn.iocoder.yudao.module.system.service.delegation.DelegationService;
@@ -27,10 +25,10 @@ import java.util.Date;
  */
 @Service
 @Validated
-public class OperationServiceImpl implements OperationService {
+public class FlowLogServiceImpl implements FlowLogService {
 
     @Resource
-    private OperationMapper operationMapper;
+    private FlowLogMapper flowLogMapper;
 
     @Resource
     private FlowService flowService;
@@ -43,6 +41,8 @@ public class OperationServiceImpl implements OperationService {
 
     @Resource
     private AdminUserService userService;
+
+
 
     @Override
     public void saveLog (Long flowId, FlowStateEnum fromState, FlowStateEnum toState) {
@@ -84,14 +84,16 @@ public class OperationServiceImpl implements OperationService {
             }
         }
 
-        OperationDO operationDO = OperationDO.builder()
+        FlowLogDO flowLogDO = FlowLogDO.builder()
                 .operatorId(operatorId)
                 .operateTime(operatorTime)
                 .remark(remark)
                 .flowId(flowId)
+                .fromState(fromState.getState())
+                .toState(toState.getState())
                 .build();
 
-        operationMapper.insert(operationDO);
+        flowLogMapper.insert(flowLogDO);
     }
 
 }

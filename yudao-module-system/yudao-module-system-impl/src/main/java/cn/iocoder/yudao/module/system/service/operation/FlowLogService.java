@@ -7,7 +7,7 @@ import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
  *
  * @author qjy
  */
-public interface OperationService {
+public interface FlowLogService {
 
     /**
      * 保存操作日志
