@@ -9,6 +9,9 @@ import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
 import org.apache.ibatis.annotations.Mapper;
 import cn.iocoder.yudao.module.system.controller.admin.flow.vo.*;
 
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.FLOW_NOT_EXISTS;
+
 /**
  * 项目流程 Mapper
  *
@@ -43,6 +46,16 @@ public interface FlowMapper extends BaseMapperX<FlowDO> {
                 .eqIfPresent(FlowDO::getState, reqVO.getState())
                 .betweenIfPresent(FlowDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
                 .orderByDesc(FlowDO::getId));
+    }
+
+    default FlowDO selectByDelegation(Long delegationId) {
+        FlowDO flow = selectOne(new LambdaQueryWrapperX<FlowDO>()
+                .eqIfPresent(FlowDO::getDelegationId, delegationId)
+                .eqIfPresent(FlowDO::getDeleted, false));
+        if (flow == null) {
+            throw exception(FLOW_NOT_EXISTS);
+        }
+        return flow;
     }
 
 }
