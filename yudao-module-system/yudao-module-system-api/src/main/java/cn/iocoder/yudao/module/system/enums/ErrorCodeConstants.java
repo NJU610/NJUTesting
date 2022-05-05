@@ -131,6 +131,7 @@ public interface ErrorCodeConstants {
 
     // ========== 项目流程 1002021000 ==========
     ErrorCode FLOW_NOT_EXISTS = new ErrorCode(1002021000, "项目流程不存在");
+    ErrorCode FLOW_STATE_ERROR = new ErrorCode(1002021001, "项目流程状态错误");
 
     // ========== 公司认证模块 1002022000 =========
     ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002022000, "公司不存在");
