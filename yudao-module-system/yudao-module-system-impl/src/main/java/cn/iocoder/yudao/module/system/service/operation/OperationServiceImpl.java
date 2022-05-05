@@ -44,10 +44,11 @@ public class OperationServiceImpl implements OperationService {
     @Resource
     private AdminUserService userService;
 
-    public void saveLog (Long FLowId, FlowStateEnum fromState, FlowStateEnum toState) {
+    @Override
+    public void saveLog (Long flowId, FlowStateEnum fromState, FlowStateEnum toState) {
         String template = OperationUtil.getTemplate(fromState, toState);
 
-        FlowDO flowDO = flowService.getFlow(FLowId);
+        FlowDO flowDO = flowService.getFlow(flowId);
         Long operatorId = null;
         Date operatorTime = new Date();
         String remark = template;
@@ -87,7 +88,7 @@ public class OperationServiceImpl implements OperationService {
                 .operatorId(operatorId)
                 .operateTime(operatorTime)
                 .remark(remark)
-                .flowId(FLowId)
+                .flowId(flowId)
                 .build();
 
         operationMapper.insert(operationDO);
