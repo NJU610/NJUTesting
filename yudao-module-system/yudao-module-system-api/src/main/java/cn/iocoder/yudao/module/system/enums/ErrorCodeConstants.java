@@ -128,14 +128,20 @@ public interface ErrorCodeConstants {
     ErrorCode DELEGATION_NOT_EXISTS = new ErrorCode(1002020000, "委托不存在");
     ErrorCode DELEGATION_NAME_DUPLICATE = new ErrorCode(1002020001, "委托名称不能重复");
     ErrorCode DELEGATION_TABLE_NOT_EXISTS = new ErrorCode(1002020002, "委托表格不存在");
+    ErrorCode DELEGATION_ALREADY_ACCEPTED = new ErrorCode(1002020003, "委托已被接收");
 
     // ========== 项目流程 1002021000 ==========
     ErrorCode FLOW_NOT_EXISTS = new ErrorCode(1002021000, "项目流程不存在");
+    ErrorCode FLOW_STATE_ERROR = new ErrorCode(1002021001, "项目流程状态错误");
 
     // ========== 公司认证模块 1002022000 =========
     ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002022000, "公司不存在");
     ErrorCode USER_COMPANY_NOT_EXISTS = new ErrorCode(1002022001, "用户公司关联不存在");
     ErrorCode COMPANY_NAME_EXISTS = new ErrorCode(1002022002, "公司名已存在");
     ErrorCode USER_COMPANY_EXISTS = new ErrorCode(1002022003, "用户公司关联已存在");
+
+    // ========== 合同 1002022000 ==========
+    ErrorCode CONTRACT_NOT_EXISTS = new ErrorCode(1002022000, "合同不存在");
+    ErrorCode CONTRACT_ALREADY_EXISTS = new ErrorCode(1002022001, "合同已存在");
 
 }

@@ -31,23 +31,51 @@ public interface DelegationService {
     /**
      * 提交委托
      *
-     * @param  id 编号
+     * @param submitReqVO 提交信息
      */
-    void submitDelegation(Long id);
+    void submitDelegation(@Valid DelegationSubmitReqVO submitReqVO);
 
     /**
      * 保存软件项目委托测试申请表
      *
      * @param updateReqVO 更新信息
      */
-    void saveDelegationTable2(@Valid DelegationSaveTableReqVo updateReqVO);
+    void saveDelegationTable2(@Valid DelegationSaveTableReqVO updateReqVO);
 
     /**
      * 保存委托测试软件功能列表
      *
      * @param updateReqVO 更新信息
      */
-    void saveDelegationTable3(@Valid DelegationSaveTableReqVo updateReqVO);
+    void saveDelegationTable3(@Valid DelegationSaveTableReqVO updateReqVO);
+
+    /**
+     * 接收委托
+     *
+     * @param acceptReqVO 接收信息
+     */
+    void acceptDelegation(@Valid DelegationAcceptReqVO acceptReqVO);
+
+    /**
+     * 分配委托给测试人员
+     *
+     * @param distributeReqVO 分配信息
+     */
+    void distributeDelegation(@Valid DelegationDistributeReqVO distributeReqVO);
+
+    /**
+     * 测试人员审核委托通过
+     *
+     * @param acceptReqVO 审核信息
+     */
+    void auditDelegationSuccess(@Valid DelegationAcceptReqVO acceptReqVO);
+
+    /**
+     * 测试人员审核委托不通过
+     *
+     * @param acceptReqVO 审核信息
+     */
+    void auditDelegationFail(@Valid DelegationAcceptReqVO acceptReqVO);
 
     /**
      * 删除委托

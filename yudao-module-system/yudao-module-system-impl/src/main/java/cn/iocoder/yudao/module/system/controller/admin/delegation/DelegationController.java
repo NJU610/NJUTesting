@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.controller.admin.delegation;
 
+import cn.iocoder.yudao.module.system.service.contract.ContractService;
 import cn.iocoder.yudao.module.system.service.flow.FlowService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -37,6 +38,9 @@ public class DelegationController {
     @Resource
     private FlowService flowService;
 
+    @Resource
+    private ContractService contractService;
+
     @PostMapping("/create")
     @ApiOperation(value = "创建委托",
             notes = "用户使用。创建新委托，需要填写委托名称name字段。返回值为委托的id。")
@@ -55,7 +59,7 @@ public class DelegationController {
     @PutMapping("/save/table2")
     @ApiOperation(value = "保存软件项目委托测试申请表",
             notes = "用户使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含表格内容。返回值为是否更新成功")
-    public CommonResult<Boolean> saveDelegationTable2(@Valid @RequestBody DelegationSaveTableReqVo saveTableReqVo) {
+    public CommonResult<Boolean> saveDelegationTable2(@Valid @RequestBody DelegationSaveTableReqVO saveTableReqVo) {
         delegationService.saveDelegationTable2(saveTableReqVo);
         return success(true);
     }
@@ -63,7 +67,7 @@ public class DelegationController {
     @PutMapping("/save/table3")
     @ApiOperation(value = "保存委托测试软件功能列表",
             notes = "用户使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含表格内容。返回值为是否更新成功")
-    public CommonResult<Boolean> saveDelegationTable3(@Valid @RequestBody DelegationSaveTableReqVo saveTableReqVo) {
+    public CommonResult<Boolean> saveDelegationTable3(@Valid @RequestBody DelegationSaveTableReqVO saveTableReqVo) {
         delegationService.saveDelegationTable3(saveTableReqVo);
         return success(true);
     }
@@ -71,8 +75,40 @@ public class DelegationController {
     @PutMapping("/submit")
     @ApiOperation(value = "表格填写完毕，提交委托",
             notes = "用户使用。需要填写id字段，其中id为委托id。返回值为是否提交成功。需要前端检验数据是否填写完整")
-    public CommonResult<Boolean> submitDelegation(@Valid @RequestBody DelegationSubmitVo submitVo) {
-        delegationService.submitDelegation(submitVo.getId());
+    public CommonResult<Boolean> submitDelegation(@Valid @RequestBody DelegationSubmitReqVO submitVo) {
+        delegationService.submitDelegation(submitVo);
+        return success(true);
+    }
+
+    @PutMapping("/distribute")
+    @ApiOperation(value = "分配委托给测试人员",
+            notes = "管理员使用。需要填写id和acceptorId字段，其中id为委托id，acceptorId为测试人员id。返回值为是否更新成功。")
+    public CommonResult<Boolean> distributeDelegation(@Valid @RequestBody DelegationDistributeReqVO distributeReqVO) {
+        delegationService.distributeDelegation(distributeReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/accept")
+    @ApiOperation(value = "接受委托",
+            notes = "测试人员使用。需要填写id字段，其中id为委托id。返回值为是否接收成功。")
+    public CommonResult<Boolean> acceptDelegation(@Valid @RequestBody DelegationAcceptReqVO acceptReqVO) {
+        delegationService.acceptDelegation(acceptReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/audit/success")
+    @ApiOperation(value = "委托审核通过",
+            notes = "测试人员使用。需要填写id字段，其中id为委托id。返回值为是否更新状态成功。")
+    public CommonResult<Boolean> auditDelegationSuccess(@Valid @RequestBody DelegationAcceptReqVO acceptReqVO) {
+        delegationService.auditDelegationSuccess(acceptReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/audit/fail")
+    @ApiOperation(value = "委托审核不通过",
+            notes = "测试人员使用。需要填写id字段，其中id为委托id。返回值为是否更新状态成功。")
+    public CommonResult<Boolean> auditDelegationFail(@Valid @RequestBody DelegationAcceptReqVO acceptReqVO) {
+        delegationService.auditDelegationFail(acceptReqVO);
         return success(true);
     }
 

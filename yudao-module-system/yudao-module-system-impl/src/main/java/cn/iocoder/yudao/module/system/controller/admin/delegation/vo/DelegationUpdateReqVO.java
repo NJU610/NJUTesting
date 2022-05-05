@@ -9,13 +9,15 @@ import javax.validation.constraints.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class DelegationUpdateReqVO extends DelegationBaseVO {
-
-    @ApiModelProperty(value = "委托编号", example = "1", required = true)
-    @NotNull(message = "委托编号不能为空")
-    private Long id;
+public class DelegationUpdateReqVO extends DelegationEditBaseVO {
 
     @ApiModelProperty(value = "委托名称", example = "example name")
     private String name;
+
+    @ApiModelProperty(value = "文档材料url", example = "doc.zip")
+    private String url;
+
+    @ApiModelProperty(value = "备注", example = "remark")
+    private String remark;
 
 }

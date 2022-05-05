@@ -34,4 +34,13 @@ public enum FlowStateEnum {
 
     private final String desc;
 
+    public static FlowStateEnum getByState(Integer state) {
+        for (FlowStateEnum flowStateEnum : values()) {
+            if (flowStateEnum.getState().equals(state)) {
+                return flowStateEnum;
+            }
+        }
+        return null;
+    }
+
 }

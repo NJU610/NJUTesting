@@ -17,6 +17,6 @@ public class DelegationRespVO extends DelegationBaseVO {
     private Date createTime;
 
     @ApiModelProperty(value = "状态")
-    private Integer state;
+    private String state;
 
 }
