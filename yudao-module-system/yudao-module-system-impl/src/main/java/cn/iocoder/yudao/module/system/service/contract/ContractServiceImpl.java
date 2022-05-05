@@ -108,7 +108,7 @@ public class ContractServiceImpl implements ContractService {
 
         ContractDO contract = contractMapper.selectById(contractId);
         if (contract.getTable5Id() == null) {
-            contract.setTable4Id(tableMongoRepository.create("table5", saveReqVO.getData()));
+            contract.setTable5Id(tableMongoRepository.create("table5", saveReqVO.getData()));
         } else {
             tableMongoRepository.upsert("table5", contract.getTable5Id(), saveReqVO.getData());
         }

@@ -140,8 +140,8 @@ public interface ErrorCodeConstants {
     ErrorCode COMPANY_NAME_EXISTS = new ErrorCode(1002022002, "公司名已存在");
     ErrorCode USER_COMPANY_EXISTS = new ErrorCode(1002022003, "用户公司关联已存在");
 
-    // ========== 合同 1002022000 ==========
-    ErrorCode CONTRACT_NOT_EXISTS = new ErrorCode(1002022000, "合同不存在");
-    ErrorCode CONTRACT_ALREADY_EXISTS = new ErrorCode(1002022001, "合同已存在");
+    // ========== 合同 1002023000 ==========
+    ErrorCode CONTRACT_NOT_EXISTS = new ErrorCode(1002023000, "合同不存在");
+    ErrorCode CONTRACT_ALREADY_EXISTS = new ErrorCode(1002023001, "合同已存在");
 
 }
