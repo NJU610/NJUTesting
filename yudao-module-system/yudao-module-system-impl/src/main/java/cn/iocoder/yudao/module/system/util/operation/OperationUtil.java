@@ -3,13 +3,17 @@ package cn.iocoder.yudao.module.system.util.operation;
 import cn.hutool.core.lang.Pair;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
 import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
+import cn.iocoder.yudao.module.system.service.flow.FlowService;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.FLOW_STATE_ERROR;
 
 public class OperationUtil {
+
+
     private final static HashMap<Pair<FlowStateEnum, FlowStateEnum>, String> normalFlowStateMap = new HashMap<>();
     private final static HashMap<FlowStateEnum, String> exceptionFlowStateMap = new HashMap<>();
 
@@ -22,12 +26,6 @@ public class OperationUtil {
             throw exception(FLOW_STATE_ERROR);
         }
     }
-
-    public static String fillTemplate(String template, Long FLowId) {
-        return null;
-    }
-
-
 
 
 
