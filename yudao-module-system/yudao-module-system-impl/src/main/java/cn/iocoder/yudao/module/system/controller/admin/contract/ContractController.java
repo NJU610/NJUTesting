@@ -35,23 +35,23 @@ public class ContractController {
 
     @PostMapping("/create")
     @ApiOperation(value = "创建合同",
-            notes = "测试人员使用。创建新合同，需要填写委托id。发起者id为空时默认发起者为当前用户。返回值为合同的id。")
+            notes = "市场部工作人员使用。创建新合同，需要填写委托id。发起者id为空时默认发起者为当前用户。返回值为合同的id。")
     public CommonResult<Long> createContract(@RequestBody @Validated ContractCreateReqVO createReqVO) {
         // TODO 需要发起人id
         return success(contractService.createContract(createReqVO));
     }
 
     @PostMapping("/save/table4")
-    @ApiOperation(value = "市场部人员填写软件委托测试合同",
-            notes = "管理员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
+    @ApiOperation(value = "保存软件委托测试合同",
+            notes = "客户和市场部工作人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
     public CommonResult<Boolean> saveContractTable4(@Valid @RequestBody ContractSaveTableReqVO saveReqVO) {
         contractService.saveContractTable4(saveReqVO);
         return success(true);
     }
 
     @PostMapping("/save/table5")
-    @ApiOperation(value = "市场部人员填写软件项目委托测试保密协议",
-            notes = "管理员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
+    @ApiOperation(value = "保存软件项目委托测试保密协议",
+            notes = "客户和市场部工作人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
     public CommonResult<Boolean> saveContractTable5(@Valid @RequestBody ContractSaveTableReqVO saveReqVO) {
         contractService.saveContractTable5(saveReqVO);
         return success(true);
