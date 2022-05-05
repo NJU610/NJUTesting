@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Api(tags = "管理后台 - 验证码")
+@Api(tags = "验证码")
 @RestController
 @RequestMapping("/system/captcha")
 public class CaptchaController {
@@ -22,7 +22,7 @@ public class CaptchaController {
     private CaptchaService captchaService;
 
     @GetMapping("/get-image")
-    @ApiOperation("生成图片验证码")
+    @ApiOperation(value = "生成图片验证码", notes = "生成图片验证码，直接调用返回图片的 base64 编码与uuid，使用验证码时传入 uuid 即可")
     public CommonResult<CaptchaImageRespVO> getCaptchaImage() {
         return success(captchaService.getCaptchaImage());
     }

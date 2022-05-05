@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AuthSimpleMenuRespVO {
 
-    @ApiModelProperty(value = "菜单名称", required = true, example = "芋道")
+    @ApiModelProperty(value = "菜单名称", required = true, example = "用户管理")
     private String name;
 
-    @ApiModelProperty(value = "路由地址", example = "post", notes = "路由地址")
+    @ApiModelProperty(value = "路由地址", example = "/delegation", notes = "路由地址")
     private String path;
 
-    @ApiModelProperty(value = "路由参数", example = "post", notes = "路由参数")
+    @ApiModelProperty(value = "路由参数", example = "true", notes = "路由参数")
     private Boolean hideInMenu;
 }

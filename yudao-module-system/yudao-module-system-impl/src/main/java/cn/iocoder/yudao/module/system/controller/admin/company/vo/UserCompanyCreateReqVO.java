@@ -5,7 +5,7 @@ import io.swagger.annotations.*;
 
 import javax.validation.constraints.NotNull;
 
-@ApiModel("管理后台 - 用户公司关联创建 Request VO")
+@ApiModel("用户公司关联创建 Request VO")
 @Data
 @ToString(callSuper = true)
 public class UserCompanyCreateReqVO{

@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AuthRegisterRespVO {
 
-    @ApiModelProperty(value = "token", required = true, example = "yudaoyuanma")
+    @ApiModelProperty(value = "token。返回token作为认证，调用需要认证的接口时需要传入该参数", required = true, example = "4389dhkd93ujdasgudd32h2e")
     private String token;
 }

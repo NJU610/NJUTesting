@@ -11,13 +11,16 @@ import cn.iocoder.yudao.module.system.api.logger.dto.LoginLogCreateReqDTO;
 import cn.iocoder.yudao.module.system.api.sms.SmsCodeApi;
 import cn.iocoder.yudao.module.system.controller.admin.auth.vo.auth.*;
 import cn.iocoder.yudao.module.system.convert.auth.AuthConvert;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.yudao.module.system.enums.logger.LoginLogTypeEnum;
 import cn.iocoder.yudao.module.system.enums.logger.LoginResultEnum;
+import cn.iocoder.yudao.module.system.enums.permission.RoleCodeEnum;
 import cn.iocoder.yudao.module.system.enums.sms.SmsSceneEnum;
 import cn.iocoder.yudao.module.system.service.common.CaptchaService;
 import cn.iocoder.yudao.module.system.service.logger.LoginLogService;
 import cn.iocoder.yudao.module.system.service.permission.PermissionService;
+import cn.iocoder.yudao.module.system.service.permission.RoleService;
 import cn.iocoder.yudao.module.system.service.social.SocialUserService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,11 +39,13 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import javax.validation.Validator;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 import static java.util.Collections.singleton;
 
@@ -72,9 +77,13 @@ public class AdminAuthServiceImpl implements AdminAuthService {
     private SocialUserService socialUserService;
     @Resource
     private SmsCodeApi smsCodeApi;
+    @Resource
+    private RoleService roleService;
 
     @Resource
     private Validator validator;
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -378,10 +387,16 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         if (user == null) {
             throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
         }
+        assignNormalUserRole(user);
         // 执行登陆
         LoginUser loginUser = AuthConvert.INSTANCE.convert(adminUserDO);
 
         // 缓存登录用户到 Redis 中，返回 sessionId 编号
         return createUserSessionAfterLoginSuccess(loginUser, LoginLogTypeEnum.LOGIN_USERNAME, clientIP, userAgent);
+    }
+
+    public void assignNormalUserRole(Long id){
+        RoleDO role = roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode());
+        permissionService.assignUserRole(id, Collections.singleton(role.getId()));
     }
 }

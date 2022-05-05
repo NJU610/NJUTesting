@@ -6,7 +6,7 @@ import io.swagger.annotations.*;
 
 import javax.validation.constraints.NotNull;
 
-@ApiModel("管理后台 - 公司 Response VO")
+@ApiModel("公司 Response VO")
 @Data
 @ToString(callSuper = true)
 public class CompanyRespVO{

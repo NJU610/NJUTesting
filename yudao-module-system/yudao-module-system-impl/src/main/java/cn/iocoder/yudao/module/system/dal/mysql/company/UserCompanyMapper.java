@@ -18,6 +18,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserCompanyMapper extends BaseMapperX<UserCompanyDO> {
 
+    default UserCompanyDO selectByUser(Long userId) {
+        return selectOne(new LambdaQueryWrapperX<UserCompanyDO>()
+                .eq(UserCompanyDO::getUserId, userId));
+    }
+
     default boolean existsByUser(Long userId) {
         return selectCount(new LambdaQueryWrapperX<UserCompanyDO>()
                 .eq(UserCompanyDO::getUserId, userId)) > 0;

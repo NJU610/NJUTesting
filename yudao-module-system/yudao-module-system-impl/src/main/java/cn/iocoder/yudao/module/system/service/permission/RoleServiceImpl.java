@@ -318,4 +318,15 @@ public class RoleServiceImpl implements RoleService {
             }
         });
     }
+
+    public RoleDO getRoleByCode(String code) {
+        RoleDO roleDO = roleMapper.selectByCode(code);
+        if (roleDO == null) {
+            throw exception(ROLE_NOT_EXISTS);
+        }
+        if (!CommonStatusEnum.ENABLE.getStatus().equals(roleDO.getStatus())) {
+            throw exception(ROLE_IS_DISABLE, roleDO.getName());
+        }
+        return roleDO;
+    }
 }
