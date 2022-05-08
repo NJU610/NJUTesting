@@ -13,6 +13,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.DELEGATION_TABLE_NOT_EXISTS;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.TABLE_NOT_EXISTS;
 
 @Repository
 public class TableMongoRepository {
@@ -75,7 +76,7 @@ public class TableMongoRepository {
     private void validateTableExists(String tableName, String tableId) {
         TableMongoQueryDO obj = mongoTemplate.findById(tableId, TableMongoQueryDO.class, tableName);
         if (obj == null || obj.getDeleted()) {
-            throw exception(DELEGATION_TABLE_NOT_EXISTS);
+            throw exception(TABLE_NOT_EXISTS);
         }
     }
 

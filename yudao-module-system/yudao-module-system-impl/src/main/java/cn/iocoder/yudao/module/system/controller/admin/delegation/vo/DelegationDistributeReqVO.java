@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
 @ToString(callSuper = true)
 public class DelegationDistributeReqVO extends DelegationEditBaseVO {
 
-    @ApiModelProperty(value = "接收委托的测试人员id", example = "1", required = true)
-    @NotNull(message = "测试人员id不能为空")
+    @ApiModelProperty(value = "接收委托的工作人员id", example = "1", required = true)
+    @NotNull(message = "工作人员id不能为空")
     private Long acceptorId;
 
 }

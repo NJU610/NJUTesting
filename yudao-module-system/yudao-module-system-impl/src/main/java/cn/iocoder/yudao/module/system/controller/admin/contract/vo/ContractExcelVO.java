@@ -17,31 +17,22 @@ public class ContractExcelVO {
     @ExcelProperty("合同编号")
     private Long id;
 
-    @ExcelProperty("受理人编号")
-    private Long acceptorId;
-
-    @ExcelProperty("发起时间")
-    private Date launchTime;
-
-    @ExcelProperty("受理时间")
-    private Date acceptTime;
-
-    @ExcelProperty("处理时间")
-    private Date processTime;
-
     @ExcelProperty("软件委托测试合同ID")
     private String table4Id;
 
     @ExcelProperty("软件项目委托测试保密协议ID")
     private String table5Id;
 
-    @ExcelProperty("备注")
-    private String remark;
+    @ExcelProperty("客户审核合同意见")
+    private String clientRemark;
+
+    @ExcelProperty("市场部人员审核合同意见")
+    private String staffRemark;
+
+    @ExcelProperty("实体合同材料url")
+    private String url;
 
     @ExcelProperty("创建时间")
     private Date createTime;
-
-    @ExcelProperty("发起者编号")
-    private Long creatorId;
 
 }

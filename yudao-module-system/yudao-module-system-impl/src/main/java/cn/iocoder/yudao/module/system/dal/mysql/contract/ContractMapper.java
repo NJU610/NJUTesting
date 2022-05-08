@@ -19,27 +19,19 @@ public interface ContractMapper extends BaseMapperX<ContractDO> {
 
     default PageResult<ContractDO> selectPage(ContractPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<ContractDO>()
-                .eqIfPresent(ContractDO::getAcceptorId, reqVO.getAcceptorId())
-                .betweenIfPresent(ContractDO::getLaunchTime, reqVO.getBeginLaunchTime(), reqVO.getEndLaunchTime())
-                .betweenIfPresent(ContractDO::getAcceptTime, reqVO.getBeginAcceptTime(), reqVO.getEndAcceptTime())
-                .betweenIfPresent(ContractDO::getProcessTime, reqVO.getBeginProcessTime(), reqVO.getEndProcessTime())
                 .eqIfPresent(ContractDO::getTable4Id, reqVO.getTable4Id())
                 .eqIfPresent(ContractDO::getTable5Id, reqVO.getTable5Id())
+                .eqIfPresent(ContractDO::getUrl, reqVO.getUrl())
                 .betweenIfPresent(ContractDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
-                .eqIfPresent(ContractDO::getCreatorId, reqVO.getCreatorId())
                 .orderByDesc(ContractDO::getId));
     }
 
     default List<ContractDO> selectList(ContractExportReqVO reqVO) {
         return selectList(new LambdaQueryWrapperX<ContractDO>()
-                .eqIfPresent(ContractDO::getAcceptorId, reqVO.getAcceptorId())
-                .betweenIfPresent(ContractDO::getLaunchTime, reqVO.getBeginLaunchTime(), reqVO.getEndLaunchTime())
-                .betweenIfPresent(ContractDO::getAcceptTime, reqVO.getBeginAcceptTime(), reqVO.getEndAcceptTime())
-                .betweenIfPresent(ContractDO::getProcessTime, reqVO.getBeginProcessTime(), reqVO.getEndProcessTime())
                 .eqIfPresent(ContractDO::getTable4Id, reqVO.getTable4Id())
                 .eqIfPresent(ContractDO::getTable5Id, reqVO.getTable5Id())
+                .eqIfPresent(ContractDO::getUrl, reqVO.getUrl())
                 .betweenIfPresent(ContractDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
-                .eqIfPresent(ContractDO::getCreatorId, reqVO.getCreatorId())
                 .orderByDesc(ContractDO::getId));
     }
 

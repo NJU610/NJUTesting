@@ -21,7 +21,7 @@ public interface ContractConvert {
 
     ContractDO convert(ContractSaveTableReqVO bean);
 
-    ContractDO convert(ContractUpdateReqVO bean);
+    ContractDO convert(ContractUploadDocReqVO bean);
 
     ContractRespVO convert(ContractDO bean);
 

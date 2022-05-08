@@ -22,15 +22,6 @@ public interface ContractService {
     Long createContract(@Valid ContractCreateReqVO createReqVO);
 
     /**
-     * 创建合同
-     *
-     * @param delegationId 委托编号
-     * @param creatorId 发起者编号
-     * @return 编号
-     */
-    Long createContract(Long delegationId, Long creatorId);
-
-    /**
      * 保存软件委托测试合同
      *
      * @param saveReqVO 填写信息
@@ -59,11 +50,32 @@ public interface ContractService {
     void submitContractClient(@Valid ContractSubmitReqVO submitReqVO);
 
     /**
-     * 更新合同
+     * 客户不接受市场部合同草稿
      *
-     * @param updateReqVO 更新信息
+     * @param rejectReqVO 拒绝信息
      */
-    void updateContract(@Valid ContractUpdateReqVO updateReqVO);
+    void rejectContractClient(@Valid ContractRejectReqVO rejectReqVO);
+
+    /**
+     * 市场部审核合同不通过
+     *
+     * @param rejectReqVO 拒绝信息
+     */
+    void rejectContractStaff(@Valid ContractRejectReqVO rejectReqVO);
+
+    /**
+     * 市场部审核合同通过
+     *
+     * @param acceptReqVO 通过信息
+     */
+    void acceptContractStaff(@Valid ContractAcceptReqVO acceptReqVO);
+
+    /**
+     * 上传合同实体文档材料
+     *
+     * @param uploadReqVO 文档材料信息
+     */
+    void uploadDocument(@Valid ContractUploadDocReqVO uploadReqVO);
 
     /**
      * 删除合同

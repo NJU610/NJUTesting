@@ -17,7 +17,4 @@ public class DelegationUpdateReqVO extends DelegationEditBaseVO {
     @ApiModelProperty(value = "文档材料url", example = "doc.zip")
     private String url;
 
-    @ApiModelProperty(value = "备注", example = "remark")
-    private String remark;
-
 }

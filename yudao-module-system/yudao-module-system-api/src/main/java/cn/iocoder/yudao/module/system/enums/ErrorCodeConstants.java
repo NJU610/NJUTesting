@@ -128,11 +128,7 @@ public interface ErrorCodeConstants {
     ErrorCode DELEGATION_NOT_EXISTS = new ErrorCode(1002020000, "委托不存在");
     ErrorCode DELEGATION_NAME_DUPLICATE = new ErrorCode(1002020001, "委托名称不能重复");
     ErrorCode DELEGATION_TABLE_NOT_EXISTS = new ErrorCode(1002020002, "委托表格不存在");
-    ErrorCode DELEGATION_ALREADY_ACCEPTED = new ErrorCode(1002020003, "委托已被接收");
-
-    // ========== 项目流程 1002021000 ==========
-    ErrorCode FLOW_NOT_EXISTS = new ErrorCode(1002021000, "项目流程不存在");
-    ErrorCode FLOW_STATE_ERROR = new ErrorCode(1002021001, "项目流程状态错误");
+    ErrorCode DELEGATION_STATE_ERROR = new ErrorCode(1002020003, "委托状态错误");
 
     // ========== 公司认证模块 1002022000 =========
     ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002022000, "公司不存在");
@@ -142,6 +138,8 @@ public interface ErrorCodeConstants {
 
     // ========== 合同 1002023000 ==========
     ErrorCode CONTRACT_NOT_EXISTS = new ErrorCode(1002023000, "合同不存在");
-    ErrorCode CONTRACT_ALREADY_EXISTS = new ErrorCode(1002023001, "合同已存在");
+
+    // ========== 表格 1002024000 ==========
+    ErrorCode TABLE_NOT_EXISTS = new ErrorCode(1002024000, "表格不存在");
 
 }

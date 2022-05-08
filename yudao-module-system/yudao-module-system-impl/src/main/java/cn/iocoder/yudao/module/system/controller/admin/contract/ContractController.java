@@ -35,15 +35,14 @@ public class ContractController {
 
     @PostMapping("/create")
     @ApiOperation(value = "创建合同",
-            notes = "市场部工作人员使用。创建新合同，需要填写委托id。发起者id为空时默认发起者为当前用户。返回值为合同的id。")
+            notes = "市场部工作人员使用。需要填写delegationId字段。其中delegationId为委托id。返回值为合同的id。")
     public CommonResult<Long> createContract(@RequestBody @Validated ContractCreateReqVO createReqVO) {
-        // TODO 需要发起人id
         return success(contractService.createContract(createReqVO));
     }
 
     @PostMapping("/save/table4")
     @ApiOperation(value = "保存软件委托测试合同",
-            notes = "客户和市场部工作人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
+            notes = "客户和市场部人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
     public CommonResult<Boolean> saveContractTable4(@Valid @RequestBody ContractSaveTableReqVO saveReqVO) {
         contractService.saveContractTable4(saveReqVO);
         return success(true);
@@ -51,35 +50,61 @@ public class ContractController {
 
     @PostMapping("/save/table5")
     @ApiOperation(value = "保存软件项目委托测试保密协议",
-            notes = "客户和市场部工作人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
+            notes = "客户和市场部人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
     public CommonResult<Boolean> saveContractTable5(@Valid @RequestBody ContractSaveTableReqVO saveReqVO) {
         contractService.saveContractTable5(saveReqVO);
         return success(true);
     }
 
-    @PostMapping("/staff/submit")
+    @PostMapping("/submit/staff")
     @ApiOperation(value = "市场部人员提交合同",
-            notes = "管理员使用。需要填写合同id。返回值为是否保存成功。需要前端检验数据是否填写完整")
+            notes = "市场部人员使用。需要填写id字段。其中id为合同id。返回值为是否保存成功。需要前端检验数据是否填写完整")
     public CommonResult<Boolean> submitContractStaff(@Valid @RequestBody ContractSubmitReqVO submitReqVO) {
         contractService.submitContractStaff(submitReqVO);
         return success(true);
     }
 
-    @PostMapping("/client/submit")
-    @ApiOperation(value = "客户提交合同",
-            notes = "客户使用。需要填写合同id。返回值为是否保存成功。需要前端检验数据是否填写完整")
+    @PostMapping("/reject/client")
+    @ApiOperation(value = "客户不接受市场部合同草稿",
+            notes = "客户使用。需要填写id和reason字段。其中id为合同id，reason为拒绝原因。返回值为是否更新成功。")
+    public CommonResult<Boolean> rejectContractClient(@Valid @RequestBody ContractRejectReqVO rejectReqVO) {
+        contractService.rejectContractClient(rejectReqVO);
+        return success(true);
+    }
+
+    @PostMapping("/submit/client")
+    @ApiOperation(value = "客户客户接受市场部合同草稿，并提交合同草稿",
+            notes = "客户使用。需要填写id字段。其中id为合同id。返回值为是否保存成功。需要前端检验数据是否填写完整")
     public CommonResult<Boolean> submitContractClient(@Valid @RequestBody ContractSubmitReqVO submitReqVO) {
         contractService.submitContractClient(submitReqVO);
         return success(true);
     }
 
-    @PutMapping("/update")
-    @ApiOperation("更新合同")
-    public CommonResult<Boolean> updateContract(@Valid @RequestBody ContractUpdateReqVO updateReqVO) {
-        contractService.updateContract(updateReqVO);
+    @PostMapping("/reject/staff")
+    @ApiOperation(value = "市场部审核合同不通过",
+            notes = "市场部人员使用。需要填写id和reason字段。其中id为合同id，reason为拒绝原因。返回值为是否更新成功。")
+    public CommonResult<Boolean> rejectContractStaff(@Valid @RequestBody ContractRejectReqVO rejectReqVO) {
+        contractService.rejectContractStaff(rejectReqVO);
         return success(true);
     }
 
+    @PostMapping("/accept/staff")
+    @ApiOperation(value = "市场部审核合同通过",
+            notes = "市场部人员使用。需要填写id字段。其中id为合同id。返回值为是否更新成功。")
+    public CommonResult<Boolean> acceptContractStaff(@Valid @RequestBody ContractAcceptReqVO acceptReqVO) {
+        contractService.acceptContractStaff(acceptReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/upload/doc")
+    @ApiOperation(value = "上传实体合同材料的url"
+            , notes = "测试人员使用。需要填写id和url字段。其中id为合同id，url为实体合同材料的url。返回值为是否保存成功。")
+    public CommonResult<Boolean> updateContract(@Valid @RequestBody ContractUploadDocReqVO uploadDocReqVO) {
+        contractService.uploadDocument(uploadDocReqVO);
+        return success(true);
+    }
+
+    /*
     @DeleteMapping("/delete")
     @ApiOperation("删除合同")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
@@ -87,6 +112,7 @@ public class ContractController {
         contractService.deleteContract(id);
         return success(true);
     }
+     */
 
     @GetMapping("/get")
     @ApiOperation("获得合同")

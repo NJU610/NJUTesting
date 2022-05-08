@@ -8,11 +8,11 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-@ApiModel("合同提交 Request VO")
+@ApiModel("合同审核通过 Request VO")
 @Data
 @EqualsAndHashCode
 @ToString
-public class ContractSubmitReqVO {
+public class ContractAcceptReqVO {
 
     @ApiModelProperty(value = "合同编号", example = "1", required = true)
     @NotNull(message = "合同编号不能为空")

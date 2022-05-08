@@ -6,15 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
-
-@ApiModel("委托接收 Request VO")
+@ApiModel("委托审核 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class DelegationAcceptReqVO extends DelegationEditBaseVO {
+public class DelegationAuditReqVO extends DelegationEditBaseVO {
 
-    @ApiModelProperty(value = "备注", example = "remark")
+    @ApiModelProperty(value = "审核意见", example = "example opinion")
     private String remark;
 
 }

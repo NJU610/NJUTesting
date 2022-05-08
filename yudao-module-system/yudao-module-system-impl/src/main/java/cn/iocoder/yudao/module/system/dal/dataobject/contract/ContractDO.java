@@ -25,22 +25,6 @@ public class ContractDO extends BaseDO {
     @TableId
     private Long id;
     /**
-     * 受理人编号
-     */
-    private Long acceptorId;
-    /**
-     * 发起时间
-     */
-    private Date launchTime;
-    /**
-     * 受理时间
-     */
-    private Date acceptTime;
-    /**
-     * 处理时间
-     */
-    private Date processTime;
-    /**
      * 软件委托测试合同ID
      */
     private String table4Id;
@@ -49,12 +33,16 @@ public class ContractDO extends BaseDO {
      */
     private String table5Id;
     /**
-     * 备注
+     * 客户审核合同意见
      */
-    private String remark;
+    private String clientRemark;
     /**
-     * 发起者编号
+     * 市场部人员审核合同意见
      */
-    private Long creatorId;
+    private String staffRemark;
+    /**
+     * 实体合同材料url
+     */
+    private String url;
 
 }

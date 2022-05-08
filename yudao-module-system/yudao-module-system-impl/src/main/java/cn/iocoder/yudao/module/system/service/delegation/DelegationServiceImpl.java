@@ -4,22 +4,19 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
-import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowCreateVO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
-import cn.iocoder.yudao.module.system.convert.flow.FlowConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
-import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
-import cn.iocoder.yudao.module.system.dal.mysql.flow.FlowMapper;
-import cn.iocoder.yudao.module.system.enums.flow.FlowStateEnum;
-import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
-import org.springframework.context.annotation.Lazy;
+import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
@@ -37,40 +34,21 @@ public class DelegationServiceImpl implements DelegationService {
     private DelegationMapper delegationMapper;
 
     @Resource
-    private FlowMapper flowMapper;
-
-    @Resource
     private TableMongoRepository tableMongoRepository;
-
-    @Resource
-    @Lazy
-    private FlowLogService flowLogService;
 
     @Override
     public Long createDelegation(DelegationCreateReqVO createReqVO) {
-        // 检验名称是否重复
-        if (createReqVO.getName() != null) {
-            this.validateDelegationNameDuplicate(SecurityFrameworkUtils.getLoginUserId(), createReqVO.getName());
-        }
-
         Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
-        Date now = new Date();
+        // 检验名称是否重复
+        this.validateDelegationNameDuplicate(loginUserId, createReqVO.getName());
         // 插入
+        Date now = new Date();
         DelegationDO delegation = DelegationConvert.INSTANCE.convert(createReqVO);
         delegation.setLaunchTime(now);
         delegation.setCreatorId(loginUserId);
+        delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
         delegationMapper.insert(delegation);
-        // 插入流程
-        FlowCreateVO flowCreateVO = FlowCreateVO.builder()
-                .delegationId(delegation.getId())
-                .creatorId(loginUserId)
-                .launchTime(now)
-                .build();
-        FlowDO flow = FlowConvert.INSTANCE.convert(flowCreateVO);
-        flow.setState(FlowStateEnum.DELEGATE_WRITING.getState());
-        flowMapper.insert(flow);
-        // 保存日志
-        flowLogService.saveLog(flow.getId(), null, FlowStateEnum.DELEGATE_WRITING);
+        // TODO 保存日志
         // 返回
         return delegation.getId();
     }
@@ -94,15 +72,18 @@ public class DelegationServiceImpl implements DelegationService {
         // 校验存在
         Long id = submitReqVO.getId();
         this.validateDelegationExists(id);
-
-        FlowDO flowDO = flowMapper.selectByDelegation(id);
-        if (!Objects.equals(flowDO.getState(), FlowStateEnum.DELEGATE_WRITING.getState())) {
-            throw exception(FLOW_STATE_ERROR);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(id, DelegationStateEnum.DELEGATE_WRITING);
+        // 更新状态，要通过是否有相关字段判断是否是第一次提交，以及目标状态
+        if (delegation.getMarketDeptStaffId() == null) {
+            delegation.setState(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState());
+        } else if (delegation.getTestingDeptStaffId() == null) {
+            delegation.setState(DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState());
+        } else {
+            delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
         }
-        flowDO.setState(FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState());
-        flowMapper.updateById(flowDO);
-        // 保存日志
-        flowLogService.saveLog(flowDO.getId(), FlowStateEnum.DELEGATE_WRITING, FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE);
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
     }
 
     @Override
@@ -138,93 +119,183 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
-    public void acceptDelegation(DelegationAcceptReqVO acceptReqVO) {
+    public void saveDelegationTable14(DelegationSaveTableReqVO updateReqVO) {
         // 校验存在
-        Long delegationId = acceptReqVO.getId();
+        Long delegationId = updateReqVO.getDelegationId();
         this.validateDelegationExists(delegationId);
-        // 校验状态
-        FlowDO flowDO = flowMapper.selectByDelegation(delegationId);
-        if (!Objects.equals(flowDO.getState(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState())) {
-            throw exception(FLOW_STATE_ERROR);
+
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
+        if (delegationDO.getTable14Id() == null) {
+            delegationDO.setTable14Id(tableMongoRepository.create("table14", updateReqVO.getData()));
+        } else {
+            tableMongoRepository.upsert("table14", delegationDO.getTable14Id(), updateReqVO.getData());
         }
-        // 接收委托
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
-        DelegationDO delegation = delegationMapper.selectById(delegationId);
-        if (delegation.getAcceptorId() != null) {
-            throw exception(DELEGATION_ALREADY_ACCEPTED, "委托已被接收");
-        }
-        delegation.setAcceptorId(loginUserId);
-        delegation.setAcceptTime(new Date());
-        delegationMapper.updateById(delegation);
-        // TODO 更新日志？
+
+        delegationMapper.updateById(delegationDO);
     }
 
     @Override
-    public void distributeDelegation(DelegationDistributeReqVO distributeReqVO) {
+    public void distributeDelegation2Mkt(DelegationDistributeReqVO distributeReqVO) {
         // 校验存在
         Long delegationId = distributeReqVO.getId();
         this.validateDelegationExists(delegationId);
         // 校验状态
-        FlowDO flowDO = flowMapper.selectByDelegation(delegationId);
-        if (!Objects.equals(flowDO.getState(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState())) {
-            throw exception(FLOW_STATE_ERROR);
-        }
-        // 更新接收人员id
-        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
-        delegationDO.setAcceptorId(distributeReqVO.getAcceptorId());
-        delegationDO.setAcceptTime(new Date());
-        delegationMapper.updateById(delegationDO);
-        // 更新流程
-        flowDO.setState(FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState());
-        flowMapper.updateById(flowDO);
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF);
+        // 更新接收人员id和状态
+        delegation.setMarketDeptStaffId(distributeReqVO.getAcceptorId());
+        delegation.setState(DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
     }
 
     @Override
-    public void auditDelegationSuccess(DelegationAcceptReqVO acceptReqVO) {
+    public void distributeDelegation2Test(DelegationDistributeReqVO distributeReqVO) {
         // 校验存在
-        Long delegationId = acceptReqVO.getId();
+        Long delegationId = distributeReqVO.getId();
         this.validateDelegationExists(delegationId);
         // 校验状态
-        FlowDO flowDO = flowMapper.selectByDelegation(delegationId);
-        if (!Objects.equals(flowDO.getState(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState())) {
-            throw exception(FLOW_STATE_ERROR);
-        }
-        // 更新备注
-        if (acceptReqVO.getRemark() != null) {
-            DelegationDO delegationDO = delegationMapper.selectById(delegationId);
-            delegationDO.setRemark(acceptReqVO.getRemark());
-            delegationMapper.updateById(delegationDO);
-        }
-        // 更新流程
-        flowDO.setState(FlowStateEnum.MARKET_DEPT_GENERATE_CONTRACT.getState());
-        flowMapper.updateById(flowDO);
-        // 保存日志
-        flowLogService.saveLog(flowDO.getId(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE, FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE_SUCCESS);
-        flowLogService.saveLog(flowDO.getId(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE_SUCCESS, FlowStateEnum.MARKET_DEPT_GENERATE_CONTRACT);
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF);
+        // 更新接收人员id和状态
+        delegation.setTestingDeptStaffId(distributeReqVO.getAcceptorId());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
     }
 
     @Override
-    public void auditDelegationFail(DelegationAcceptReqVO acceptReqVO) {
+    public void auditDelegationSuccessMkt(DelegationAuditReqVO auditReqVO) {
         // 校验存在
-        Long delegationId = acceptReqVO.getId();
+        Long delegationId = auditReqVO.getId();
         this.validateDelegationExists(delegationId);
         // 校验状态
-        FlowDO flowDO = flowMapper.selectByDelegation(delegationId);
-        if (!Objects.equals(flowDO.getState(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE.getState())) {
-            throw exception(FLOW_STATE_ERROR);
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION);
+        // 更新备注并连续更新状态
+        delegation.setMarketRemark(auditReqVO.getRemark());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS.getState());
+        delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
+    }
+
+    @Override
+    public void auditDelegationSuccessTest(DelegationAuditReqVO auditReqVO) {
+        // 校验存在
+        Long delegationId = auditReqVO.getId();
+        this.validateDelegationExists(delegationId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION);
+        // 确保测试部人员填写了软件文档评审表
+        if (delegation.getTable14Id() == null) {
+            throw exception(DELEGATION_STATE_ERROR);
         }
-        // 更新备注
-        if (acceptReqVO.getRemark() != null) {
-            DelegationDO delegationDO = delegationMapper.selectById(delegationId);
-            delegationDO.setRemark(acceptReqVO.getRemark());
-            delegationMapper.updateById(delegationDO);
+        // 更新备注并连续更新状态
+        delegation.setTestingRemark(auditReqVO.getRemark());
+        delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS.getState());
+        delegation.setState(DelegationStateEnum.AUDIT_DELEGATION_SUCCESS.getState());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
+    }
+
+    @Override
+    public void auditDelegationFailMkt(DelegationAuditReqVO auditReqVO) {
+        // 校验存在
+        Long delegationId = auditReqVO.getId();
+        this.validateDelegationExists(delegationId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION);
+        // 更新备注并连续更新状态
+        delegation.setMarketRemark(auditReqVO.getRemark());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
+        delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
+    }
+
+    @Override
+    public void auditDelegationFailTest(DelegationAuditReqVO auditReqVO) {
+        // 校验存在
+        Long delegationId = auditReqVO.getId();
+        this.validateDelegationExists(delegationId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION);
+        // 更新备注并连续更新状态
+        delegation.setTestingRemark(auditReqVO.getRemark());
+        delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
+        delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
+    }
+
+    @Override
+    public String createOffer(OfferCreateReqVO offerCreateReqVO) {
+        // 校验存在
+        Long delegationId = offerCreateReqVO.getDelegationId();
+        this.validateDelegationExists(delegationId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER);
+        if (delegation.getTable14Id() != null) {
+            throw exception(DELEGATION_STATE_ERROR);
         }
-        // 更新流程
-        flowDO.setState(FlowStateEnum.DELEGATE_WRITING.getState());
-        flowMapper.updateById(flowDO);
-        // 保存日志
-        flowLogService.saveLog(flowDO.getId(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE, FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE_FAIL);
-        flowLogService.saveLog(flowDO.getId(), FlowStateEnum.MARKET_DEPT_AUDIT_DELEGATE_FAIL, FlowStateEnum.DELEGATE_WRITING);
+        // 创建报价单
+        String tableId = tableMongoRepository.create("table14", offerCreateReqVO.getData());
+        // 更新委托
+        delegation.setOfferId(tableId);
+        delegation.setState(DelegationStateEnum.CLIENT_DEALING_OFFER.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
+        return tableId;
+    }
+
+    @Override
+    public void updateOffer(OfferUpdateReqVO offerUpdateReqVO) {
+        // 校验状态
+        DelegationDO delegation = delegationMapper.selectOne("offer_id", offerUpdateReqVO.getId());
+        if (delegation == null) {
+            throw exception(DELEGATION_NOT_EXISTS);
+        }
+        if (!Objects.equals(delegation.getState(), DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState())) {
+            throw exception(DELEGATION_STATE_ERROR);
+        }
+        tableMongoRepository.upsert("table14", offerUpdateReqVO.getId(), offerUpdateReqVO.getData());
+    }
+
+    @Override
+    public void rejectOffer(OfferRejectReqVO offerRejectReqVO) {
+        // 校验存在
+        Long delegationId = offerRejectReqVO.getDelegationId();
+        this.validateDelegationExists(delegationId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.CLIENT_DEALING_OFFER);
+        // 更新拒绝原因并连续更新状态
+        delegation.setOfferRemark(offerRejectReqVO.getReason());
+        delegation.setState(DelegationStateEnum.CLIENT_REJECT_OFFER.getState());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
+    }
+
+    @Override
+    public void acceptOffer(OfferAcceptReqVO offerAcceptReqVO) {
+        // 校验存在
+        Long delegationId = offerAcceptReqVO.getDelegationId();
+        this.validateDelegationExists(delegationId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.CLIENT_DEALING_OFFER);
+        // 更新状态
+        delegation.setState(DelegationStateEnum.CLIENT_ACCEPT_OFFER.getState());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 保存日志
     }
 
     @Override
@@ -259,55 +330,29 @@ public class DelegationServiceImpl implements DelegationService {
             throw exception(DELEGATION_NOT_EXISTS);
         }
     }
-
+    
     @Override
-    public DelegationRespVO getDelegation(Long id) {
-        // 校验存在
-        this.validateDelegationExists(id);
-        return convert(delegationMapper.selectById(id));
+    public DelegationDO getDelegation(Long id) {
+        return delegationMapper.selectById(id);
     }
 
     @Override
-    public List<DelegationRespVO> getDelegationsByCurrentUser() {
+    public List<DelegationDO> getDelegationsByCurrentUser() {
         Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
-        return convert(delegationMapper.selectList("creator_id", loginUserId));
+        return delegationMapper.selectList("creator_id", loginUserId);
     }
 
     @Override
-    public List<DelegationRespVO> getDelegationsByCreator(Long creatorId) {
-        return convert(delegationMapper.selectList("creator_id", creatorId));
+    public List<DelegationDO> getDelegationsByCreator(Long creatorId) {
+        return delegationMapper.selectList("creator_id", creatorId);
     }
 
     @Override
-    public List<DelegationRespVO> getDelegationsNotAccepted() {
+    public List<DelegationDO> getDelegationsNotAccepted() {
         QueryWrapperX<DelegationDO> queryWrapper = new QueryWrapperX<>();
         queryWrapper.eqIfPresent("deleted", false)
                 .isNull("acceptor_id");
-        return convert(delegationMapper.selectList(queryWrapper));
-    }
-
-    private DelegationRespVO convert(DelegationDO delegationDO) {
-        if (delegationDO == null) {
-            return null;
-        }
-        DelegationRespVO delegationRespVO = DelegationConvert.INSTANCE.convert(delegationDO);
-        FlowDO flowDO = flowMapper.selectByDelegation(delegationDO.getId());
-        FlowStateEnum flowStateEnum = FlowStateEnum.getByState(flowDO.getState());
-        if (flowStateEnum != null) {
-            delegationRespVO.setState(flowStateEnum.getDesc());
-        }
-        return delegationRespVO;
-    }
-
-    private List<DelegationRespVO> convert(List<DelegationDO> delegationDOList) {
-        if (delegationDOList == null) {
-            return null;
-        }
-        List<DelegationRespVO> delegationRespVOList = new ArrayList<>();
-        for (DelegationDO delegationDO : delegationDOList) {
-            delegationRespVOList.add(convert(delegationDO));
-        }
-        return delegationRespVOList;
+        return delegationMapper.selectList(queryWrapper);
     }
 
     @Override
@@ -321,21 +366,18 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
-    public List<DelegationRespVO> getDelegationList(Collection<Long> ids) {
-        return convert(delegationMapper.selectBatchIds(ids));
+    public String getDelegationTable14(String id) {
+        return tableMongoRepository.get("table14", id);
     }
 
     @Override
-    public PageResult<DelegationRespVO> getDelegationPage(DelegationPageReqVO pageReqVO) {
-        // 获取分页结果
-        PageResult<DelegationDO> pageDOResult = delegationMapper.selectPage(pageReqVO);
-        List<DelegationDO> list = pageDOResult.getList();
-        // 转换
-        PageResult<DelegationRespVO> pageResult = new PageResult<>();
-        List<DelegationRespVO> delegationRespVOList = convert(list);
-        pageResult.setList(delegationRespVOList);
-        pageResult.setTotal(pageDOResult.getTotal());
-        return pageResult;
+    public List<DelegationDO> getDelegationList(Collection<Long> ids) {
+        return delegationMapper.selectBatchIds(ids);
+    }
+
+    @Override
+    public PageResult<DelegationDO> getDelegationPage(DelegationPageReqVO pageReqVO) {
+        return delegationMapper.selectPage(pageReqVO);
     }
 
     @Override

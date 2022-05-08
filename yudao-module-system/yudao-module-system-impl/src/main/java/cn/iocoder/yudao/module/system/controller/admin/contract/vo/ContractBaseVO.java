@@ -15,31 +15,19 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class ContractBaseVO {
 
-    @ApiModelProperty(value = "受理人编号", example = "1")
-    private Long acceptorId;
-
-    @ApiModelProperty(value = "发起时间", example = "2022-02-02 00:00:00")
-    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    private Date launchTime;
-
-    @ApiModelProperty(value = "受理时间", example = "2022-02-02 00:00:00")
-    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    private Date acceptTime;
-
-    @ApiModelProperty(value = "处理时间", example = "2022-02-02 00:00:00")
-    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    private Date processTime;
-
-    @ApiModelProperty(value = "软件委托测试合同ID", example = "abc")
+    @ApiModelProperty(value = "软件委托测试合同ID")
     private String table4Id;
 
-    @ApiModelProperty(value = "软件项目委托测试保密协议ID", example = "abc")
+    @ApiModelProperty(value = "软件项目委托测试保密协议ID")
     private String table5Id;
 
-    @ApiModelProperty(value = "备注")
-    private String remark;
+    @ApiModelProperty(value = "客户审核合同意见")
+    private String clientRemark;
 
-    @ApiModelProperty(value = "发起者编号", example = "1")
-    private Long creatorId;
+    @ApiModelProperty(value = "市场部人员审核合同意见")
+    private String staffRemark;
+
+    @ApiModelProperty(value = "实体合同材料url")
+    private String url;
 
 }

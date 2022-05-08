@@ -25,25 +25,17 @@ public class DelegationDO extends BaseDO {
     @TableId
     private Long id;
     /**
-     * 委托名称
+     * 发起者编号
      */
-    private String name;
-    /**
-     * 受理人编号
-     */
-    private Long acceptorId;
+    private Long creatorId;
     /**
      * 发起时间
      */
     private Date launchTime;
     /**
-     * 受理时间
+     * 委托名称
      */
-    private Date acceptTime;
-    /**
-     * 处理时间
-     */
-    private Date processTime;
+    private String name;
     /**
      * 软件项目委托测试申请表ID
      */
@@ -57,12 +49,52 @@ public class DelegationDO extends BaseDO {
      */
     private String url;
     /**
-     * 备注
+     * 分配的市场部人员id
      */
-    private String remark;
+    private Long marketDeptStaffId;
     /**
-     * 发起者编号
+     * 分配的测试部人员id
      */
-    private Long creatorId;
+    private Long testingDeptStaffId;
+    /**
+     * 市场部人员处理意见
+     */
+    private String marketRemark;
+    /**
+     * 测试部人员处理意见
+     */
+    private String testingRemark;
+    /**
+     *  软件文档评审表ID
+     */
+    private String table14Id;
+    /**
+     * 报价单ID
+     */
+    private String offerId;
+    /**
+     * 用户报价单意见
+     */
+    private String offerRemark;
+    /**
+     * 合同id
+     */
+    private Long contractId;
+    /**
+     * 样品id
+     */
+    private Long sampleId;
+    /**
+     * 测试方案id
+     */
+    private Long solutionId;
+    /**
+     * 测试报告id
+     */
+    private Long reportId;
+    /**
+     * 状态
+     */
+    private Integer state;
 
 }

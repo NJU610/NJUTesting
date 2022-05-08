@@ -1,7 +1,6 @@
 package cn.iocoder.yudao.module.system.controller.admin.contract.vo;
 
 import lombok.*;
-import java.util.*;
 import io.swagger.annotations.*;
 import javax.validation.constraints.*;
 
@@ -9,9 +8,10 @@ import javax.validation.constraints.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class ContractUpdateReqVO extends ContractEditBaseVO {
+public class ContractUploadDocReqVO extends ContractEditBaseVO {
 
-    @ApiModelProperty(value = "备注")
-    private String remark;
+    @ApiModelProperty(value = "实体合同材料url", example = "example.zip", required = true)
+    @NotNull(message = "实体合同材料url不能为空")
+    private String url;
 
 }
