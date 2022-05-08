@@ -74,7 +74,7 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         // 删除
         userCompanyMapper.deleteById(id);
         // 恢复为普通用户
-        assignNormalUserRole(userCompany.getUserId());
+        deleteCustomerRole(userCompany.getUserId());
     }
 
     private void validateUserCompanyExists(Long id) {
@@ -159,13 +159,23 @@ public class UserCompanyServiceImpl implements UserCompanyService {
 
     public void assignCustomerRole(Long id){
         RoleDO customer = roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode());
-        RoleDO normal_user = roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode());
-        permissionService.assignUserRole(id, new HashSet<>(Arrays.asList(customer.getId(), normal_user.getId())));
+        Set<Long> roleIds = new HashSet<>(permissionService.getUserRoleIdListByUserId(id));
+        roleIds.add(customer.getId());
+        permissionService.assignUserRole(id, roleIds);
     }
 
     public void assignNormalUserRole(Long id){
         RoleDO normal_user = roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode());
-        permissionService.assignUserRole(id, new HashSet<>(Collections.singletonList(normal_user.getId())));
+        Set<Long> roleIds = new HashSet<>(permissionService.getUserRoleIdListByUserId(id));
+        roleIds.add(normal_user.getId());
+        permissionService.assignUserRole(id, roleIds);
+    }
+
+    public void deleteCustomerRole(Long id){
+        RoleDO customer = roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode());
+        Set<Long> roleIds = new HashSet<>(permissionService.getUserRoleIdListByUserId(id));
+        roleIds.remove(customer.getId());
+        permissionService.assignUserRole(id, roleIds);
     }
 
 }
