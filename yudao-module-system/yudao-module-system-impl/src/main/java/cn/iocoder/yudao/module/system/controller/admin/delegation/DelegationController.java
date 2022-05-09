@@ -128,7 +128,7 @@ public class DelegationController {
         return success(true);
     }
 
-    @PutMapping("/offer/create")
+    @PostMapping("/offer/create")
     @ApiOperation(value = "市场部人员生成报价单",
             notes = "市场部人员使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含报价单内容。返回值为报价单ID。")
     public CommonResult<String> createOffer(@Valid @RequestBody OfferCreateReqVO offerCreateReqVO) {

@@ -40,7 +40,7 @@ public class ContractController {
         return success(contractService.createContract(createReqVO));
     }
 
-    @PostMapping("/save/table4")
+    @PutMapping("/save/table4")
     @ApiOperation(value = "保存软件委托测试合同",
             notes = "客户和市场部人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
     public CommonResult<Boolean> saveContractTable4(@Valid @RequestBody ContractSaveTableReqVO saveReqVO) {
@@ -48,7 +48,7 @@ public class ContractController {
         return success(true);
     }
 
-    @PostMapping("/save/table5")
+    @PutMapping("/save/table5")
     @ApiOperation(value = "保存软件项目委托测试保密协议",
             notes = "客户和市场部人员使用。需要填写contractId和data字段，其中contractId为合同id，data是json格式，包含表格内容。返回值为是否更新成功")
     public CommonResult<Boolean> saveContractTable5(@Valid @RequestBody ContractSaveTableReqVO saveReqVO) {
@@ -56,7 +56,7 @@ public class ContractController {
         return success(true);
     }
 
-    @PostMapping("/submit/staff")
+    @PutMapping("/submit/staff")
     @ApiOperation(value = "市场部人员提交合同",
             notes = "市场部人员使用。需要填写id字段。其中id为合同id。返回值为是否保存成功。需要前端检验数据是否填写完整")
     public CommonResult<Boolean> submitContractStaff(@Valid @RequestBody ContractSubmitReqVO submitReqVO) {
@@ -64,7 +64,7 @@ public class ContractController {
         return success(true);
     }
 
-    @PostMapping("/reject/client")
+    @PutMapping("/reject/client")
     @ApiOperation(value = "客户不接受市场部合同草稿",
             notes = "客户使用。需要填写id和reason字段。其中id为合同id，reason为拒绝原因。返回值为是否更新成功。")
     public CommonResult<Boolean> rejectContractClient(@Valid @RequestBody ContractRejectReqVO rejectReqVO) {
@@ -72,15 +72,15 @@ public class ContractController {
         return success(true);
     }
 
-    @PostMapping("/submit/client")
-    @ApiOperation(value = "客户客户接受市场部合同草稿，并提交合同草稿",
+    @PutMapping("/submit/client")
+    @ApiOperation(value = "客户接受市场部合同草稿，并提交合同草稿",
             notes = "客户使用。需要填写id字段。其中id为合同id。返回值为是否保存成功。需要前端检验数据是否填写完整")
     public CommonResult<Boolean> submitContractClient(@Valid @RequestBody ContractSubmitReqVO submitReqVO) {
         contractService.submitContractClient(submitReqVO);
         return success(true);
     }
 
-    @PostMapping("/reject/staff")
+    @PutMapping("/reject/staff")
     @ApiOperation(value = "市场部审核合同不通过",
             notes = "市场部人员使用。需要填写id和reason字段。其中id为合同id，reason为拒绝原因。返回值为是否更新成功。")
     public CommonResult<Boolean> rejectContractStaff(@Valid @RequestBody ContractRejectReqVO rejectReqVO) {
@@ -88,7 +88,7 @@ public class ContractController {
         return success(true);
     }
 
-    @PostMapping("/accept/staff")
+    @PutMapping("/accept/staff")
     @ApiOperation(value = "市场部审核合同通过",
             notes = "市场部人员使用。需要填写id字段。其中id为合同id。返回值为是否更新成功。")
     public CommonResult<Boolean> acceptContractStaff(@Valid @RequestBody ContractAcceptReqVO acceptReqVO) {
@@ -98,7 +98,7 @@ public class ContractController {
 
     @PutMapping("/upload/doc")
     @ApiOperation(value = "上传实体合同材料的url"
-            , notes = "测试人员使用。需要填写id和url字段。其中id为合同id，url为实体合同材料的url。返回值为是否保存成功。")
+            , notes = "测试人员使用，上传后更新状态为合同签署完毕，用户发送样品中。需要填写id和url字段。其中id为合同id，url为实体合同材料的url。返回值为是否保存成功。")
     public CommonResult<Boolean> updateContract(@Valid @RequestBody ContractUploadDocReqVO uploadDocReqVO) {
         contractService.uploadDocument(uploadDocReqVO);
         return success(true);
@@ -112,7 +112,7 @@ public class ContractController {
         contractService.deleteContract(id);
         return success(true);
     }
-     */
+    */
 
     @GetMapping("/get")
     @ApiOperation("获得合同")
