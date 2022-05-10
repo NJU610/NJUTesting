@@ -81,8 +81,14 @@ public class BpmUserTaskActivityBehavior extends UserTaskActivityBehavior {
         // 第二步，获得任务的候选用户们
         Set<Long> candidateUserIds = calculateTaskCandidateUsers(task, rule);
         // 第三步，设置一个作为负责人
-        Long assigneeUserId = chooseTaskAssignee(candidateUserIds);
-        TaskHelper.changeTaskAssignee(task, String.valueOf(assigneeUserId));
+        if (candidateUserIds.size() == 1) {
+            Long assigneeUserId = chooseTaskAssignee(candidateUserIds);
+            TaskHelper.changeTaskAssignee(task, String.valueOf(assigneeUserId));
+        } else {
+            // 全部作为候选人
+            org.flowable.engine.TaskService taskService1 = processEngineConfiguration.getTaskService();
+            candidateUserIds.forEach(userId -> {taskService1.addCandidateUser(task.getId(), String.valueOf(userId));});
+        }
     }
 
     private BpmTaskAssignRuleDO getTaskRule(TaskEntity task) {
