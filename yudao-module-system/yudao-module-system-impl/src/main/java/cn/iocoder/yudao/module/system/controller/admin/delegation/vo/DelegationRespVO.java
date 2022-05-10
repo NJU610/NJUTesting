@@ -15,7 +15,4 @@ public class DelegationRespVO extends DelegationBaseVO {
     @ApiModelProperty(value = "编号", required = true)
     private Long id;
 
-    @ApiModelProperty(value = "状态", required = true)
-    private String state;
-
 }
