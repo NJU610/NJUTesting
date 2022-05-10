@@ -16,7 +16,10 @@ public enum BpmTaskRuleScriptEnum {
     START_USER(10L, "流程发起人"),
 
     LEADER_X1(20L, "流程发起人的一级领导"),
-    LEADER_X2(21L, "流程发起人的二级领导");
+    LEADER_X2(21L, "流程发起人的二级领导"),
+
+    CORRESPONDING_MARKETING_STAFF(30L, "被分配的市场部人员"),
+    CORRESPONDING_TESTING_STAFF(31L, "被分配的测试部人员");
 
     /**
      * 脚本编号
