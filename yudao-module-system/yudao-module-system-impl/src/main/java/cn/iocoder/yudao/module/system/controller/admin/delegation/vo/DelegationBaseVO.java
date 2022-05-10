@@ -18,6 +18,13 @@ public class DelegationBaseVO {
     @ApiModelProperty(value = "发起者编号")
     private Long creatorId;
 
+    @ApiModelProperty(value = "状态", required = true)
+    private String state;
+
+    @ApiModelProperty(value = "委托名称", required = true)
+    @NotNull(message = "委托名称不能为空")
+    private String name;
+
     @ApiModelProperty(value = "发起时间", required = true)
     @NotNull(message = "发起时间不能为空")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
