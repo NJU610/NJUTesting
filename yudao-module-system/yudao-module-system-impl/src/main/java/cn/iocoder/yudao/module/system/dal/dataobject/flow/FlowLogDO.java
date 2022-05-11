@@ -25,9 +25,9 @@ public class FlowLogDO extends BaseDO {
     @TableId
     private Long id;
     /**
-     * 流程编号
+     * 编号
      */
-    private Long flowId;
+    private Long delegationId;
     /**
      * 操作人编号
      */
@@ -35,11 +35,11 @@ public class FlowLogDO extends BaseDO {
     /**
      * 原状态
      */
-    private int fromState;
+    private Integer fromState;
     /**
      * 目标状态
      */
-    private int toState;
+    private Integer toState;
     /**
      * 操作时间
      */
@@ -48,5 +48,9 @@ public class FlowLogDO extends BaseDO {
      * 操作信息
      */
     private String remark;
+    /**
+     *  操作变量
+     */
+    private String mapValue;
 
 }

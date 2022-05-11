@@ -9,16 +9,17 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
+import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
+import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -36,9 +37,16 @@ public class DelegationServiceImpl implements DelegationService {
     @Resource
     private TableMongoRepository tableMongoRepository;
 
+    @Resource
+    @Lazy
+    private FlowLogService flowLogService;
+
+    @Resource
+    private AdminUserService userService;
+
     @Override
     public Long createDelegation(DelegationCreateReqVO createReqVO) {
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
+        Long loginUserId = getLoginUserId();
         // 检验名称是否重复
         this.validateDelegationNameDuplicate(loginUserId, createReqVO.getName());
         // 插入
@@ -48,7 +56,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setCreatorId(loginUserId);
         delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
         delegationMapper.insert(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                null, DelegationStateEnum.DELEGATE_WRITING,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 创建了委托：" + delegation.getName(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
         // 返回
         return delegation.getId();
     }
@@ -60,7 +72,7 @@ public class DelegationServiceImpl implements DelegationService {
 
         // 检验名称是否重复
         if (updateReqVO.getName() != null) {
-            this.validateDelegationNameDuplicate(SecurityFrameworkUtils.getLoginUserId(), updateReqVO.getName());
+            this.validateDelegationNameDuplicate(getLoginUserId(), updateReqVO.getName());
         }
         // 更新
         DelegationDO updateObj = DelegationConvert.INSTANCE.convert(updateReqVO);
@@ -77,20 +89,32 @@ public class DelegationServiceImpl implements DelegationService {
                 DelegationStateEnum.DELEGATE_WRITING,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL,
                 DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL);
+        DelegationStateEnum initEnum = DelegationStateEnum.getByState(delegation.getState());
+        String remark = "";
         // 更新状态，要通过是否有相关字段判断是否是第一次提交，以及目标状态
         if (delegation.getMarketDeptStaffId() == null) {
             delegation.setState(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState());
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 提交了委托，等待分配市场部人员";
         } else if (delegation.getTestingDeptStaffId() == null) {
             delegation.setState(DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState());
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 提交了委托，等待分配测试部人员";
         } else {
             Integer state = delegation.getState();
-            if (Objects.equals(state, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState()))
+            if (Objects.equals(state, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState())) {
                 delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
-            else if (Objects.equals(state, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState()))
+                remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 重新提交了委托，市场部审核中";
+
+            } else if (Objects.equals(state, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState())) {
                 delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION.getState());
+                remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 重新提交了委托，测试部审核中";
+            }
         }
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                initEnum, DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF,
+                remark,
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -153,7 +177,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setMarketDeptStaffId(distributeReqVO.getAcceptorId());
         delegation.setState(DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF, DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 分配了市场部人员：" + userService.getUser(delegation.getMarketDeptStaffId()).getNickname(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -168,7 +196,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setTestingDeptStaffId(distributeReqVO.getAcceptorId());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION,
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 分配了测试部人员：" + userService.getUser(delegation.getTestingDeptStaffId()).getNickname(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -182,9 +214,21 @@ public class DelegationServiceImpl implements DelegationService {
         // 更新备注并连续更新状态
         delegation.setMarketRemark(auditReqVO.getRemark());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核了委托，审核通过",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+
+
         delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION,
+                "测试部：" + userService.getUser(delegation.getTestingDeptStaffId()).getNickname() + " 审核委托中",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -201,11 +245,32 @@ public class DelegationServiceImpl implements DelegationService {
         }
         // 更新备注并连续更新状态
         delegation.setTestingRemark(auditReqVO.getRemark());
+
         delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS,
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核了委托，审核通过",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+
+
         delegation.setState(DelegationStateEnum.AUDIT_DELEGATION_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS, DelegationStateEnum.AUDIT_DELEGATION_SUCCESS,
+                "测试中心：委托审核通过",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.AUDIT_DELEGATION_SUCCESS, DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER,
+                "市场部：" + userService.getUser(delegation.getMarketDeptStaffId()).getNickname() + " 生成报价中",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+
     }
 
     @Override
@@ -220,7 +285,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setMarketRemark(auditReqVO.getRemark());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核委托不通过，原因：" + delegation.getMarketRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -235,7 +304,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setTestingRemark(auditReqVO.getRemark());
         delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL,
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核委托不通过，原因：" + delegation.getTestingRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -255,7 +328,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setOfferId(tableId);
         delegation.setState(DelegationStateEnum.CLIENT_DEALING_OFFER.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER, DelegationStateEnum.CLIENT_DEALING_OFFER,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 生成了报价单",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
         return tableId;
     }
 
@@ -283,6 +360,11 @@ public class DelegationServiceImpl implements DelegationService {
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_DEALING_OFFER.getState());
         delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER, DelegationStateEnum.CLIENT_DEALING_OFFER,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 生成了报价单",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -298,7 +380,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setState(DelegationStateEnum.CLIENT_REJECT_OFFER.getState());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CLIENT_DEALING_OFFER, DelegationStateEnum.CLIENT_DEALING_OFFER,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 拒绝了报价单，原因：" + delegation.getOfferRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -313,7 +399,11 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setState(DelegationStateEnum.CLIENT_ACCEPT_OFFER.getState());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CLIENT_DEALING_OFFER, DelegationStateEnum.CLIENT_DEALING_OFFER,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 拒绝了报价单，原因：" + delegation.getOfferRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
     @Override
@@ -342,7 +432,7 @@ public class DelegationServiceImpl implements DelegationService {
             throw exception(DELEGATION_NAME_DUPLICATE);
         }
     }
-    
+
     @Override
     public DelegationDO getDelegation(Long id) {
         return delegationMapper.selectById(id);
@@ -350,7 +440,7 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Override
     public List<DelegationDO> getDelegationsByCurrentUser() {
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
+        Long loginUserId = getLoginUserId();
         return delegationMapper.selectList("creator_id", loginUserId);
     }
 
