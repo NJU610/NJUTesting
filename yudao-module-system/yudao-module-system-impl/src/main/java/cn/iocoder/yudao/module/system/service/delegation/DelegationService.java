@@ -113,6 +113,13 @@ public interface DelegationService {
     void updateOffer(@Valid OfferUpdateReqVO offerUpdateReqVO);
 
     /**
+     * 提交报价单
+     *
+     * @param offerSubmitReqVO 提交信息
+     */
+    void submitOffer(@Valid OfferSubmitReqVO offerSubmitReqVO);
+
+    /**
      * 客户不接受报价
      *
      * @param offerRejectReqVO 拒绝信息

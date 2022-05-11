@@ -142,4 +142,8 @@ public interface ErrorCodeConstants {
     // ========== 表格 1002024000 ==========
     ErrorCode TABLE_NOT_EXISTS = new ErrorCode(1002024000, "表格不存在");
 
+    // ========== 样品 1002025000 ==========
+    ErrorCode SAMPLE_NOT_EXISTS = new ErrorCode(1002025000, "样品不存在");
+    ErrorCode SAMPLE_AUDITOR_ERROR = new ErrorCode(1002025001, "样品审核员不正确");
+    ErrorCode SAMPLE_STATE_ERROR = new ErrorCode(1002025002, "样品状态错误");
 }

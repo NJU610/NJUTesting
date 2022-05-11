@@ -31,6 +31,12 @@ public enum DelegationStateEnum {
     CONTRACT_SIGNING(220, "合同签署中"),
     CONTRACT_SIGN_SUCCESS(230, "合同签署成功"),
     CLIENT_SENDING_SAMPLE(240, "客户发送样品中"),
+    CLIENT_UPLOAD_SAMPLE_INFO(250, "客户上传样品信息"),
+    CHECKING_SAMPLE(260, "测试部/市场部验收样品中"),
+    SAMPLE_CHECK_FAIL_RESENDING_SAMPLE(270, "样品验收不通过，用户重新发送样品中"),
+    SAMPLE_CHECK_FAIL_MODIFY_SAMPLE_INFO(280, "样品验收不通过，用户修改样品信息中"),
+    SAMPLE_CHECK_SUCCESS(290, "样品验收通过"),
+    TESTING_DEPT_WRITING_TEST_SOLUTION(300, "测试部编写测试方案中"),
 
     ;
 
