@@ -23,6 +23,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.*;
 
 @Service
@@ -49,13 +50,14 @@ public class BpmDelegationServiceImpl implements BpmDelegationService {
         // 发起流程
         Map<String, Object> variables = new HashMap<>();
         variables.put("name", createReqVO.getName());
+        variables.put("owner", getLoginUserId());
         return createProcessInstance(definition, variables, null);
     }
 
     @Override
     public void submitDelegation(BpmDelegationSubmitReqVO submitVo) {
         // 校验任务存在
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
+        Long loginUserId = getLoginUserId();
         Task task = checkTask(loginUserId, submitVo.getId());
         // 校验流程实例存在
         ProcessInstance instance = processInstanceService.getProcessInstance(task.getProcessInstanceId());
@@ -70,7 +72,7 @@ public class BpmDelegationServiceImpl implements BpmDelegationService {
     @Override
     public void assignDelegation(BpmDelegationAssignReqVO assignReqVO, String department) {
         // 校验任务存在
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
+        Long loginUserId = getLoginUserId();
         Task task = checkTask(loginUserId, assignReqVO.getId());
         // 校验流程实例存在
         ProcessInstance instance = processInstanceService.getProcessInstance(task.getProcessInstanceId());
@@ -93,7 +95,7 @@ public class BpmDelegationServiceImpl implements BpmDelegationService {
     @Override
     public void auditDelegation(BpmDelegationAuditReqVO auditReqVO) {
         // 校验任务存在
-        Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
+        Long loginUserId = getLoginUserId();
         Task task = checkTask(loginUserId, auditReqVO.getId());
         // 校验流程实例存在
         ProcessInstance instance = processInstanceService.getProcessInstance(task.getProcessInstanceId());
