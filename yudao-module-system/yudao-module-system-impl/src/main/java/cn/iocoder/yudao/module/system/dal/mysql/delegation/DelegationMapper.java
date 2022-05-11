@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.system.dal.mysql.delegation;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
@@ -62,23 +63,38 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
                 .orderByDesc(DelegationDO::getId));
     }
 
-    default DelegationDO validateDelegationState(Long id, DelegationStateEnum state) {
+    default DelegationDO validateDelegationExists(Long id) {
         DelegationDO delegation = selectById(id);
-        if (!Objects.equals(delegation.getState(), state.getState())) {
+        if (delegation == null) {
+            throw exception(DELEGATION_NOT_EXISTS);
+        }
+        return delegation;
+    }
+
+    default DelegationDO validateDelegationState(DelegationDO delegation, DelegationStateEnum ... states) {
+        if (delegation == null) {
+            throw exception(DELEGATION_NOT_EXISTS);
+        }
+        List<Integer> list = Arrays.stream(states).map(DelegationStateEnum::getState).collect(Collectors.toList());
+        if (!list.contains(delegation.getState())) {
             throw exception(DELEGATION_STATE_ERROR);
         }
         return delegation;
     }
 
-    default DelegationDO validateDelegationStateByContract(Long contractId, DelegationStateEnum state) {
+    default DelegationDO validateDelegationState(Long id, DelegationStateEnum ... states) {
+        DelegationDO delegation = selectById(id);
+        return validateDelegationState(delegation, states);
+    }
+
+    default DelegationDO validateDelegationStateByContract(Long contractId, DelegationStateEnum ... states) {
         DelegationDO delegation = selectOne("contract_id", contractId);
-        if (delegation == null) {
-            throw exception(DELEGATION_NOT_EXISTS);
-        }
-        if (!Objects.equals(delegation.getState(), state.getState())) {
-            throw exception(DELEGATION_STATE_ERROR);
-        }
-        return delegation;
+        return validateDelegationState(delegation, states);
+    }
+
+    default DelegationDO validateDelegationStateBySample(Long sampleId, DelegationStateEnum ... states) {
+        DelegationDO delegation = selectOne("sample_id", sampleId);
+        return validateDelegationState(delegation, states);
     }
 
 }

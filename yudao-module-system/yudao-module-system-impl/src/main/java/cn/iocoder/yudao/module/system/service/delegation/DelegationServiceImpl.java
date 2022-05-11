@@ -56,7 +56,7 @@ public class DelegationServiceImpl implements DelegationService {
     @Override
     public void updateDelegation(DelegationUpdateReqVO updateReqVO) {
         // 校验存在
-        this.validateDelegationExists(updateReqVO.getId());
+        delegationMapper.validateDelegationExists(updateReqVO.getId());
 
         // 检验名称是否重复
         if (updateReqVO.getName() != null) {
@@ -71,16 +71,23 @@ public class DelegationServiceImpl implements DelegationService {
     public void submitDelegation(DelegationSubmitReqVO submitReqVO) {
         // 校验存在
         Long id = submitReqVO.getId();
-        this.validateDelegationExists(id);
+        delegationMapper.validateDelegationExists(id);
         // 校验状态
-        DelegationDO delegation = delegationMapper.validateDelegationState(id, DelegationStateEnum.DELEGATE_WRITING);
+        DelegationDO delegation = delegationMapper.validateDelegationState(id,
+                DelegationStateEnum.DELEGATE_WRITING,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL,
+                DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL);
         // 更新状态，要通过是否有相关字段判断是否是第一次提交，以及目标状态
         if (delegation.getMarketDeptStaffId() == null) {
             delegation.setState(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState());
         } else if (delegation.getTestingDeptStaffId() == null) {
             delegation.setState(DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState());
         } else {
-            delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
+            Integer state = delegation.getState();
+            if (Objects.equals(state, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState()))
+                delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
+            else if (Objects.equals(state, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState()))
+                delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION.getState());
         }
         delegationMapper.updateById(delegation);
         // TODO 保存日志
@@ -90,7 +97,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void saveDelegationTable2(DelegationSaveTableReqVO updateReqVO) {
         // 校验存在
         Long delegationId = updateReqVO.getDelegationId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
 
         DelegationDO delegationDO = delegationMapper.selectById(delegationId);
         if (delegationDO.getTable2Id() == null) {
@@ -106,7 +113,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void saveDelegationTable3(DelegationSaveTableReqVO updateReqVO) {
         // 校验存在
         Long delegationId = updateReqVO.getDelegationId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
 
         DelegationDO delegationDO = delegationMapper.selectById(delegationId);
         if (delegationDO.getTable3Id() == null) {
@@ -122,7 +129,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void saveDelegationTable14(DelegationSaveTableReqVO updateReqVO) {
         // 校验存在
         Long delegationId = updateReqVO.getDelegationId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
 
         DelegationDO delegationDO = delegationMapper.selectById(delegationId);
         if (delegationDO.getTable14Id() == null) {
@@ -138,7 +145,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void distributeDelegation2Mkt(DelegationDistributeReqVO distributeReqVO) {
         // 校验存在
         Long delegationId = distributeReqVO.getId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF);
@@ -153,7 +160,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void distributeDelegation2Test(DelegationDistributeReqVO distributeReqVO) {
         // 校验存在
         Long delegationId = distributeReqVO.getId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF);
@@ -168,7 +175,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void auditDelegationSuccessMkt(DelegationAuditReqVO auditReqVO) {
         // 校验存在
         Long delegationId = auditReqVO.getId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION);
@@ -184,7 +191,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void auditDelegationSuccessTest(DelegationAuditReqVO auditReqVO) {
         // 校验存在
         Long delegationId = auditReqVO.getId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION);
@@ -205,14 +212,13 @@ public class DelegationServiceImpl implements DelegationService {
     public void auditDelegationFailMkt(DelegationAuditReqVO auditReqVO) {
         // 校验存在
         Long delegationId = auditReqVO.getId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION);
         // 更新备注并连续更新状态
         delegation.setMarketRemark(auditReqVO.getRemark());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
-        delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
         delegationMapper.updateById(delegation);
         // TODO 保存日志
     }
@@ -221,14 +227,13 @@ public class DelegationServiceImpl implements DelegationService {
     public void auditDelegationFailTest(DelegationAuditReqVO auditReqVO) {
         // 校验存在
         Long delegationId = auditReqVO.getId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION);
         // 更新备注并连续更新状态
         delegation.setTestingRemark(auditReqVO.getRemark());
         delegation.setState(DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
-        delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
         delegationMapper.updateById(delegation);
         // TODO 保存日志
     }
@@ -237,7 +242,7 @@ public class DelegationServiceImpl implements DelegationService {
     public String createOffer(OfferCreateReqVO offerCreateReqVO) {
         // 校验存在
         Long delegationId = offerCreateReqVO.getDelegationId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER);
@@ -245,7 +250,7 @@ public class DelegationServiceImpl implements DelegationService {
             throw exception(DELEGATION_STATE_ERROR);
         }
         // 创建报价单
-        String tableId = tableMongoRepository.create("table14", offerCreateReqVO.getData());
+        String tableId = tableMongoRepository.create("offer", offerCreateReqVO.getData());
         // 更新委托
         delegation.setOfferId(tableId);
         delegation.setState(DelegationStateEnum.CLIENT_DEALING_OFFER.getState());
@@ -268,10 +273,23 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
+    public void submitOffer(OfferSubmitReqVO offerSubmitReqVO) {
+        // 校验存在
+        delegationMapper.validateDelegationExists(offerSubmitReqVO.getDelegationId());
+        // 校验状态
+        DelegationDO delegation = delegationMapper
+                .validateDelegationState(offerSubmitReqVO.getDelegationId(),
+                        DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER);
+        // 更新状态
+        delegation.setState(DelegationStateEnum.CLIENT_DEALING_OFFER.getState());
+        delegationMapper.updateById(delegation);
+    }
+
+    @Override
     public void rejectOffer(OfferRejectReqVO offerRejectReqVO) {
         // 校验存在
         Long delegationId = offerRejectReqVO.getDelegationId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.CLIENT_DEALING_OFFER);
@@ -287,7 +305,7 @@ public class DelegationServiceImpl implements DelegationService {
     public void acceptOffer(OfferAcceptReqVO offerAcceptReqVO) {
         // 校验存在
         Long delegationId = offerAcceptReqVO.getDelegationId();
-        this.validateDelegationExists(delegationId);
+        delegationMapper.validateDelegationExists(delegationId);
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.CLIENT_DEALING_OFFER);
@@ -301,7 +319,7 @@ public class DelegationServiceImpl implements DelegationService {
     @Override
     public void deleteDelegation(Long id) {
         // 校验存在
-        this.validateDelegationExists(id);
+        delegationMapper.validateDelegationExists(id);
         // 删除表格
         DelegationDO delegationDO = delegationMapper.selectById(id);
         if (delegationDO.getTable2Id() != null) {
@@ -322,12 +340,6 @@ public class DelegationServiceImpl implements DelegationService {
                 .eqIfPresent("deleted", false);
         if (delegationMapper.selectCount(queryWrapper) > 0) {
             throw exception(DELEGATION_NAME_DUPLICATE);
-        }
-    }
-
-    private void validateDelegationExists(Long id) {
-        if (delegationMapper.selectById(id) == null) {
-            throw exception(DELEGATION_NOT_EXISTS);
         }
     }
     
