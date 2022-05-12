@@ -4,6 +4,9 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
+import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
+import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -19,6 +22,7 @@ import cn.iocoder.yudao.module.system.convert.contract.ContractConvert;
 import cn.iocoder.yudao.module.system.dal.mysql.contract.ContractMapper;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -39,6 +43,13 @@ public class ContractServiceImpl implements ContractService {
     @Resource
     private TableMongoRepository tableMongoRepository;
 
+    @Resource
+    @Lazy
+    private FlowLogService flowLogService;
+
+    @Resource
+    private AdminUserService userService;
+
     @Override
     public Long createContract(ContractCreateReqVO createReqVO) {
         Long delegationId = createReqVO.getDelegationId();
@@ -52,7 +63,6 @@ public class ContractServiceImpl implements ContractService {
         // 更新委托
         delegation.setContractId(contractId);
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
         return contractId;
     }
 
@@ -99,7 +109,11 @@ public class ContractServiceImpl implements ContractService {
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT, DelegationStateEnum.CLIENT_AUDIT_CONTRACT,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 起草了合同，用户检查中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
@@ -114,7 +128,7 @@ public class ContractServiceImpl implements ContractService {
         delegation.setState(DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
     }
 
     @Override
@@ -133,7 +147,11 @@ public class ContractServiceImpl implements ContractService {
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL.getState());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT, DelegationStateEnum.CLIENT_AUDIT_CONTRACT,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 不接受合同，市场部修改中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
