@@ -3,10 +3,8 @@ package cn.iocoder.yudao.module.system.controller.admin.sample;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.*;
 
-import javax.validation.constraints.*;
 import javax.validation.*;
 import javax.servlet.http.*;
 import java.util.*;
@@ -37,14 +35,14 @@ public class SampleController {
 
     @PostMapping("/create")
     @ApiOperation(value = "客户-创建样品",
-            notes = "客户首次创建样品时调用，之后修改样品信息时调用update接口。返回值为样品编号。")
+            notes = "客户首次创建样品时调用，之后修改样品信息时调用update和submit接口。返回值为样品编号。")
     public CommonResult<Long> createSample(@Valid @RequestBody SampleCreateReqVO createReqVO) {
         return success(sampleService.createSample(createReqVO));
     }
 
     @PutMapping("/update")
     @ApiOperation(value = "客户-更新样品",
-            notes = "客户修改样品信息。需要传入id和要更新的字段。id为样品编号，通过查询委托信息可以获取。返回值为是否更新成功。")
+            notes = "客户修改样品信息。需要填写id和要更新的字段。id为样品编号，通过查询委托信息可以获取。返回值为是否更新成功。")
     public CommonResult<Boolean> updateSample(@Valid @RequestBody SampleUpdateReqVO updateReqVO) {
         sampleService.updateSample(updateReqVO);
         return success(true);
@@ -71,7 +69,7 @@ public class SampleController {
     @ApiOperation(value = "市场部/测试部负责人-样品验收不通过，用户重新发送样品中",
             notes = "需要传入id和remark字段。id为样品编号，remark为审核意见。返回值为是否更新成功。")
     public CommonResult<Boolean> auditSampleFailResend(@Valid @RequestBody SampleAuditReqVO auditReqVO) {
-        sampleService.auditSampleFail1(auditReqVO);
+        sampleService.auditSampleFailResend(auditReqVO);
         return success(true);
     }
 
@@ -79,7 +77,7 @@ public class SampleController {
     @ApiOperation(value = "市场部/测试部负责人-样品验收不通过，用户修改样品信息中",
             notes = "需要传入id和remark字段。id为样品编号，remark为审核意见。返回值为是否更新成功。")
     public CommonResult<Boolean> auditSampleFailModify(@Valid @RequestBody SampleAuditReqVO auditReqVO) {
-        sampleService.auditSampleFail2(auditReqVO);
+        sampleService.auditSampleFailModify(auditReqVO);
         return success(true);
     }
 

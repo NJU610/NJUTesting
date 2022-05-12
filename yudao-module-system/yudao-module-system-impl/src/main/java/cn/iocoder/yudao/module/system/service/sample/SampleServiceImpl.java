@@ -39,12 +39,11 @@ public class SampleServiceImpl implements SampleService {
     public Long createSample(SampleCreateReqVO createReqVO) {
         // 校验委托存在
         Long delegationId = createReqVO.getDelegationId();
-        delegationMapper.validateDelegationExists(delegationId);
         DelegationDO delegation = delegationMapper
                 .validateDelegationState(delegationId, DelegationStateEnum.CLIENT_SENDING_SAMPLE);
         // 插入
         SampleDO sample = SampleConvert.INSTANCE.convert(createReqVO);
-        sample.setState(SampleStateEnum.UNSENT.getState());
+        sample.setState(SampleStateEnum.SENT.getState());
         sampleMapper.insert(sample);
         Long sampleId = sample.getId();
         // 更新委托
@@ -68,14 +67,12 @@ public class SampleServiceImpl implements SampleService {
 
     @Override
     public void submitSample(SampleSubmitReqVO submitReqVO) {
-        // 校验存在
-        this.validateSampleExists(submitReqVO.getId());
-        // 校验状态
+        // 校验存在和状态
+        SampleDO sample = this.validateSampleState(submitReqVO.getId(), SampleStateEnum.UNSENT);
         DelegationDO delegation = delegationMapper.validateDelegationStateBySample(submitReqVO.getId(),
                 DelegationStateEnum.CLIENT_SENDING_SAMPLE,
                 DelegationStateEnum.SAMPLE_CHECK_FAIL_RESENDING_SAMPLE,
                 DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE_INFO);
-        SampleDO sample = this.validateSampleState(submitReqVO.getId(), SampleStateEnum.UNSENT);
         // 更新状态
         sample.setState(SampleStateEnum.SENT.getState());
         sampleMapper.updateById(sample);
@@ -95,7 +92,7 @@ public class SampleServiceImpl implements SampleService {
     }
 
     @Override
-    public void auditSampleFail1(SampleAuditReqVO auditReqVO) {
+    public void auditSampleFailResend(SampleAuditReqVO auditReqVO) {
         // 审核
         DelegationDO delegation = this.auditSample(auditReqVO, false);
         // 更新委托
@@ -105,7 +102,7 @@ public class SampleServiceImpl implements SampleService {
     }
 
     @Override
-    public void auditSampleFail2(SampleAuditReqVO auditReqVO) {
+    public void auditSampleFailModify(SampleAuditReqVO auditReqVO) {
         // 审核
         DelegationDO delegation = this.auditSample(auditReqVO, false);
         // 更新委托
@@ -122,14 +119,16 @@ public class SampleServiceImpl implements SampleService {
         sampleMapper.deleteById(id);
     }
 
-    private void validateSampleExists(Long id) {
-        if (sampleMapper.selectById(id) == null) {
+    private SampleDO validateSampleExists(Long id) {
+        SampleDO sample = sampleMapper.selectById(id);
+        if (sample == null) {
             throw exception(SAMPLE_NOT_EXISTS);
         }
+        return sample;
     }
 
     private SampleDO validateSampleState(Long id, SampleStateEnum state) {
-        SampleDO sample = sampleMapper.selectById(id);
+        SampleDO sample = this.validateSampleExists(id);
         if (!Objects.equals(sample.getState(), state.getState())) {
             throw exception(SAMPLE_STATE_ERROR);
         }
@@ -140,7 +139,6 @@ public class SampleServiceImpl implements SampleService {
         // 校验存在
         Long sampleId = auditReqVO.getId();
         Long loginUserId = SecurityFrameworkUtils.getLoginUserId();
-        this.validateSampleExists(sampleId);
         this.validateSampleState(sampleId, SampleStateEnum.SENT);
         // 校验状态
         DelegationDO delegation = delegationMapper
