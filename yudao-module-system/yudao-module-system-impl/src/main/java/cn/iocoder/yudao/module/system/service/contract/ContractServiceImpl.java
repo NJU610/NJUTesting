@@ -53,7 +53,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Long createContract(ContractCreateReqVO createReqVO) {
         Long delegationId = createReqVO.getDelegationId();
-        // 检验状态
+        // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT);
         // 创建合同
@@ -68,44 +68,41 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void saveContractTable4(ContractSaveTableReqVO saveReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = saveReqVO.getContractId();
-        this.validateContractExists(contractId);
-
-        ContractDO contract = contractMapper.selectById(contractId);
+        ContractDO contract = this.validateContractExists(contractId);
+        // 保存表单
         if (contract.getTable4Id() == null) {
             contract.setTable4Id(tableMongoRepository.create("table4", saveReqVO.getData()));
+            contractMapper.updateById(contract);
         } else {
             tableMongoRepository.upsert("table4", contract.getTable4Id(), saveReqVO.getData());
         }
-
-        contractMapper.updateById(contract);
     }
 
     @Override
     public void saveContractTable5(ContractSaveTableReqVO saveReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = saveReqVO.getContractId();
-        this.validateContractExists(contractId);
-
-        ContractDO contract = contractMapper.selectById(contractId);
+        ContractDO contract = this.validateContractExists(contractId);
+        // 保存表单
         if (contract.getTable5Id() == null) {
             contract.setTable5Id(tableMongoRepository.create("table5", saveReqVO.getData()));
+            contractMapper.updateById(contract);
         } else {
             tableMongoRepository.upsert("table5", contract.getTable5Id(), saveReqVO.getData());
         }
-
-        contractMapper.updateById(contract);
     }
 
     @Override
     public void submitContractStaff(ContractSubmitReqVO submitReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = submitReqVO.getId();
         this.validateContractExists(contractId);
-        // 检验状态
+        // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
-                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT);
+                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT,
+                DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL);
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
@@ -118,34 +115,46 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void submitContractClient(ContractSubmitReqVO submitReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = submitReqVO.getId();
         this.validateContractExists(contractId);
-        // 检验状态
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
+                DelegationStateEnum.CLIENT_WRITING_CONTRACT,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL);
+        // 更新状态
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
+        delegationMapper.updateById(delegation);
+        // TODO 更新日志
+    }
+
+    @Override
+    public void acceptContractClient(ContractAcceptReqVO acceptReqVO) {
+        // 校验合同是否存在
+        Long contractId = acceptReqVO.getId();
+        this.validateContractExists(contractId);
+        // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
                 DelegationStateEnum.CLIENT_AUDIT_CONTRACT);
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState());
-        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
         // 更新日志
     }
 
     @Override
     public void rejectContractClient(ContractRejectReqVO rejectReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = rejectReqVO.getId();
-        this.validateContractExists(contractId);
-        // 检验状态
+        ContractDO contract = this.validateContractExists(contractId);
+        // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
                 DelegationStateEnum.CLIENT_AUDIT_CONTRACT);
         // 更新拒绝原因
-        ContractDO contract = contractMapper.selectById(contractId);
         contract.setClientRemark(rejectReqVO.getReason());
         contractMapper.updateById(contract);
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL.getState());
-        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
         delegationMapper.updateById(delegation);
         // 更新日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
@@ -156,29 +165,27 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void rejectContractStaff(ContractRejectReqVO rejectReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = rejectReqVO.getId();
-        this.validateContractExists(contractId);
-        // 检验状态
+        ContractDO contract = this.validateContractExists(contractId);
+        // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT);
         // 更新拒绝原因
-        ContractDO contract = contractMapper.selectById(contractId);
         contract.setStaffRemark(rejectReqVO.getReason());
         contractMapper.updateById(contract);
         // 更新状态
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL.getState());
-        delegation.setState(DelegationStateEnum.CLIENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
         // TODO 更新日志
     }
 
     @Override
     public void acceptContractStaff(ContractAcceptReqVO acceptReqVO) {
-        // 检验合同是否存在
+        // 校验合同是否存在
         Long contractId = acceptReqVO.getId();
         this.validateContractExists(contractId);
-        // 检验状态
+        // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT);
         // 更新状态
@@ -190,17 +197,12 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void uploadDocument(@Valid ContractUploadDocReqVO uploadReqVO) {
-        // 校验存在
+        // 校验合同是否存在
+        Long contractId = uploadReqVO.getId();
         this.validateContractExists(uploadReqVO.getId());
         // 校验状态
-        DelegationDO delegation = delegationMapper.selectOne("contract_id", uploadReqVO.getId());
-        if (delegation == null) {
-            throw exception(DELEGATION_NOT_EXISTS);
-        }
-        if (!Objects.equals(delegation.getState(),
-                DelegationStateEnum.CONTRACT_SIGNING.getState())) {
-            throw exception(DELEGATION_STATE_ERROR);
-        }
+        DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
+                DelegationStateEnum.CONTRACT_SIGNING);
         // 更新url
         ContractDO updateObj = ContractConvert.INSTANCE.convert(uploadReqVO);
         contractMapper.updateById(updateObj);
@@ -214,9 +216,8 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void deleteContract(Long id) {
         // 校验存在
-        this.validateContractExists(id);
+        ContractDO contract = this.validateContractExists(id);
         // 删除表格
-        ContractDO contract = contractMapper.selectById(id);
         if (contract.getTable4Id() != null) {
             tableMongoRepository.delete("table4", contract.getTable4Id());
         }
@@ -227,10 +228,12 @@ public class ContractServiceImpl implements ContractService {
         contractMapper.deleteById(id);
     }
 
-    private void validateContractExists(Long id) {
-        if (contractMapper.selectById(id) == null) {
+    private ContractDO validateContractExists(Long id) {
+        ContractDO contract = contractMapper.selectById(id);
+        if (contract == null) {
             throw exception(CONTRACT_NOT_EXISTS);
         }
+        return contract;
     }
 
     @Override
