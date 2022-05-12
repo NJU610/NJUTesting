@@ -242,6 +242,16 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public String getContractTable4(String id) {
+        return tableMongoRepository.get("table4", id);
+    }
+
+    @Override
+    public String getContractTable5(String id) {
+        return tableMongoRepository.get("table5", id);
+    }
+
+    @Override
     public List<ContractDO> getContractList(Collection<Long> ids) {
         return contractMapper.selectBatchIds(ids);
     }

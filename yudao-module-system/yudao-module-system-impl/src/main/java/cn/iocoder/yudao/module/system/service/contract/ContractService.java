@@ -100,6 +100,22 @@ public interface ContractService {
     ContractDO getContract(Long id);
 
     /**
+     * 获取软件委托测试合同
+     *
+     * @param id 表格编号
+     * @return 表格内容
+     */
+    String getContractTable4(String id);
+
+    /**
+     * 获取软件项目委托测试保密协议
+     *
+     * @param id 表格编号
+     * @return 表格内容
+     */
+    String getContractTable5(String id);
+
+    /**
      * 获得合同列表
      *
      * @param ids 编号

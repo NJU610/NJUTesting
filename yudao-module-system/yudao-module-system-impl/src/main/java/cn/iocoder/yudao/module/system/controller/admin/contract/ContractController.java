@@ -120,6 +120,22 @@ public class ContractController {
         return success(ContractConvert.INSTANCE.convert(contract));
     }
 
+    @GetMapping("/get/table4")
+    @ApiOperation(value = "获得软件委托测试合同",
+            notes = "需要填写id字段。其中id为表格id，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
+    @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
+    public CommonResult<String> getContractTable4(@RequestParam("id") String id) {
+        return success(contractService.getContractTable4(id));
+    }
+
+    @GetMapping("/get/table5")
+    @ApiOperation(value = "获得软件项目委托测试保密协议",
+            notes = "需要填写id字段。其中id为表格id，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
+    @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
+    public CommonResult<String> getContractTable5(@RequestParam("id") String id) {
+        return success(contractService.getContractTable5(id));
+    }
+
     @GetMapping("/list")
     @ApiOperation(value = "获得合同列表", notes = "根据需要填写多个合同id，获得所有合同。返回值为合同列表。")
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
