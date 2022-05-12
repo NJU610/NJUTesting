@@ -99,18 +99,11 @@ public interface DelegationService {
     void auditDelegationFailTest(@Valid DelegationAuditReqVO auditReqVO);
 
     /**
-     * 创建报价单
+     * 保存报价单
      *
-     * @param offerCreateReqVO 创建信息
+     * @param offerSaveReqVO 保存信息
      */
-    String createOffer(@Valid OfferCreateReqVO offerCreateReqVO);
-
-    /**
-     * 修改报价单
-     *
-     * @param offerUpdateReqVO 修改信息
-     */
-    void updateOffer(@Valid OfferUpdateReqVO offerUpdateReqVO);
+    void saveOffer(@Valid DelegationSaveTableReqVO offerSaveReqVO);
 
     /**
      * 提交报价单

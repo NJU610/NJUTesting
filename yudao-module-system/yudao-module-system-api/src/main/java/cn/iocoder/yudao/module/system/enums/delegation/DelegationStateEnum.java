@@ -19,7 +19,7 @@ public enum DelegationStateEnum {
     AUDIT_DELEGATION_SUCCESS(100, "委托审核通过"),
     MARKETING_DEPARTMENT_GENERATE_OFFER(110, "市场部生成报价中"),
     CLIENT_DEALING_OFFER(120, "客户处理报价中"),
-    CLIENT_REJECT_OFFER(130, "客户不接受报价"),
+    CLIENT_REJECT_OFFER(130, "客户不接受报价，市场部修改报价"),
     CLIENT_ACCEPT_OFFER(140, "客户接受报价"),
     MARKETING_DEPARTMENT_GENERATE_CONTRACT(150, "市场部生成合同草稿中"),
     CLIENT_AUDIT_CONTRACT(160, "客户审核合同草稿中"),

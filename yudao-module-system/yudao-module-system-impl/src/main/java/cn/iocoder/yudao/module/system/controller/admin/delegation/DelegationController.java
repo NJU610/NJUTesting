@@ -128,18 +128,11 @@ public class DelegationController {
         return success(true);
     }
 
-    @PostMapping("/offer/create")
-    @ApiOperation(value = "市场部人员-生成报价单",
-            notes = "市场部人员使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含报价单内容。返回值为报价单ID。")
-    public CommonResult<String> createOffer(@Valid @RequestBody OfferCreateReqVO offerCreateReqVO) {
-        return success(delegationService.createOffer(offerCreateReqVO));
-    }
-
-    @PutMapping("/offer/update")
-    @ApiOperation(value = "市场部人员-修改报价单",
-            notes = "市场部人员使用。需要填写id和data字段，其中id为报价单id，data是json格式，包含报价单内容。返回值为是否更新成功。")
-    public CommonResult<Boolean> updateOffer(@Valid @RequestBody OfferUpdateReqVO offerUpdateReqVO) {
-        delegationService.updateOffer(offerUpdateReqVO);
+    @PutMapping("/offer/save")
+    @ApiOperation(value = "市场部人员-保存报价单",
+            notes = "市场部人员使用。需要填写delegationId和data字段，其中delegationId为委托id，data是json格式，包含表格内容。返回值为是否更新成功")
+    public CommonResult<Boolean> saveOffer(@Valid @RequestBody DelegationSaveTableReqVO saveTableReqVo) {
+        delegationService.saveOffer(saveTableReqVo);
         return success(true);
     }
 
