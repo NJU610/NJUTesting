@@ -88,6 +88,9 @@ public class DelegationServiceImpl implements DelegationService {
                 DelegationStateEnum.DELEGATE_WRITING,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL,
                 DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL);
+        if (delegation.getTable2Id() == null || delegation.getTable3Id() == null) {
+            throw exception(DELEGATION_STATE_ERROR);
+        }
         DelegationStateEnum initEnum = DelegationStateEnum.getByState(delegation.getState());
         String remark = "";
         // 更新状态，要通过是否有相关字段判断是否是第一次提交，以及目标状态
