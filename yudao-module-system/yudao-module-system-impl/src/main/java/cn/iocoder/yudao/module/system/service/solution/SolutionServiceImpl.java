@@ -71,6 +71,9 @@ public class SolutionServiceImpl implements SolutionService {
         // 校验测试方案是否存在
         Long solutionId = submitReqVO.getSolutionId();
         SolutionDO solution = this.validateSolutionExists(solutionId);
+        if (solution.getTable6Id() == null) {
+            throw exception(SOLUTION_TABLE6_NOT_FILLED);
+        }
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateBySolution(solutionId,
                 DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION,
@@ -144,7 +147,7 @@ public class SolutionServiceImpl implements SolutionService {
         SolutionDO solution = this.validateSolutionExists(solutionId);
         // 校验状态
         if (solution.getTable13Id() == null) {
-            throw exception(DELEGATION_STATE_ERROR);
+            throw exception(SOLUTION_TABLE13_NOT_FILLED);
         }
         DelegationDO delegation = delegationMapper.validateDelegationStateBySolution(solutionId,
                 DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION);

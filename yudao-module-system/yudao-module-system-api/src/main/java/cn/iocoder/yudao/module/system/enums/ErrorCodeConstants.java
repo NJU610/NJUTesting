@@ -150,5 +150,7 @@ public interface ErrorCodeConstants {
 
     // ========== 测试方案 1002026000 ==========
     ErrorCode SOLUTION_NOT_EXISTS = new ErrorCode(1002026000, "测试方案不存在");
+    ErrorCode SOLUTION_TABLE6_NOT_FILLED = new ErrorCode(1002026001, "软件测试方案未填写");
+    ErrorCode SOLUTION_TABLE13_NOT_FILLED = new ErrorCode(1002026002, "测试方案评审表未填写");
 
 }
