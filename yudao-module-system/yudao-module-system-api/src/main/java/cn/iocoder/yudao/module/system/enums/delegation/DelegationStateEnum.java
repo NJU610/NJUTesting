@@ -37,6 +37,10 @@ public enum DelegationStateEnum {
     SAMPLE_CHECK_FAIL_MODIFY_SAMPLE_INFO(280, "样品验收不通过，用户修改样品信息中"),
     SAMPLE_CHECK_SUCCESS(290, "样品验收通过"),
     TESTING_DEPT_WRITING_TEST_SOLUTION(300, "测试部编写测试方案中"),
+    QUALITY_DEPT_AUDIT_TEST_SOLUTION(310, "质量部审核测试方案中"),
+    QUALITY_DEPT_AUDIT_TEST_SOLUTION_FAIL(320, "测试方案审核未通过，测试部修改测试方案中"),
+    QUALITY_DEPT_AUDIT_TEST_SOLUTION_SUCCESS(330, "测试方案审核通过"),
+    TESTING_DEPT_WRITING_TEST_REPORT(340, "测试部测试进行中，填写测试文档"),
 
     ;
 
