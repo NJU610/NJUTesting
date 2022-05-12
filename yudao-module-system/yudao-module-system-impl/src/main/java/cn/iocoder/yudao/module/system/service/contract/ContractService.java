@@ -50,6 +50,13 @@ public interface ContractService {
     void submitContractClient(@Valid ContractSubmitReqVO submitReqVO);
 
     /**
+     * 客户接受市场部合同草稿
+     *
+     * @param acceptReqVO 接受信息
+     */
+    void acceptContractClient(@Valid ContractAcceptReqVO acceptReqVO);
+
+    /**
      * 客户不接受市场部合同草稿
      *
      * @param rejectReqVO 拒绝信息

@@ -439,6 +439,11 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
+    public String getOffer(String id) {
+        return tableMongoRepository.get("offer", id);
+    }
+
+    @Override
     public List<DelegationDO> getDelegationList(Collection<Long> ids) {
         return delegationMapper.selectBatchIds(ids);
     }

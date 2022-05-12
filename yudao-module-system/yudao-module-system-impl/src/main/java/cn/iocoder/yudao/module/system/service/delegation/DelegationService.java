@@ -167,7 +167,7 @@ public interface DelegationService {
      * 获取软件项目委托测试申请表
      *
      * @param id 表格编号
-     * @return 委托列表
+     * @return 表格内容
      */
     String getDelegationTable2(String id);
 
@@ -175,7 +175,7 @@ public interface DelegationService {
      * 获取委托测试软件功能列表
      *
      * @param id 表格编号
-     * @return 委托列表
+     * @return 表格内容
      */
     String getDelegationTable3(String id);
 
@@ -183,9 +183,17 @@ public interface DelegationService {
      * 获取软件文档评审表
      *
      * @param id 表格编号
-     * @return 委托列表
+     * @return 表格内容
      */
     String getDelegationTable14(String id);
+
+    /**
+     * 获取报价单
+     *
+     * @param id 表格编号
+     * @return 报价单内容
+     */
+    String getOffer(String id);
 
     /**
      * 获得委托列表
