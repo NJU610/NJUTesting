@@ -97,4 +97,9 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
         return validateDelegationState(delegation, states);
     }
 
+    default DelegationDO validateDelegationStateBySolution(Long solutionId, DelegationStateEnum ... states) {
+        DelegationDO delegation = selectOne("solution_id", solutionId);
+        return validateDelegationState(delegation, states);
+    }
+
 }

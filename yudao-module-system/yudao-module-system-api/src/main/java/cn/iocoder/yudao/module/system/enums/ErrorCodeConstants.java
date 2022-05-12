@@ -147,4 +147,8 @@ public interface ErrorCodeConstants {
     ErrorCode SAMPLE_NOT_EXISTS = new ErrorCode(1002025000, "样品不存在");
     ErrorCode SAMPLE_AUDITOR_ERROR = new ErrorCode(1002025001, "样品审核员不正确");
     ErrorCode SAMPLE_STATE_ERROR = new ErrorCode(1002025002, "样品状态错误");
+
+    // ========== 测试方案 1002026000 ==========
+    ErrorCode SOLUTION_NOT_EXISTS = new ErrorCode(1002026000, "测试方案不存在");
+
 }
