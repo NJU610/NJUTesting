@@ -1,7 +1,10 @@
 package cn.iocoder.yudao.module.system.service.flow;
 
+import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
+import com.tencentcloudapi.vpc.v20170312.models.FlowLog;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,5 +23,8 @@ public interface FlowLogService {
      * @param templateParams 操作变量
      */
     void saveLog (Long delegationId, Long operatorId, DelegationStateEnum fromState, DelegationStateEnum toState, String remark, Map<String, Object> templateParams);
+
+
+    List<FlowLogDO> listLogs(Long delegationId);
 
 }

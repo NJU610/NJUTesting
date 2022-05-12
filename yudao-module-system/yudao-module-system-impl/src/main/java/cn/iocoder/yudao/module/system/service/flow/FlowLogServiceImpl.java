@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -63,5 +64,7 @@ public class FlowLogServiceImpl implements FlowLogService {
         flowLogMapper.insert(flowLogDO);
 
     }
-
+    public List<FlowLogDO> listLogs(Long delegationId) {
+        return flowLogMapper.selectList("delegation_id", delegationId);
+    }
 }

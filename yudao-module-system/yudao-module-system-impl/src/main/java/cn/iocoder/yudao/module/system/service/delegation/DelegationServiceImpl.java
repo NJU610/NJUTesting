@@ -3,8 +3,10 @@ package cn.iocoder.yudao.module.system.service.delegation;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
@@ -456,6 +458,10 @@ public class DelegationServiceImpl implements DelegationService {
     @Override
     public List<DelegationDO> getDelegationList(DelegationExportReqVO exportReqVO) {
         return delegationMapper.selectList(exportReqVO);
+    }
+
+    public List<FlowLogDO> getDelegationProcessList(Long id) {
+        return flowLogService.listLogs(id);
     }
 
 }
