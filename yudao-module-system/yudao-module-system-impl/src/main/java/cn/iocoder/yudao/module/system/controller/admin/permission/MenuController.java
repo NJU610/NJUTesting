@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Api(tags = "管理后台 - 菜单")
+@Api(tags = "菜单")
 @RestController
 @RequestMapping("/system/menu")
 @Validated

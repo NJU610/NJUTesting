@@ -5,7 +5,9 @@ import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.module.system.controller.admin.permission.vo.permission.PermissionAssignRoleDataScopeReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.permission.vo.permission.PermissionAssignRoleMenuReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.permission.vo.permission.PermissionAssignUserRoleReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.UserSimpleRespVO;
 import cn.iocoder.yudao.module.system.service.permission.PermissionService;
+import cn.iocoder.yudao.module.system.service.permission.RoleService;
 import cn.iocoder.yudao.module.system.service.tenant.TenantService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -25,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
  *
  * @author 芋道源码
  */
-@Api(tags = "管理后台 - 权限")
+@Api(tags = "权限")
 @RestController
 @RequestMapping("/system/permission")
 public class PermissionController {
@@ -34,6 +36,8 @@ public class PermissionController {
     private PermissionService permissionService;
     @Resource
     private TenantService tenantService;
+    @Resource
+    private RoleService roleService;
 
 
     @ApiOperation("获得角色拥有的菜单编号")
@@ -78,6 +82,20 @@ public class PermissionController {
     public CommonResult<Boolean> assignUserRole(@Validated @RequestBody PermissionAssignUserRoleReqVO reqVO) {
         permissionService.assignUserRole(reqVO.getUserId(), reqVO.getRoleIds());
         return success(true);
+    }
+
+    @ApiOperation("获得拥有某个角色的用户编号集合")
+    @ApiImplicitParam(name = "roleCode", value = "角色Code", required = true, dataTypeClass = String.class)
+    @PostMapping("/list-role-users")
+    public CommonResult<Set<Long>> listUserIdsByRoleCode(@RequestParam("roleCode")String roleCode) {
+        return success(permissionService.getUserRoleIdListByRoleId(roleService.getRoleByCode(roleCode).getId()));
+    }
+
+    @ApiOperation("获得拥有某个角色的用户精简信息集合")
+    @ApiImplicitParam(name = "roleCode", value = "角色Code", required = true, dataTypeClass = String.class)
+    @PostMapping("/list-role-simple-users")
+    public CommonResult<Set<UserSimpleRespVO>> listSimpleUsersByRoleCode(@RequestParam("roleCode")String roleCode) {
+        return success(permissionService.getSimpleUserListByRoleId(roleService.getRoleByCode(roleCode).getId()));
     }
 
 }

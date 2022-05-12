@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.system.service.permission;
 
 import cn.iocoder.yudao.framework.datapermission.core.dept.service.DeptDataPermissionFrameworkService;
 import cn.iocoder.yudao.framework.security.core.service.SecurityPermissionFrameworkService;
+import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.UserSimpleRespVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.MenuDO;
 import org.springframework.lang.Nullable;
 
@@ -76,6 +77,15 @@ public interface PermissionService extends SecurityPermissionFrameworkService, D
      * @return 用户编号集合
      */
     Set<Long> getUserRoleIdListByRoleId(Long roleId);
+
+    /**
+     * 获得拥有某个角色的用户精简信息集合
+     *
+     * @param roleId 角色编号
+     * @return 用户精简信息集合
+     */
+
+    Set<UserSimpleRespVO> getSimpleUserListByRoleId(Long roleId);
 
     /**
      * 设置用户角色

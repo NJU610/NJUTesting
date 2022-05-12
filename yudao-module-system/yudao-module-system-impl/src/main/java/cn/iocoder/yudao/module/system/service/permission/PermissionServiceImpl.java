@@ -10,6 +10,7 @@ import cn.iocoder.yudao.framework.datapermission.core.dept.service.dto.DeptDataP
 import cn.iocoder.yudao.framework.security.core.LoginUser;
 import cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils;
 import cn.iocoder.yudao.framework.tenant.core.aop.TenantIgnore;
+import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.UserSimpleRespVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.MenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
@@ -22,6 +23,7 @@ import cn.iocoder.yudao.module.system.dal.mysql.permission.UserRoleMapper;
 import cn.iocoder.yudao.module.system.enums.permission.DataScopeEnum;
 import cn.iocoder.yudao.module.system.mq.producer.permission.PermissionProducer;
 import cn.iocoder.yudao.module.system.service.dept.DeptService;
+import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -86,6 +88,8 @@ public class PermissionServiceImpl implements PermissionService {
     private UserRoleMapper userRoleMapper;
     @Resource
     private UserRoleBatchInsertMapper userRoleBatchInsertMapper;
+    @Resource
+    private AdminUserService userService;
 
     @Resource
     private RoleService roleService;
@@ -239,6 +243,14 @@ public class PermissionServiceImpl implements PermissionService {
     public Set<Long> getUserRoleIdListByRoleId(Long roleId) {
         return CollectionUtils.convertSet(userRoleMapper.selectListByRoleId(roleId),
                 UserRoleDO::getRoleId);
+    }
+
+    @Override
+    public Set<UserSimpleRespVO> getSimpleUserListByRoleId(Long roleId) {
+        return CollectionUtils.convertSet(userRoleMapper.selectListByRoleId(roleId),
+                userRoleDO -> new UserSimpleRespVO()
+                        .setId(userRoleDO.getUserId())
+                        .setNickname(userService.getUser(userRoleDO.getUserId()).getNickname()));
     }
 
     @Override
