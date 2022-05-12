@@ -3,8 +3,10 @@ package cn.iocoder.yudao.module.system.service.delegation;
 import java.util.*;
 import javax.validation.*;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 
 /**
  * 委托 Service 接口
@@ -219,4 +221,10 @@ public interface DelegationService {
      */
     List<DelegationDO> getDelegationList(DelegationExportReqVO exportReqVO);
 
+    /**
+     * 获得委托流程列表
+     * @param id 委托id
+     * @return 委托流程列表
+     */
+    List<FlowLogDO> getDelegationProcessList(Long id);
 }

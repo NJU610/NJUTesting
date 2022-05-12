@@ -5,8 +5,11 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.excel.core.util.ExcelUtils;
 import cn.iocoder.yudao.framework.operatelog.core.annotations.OperateLog;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
+import cn.iocoder.yudao.module.system.convert.flow.FlowLogConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.service.delegation.DelegationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -242,6 +245,24 @@ public class DelegationController {
     public CommonResult<List<DelegationRespVO>> getDelegationList(@RequestParam("ids") Collection<Long> ids) {
         List<DelegationDO> list = delegationService.getDelegationList(ids);
         return success(DelegationConvert.INSTANCE.convertList(list));
+    }
+
+    @GetMapping("/get-process-list")
+    @ApiOperation(value = "获得委托流程列表",
+            notes = "获得委托的流程列表。返回值为委托流程列表。remark为日志信息内容，mapValue是一个字典，\"delegation\"字段为日志生成时间的delegation信息（DelegationDO），\"contract\"为当时的contract信息")
+    @ApiImplicitParam(name = "id", value = "委托编号", required = true, example = "1024", dataTypeClass = Long.class)
+    public CommonResult<List<FlowLogInstanceResponseVO>> getDelegationProcessList(@RequestParam("id") Long id) {
+        List<FlowLogDO> list = delegationService.getDelegationProcessList(id);
+        return success(FlowLogConvert.INSTANCE.convertList(list));
+    }
+
+    @GetMapping("/get-process-simple-list")
+    @ApiOperation(value = "获得委托流程简略列表",
+            notes = "获得委托的流程列表。返回值为委托流程简略列表。只包含日志信息remark")
+    @ApiImplicitParam(name = "id", value = "委托编号", required = true, example = "1024", dataTypeClass = Long.class)
+    public CommonResult<List<String>> getDelegationProcessSimpleList(@RequestParam("id") Long id) {
+        List<FlowLogDO> list = delegationService.getDelegationProcessList(id);
+        return success(FlowLogConvert.INSTANCE.convertListToString(list));
     }
 
     @GetMapping("/page")
