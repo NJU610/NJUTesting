@@ -212,7 +212,7 @@ public class DelegationServiceImpl implements DelegationService {
         // 保存日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS,
-                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核了委托，审核通过",
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核委托通过",
                 new HashMap<String, Object>(){{put("delegation", delegation);}});
 
 
@@ -243,7 +243,7 @@ public class DelegationServiceImpl implements DelegationService {
         // 保存日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION, DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_SUCCESS,
-                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核了委托，审核通过",
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核委托通过",
                 new HashMap<String, Object>(){{put("delegation", delegation);}});
 
 

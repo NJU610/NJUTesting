@@ -104,11 +104,12 @@ public class ContractServiceImpl implements ContractService {
                 DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT,
                 DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL);
         // 更新状态
+        DelegationStateEnum oldState = DelegationStateEnum.getByState(delegation.getState());
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
         // 更新日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
-                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT, DelegationStateEnum.CLIENT_AUDIT_CONTRACT,
+                oldState, DelegationStateEnum.CLIENT_AUDIT_CONTRACT,
                 "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 起草了合同，用户检查中",
                 new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
@@ -123,9 +124,21 @@ public class ContractServiceImpl implements ContractService {
                 DelegationStateEnum.CLIENT_WRITING_CONTRACT,
                 DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL);
         // 更新状态
+        DelegationStateEnum oldEnum = DelegationStateEnum.getByState(delegation.getState());
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        String remark;
+        assert oldEnum != null;
+        if (Objects.equals(oldEnum.getState(), DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState())) {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "提交了合同，市场部审核中";
+        } else {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "重新提交了合同，市场部审核中";
+        }
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                oldEnum, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT,
+                remark,
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
@@ -140,6 +153,10 @@ public class ContractServiceImpl implements ContractService {
         delegation.setState(DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState());
         delegationMapper.updateById(delegation);
         // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CLIENT_AUDIT_CONTRACT, DelegationStateEnum.CLIENT_WRITING_CONTRACT,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 接受合同草稿，填写合同中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
@@ -158,8 +175,8 @@ public class ContractServiceImpl implements ContractService {
         delegationMapper.updateById(delegation);
         // 更新日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
-                DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT, DelegationStateEnum.CLIENT_AUDIT_CONTRACT,
-                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 不接受合同，市场部修改中",
+                DelegationStateEnum.CLIENT_AUDIT_CONTRACT, DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 不接受合同，原因：" + contract.getClientRemark() + "。 市场部修改中",
                 new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
@@ -177,7 +194,11 @@ public class ContractServiceImpl implements ContractService {
         // 更新状态
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核合同不通过，原因：" + contract.getStaffRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
@@ -192,7 +213,11 @@ public class ContractServiceImpl implements ContractService {
         delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_SUCCESS.getState());
         delegation.setState(DelegationStateEnum.CONTRACT_SIGNING.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT, DelegationStateEnum.CONTRACT_SIGNING,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核合同通过",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
@@ -208,9 +233,20 @@ public class ContractServiceImpl implements ContractService {
         contractMapper.updateById(updateObj);
         // 更新状态
         delegation.setState(DelegationStateEnum.CONTRACT_SIGN_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGNING, DelegationStateEnum.CONTRACT_SIGN_SUCCESS,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 已上传合同扫描件，合同签署成功",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
         delegation.setState(DelegationStateEnum.CLIENT_SENDING_SAMPLE.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGN_SUCCESS, DelegationStateEnum.CLIENT_SENDING_SAMPLE,
+                "等待用户发送样品",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 
     @Override
