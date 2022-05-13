@@ -41,6 +41,18 @@ public enum DelegationStateEnum {
     QUALITY_DEPT_AUDIT_TEST_SOLUTION_FAIL(320, "测试方案审核未通过，测试部修改测试方案中"),
     QUALITY_DEPT_AUDIT_TEST_SOLUTION_SUCCESS(330, "测试方案审核通过"),
     TESTING_DEPT_WRITING_TEST_REPORT(340, "测试部测试进行中，填写测试文档"),
+    TESTING_DEPT_GENERATE_TEST_REPORT(350, "测试部测试完成，生成测试报告"),
+    TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT(360, "测试部主管审核测试报告中"),
+    TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL(370, "测试部主管测试报告审核未通过，测试部修改测试文档中"),
+    TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS(380, "测试部主管测试报告审核通过，用户审核中"),
+    CLIENT_AUDIT_TEST_REPORT_FAIL(390, "用户审核测试报告未通过，测试部修改测试文档中"),
+    CLIENT_AUDIT_TEST_REPORT_SUCCESS(400, "用户审核测试报告通过，授权签字人审核测试报告中"),
+    SIGNATORY_AUDIT_TEST_REPORT_FAIL(410, "授权签字人测试报告审核未通过，测试部修改测试文档中"),
+    SIGNATORY_AUDIT_TEST_REPORT_SUCCESS(420, "授权签字人测试报告审核通过"),
+    TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE(430, "测试部测试文档归档，处理样品中"),
+    MARKETING_DEPT_SEND_TEST_REPORT(440, "市场部发送测试报告中"),
+    WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT(450, "等待客户接收测试报告中"),
+    CLIENT_CONFIRM_RECEIVE_TEST_REPORT(460, "客户确认接收测试报告"),
 
     ;
 

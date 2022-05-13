@@ -178,7 +178,7 @@ public class SampleServiceImpl implements SampleService {
         }
         // 更新
         SampleDO updateObj = SampleConvert.INSTANCE.convert(auditReqVO);
-        updateObj.setVerifyId(loginUserId);
+        updateObj.setAuditorId(loginUserId);
         if (success) {
             updateObj.setState(SampleStateEnum.VERIFIED.getState());
         } else {
