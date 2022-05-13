@@ -1,7 +1,8 @@
 package cn.iocoder.yudao.module.system.convert.flow;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
+import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,23 +13,21 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 import java.util.Map;
 
-import static cn.hutool.core.bean.BeanUtil.copyProperties;
-
 /**
  *  Convert
  *
- * @author 芋道源码
+ * @author qjy
  */
 @Mapper
 public interface FlowLogConvert {
 
     FlowLogConvert INSTANCE = Mappers.getMapper(FlowLogConvert.class);
 
-    default List<FlowLogInstanceResponseVO> convertList(List<FlowLogDO> list) {
-        return list.stream().map(this::convert).collect(java.util.stream.Collectors.toList());
+    default List<FlowLogInstanceResponseVO> convertInstanceList(List<FlowLogDO> list) {
+        return list.stream().map(this::convertInstance).collect(java.util.stream.Collectors.toList());
     }
 
-    default FlowLogInstanceResponseVO convert(FlowLogDO flowLogDO) {
+    default FlowLogInstanceResponseVO convertInstance(FlowLogDO flowLogDO) {
         try {
             return BeanUtil
                     .copyProperties(flowLogDO, FlowLogInstanceResponseVO.class, "mapValue")
@@ -38,7 +37,26 @@ public interface FlowLogConvert {
         }
     }
 
+    FlowLogDO convert(FlowLogCreateReqVO bean);
+
+    FlowLogDO convert(FlowLogUpdateReqVO bean);
+
+    FlowLogRespVO convert(FlowLogDO bean);
+
+    List<FlowLogRespVO> convertList(List<FlowLogDO> list);
+
+    PageResult<FlowLogRespVO> convertPage(PageResult<FlowLogDO> page);
+
+    List<FlowLogExcelVO> convertList02(List<FlowLogDO> list);
+
     default List<String> convertListToString(List<FlowLogDO> list) {
         return list.stream().map(FlowLogDO::getRemark).collect(java.util.stream.Collectors.toList());
+    }
+
+    default FlowLogSimpleResponseVO convertSimple(FlowLogDO list) {
+        return BeanUtil.copyProperties(list, FlowLogSimpleResponseVO.class);
+    }
+    default List<FlowLogSimpleResponseVO> convertSimpleList(List<FlowLogDO> list){
+        return list.stream().map(this::convertSimple).collect(java.util.stream.Collectors.toList());
     }
 }

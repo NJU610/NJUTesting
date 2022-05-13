@@ -6,6 +6,7 @@ import cn.iocoder.yudao.framework.excel.core.util.ExcelUtils;
 import cn.iocoder.yudao.framework.operatelog.core.annotations.OperateLog;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
 import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
+import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogSimpleResponseVO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
 import cn.iocoder.yudao.module.system.convert.flow.FlowLogConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
@@ -253,16 +254,16 @@ public class DelegationController {
     @ApiImplicitParam(name = "id", value = "委托编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<List<FlowLogInstanceResponseVO>> getDelegationProcessList(@RequestParam("id") Long id) {
         List<FlowLogDO> list = delegationService.getDelegationProcessList(id);
-        return success(FlowLogConvert.INSTANCE.convertList(list));
+        return success(FlowLogConvert.INSTANCE.convertInstanceList(list));
     }
 
     @GetMapping("/get-process-simple-list")
     @ApiOperation(value = "获得委托流程简略列表",
-            notes = "获得委托的流程列表。返回值为委托流程简略列表。只包含日志信息remark")
+            notes = "获得委托的流程列表。返回值为委托流程简略列表。只包含日志信息remark与时间，编号")
     @ApiImplicitParam(name = "id", value = "委托编号", required = true, example = "1024", dataTypeClass = Long.class)
-    public CommonResult<List<String>> getDelegationProcessSimpleList(@RequestParam("id") Long id) {
+    public CommonResult<List<FlowLogSimpleResponseVO>> getDelegationProcessSimpleList(@RequestParam("id") Long id) {
         List<FlowLogDO> list = delegationService.getDelegationProcessList(id);
-        return success(FlowLogConvert.INSTANCE.convertListToString(list));
+        return success(FlowLogConvert.INSTANCE.convertSimpleList(list));
     }
 
     @GetMapping("/page")

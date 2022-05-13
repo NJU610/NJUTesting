@@ -158,4 +158,7 @@ public interface ErrorCodeConstants {
     ErrorCode REPORT_NOT_EXISTS = new ErrorCode(1002027000, "测试报告不存在");
     ErrorCode REPORT_TABLE_NOT_FILLED = new ErrorCode(1002027001, "测试报告相关表格未填写");
 
+    // ========== 流程日志 1002028000 ==========
+    ErrorCode FLOW_LOG_NOT_EXISTS = new ErrorCode(1002028000, "流程日志不存在");
+
 }
