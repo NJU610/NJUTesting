@@ -98,8 +98,11 @@ public class ContractServiceImpl implements ContractService {
     public void submitContractStaff(ContractSubmitReqVO submitReqVO) {
         // 校验合同是否存在
         Long contractId = submitReqVO.getId();
-        this.validateContractExists(contractId);
+        ContractDO contract = this.validateContractExists(contractId);
         // 校验状态
+        if (contract.getTable4Id() == null || contract.getTable5Id() == null) {
+            throw exception(CONTRACT_TABLE_NOT_FILLED);
+        }
         DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
                 DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT,
                 DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL);
