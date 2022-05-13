@@ -1,7 +1,6 @@
 package cn.iocoder.yudao.module.system.dal.dataobject.sample;
 
 import lombok.*;
-import java.util.*;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
 
@@ -43,7 +42,7 @@ public class SampleDO extends BaseDO {
     /**
      * 审核人id，只能为选定的市场部或者测试部两个人中的一个
      */
-    private Long verifyId;
+    private Long auditorId;
     /**
      * 审核意见
      */

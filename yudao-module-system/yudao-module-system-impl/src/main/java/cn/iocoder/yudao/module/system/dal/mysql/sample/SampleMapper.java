@@ -23,7 +23,7 @@ public interface SampleMapper extends BaseMapperX<SampleDO> {
                 .eqIfPresent(SampleDO::getProcessType, reqVO.getProcessType())
                 .eqIfPresent(SampleDO::getUrl, reqVO.getUrl())
                 .eqIfPresent(SampleDO::getInformation, reqVO.getInformation())
-                .eqIfPresent(SampleDO::getVerifyId, reqVO.getVerifyId())
+                .eqIfPresent(SampleDO::getAuditorId, reqVO.getVerifyId())
                 .eqIfPresent(SampleDO::getState, reqVO.getState())
                 .betweenIfPresent(SampleDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
                 .orderByDesc(SampleDO::getId));
@@ -35,7 +35,7 @@ public interface SampleMapper extends BaseMapperX<SampleDO> {
                 .eqIfPresent(SampleDO::getProcessType, reqVO.getProcessType())
                 .eqIfPresent(SampleDO::getUrl, reqVO.getUrl())
                 .eqIfPresent(SampleDO::getInformation, reqVO.getInformation())
-                .eqIfPresent(SampleDO::getVerifyId, reqVO.getVerifyId())
+                .eqIfPresent(SampleDO::getAuditorId, reqVO.getVerifyId())
                 .eqIfPresent(SampleDO::getState, reqVO.getState())
                 .betweenIfPresent(SampleDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
                 .orderByDesc(SampleDO::getId));
