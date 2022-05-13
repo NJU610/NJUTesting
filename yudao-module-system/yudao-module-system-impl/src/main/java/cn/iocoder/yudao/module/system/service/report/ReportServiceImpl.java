@@ -4,6 +4,9 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
+import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
+import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +20,7 @@ import cn.iocoder.yudao.module.system.convert.report.ReportConvert;
 import cn.iocoder.yudao.module.system.dal.mysql.report.ReportMapper;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -36,6 +40,13 @@ public class ReportServiceImpl implements ReportService {
 
     @Resource
     private TableMongoRepository tableMongoRepository;
+
+    @Resource
+    @Lazy
+    private FlowLogService flowLogService;
+
+    @Resource
+    private AdminUserService userService;
 
     @Override
     public Long createReport(ReportCreateReqVO createReqVO) {
@@ -141,9 +152,20 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL,
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL);
         // 更新状态
+        DelegationStateEnum fromState = DelegationStateEnum.getByState(delegation.getState());
+        // delegation.setState(DelegationStateEnum.TESTING_DEPT_GENERATE_TEST_REPORT.getState());
         delegation.setState(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                fromState, DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 提交了测试报告，测试部主管审核中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", report);
+                    }
+                });
     }
 
     @Override
@@ -155,7 +177,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
+                DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
+                "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过，客户审核中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
@@ -167,7 +199,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
+                DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL,
+                "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过，测试部修改测试文档中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
@@ -179,7 +221,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
+                DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过，授权签字人审核测试报告中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
@@ -191,7 +243,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
+                DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过，测试部修改测试文档中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
@@ -199,12 +261,36 @@ public class ReportServiceImpl implements ReportService {
         // 审核报告
         Long reportId = acceptReqVO.getId();
         String remark = acceptReqVO.getRemark();
+        ReportDO report = this.validateReportExists(reportId);
         DelegationDO delegation = this.auditReportSignatory(reportId, remark);
-        // 连续更新状态
+        // 更新状态
         delegation.setState(DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
+                DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS,
+                "授权签字人：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过。",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", report);
+                    }
+                });
+        // 更新状态
         delegation.setState(DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS,
+                DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE,
+                "测试部测试文档归档，处理样品中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", report);
+                    }
+                });
     }
 
     @Override
@@ -216,7 +302,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
+                DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL,
+                "授权签字人：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过， 测试部修改测试文档中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
@@ -230,7 +326,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE,
+                DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT,
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() + "归档测试报告并处理样品完成，市场部发送测试报告中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", report);
+                    }
+                });
     }
 
     @Override
@@ -244,7 +350,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT,
+                DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + "发送测试报告，等待客户接收测试报告中",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
@@ -258,7 +374,17 @@ public class ReportServiceImpl implements ReportService {
         // 更新状态
         delegation.setState(DelegationStateEnum.CLIENT_CONFIRM_RECEIVE_TEST_REPORT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT,
+                DelegationStateEnum.CLIENT_CONFIRM_RECEIVE_TEST_REPORT,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 确认接收测试报告",
+                new HashMap<String, Object>(){
+                    {
+                        put("delegation", delegation);
+                        put("report", reportMapper.selectById(reportId));
+                    }
+                });
     }
 
     @Override
