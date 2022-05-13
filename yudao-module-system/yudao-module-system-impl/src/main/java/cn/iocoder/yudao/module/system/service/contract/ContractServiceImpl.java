@@ -240,12 +240,12 @@ public class ContractServiceImpl implements ContractService {
                 "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 已上传合同扫描件，合同签署成功",
                 new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
 
-        delegation.setState(DelegationStateEnum.CLIENT_SENDING_SAMPLE.getState());
+        delegation.setState(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
         delegationMapper.updateById(delegation);
         // 更新日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
-                DelegationStateEnum.CONTRACT_SIGN_SUCCESS, DelegationStateEnum.CLIENT_SENDING_SAMPLE,
-                "等待用户发送样品",
+                DelegationStateEnum.CONTRACT_SIGN_SUCCESS, DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO,
+                "测试中心：等待用户上传样品中",
                 new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
     }
 

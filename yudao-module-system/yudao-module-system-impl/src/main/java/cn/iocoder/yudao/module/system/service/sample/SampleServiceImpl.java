@@ -5,6 +5,9 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.enums.sample.SampleStateEnum;
+import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
+import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +21,7 @@ import cn.iocoder.yudao.module.system.convert.sample.SampleConvert;
 import cn.iocoder.yudao.module.system.dal.mysql.sample.SampleMapper;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -35,23 +39,32 @@ public class SampleServiceImpl implements SampleService {
     @Resource
     private DelegationMapper delegationMapper;
 
+    @Lazy
+    @Resource
+    private FlowLogService flowLogService;
+
+    @Resource
+    private AdminUserService userService;
+
     @Override
     public Long createSample(SampleCreateReqVO createReqVO) {
         // 校验委托存在
         Long delegationId = createReqVO.getDelegationId();
         DelegationDO delegation = delegationMapper
-                .validateDelegationState(delegationId, DelegationStateEnum.CLIENT_SENDING_SAMPLE);
+                .validateDelegationState(delegationId, DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO);
         // 插入
         SampleDO sample = SampleConvert.INSTANCE.convert(createReqVO);
-        sample.setState(SampleStateEnum.SENT.getState());
+        sample.setState(SampleStateEnum.UNSENT.getState());
         sampleMapper.insert(sample);
         Long sampleId = sample.getId();
         // 更新委托
         delegation.setSampleId(sampleId);
-        delegation.setState(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
-        delegation.setState(DelegationStateEnum.CHECKING_SAMPLE.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+//        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+//                DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO, DelegationStateEnum.CHECKING_SAMPLE,
+//                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 上传了样品，测试部/市场部验收样品中",
+//                new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sample);}});
         // 返回
         return sampleId;
     }
@@ -70,45 +83,59 @@ public class SampleServiceImpl implements SampleService {
         // 校验存在和状态
         SampleDO sample = this.validateSampleState(submitReqVO.getId(), SampleStateEnum.UNSENT);
         DelegationDO delegation = delegationMapper.validateDelegationStateBySample(submitReqVO.getId(),
-                DelegationStateEnum.CLIENT_SENDING_SAMPLE,
-                DelegationStateEnum.SAMPLE_CHECK_FAIL_RESENDING_SAMPLE,
-                DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE_INFO);
+                DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO, DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE);
+        DelegationStateEnum oldState = DelegationStateEnum.getByState(delegation.getState());
         // 更新状态
         sample.setState(SampleStateEnum.SENT.getState());
         sampleMapper.updateById(sample);
         delegation.setState(DelegationStateEnum.CHECKING_SAMPLE.getState());
         delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                oldState, DelegationStateEnum.CHECKING_SAMPLE,
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 上传了样品，测试部/市场部验收样品中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sample);}});
     }
 
     @Override
     public void auditSampleSuccess(SampleAuditReqVO auditReqVO) {
         // 审核
         DelegationDO delegation = this.auditSample(auditReqVO, true);
+        SampleDO sample = sampleMapper.selectById(delegation.getSampleId());
         // 更新委托
         delegation.setState(DelegationStateEnum.SAMPLE_CHECK_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CHECKING_SAMPLE, DelegationStateEnum.SAMPLE_CHECK_SUCCESS,
+                (Objects.equals(delegation.getTestingDeptStaffId(), getLoginUserId()) ? "测试部：" : "市场部：") +
+                        userService.getUser(getLoginUserId()).getNickname() + " 审核通过",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sampleMapper.selectById(sample));}});
+
         delegation.setState(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.SAMPLE_CHECK_SUCCESS, DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION,
+                "测试部：" + userService.getUser(delegation.getTestingDeptStaffId()).getNickname() + " 编写测试方案中",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
     }
 
-    @Override
-    public void auditSampleFailResend(SampleAuditReqVO auditReqVO) {
-        // 审核
-        DelegationDO delegation = this.auditSample(auditReqVO, false);
-        // 更新委托
-        delegation.setState(DelegationStateEnum.SAMPLE_CHECK_FAIL_RESENDING_SAMPLE.getState());
-        delegationMapper.updateById(delegation);
-        // TODO 更新日志
-    }
 
     @Override
-    public void auditSampleFailModify(SampleAuditReqVO auditReqVO) {
+    public void auditSampleFail(SampleAuditReqVO auditReqVO) {
         // 审核
         DelegationDO delegation = this.auditSample(auditReqVO, false);
+        SampleDO sample = sampleMapper.selectById(delegation.getSampleId());
         // 更新委托
-        delegation.setState(DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE_INFO.getState());
+        delegation.setState(DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE.getState());
         delegationMapper.updateById(delegation);
-        // TODO 更新日志
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CHECKING_SAMPLE, DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE,
+                (Objects.equals(delegation.getTestingDeptStaffId(), getLoginUserId()) ? "测试部：" : "市场部：") +
+                        userService.getUser(getLoginUserId()).getNickname() + " 审核不通过，请重新修改",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sampleMapper.selectById(sample));}});
     }
 
     @Override

@@ -41,20 +41,12 @@ public interface SampleService {
      * @param auditReqVO 验收信息
      */
     void auditSampleSuccess(@Valid SampleAuditReqVO auditReqVO);
-
     /**
-     * 样品验收不通过，用户重新发送样品中
+     * 样品验收不通过，用户修改中
      *
      * @param auditReqVO 验收信息
      */
-    void auditSampleFailResend(@Valid SampleAuditReqVO auditReqVO);
-
-    /**
-     * 样品验收不通过，用户修改样品信息中
-     *
-     * @param auditReqVO 验收信息
-     */
-    void auditSampleFailModify(@Valid SampleAuditReqVO auditReqVO);
+    void auditSampleFail(SampleAuditReqVO auditReqVO);
 
     /**
      * 删除样品

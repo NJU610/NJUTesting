@@ -65,19 +65,11 @@ public class SampleController {
         return success(true);
     }
 
-    @PutMapping("/audit/fail/resend")
-    @ApiOperation(value = "市场部/测试部负责人-样品验收不通过，用户重新发送样品中",
+    @PutMapping("/audit/fail")
+    @ApiOperation(value = "市场部/测试部负责人-样品验收不通过，用户修改中",
             notes = "需要传入id和remark字段。id为样品编号，remark为审核意见。返回值为是否更新成功。")
     public CommonResult<Boolean> auditSampleFailResend(@Valid @RequestBody SampleAuditReqVO auditReqVO) {
-        sampleService.auditSampleFailResend(auditReqVO);
-        return success(true);
-    }
-
-    @PutMapping("/audit/fail/modify")
-    @ApiOperation(value = "市场部/测试部负责人-样品验收不通过，用户修改样品信息中",
-            notes = "需要传入id和remark字段。id为样品编号，remark为审核意见。返回值为是否更新成功。")
-    public CommonResult<Boolean> auditSampleFailModify(@Valid @RequestBody SampleAuditReqVO auditReqVO) {
-        sampleService.auditSampleFailModify(auditReqVO);
+        sampleService.auditSampleFail(auditReqVO);
         return success(true);
     }
 
