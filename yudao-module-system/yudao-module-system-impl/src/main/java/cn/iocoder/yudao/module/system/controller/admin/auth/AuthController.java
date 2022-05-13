@@ -82,7 +82,7 @@ public class AuthController {
     }
 
     @PostMapping("/send-sms-code")
-    @ApiOperation(value = "发送手机验证码", notes = "发送手机验证码, 注册账号，忘记密码，手机验证登录时使用")
+    @ApiOperation(value = "发送手机验证码", notes = "发送手机验证码, 注册账号，忘记密码，手机验证登录时使用。测试环境默认为9999，使用时直接填入9999即可")
     @OperateLog(enable = false) // 避免 Post 请求被记录操作日志
     public CommonResult<Boolean> sendSmsCode(@RequestBody @Valid AuthSendSmsReqVO reqVO) {
         authService.sendSmsCode(getLoginUserId(), reqVO);

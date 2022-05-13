@@ -5,6 +5,9 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
+import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
+import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +21,7 @@ import cn.iocoder.yudao.module.system.convert.solution.SolutionConvert;
 import cn.iocoder.yudao.module.system.dal.mysql.solution.SolutionMapper;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -37,6 +41,30 @@ public class SolutionServiceImpl implements SolutionService {
 
     @Resource
     private TableMongoRepository tableMongoRepository;
+
+    @Resource
+    @Lazy
+    private FlowLogService flowLogService;
+
+    @Resource
+    private AdminUserService userService;
+
+
+    @Override
+    public Long createSolution(SolutionCreateReqVO createReqVO) {
+        // 校验委托存在
+        Long delegationId = createReqVO.getDelegationId();
+        DelegationDO delegation = delegationMapper
+                .validateDelegationState(delegationId, DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION);
+        // 插入
+        SolutionDO solution = SolutionConvert.INSTANCE.convert(createReqVO);
+        solutionMapper.insert(solution);
+        Long solutionId = solution.getId();
+        // 更新委托
+        delegation.setSolutionId(solutionId);
+        delegationMapper.updateById(delegation);
+        return solutionId;
+    }
 
     @Override
     public void saveSolutionTable6(SolutionSaveTableReqVO saveReqVO) {
@@ -78,31 +106,54 @@ public class SolutionServiceImpl implements SolutionService {
         DelegationDO delegation = delegationMapper.validateDelegationStateBySolution(solutionId,
                 DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION,
                 DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION_FAIL);
+        DelegationStateEnum oldState = DelegationStateEnum.getByState(delegation.getState());
         // 更新状态
         delegation.setState(DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                oldState, DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION,
+                "测试部：" + userService.getUser(getLoginUserId()).getNickname() +
+                        (Objects.equals(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION, oldState) ? " 提交了测试方案，质量部审核中" : "重新修改了测试方案，质量部审核中"),
+                new HashMap<String, Object>(){{put("delegation", delegation);put("solution", solution);}});
     }
 
     @Override
     public void auditSuccess(SolutionSubmitReqVO submitReqVO) {
         // 校验状态
         DelegationDO delegation = auditSolution(submitReqVO);
+        SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
         // 连续更新状态
         delegation.setState(DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION, DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION_SUCCESS,
+                "质量部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试方案通过",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("solution", solution);}});
+
         delegation.setState(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION_SUCCESS, DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT,
+                "测试部：" + userService.getUser(delegation.getTestingDeptStaffId()).getNickname() + " 进行测试中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("solution", solution);}});
     }
 
     @Override
     public void auditFail(SolutionSubmitReqVO submitReqVO) {
         // 校验状态
         DelegationDO delegation = auditSolution(submitReqVO);
+        SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
         // 更新状态
         delegation.setState(DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION_FAIL.getState());
         delegationMapper.updateById(delegation);
-        // TODO 保存日志
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION, DelegationStateEnum.QUALITY_DEPT_AUDIT_TEST_SOLUTION_FAIL,
+                "质量部：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试方案不通过，测试部重新修改中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("solution", solution);}});
     }
 
     @Override

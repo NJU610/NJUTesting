@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.controller.admin.solution;
 
+import cn.iocoder.yudao.module.system.controller.admin.sample.vo.SampleCreateReqVO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +35,13 @@ public class SolutionController {
 
     @Resource
     private SolutionService solutionService;
+
+    @PostMapping("/create")
+    @ApiOperation(value = "测试部人员-创建测试方案",
+            notes = "测试部人员首次创建测试方案时调用，之后修改测试方案时调用update和submit接口。返回值为测试方案编号。")
+    public CommonResult<Long> createSolution(@Valid @RequestBody SolutionCreateReqVO createReqVO) {
+        return success(solutionService.createSolution(createReqVO));
+    }
 
     @PutMapping("/save/table6")
     @ApiOperation(value = "测试部人员-保存软件测试方案表格",

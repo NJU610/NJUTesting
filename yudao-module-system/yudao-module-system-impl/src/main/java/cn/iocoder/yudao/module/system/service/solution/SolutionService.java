@@ -16,6 +16,13 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 public interface SolutionService {
 
     /**
+     * 创建测试方案
+     * @param createReqVO
+     * @return
+     */
+    Long createSolution(SolutionCreateReqVO createReqVO);
+
+    /**
      * 保存软件测试方案表格
      *
      * @param saveReqVO 填写信息
