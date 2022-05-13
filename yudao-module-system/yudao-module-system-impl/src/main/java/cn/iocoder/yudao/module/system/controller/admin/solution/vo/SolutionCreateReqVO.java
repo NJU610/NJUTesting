@@ -7,8 +7,8 @@ import javax.validation.constraints.*;
 
 @ApiModel("管理后台 - 测试方案创建 Request VO")
 @Data
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-public class SolutionCreateReqVO extends SolutionBaseVO {
-
+public class SolutionCreateReqVO{
+    @ApiModelProperty(value = "委托编号", example = "1", required = true)
+    @NotNull(message = "委托编号不能为空")
+    private Long delegationId;
 }

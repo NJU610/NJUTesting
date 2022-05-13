@@ -93,7 +93,9 @@ public class SampleServiceImpl implements SampleService {
         // 更新日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 oldState, DelegationStateEnum.CHECKING_SAMPLE,
-                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 上传了样品，测试部/市场部验收样品中",
+                "客户：" + userService.getUser(getLoginUserId()).getNickname() + " " +
+                        (Objects.equals(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO, oldState) ? "" : "重新") +
+                        "上传了样品，测试部/市场部验收样品中",
                 new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sample);}});
     }
 
@@ -109,7 +111,7 @@ public class SampleServiceImpl implements SampleService {
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 DelegationStateEnum.CHECKING_SAMPLE, DelegationStateEnum.SAMPLE_CHECK_SUCCESS,
                 (Objects.equals(delegation.getTestingDeptStaffId(), getLoginUserId()) ? "测试部：" : "市场部：") +
-                        userService.getUser(getLoginUserId()).getNickname() + " 审核通过",
+                        userService.getUser(getLoginUserId()).getNickname() + " 审核样品通过",
                 new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sampleMapper.selectById(sample));}});
 
         delegation.setState(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION.getState());
@@ -134,7 +136,7 @@ public class SampleServiceImpl implements SampleService {
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 DelegationStateEnum.CHECKING_SAMPLE, DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE,
                 (Objects.equals(delegation.getTestingDeptStaffId(), getLoginUserId()) ? "测试部：" : "市场部：") +
-                        userService.getUser(getLoginUserId()).getNickname() + " 审核不通过，请重新修改",
+                        userService.getUser(getLoginUserId()).getNickname() + " 审核样品不通过，请重新修改，原因：" + auditReqVO.getRemark(),
                 new HashMap<String, Object>(){{put("delegation", delegation);put("sample", sampleMapper.selectById(sample));}});
     }
 
