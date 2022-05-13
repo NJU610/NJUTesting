@@ -154,4 +154,7 @@ public interface ErrorCodeConstants {
     ErrorCode SOLUTION_TABLE6_NOT_FILLED = new ErrorCode(1002026001, "软件测试方案未填写");
     ErrorCode SOLUTION_TABLE13_NOT_FILLED = new ErrorCode(1002026002, "测试方案评审表未填写");
 
+    // ========== 流程日志 1002028000 ==========
+    ErrorCode FLOW_LOG_NOT_EXISTS = new ErrorCode(1002028000, "流程日志不存在");
+
 }
