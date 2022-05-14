@@ -12,6 +12,7 @@ import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -429,22 +430,22 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
-    public String getDelegationTable2(String id) {
+    public JSONObject getDelegationTable2(String id) {
         return tableMongoRepository.get("table2", id);
     }
 
     @Override
-    public String getDelegationTable3(String id) {
+    public JSONObject getDelegationTable3(String id) {
         return tableMongoRepository.get("table3", id);
     }
 
     @Override
-    public String getDelegationTable14(String id) {
+    public JSONObject getDelegationTable14(String id) {
         return tableMongoRepository.get("table14", id);
     }
 
     @Override
-    public String getOffer(String id) {
+    public JSONObject getOffer(String id) {
         return tableMongoRepository.get("offer", id);
     }
 

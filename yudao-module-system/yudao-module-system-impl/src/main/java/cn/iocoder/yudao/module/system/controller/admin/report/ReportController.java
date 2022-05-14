@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.controller.admin.report;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -170,7 +171,7 @@ public class ReportController {
     @ApiOperation(value = "获得软件测试报告",
             notes = "需要填写id字段。其中id为表格编号，从测试报告的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
-    public CommonResult<String> getReportTable7(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getReportTable7(@RequestParam("id") String id) {
         return success(reportService.getReportTable("table7", id));
     }
 
@@ -178,7 +179,7 @@ public class ReportController {
     @ApiOperation(value = "获得测试用例（电子记录）",
             notes = "需要填写id字段。其中id为表格编号，从测试报告的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
-    public CommonResult<String> getReportTable8(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getReportTable8(@RequestParam("id") String id) {
         return success(reportService.getReportTable("table8", id));
     }
 
@@ -186,7 +187,7 @@ public class ReportController {
     @ApiOperation(value = "获得软件测试记录（电子记录）",
             notes = "需要填写id字段。其中id为表格编号，从测试报告的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
-    public CommonResult<String> getReportTable9(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getReportTable9(@RequestParam("id") String id) {
         return success(reportService.getReportTable("table9", id));
     }
 
@@ -194,7 +195,7 @@ public class ReportController {
     @ApiOperation(value = "获得测试报告检查表",
             notes = "需要填写id字段。其中id为表格编号，从测试报告的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
-    public CommonResult<String> getReportTable10(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getReportTable10(@RequestParam("id") String id) {
         return success(reportService.getReportTable("table10", id));
     }
 
@@ -202,7 +203,7 @@ public class ReportController {
     @ApiOperation(value = "获得软件测试问题清单（电子记录）",
             notes = "需要填写id字段。其中id为表格编号，从测试报告的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
-    public CommonResult<String> getReportTable11(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getReportTable11(@RequestParam("id") String id) {
         return success(reportService.getReportTable("table11", id));
     }
 

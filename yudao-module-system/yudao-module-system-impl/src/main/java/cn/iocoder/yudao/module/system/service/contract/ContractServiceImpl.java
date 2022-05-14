@@ -6,6 +6,7 @@ import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -281,12 +282,12 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public String getContractTable4(String id) {
+    public JSONObject getContractTable4(String id) {
         return tableMongoRepository.get("table4", id);
     }
 
     @Override
-    public String getContractTable5(String id) {
+    public JSONObject getContractTable5(String id) {
         return tableMongoRepository.get("table5", id);
     }
 

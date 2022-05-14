@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.system.service.report;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.system.controller.admin.report.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.report.ReportDO;
+import com.alibaba.fastjson.JSONObject;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -149,7 +150,7 @@ public interface ReportService {
      * @param tableName 表名
      * @param tableId 编号
      */
-    String getReportTable(String tableName, String tableId);
+    JSONObject getReportTable(String tableName, String tableId);
 
     /**
      * 获得测试报告列表

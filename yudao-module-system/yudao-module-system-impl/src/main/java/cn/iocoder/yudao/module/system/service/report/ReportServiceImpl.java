@@ -6,6 +6,7 @@ import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -454,7 +455,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String getReportTable(String tableName, String tableId) {
+    public JSONObject getReportTable(String tableName, String tableId) {
         return tableMongoRepository.get(tableName, tableId);
     }
 

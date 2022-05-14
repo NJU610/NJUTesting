@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.system.controller.admin.solution;
 
 import cn.iocoder.yudao.module.system.controller.admin.sample.vo.SampleCreateReqVO;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -86,14 +87,14 @@ public class SolutionController {
     @GetMapping("/get/table6")
     @ApiOperation(value = "获得软件测试方案表格",
             notes = "需要填写id字段。其中id为表格编号，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
-    public CommonResult<String> getSolutionTable6(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getSolutionTable6(@RequestParam("id") String id) {
         return success(solutionService.getSolutionTable6(id));
     }
 
     @GetMapping("/get/table13")
     @ApiOperation(value = "获得测试方案评审表",
             notes = "需要填写id字段。其中id为表格编号，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
-    public CommonResult<String> getSolutionTable13(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getSolutionTable13(@RequestParam("id") String id) {
         return success(solutionService.getSolutionTable13(id));
     }
 

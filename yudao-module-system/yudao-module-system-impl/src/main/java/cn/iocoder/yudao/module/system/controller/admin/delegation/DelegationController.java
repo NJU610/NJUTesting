@@ -12,6 +12,7 @@ import cn.iocoder.yudao.module.system.convert.flow.FlowLogConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.service.delegation.DelegationService;
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -211,7 +212,7 @@ public class DelegationController {
     @ApiOperation(value = "获得软件项目委托测试申请表",
             notes = "需要填写id字段。其中id为表格id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
-    public CommonResult<String> getDelegationTable2(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getDelegationTable2(@RequestParam("id") String id) {
         return success(delegationService.getDelegationTable2(id));
     }
 
@@ -219,7 +220,7 @@ public class DelegationController {
     @ApiOperation(value = "获得委托测试软件功能列表",
             notes = "需要填写id字段。其中id为表格id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
-    public CommonResult<String> getDelegationTable3(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getDelegationTable3(@RequestParam("id") String id) {
         return success(delegationService.getDelegationTable3(id));
     }
 
@@ -227,7 +228,7 @@ public class DelegationController {
     @ApiOperation(value = "获得软件文档评审表",
             notes = "需要填写id字段。其中id为表格id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
-    public CommonResult<String> getDelegationTable14(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getDelegationTable14(@RequestParam("id") String id) {
         return success(delegationService.getDelegationTable14(id));
     }
 
@@ -235,7 +236,7 @@ public class DelegationController {
     @ApiOperation(value = "获得报价单",
             notes = "需要填写id字段。其中id为报价单id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
-    public CommonResult<String> getOffer(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getOffer(@RequestParam("id") String id) {
         return success(delegationService.getOffer(id));
     }
 

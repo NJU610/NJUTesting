@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.system.dal.mongo.table;
 
 import cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoQueryDO;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -62,22 +63,17 @@ public class TableMongoRepository {
         mongoTemplate.updateFirst(query, update, tableName);
     }
 
-    public String get(String tableName, String tableId) {
+    public JSONObject get(String tableName, String tableId) {
         // 校验存在
-        this.validateTableExists(tableName, tableId);
-        // 查询
-        Query query = new Query();
-        query.addCriteria(new Criteria().andOperator(
-                Criteria.where("_id").is(tableId)
-        ));
-        return mongoTemplate.findOne(query, String.class, tableName);
+        return this.validateTableExists(tableName, tableId);
     }
 
-    private void validateTableExists(String tableName, String tableId) {
-        TableMongoQueryDO obj = mongoTemplate.findById(tableId, TableMongoQueryDO.class, tableName);
-        if (obj == null || obj.getDeleted()) {
+    private JSONObject validateTableExists(String tableName, String tableId) {
+        JSONObject obj = mongoTemplate.findById(tableId, JSONObject.class, tableName);
+        if (obj == null || obj.getBoolean("deleted")) {
             throw exception(TABLE_NOT_EXISTS);
         }
+        return obj;
     }
 
 }

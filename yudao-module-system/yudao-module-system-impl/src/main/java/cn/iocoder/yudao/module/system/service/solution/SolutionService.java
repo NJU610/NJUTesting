@@ -7,6 +7,7 @@ import cn.iocoder.yudao.module.system.controller.admin.contract.vo.ContractSaveT
 import cn.iocoder.yudao.module.system.controller.admin.solution.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.solution.SolutionDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 测试方案 Service 接口
@@ -63,7 +64,7 @@ public interface SolutionService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getSolutionTable6(String id);
+    JSONObject getSolutionTable6(String id);
 
     /**
      * 获取测试方案评审表
@@ -71,7 +72,7 @@ public interface SolutionService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getSolutionTable13(String id);
+    JSONObject getSolutionTable13(String id);
 
     /**
      * 更新测试方案

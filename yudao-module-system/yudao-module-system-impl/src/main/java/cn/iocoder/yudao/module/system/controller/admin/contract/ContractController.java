@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.controller.admin.contract;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -124,7 +125,7 @@ public class ContractController {
     @ApiOperation(value = "获得软件委托测试合同",
             notes = "需要填写id字段。其中id为表格id，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
-    public CommonResult<String> getContractTable4(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getContractTable4(@RequestParam("id") String id) {
         return success(contractService.getContractTable4(id));
     }
 
@@ -132,7 +133,7 @@ public class ContractController {
     @ApiOperation(value = "获得软件项目委托测试保密协议",
             notes = "需要填写id字段。其中id为表格id，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
-    public CommonResult<String> getContractTable5(@RequestParam("id") String id) {
+    public CommonResult<JSONObject> getContractTable5(@RequestParam("id") String id) {
         return success(contractService.getContractTable5(id));
     }
 

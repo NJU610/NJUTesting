@@ -5,6 +5,7 @@ import javax.validation.*;
 import cn.iocoder.yudao.module.system.controller.admin.contract.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.contract.ContractDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 合同 Service 接口
@@ -105,7 +106,7 @@ public interface ContractService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getContractTable4(String id);
+    JSONObject getContractTable4(String id);
 
     /**
      * 获取软件项目委托测试保密协议
@@ -113,7 +114,7 @@ public interface ContractService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getContractTable5(String id);
+    JSONObject getContractTable5(String id);
 
     /**
      * 获得合同列表

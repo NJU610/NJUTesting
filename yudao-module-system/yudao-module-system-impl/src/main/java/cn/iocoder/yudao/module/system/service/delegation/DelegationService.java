@@ -7,6 +7,7 @@ import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceRe
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 委托 Service 接口
@@ -171,7 +172,7 @@ public interface DelegationService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getDelegationTable2(String id);
+    JSONObject getDelegationTable2(String id);
 
     /**
      * 获取委托测试软件功能列表
@@ -179,7 +180,7 @@ public interface DelegationService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getDelegationTable3(String id);
+    JSONObject getDelegationTable3(String id);
 
     /**
      * 获取软件文档评审表
@@ -187,7 +188,7 @@ public interface DelegationService {
      * @param id 表格编号
      * @return 表格内容
      */
-    String getDelegationTable14(String id);
+    JSONObject getDelegationTable14(String id);
 
     /**
      * 获取报价单
@@ -195,7 +196,7 @@ public interface DelegationService {
      * @param id 表格编号
      * @return 报价单内容
      */
-    String getOffer(String id);
+    JSONObject getOffer(String id);
 
     /**
      * 获得委托列表
