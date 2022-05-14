@@ -1,11 +1,11 @@
 # 南大测试项目
 
-本项目基于SpringBoot开发平台ruoyi-vue-pro，原项目使用手册见RUOYI.md
+本项目基于SpringBoot开发平台ruoyi-vue-pro，原项目使用手册见RUOYI.md，
 
 ## 分支
 
 - main分支为项目主分支
-- master分支为课程中原型demo的分支
+- master分支为课程中原型demo的分支，不使用
 
 ## 后端技术栈（之后会去除不使用的部分）
 
