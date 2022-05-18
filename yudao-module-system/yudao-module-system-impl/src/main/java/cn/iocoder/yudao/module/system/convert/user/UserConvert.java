@@ -53,10 +53,22 @@ public interface UserConvert {
 
     Map<Long, AdminUserRespDTO> convertMap4(Map<Long, AdminUserDO> map);
 
-    FrontUserProfileRespVO convert5(UserProfileRespVO bean);
+    FrontUserProfileRespVO convert(UserProfileRespVO bean);
 
-    UserProfileUpdateReqVO convert6(FrontUserProfileUpdateReqVO bean);
+    UserProfileUpdateReqVO convert(FrontUserProfileUpdateReqVO bean);
 
-    UserProfileUpdatePasswordReqVO convert7(FrontUserProfileUpdatePasswordReqVO bean);
+    UserProfileUpdatePasswordReqVO convert(FrontUserProfileUpdatePasswordReqVO bean);
+
+    UserCreateReqVO convert(FrontUserCreateReqVO bean);
+
+    UserUpdateReqVO convert(FrontUserUpdateReqVO bean);
+
+    UserPageReqVO convert(FrontUserPageReqVO bean);
+
+    List<FrontUserPageItemRespVO> convertList05(List<AdminUserDO> bean);
+
+    List<FrontUserSimpleRespVO> convertList06(List<AdminUserDO> bean);
+
+    FrontUserPageItemRespVO convert5(AdminUserDO bean);
 
 }

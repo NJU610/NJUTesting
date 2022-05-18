@@ -72,20 +72,20 @@ public class FrontUserProfileController {
 //        // 获得社交用户信息
 ////        List<SocialUserDO> socialUsers = socialService.getSocialUserList(user.getId(), UserTypeEnum.ADMIN.getValue());
 //        resp.setSocialUsers(UserConvert.INSTANCE.convertList03(socialUsers));
-        return success(UserConvert.INSTANCE.convert5(resp));
+        return success(UserConvert.INSTANCE.convert(resp));
     }
 
     @PutMapping("/update")
     @ApiOperation("修改用户个人信息")
     public CommonResult<Boolean> updateUserProfile(@Valid @RequestBody FrontUserProfileUpdateReqVO reqVO) {
-        userService.updateUserProfile(getLoginUserId(), UserConvert.INSTANCE.convert6(reqVO));
+        userService.updateUserProfile(getLoginUserId(), UserConvert.INSTANCE.convert(reqVO));
         return success(true);
     }
 
     @PutMapping("/update-password")
     @ApiOperation("修改用户个人密码")
     public CommonResult<Boolean> updateUserProfilePassword(@Valid @RequestBody FrontUserProfileUpdatePasswordReqVO reqVO) {
-        userService.updateUserPassword(getLoginUserId(), UserConvert.INSTANCE.convert7(reqVO));
+        userService.updateUserPassword(getLoginUserId(), UserConvert.INSTANCE.convert(reqVO));
         return success(true);
     }
 
