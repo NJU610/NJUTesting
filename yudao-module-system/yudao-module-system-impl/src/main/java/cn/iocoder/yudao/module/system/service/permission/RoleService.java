@@ -1,10 +1,7 @@
 package cn.iocoder.yudao.module.system.service.permission;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.RoleCreateReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.RoleExportReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.RolePageReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.RoleUpdateReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
 import org.springframework.lang.Nullable;
 
@@ -122,6 +119,13 @@ public interface RoleService {
      * @return 角色分页结果
      */
     PageResult<RoleDO> getRolePage(RolePageReqVO reqVO);
+
+    /**
+     * 获得过滤后的角色分页
+     * @param reqVO 角色分页查询
+     * @return
+     */
+    PageResult<RoleDO> getFrontRolePage(FrontRolePageReqVO reqVO);
 
     /**
      * 获得角色列表

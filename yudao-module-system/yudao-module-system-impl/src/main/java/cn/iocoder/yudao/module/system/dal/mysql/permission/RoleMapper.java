@@ -4,6 +4,8 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
+import cn.iocoder.yudao.module.system.controller.admin.permission.FrontRoleController;
+import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.FrontRolePageReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.RoleExportReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.permission.vo.role.RolePageReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
@@ -47,4 +49,11 @@ public interface RoleMapper extends BaseMapperX<RoleDO> {
     @Select("SELECT id FROM system_role WHERE update_time > #{maxUpdateTime} LIMIT 1")
     RoleDO selectExistsByUpdateTimeAfter(Date maxUpdateTime);
 
+    default PageResult<RoleDO> selectFrontPage(FrontRolePageReqVO reqVO) {
+        return selectPage(reqVO, new QueryWrapperX<RoleDO>().likeIfPresent("name", reqVO.getName())
+                .likeIfPresent("code", reqVO.getCode())
+                .eqIfPresent("status", reqVO.getStatus())
+                .betweenIfPresent("create_time", reqVO.getBeginTime(), reqVO.getEndTime())
+                .notIn("id", FrontRoleController.ROLE_IDS));
+    }
 }
