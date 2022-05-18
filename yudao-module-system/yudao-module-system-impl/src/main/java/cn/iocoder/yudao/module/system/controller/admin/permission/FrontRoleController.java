@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
-import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.ROLE_NOT_EXISTS;
 
 @Api(tags = "角色")
 @RestController
@@ -41,6 +45,9 @@ public class FrontRoleController {
     @PutMapping("/update")
     @ApiOperation("修改角色")
     public CommonResult<Boolean> updateRole(@Valid @RequestBody FrontRoleUpdateReqVO reqVO) {
+        if (ROLE_IDS.contains(reqVO.getId())) {
+            throw exception(ROLE_NOT_EXISTS);
+        }
         roleService.updateRole(RoleConvert.INSTANCE.convert(reqVO));
         return success(true);
     }
@@ -48,6 +55,9 @@ public class FrontRoleController {
     @PutMapping("/update-status")
     @ApiOperation("修改角色状态")
     public CommonResult<Boolean> updateRoleStatus(@Valid @RequestBody FrontRoleUpdateStatusReqVO reqVO) {
+        if (ROLE_IDS.contains(reqVO.getId())) {
+            throw exception(ROLE_NOT_EXISTS);
+        }
         roleService.updateRoleStatus(reqVO.getId(), reqVO.getStatus());
         return success(true);
     }
@@ -56,6 +66,9 @@ public class FrontRoleController {
     @ApiOperation("删除角色")
     @ApiImplicitParam(name = "id", value = "角色编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<Boolean> deleteRole(@RequestParam("id") Long id) {
+        if (ROLE_IDS.contains(id)) {
+            throw exception(ROLE_NOT_EXISTS);
+        }
         roleService.deleteRole(id);
         return success(true);
     }
@@ -64,7 +77,7 @@ public class FrontRoleController {
     @ApiOperation("获得角色信息")
     public CommonResult<FrontRoleRespVO> getRole(@RequestParam("id") Long id) {
         RoleDO role = roleService.getRole(id);
-        if (ROLE_IDS.contains(id)) {
+        if (ROLE_IDS.contains(id) || role == null) {
             throw exception(ROLE_NOT_EXISTS);
         }
         return success(RoleConvert.INSTANCE.convert2(role));
@@ -84,6 +97,7 @@ public class FrontRoleController {
     public CommonResult<List<FrontRoleSimpleRespVO>> getSimpleRoles() {
         // 获得角色列表，只要开启状态的
         List<RoleDO> list = roleService.getRoles(Collections.singleton(CommonStatusEnum.ENABLE.getStatus()));
+        list = list.stream().filter(role -> !ROLE_IDS.contains(role.getId())).collect(Collectors.toList());
         // 排序后，返回给前端
         list.sort(Comparator.comparing(RoleDO::getSort));
         return success(RoleConvert.INSTANCE.convertList04(list));

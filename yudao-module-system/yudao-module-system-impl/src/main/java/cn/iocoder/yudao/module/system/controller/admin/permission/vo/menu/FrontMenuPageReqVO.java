@@ -33,11 +33,11 @@ public class FrontMenuPageReqVO extends PageParam {
     @ApiModelProperty(value = "展示状态", example = "1", notes = "参见 CommonStatusEnum 枚举类")
     private Integer status;
 
-    @ApiModelProperty(value = "开始时间", example = "2020-10-24")
+    @ApiModelProperty(value = "开始时间", example = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private Date beginTime;
 
-    @ApiModelProperty(value = "结束时间", example = "2020-10-24")
+    @ApiModelProperty(value = "结束时间", example = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private Date endTime;
 

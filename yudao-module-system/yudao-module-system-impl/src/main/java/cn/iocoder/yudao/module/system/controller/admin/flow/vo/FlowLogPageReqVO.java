@@ -12,7 +12,7 @@ import java.util.Date;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@ApiModel("管理后台 - 分页 Request VO")
+@ApiModel("分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -34,19 +34,19 @@ public class FlowLogPageReqVO extends PageParam {
     private String remark;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @ApiModelProperty(value = "开始日志时间")
+    @ApiModelProperty(value = "开始日志时间", example = "2019-01-01 00:00:00")
     private Date beginOperateTime;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @ApiModelProperty(value = "结束日志时间")
+    @ApiModelProperty(value = "结束日志时间", example = "2019-01-01 00:00:00")
     private Date endOperateTime;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @ApiModelProperty(value = "开始创建时间")
+    @ApiModelProperty(value = "开始创建时间", example = "2019-01-01 00:00:00")
     private Date beginCreateTime;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @ApiModelProperty(value = "结束创建时间")
+    @ApiModelProperty(value = "结束创建时间", example = "2019-01-01 00:00:00")
     private Date endCreateTime;
 
     @ApiModelProperty(value = "日志变量")
