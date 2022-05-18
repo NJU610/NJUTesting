@@ -1,15 +1,11 @@
 package cn.iocoder.yudao.module.system.controller.admin.user.vo.user;
 
 import io.swagger.annotations.ApiModel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @ApiModel(value = "用户分页时的信息 Response VO", description = "")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class FrontUserPageItemRespVO extends FrontUserRespVO {
 
