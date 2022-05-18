@@ -27,6 +27,13 @@ spring:
     database: 0 # 数据库索引
 
 
+  data:
+    mongodb:
+      host: 123.60.47.174
+      port: 27017
+      database: nju_testing
+      username: root
+      password: NJU610root*
 mybatis:
   lazy-initialization: true # 单元测试，设置 MyBatis Mapper 延迟加载，加速每个单元测试
 
