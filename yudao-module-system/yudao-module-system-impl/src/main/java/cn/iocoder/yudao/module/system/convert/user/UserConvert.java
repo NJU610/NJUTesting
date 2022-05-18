@@ -1,9 +1,7 @@
 package cn.iocoder.yudao.module.system.convert.user;
 
 import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
-import cn.iocoder.yudao.module.system.controller.admin.user.vo.profile.UserProfileRespVO;
-import cn.iocoder.yudao.module.system.controller.admin.user.vo.profile.UserProfileUpdatePasswordReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.user.vo.profile.UserProfileUpdateReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.user.vo.profile.*;
 import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.dept.PostDO;
@@ -54,5 +52,23 @@ public interface UserConvert {
     List<AdminUserRespDTO> convertList4(List<AdminUserDO> users);
 
     Map<Long, AdminUserRespDTO> convertMap4(Map<Long, AdminUserDO> map);
+
+    FrontUserProfileRespVO convert(UserProfileRespVO bean);
+
+    UserProfileUpdateReqVO convert(FrontUserProfileUpdateReqVO bean);
+
+    UserProfileUpdatePasswordReqVO convert(FrontUserProfileUpdatePasswordReqVO bean);
+
+    UserCreateReqVO convert(FrontUserCreateReqVO bean);
+
+    UserUpdateReqVO convert(FrontUserUpdateReqVO bean);
+
+    UserPageReqVO convert(FrontUserPageReqVO bean);
+
+    List<FrontUserPageItemRespVO> convertList05(List<AdminUserDO> bean);
+
+    List<FrontUserSimpleRespVO> convertList06(List<AdminUserDO> bean);
+
+    FrontUserPageItemRespVO convert5(AdminUserDO bean);
 
 }

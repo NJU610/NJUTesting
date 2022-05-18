@@ -5,14 +5,15 @@ import cn.iocoder.yudao.framework.common.enums.UserTypeEnum;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.util.collection.SetUtils;
 import cn.iocoder.yudao.framework.operatelog.core.annotations.OperateLog;
-import cn.iocoder.yudao.framework.security.core.annotations.PreAuthenticated;
 import cn.iocoder.yudao.module.system.controller.admin.auth.vo.auth.*;
 import cn.iocoder.yudao.module.system.convert.auth.AuthConvert;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.MenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.yudao.module.system.enums.permission.MenuTypeEnum;
 import cn.iocoder.yudao.module.system.service.auth.AdminAuthService;
+import cn.iocoder.yudao.module.system.service.permission.FrontPermissionService;
 import cn.iocoder.yudao.module.system.service.permission.PermissionService;
 import cn.iocoder.yudao.module.system.service.permission.RoleService;
 import cn.iocoder.yudao.module.system.service.social.SocialUserService;
@@ -27,8 +28,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
@@ -53,6 +55,8 @@ public class AuthController {
     private PermissionService permissionService;
     @Resource
     private SocialUserService socialUserService;
+    @Resource
+    private FrontPermissionService frontPermissionService;
 
     @PostMapping("/login")
     @ApiOperation(value = "使用账号密码登录", notes = "使用账号密码登录")
@@ -110,13 +114,20 @@ public class AuthController {
     @ApiOperation(value = "获得登录用户的菜单列表", notes = "用户登录后获取动态菜单")
     public CommonResult<List<AuthSimpleMenuRespVO>> listSimpleMenus() {
         // 获得用户拥有的菜单列表
-        List<MenuDO> menuList = permissionService.getRoleMenuListFromCache(
-                getLoginUserRoleIds(),
-                SetUtils.asSet(MenuTypeEnum.MENU.getType()),
-                SetUtils.asSet(CommonStatusEnum.ENABLE.getStatus(), CommonStatusEnum.DISABLE.getStatus()));
-        // 数组复制
-        List<MenuDO> menuListCopy = new ArrayList<>(menuList);
-        return success(AuthConvert.INSTANCE.convert(menuListCopy));
+//        List<MenuDO> menuList = permissionService.getRoleMenuListFromCache(
+//                getLoginUserRoleIds(),
+//                SetUtils.asSet(MenuTypeEnum.MENU.getType()),
+//                SetUtils.asSet(CommonStatusEnum.ENABLE.getStatus(), CommonStatusEnum.DISABLE.getStatus()));
+//        // 数组复制
+//        List<MenuDO> menuListCopy = new ArrayList<>(menuList);
+//        return success(AuthConvert.INSTANCE.convert(menuListCopy));
+        Set<Long> roleIds = getLoginUserRoleIds();
+        assert roleIds != null;
+        if (roleIds.isEmpty()) {
+            return success(Collections.emptyList());
+        }
+        List<FrontMenuDO> frontMenuList = frontPermissionService.getRoleMenuList(roleIds);
+        return success(AuthConvert.INSTANCE.convertList(frontMenuList));
     }
 
     @GetMapping("/get-permission-info")

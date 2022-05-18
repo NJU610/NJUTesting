@@ -25,4 +25,16 @@ public interface RoleConvert {
 
     RoleDO convert(RoleCreateReqBO bean);
 
+    RoleCreateReqVO convert(FrontRoleCreateReqVO bean);
+
+    RoleUpdateReqVO convert(FrontRoleUpdateReqVO bean);
+
+    RoleUpdateStatusReqVO convert(FrontRoleUpdateStatusReqVO bean);
+
+    FrontRoleRespVO convert2(RoleDO bean);
+
+    List<FrontRolePageRespVO> convertList(List<RoleDO> list);
+
+    List<FrontRoleSimpleRespVO> convertList04(List<RoleDO> list);
+
 }

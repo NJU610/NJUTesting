@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
  *
  * @author 芋道源码
  */
-@Api(tags = "权限")
+@Api(tags = "管理后台 - 权限")
 @RestController
 @RequestMapping("/system/permission")
 public class PermissionController {
