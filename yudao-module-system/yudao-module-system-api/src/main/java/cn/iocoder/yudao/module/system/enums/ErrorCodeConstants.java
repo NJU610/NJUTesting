@@ -161,4 +161,7 @@ public interface ErrorCodeConstants {
     // ========== 流程日志 1002028000 ==========
     ErrorCode FLOW_LOG_NOT_EXISTS = new ErrorCode(1002028000, "流程日志不存在");
 
+    // ========== 前天菜单 1002029000 ==========
+    ErrorCode FRONT_MENU_NOT_EXISTS = new ErrorCode(1002029000, "前台菜单不存在");
+
 }
