@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 角色前台菜单 Mapper
@@ -53,5 +55,12 @@ public interface RoleFrontMenuMapper extends BaseMapperX<RoleFrontMenuDO> {
 
     @Select("SELECT id FROM system_role_front_menu WHERE update_time > #{maxUpdateTime} LIMIT 1")
     Long selectExistsByUpdateTimeAfter(Date maxUpdateTime);
+
+    default Set<Long> selectMenuIdsByRoleIds(Collection<Long> roleIds) {
+        return selectList(new QueryWrapper<RoleFrontMenuDO>().in("role_id", roleIds))
+                .stream()
+                .map(RoleFrontMenuDO::getFrontMenuId)
+                .collect(Collectors.toSet());
+    }
 
 }

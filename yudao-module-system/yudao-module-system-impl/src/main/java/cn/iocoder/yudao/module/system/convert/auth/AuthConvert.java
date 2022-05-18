@@ -1,6 +1,5 @@
 package cn.iocoder.yudao.module.system.convert.auth;
 
-import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.yudao.framework.common.enums.UserTypeEnum;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.framework.security.core.LoginUser;
@@ -10,6 +9,7 @@ import cn.iocoder.yudao.module.system.api.social.dto.SocialUserBindReqDTO;
 import cn.iocoder.yudao.module.system.api.social.dto.SocialUserUnbindReqDTO;
 import cn.iocoder.yudao.module.system.controller.admin.auth.vo.auth.*;
 import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.UserCreateReqVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.MenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
@@ -21,7 +21,6 @@ import org.mapstruct.factory.Mappers;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Mapper
 public interface AuthConvert {
@@ -78,40 +77,40 @@ public interface AuthConvert {
         return CollectionUtils.filterList(treeNodeMap.values(), node -> MenuIdEnum.ROOT.getId().equals(node.getParentId()));
     }
 
-    default AuthSimpleMenuRespVO convert(MenuDO menu) {
-        return AuthSimpleMenuRespVO.builder()
-                .path(menu.getPath())
-                .name(menu.getName())
-                .hideInMenu(Objects.equals(menu.getStatus(), CommonStatusEnum.DISABLE.getStatus()))
-                .build();
-    }
+//    default AuthSimpleMenuRespVO convert(MenuDO menu) {
+//        return AuthSimpleMenuRespVO.builder()
+//                .path(menu.getPath())
+//                .name(menu.getName())
+//                .hideInMenu(Objects.equals(menu.getStatus(), CommonStatusEnum.DISABLE.getStatus()))
+//                .build();
+//    }
 
-    default List<AuthSimpleMenuRespVO> convert(List<MenuDO> menuList) {
-        Map<MenuDO, AuthSimpleMenuRespVO> map = new HashMap<>();
-        for (MenuDO menu : menuList) {
-            ArrayList<String> paths = new ArrayList<>();
-            MenuDO cur = menu;
-            while (cur != null) {
-                if (map.containsKey(cur)) {
-                    paths.add(map.get(cur).getPath());
-                    break;
-                }
-                paths.add(cur.getPath());
-                MenuDO finalCur = cur;
-                cur = menuList.stream().filter(m -> m.getId().equals(finalCur.getParentId())).findFirst().orElse(null);
-            }
-            // 反转paths
-            Collections.reverse(paths);
-            assert menu != null;
-            map.put(menu, AuthSimpleMenuRespVO.builder()
-                    .path(String.join("/", paths))
-                    .name(menu.getName())
-                    .hideInMenu(Objects.equals(menu.getStatus(), CommonStatusEnum.DISABLE.getStatus()))
-                    .build());
-        }
-        // 对map的value集合进行排序
-        return map.values().stream().sorted(Comparator.comparing(AuthSimpleMenuRespVO::getPath)).collect(Collectors.toList());
-    }
+//    default List<AuthSimpleMenuRespVO> convert(List<MenuDO> menuList) {
+//        Map<MenuDO, AuthSimpleMenuRespVO> map = new HashMap<>();
+//        for (MenuDO menu : menuList) {
+//            ArrayList<String> paths = new ArrayList<>();
+//            MenuDO cur = menu;
+//            while (cur != null) {
+//                if (map.containsKey(cur)) {
+//                    paths.add(map.get(cur).getPath());
+//                    break;
+//                }
+//                paths.add(cur.getPath());
+//                MenuDO finalCur = cur;
+//                cur = menuList.stream().filter(m -> m.getId().equals(finalCur.getParentId())).findFirst().orElse(null);
+//            }
+//            // 反转paths
+//            Collections.reverse(paths);
+//            assert menu != null;
+//            map.put(menu, AuthSimpleMenuRespVO.builder()
+//                    .path(String.join("/", paths))
+//                    .name(menu.getName())
+//                    .hideInMenu(Objects.equals(menu.getStatus(), CommonStatusEnum.DISABLE.getStatus()))
+//                    .build());
+//        }
+//        // 对map的value集合进行排序
+//        return map.values().stream().sorted(Comparator.comparing(AuthSimpleMenuRespVO::getPath)).collect(Collectors.toList());
+//    }
 
     SocialUserBindReqDTO convert(Long userId, Integer userType, AuthSocialBindReqVO reqVO);
     SocialUserBindReqDTO convert(Long userId, Integer userType, AuthSocialLogin2ReqVO reqVO);
@@ -123,5 +122,7 @@ public interface AuthConvert {
     SmsCodeUseReqDTO convert(AuthSmsLoginReqVO reqVO, Integer scene, String usedIp);
     SmsCodeUseReqDTO convert(AuthRegisterReqVO reqVO, Integer scene, String usedIp);
     UserCreateReqVO convert(AuthRegisterReqVO reqVO);
+
+    List<AuthSimpleMenuRespVO> convertList(List<FrontMenuDO> menus);
 
 }

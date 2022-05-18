@@ -21,6 +21,6 @@ public class AuthSimpleMenuRespVO {
     @ApiModelProperty(value = "路由地址", example = "/delegation", notes = "路由地址")
     private String path;
 
-    @ApiModelProperty(value = "路由参数", example = "true", notes = "路由参数")
-    private Boolean hideInMenu;
+    @ApiModelProperty(value = "路由参数", example = "1", notes = "路由参数")
+    private Integer hideInMenu;
 }

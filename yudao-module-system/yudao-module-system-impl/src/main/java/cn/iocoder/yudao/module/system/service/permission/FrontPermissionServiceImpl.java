@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.module.system.controller.admin.permission.FrontRoleController;
 import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.FrontUserSimpleRespVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleFrontMenuDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.UserRoleDO;
 import cn.iocoder.yudao.module.system.dal.mysql.permission.RoleFrontMenuBatchInsertMapper;
@@ -15,10 +16,11 @@ import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.ROLE_NOT_EXISTS;
 
 /**
  * 权限 Service 实现类
@@ -30,6 +32,9 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Resource
     private RoleService roleService;
+
+    @Resource
+    private FrontMenuService frontMenuService;
 
     @Resource
     private RoleFrontMenuMapper roleFrontMenuMapper;
@@ -48,8 +53,9 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Override
     public Set<Long> getRoleMenuIds(Long roleId) {
+        roleService.validRoles(Collections.singleton(roleId));
         if (FrontRoleController.ROLE_IDS.contains(roleId)) {
-            return new HashSet<>();
+            throw exception(ROLE_NOT_EXISTS);
         }
 
         return CollectionUtils.convertSet(roleFrontMenuMapper.selectListByRoleId(roleId),
@@ -58,6 +64,11 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Override
     public void assignRoleMenu(Long roleId, Set<Long> menuIds) {
+        roleService.validRoles(new HashSet<Long>(){{add(roleId);}});
+        if (FrontRoleController.ROLE_IDS.contains(roleId)) {
+            throw exception(ROLE_NOT_EXISTS);
+        }
+        frontMenuService.validFrontMenus(menuIds);
         // 获得角色拥有菜单编号
         Set<Long> dbMenuIds = CollectionUtils.convertSet(roleFrontMenuMapper.selectListByRoleId(roleId),
                 RoleFrontMenuDO::getFrontMenuId);
@@ -81,6 +92,7 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Override
     public Set<Long> getUserRoleIdListByUserId(Long userId) {
+        userService.validUsers(Collections.singleton(userId));
         return CollectionUtils.convertSet(userRoleMapper.selectListByUserId(userId), UserRoleDO::getRoleId)
                 .stream()
                 .filter(roleId -> !FrontRoleController.ROLE_IDS.contains(roleId)).collect(Collectors.toSet());
@@ -88,6 +100,8 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Override
     public void assignUserRole(Long userId, Set<Long> roleIds) {
+        userService.validUsers(new HashSet<Long>(){{add(userId);}});
+        roleService.validRoles(roleIds);
         // 获得角色拥有角色编号
         roleIds = roleIds.stream().filter(roleId -> !FrontRoleController.ROLE_IDS.contains(roleId)).collect(Collectors.toSet());
         Set<Long> dbRoleIds = CollectionUtils.convertSet(userRoleMapper.selectListByUserId(userId),
@@ -111,8 +125,9 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Override
     public Set<Long> getUserRoleIdListByRoleId(Long roleId) {
+        roleService.validRoles(Collections.singleton(roleId));
         if (FrontRoleController.ROLE_IDS.contains(roleId)) {
-            return new HashSet<>();
+            throw exception(ROLE_NOT_EXISTS);
         }
         return CollectionUtils.convertSet(userRoleMapper.selectListByRoleId(roleId),
                 UserRoleDO::getUserId);
@@ -120,12 +135,26 @@ public class FrontPermissionServiceImpl implements FrontPermissionService {
 
     @Override
     public Set<FrontUserSimpleRespVO> getSimpleUserListByRoleId(Long roleId) {
+        roleService.validRoles(Collections.singleton(roleId));
         if (FrontRoleController.ROLE_IDS.contains(roleId)) {
-            return new HashSet<>();
+            throw exception(ROLE_NOT_EXISTS);
         }
         return CollectionUtils.convertSet(userRoleMapper.selectListByRoleId(roleId),
                 userRoleDO -> new FrontUserSimpleRespVO()
                         .setId(userRoleDO.getUserId())
                         .setNickname(userService.getUser(userRoleDO.getUserId()).getNickname()));
     }
+
+    @Override
+    public List<FrontMenuDO> getRoleMenuList(Collection<Long> roleIds) {
+        // 获得角色拥有的菜单关联
+        roleService.validRoles(roleIds);
+        roleIds = roleIds.stream().filter(roleId -> !FrontRoleController.ROLE_IDS.contains(roleId)).collect(Collectors.toSet());
+        Set<Long> menuIds = roleFrontMenuMapper.selectMenuIdsByRoleIds(roleIds);
+        if (CollectionUtil.isEmpty(menuIds)) {
+            return new ArrayList<>();
+        }
+        return frontMenuService.getFrontMenuList(menuIds);
+    }
+
 }

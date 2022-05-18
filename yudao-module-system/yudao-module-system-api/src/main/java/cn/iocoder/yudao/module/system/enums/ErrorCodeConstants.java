@@ -34,7 +34,7 @@ public interface ErrorCodeConstants {
     ErrorCode ROLE_CAN_NOT_UPDATE_SYSTEM_TYPE_ROLE = new ErrorCode(1002002003, "不能操作类型为系统内置的角色");
     ErrorCode ROLE_IS_DISABLE = new ErrorCode(1002002004, "名字为【{}】的角色已被禁用");
     ErrorCode ROLE_ADMIN_CODE_ERROR = new ErrorCode(1002002005, "编码【{}】不能使用");
-    ErrorCode INNER_ROLE_MODIFY_FAILED = new ErrorCode(1002002006, "内置用户不能修改");
+//    ErrorCode INNER_ROLE_MODIFY_FAILED = new ErrorCode(1002002006, "内置用户不能修改");
 
     // ========== 用户模块 1002003000 ==========
     ErrorCode USER_USERNAME_EXISTS = new ErrorCode(1002003000, "用户账号已经存在");
@@ -162,7 +162,8 @@ public interface ErrorCodeConstants {
     // ========== 流程日志 1002028000 ==========
     ErrorCode FLOW_LOG_NOT_EXISTS = new ErrorCode(1002028000, "流程日志不存在");
 
-    // ========== 前天菜单 1002029000 ==========
+    // ========== 前台菜单 1002029000 ==========
     ErrorCode FRONT_MENU_NOT_EXISTS = new ErrorCode(1002029000, "前台菜单不存在");
+    ErrorCode FRONT_MENU_NOT_VALID = new ErrorCode(1002029000, "前台菜单不可用");
 
 }

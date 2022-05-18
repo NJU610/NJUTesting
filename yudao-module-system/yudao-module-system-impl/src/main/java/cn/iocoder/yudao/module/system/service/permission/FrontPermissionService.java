@@ -1,7 +1,10 @@
 package cn.iocoder.yudao.module.system.service.permission;
 
 import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.FrontUserSimpleRespVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -59,6 +62,12 @@ public interface FrontPermissionService {
      * @param roleId 角色编号
      * @return 用户精简信息集合
      */
-
     Set<FrontUserSimpleRespVO> getSimpleUserListByRoleId(Long roleId);
+
+    /**
+     * 获得某些角色拥有的菜单编号集合
+     * @param roleIds 角色编号数组
+     * @return 前台菜单集合
+     */
+    List<FrontMenuDO> getRoleMenuList(Collection<Long> roleIds);
 }

@@ -73,4 +73,5 @@ public interface FrontMenuService {
      */
     List<FrontMenuDO> getFrontMenuList(FrontMenuExportReqVO exportReqVO);
 
+    void validFrontMenus(Collection<Long> ids);
 }
