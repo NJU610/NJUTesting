@@ -167,21 +167,19 @@ public class DelegationController {
 
     @PutMapping("/cancel/client")
     @ApiOperation(value = "客户-取消委托",
-            notes = "需要填写delegationId字段，其中delegationId为委托编号。返回值为是否更新成功。")
+            notes = "需要填写id和remark字段，其中id为委托编号，remark为取消原因。返回值为是否取消成功。")
     public CommonResult<Boolean> cancelDelegationClient(@Valid @RequestBody DelegationCancelReqVO delegationCancelReqVO) {
         delegationService.cancelDelegationClient(delegationCancelReqVO);
         return  success(true);
     }
 
-
     @PutMapping("/cancel/admin")
     @ApiOperation(value = "管理员-取消委托",
-            notes = "需要填写delegationId字段，其中delegationId为委托编号。返回值为是否更新成功。")
+            notes = "需要填写id和remark字段，其中id为委托编号，remark为取消原因。返回值为是否取消成功。")
     public CommonResult<Boolean> cancelDelegationAdmin(@Valid @RequestBody DelegationCancelReqVO delegationCancelReqVO) {
         delegationService.cancelDelegationAdmin(delegationCancelReqVO);
         return  success(true);
     }
-
 
     @DeleteMapping("/delete")
     @ApiOperation(value = "根据id删除委托",

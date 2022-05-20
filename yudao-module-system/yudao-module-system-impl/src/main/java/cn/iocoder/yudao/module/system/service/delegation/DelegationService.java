@@ -231,13 +231,15 @@ public interface DelegationService {
 
     /**
      * 客户取消委托
-     * @param delegationCancelReqVO
+     *
+     * @param delegationCancelReqVO 取消信息
      */
     void cancelDelegationClient(DelegationCancelReqVO delegationCancelReqVO);
 
     /**
      * 管理员取消委托
-     * @param delegationCancelReqVO
+     *
+     * @param delegationCancelReqVO 取消信息
      */
     void cancelDelegationAdmin(DelegationCancelReqVO delegationCancelReqVO);
 }

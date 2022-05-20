@@ -131,6 +131,7 @@ public interface ErrorCodeConstants {
     ErrorCode DELEGATION_TABLE_NOT_EXISTS = new ErrorCode(1002020002, "委托表格不存在");
     ErrorCode DELEGATION_STATE_ERROR = new ErrorCode(1002020003, "委托状态错误");
     ErrorCode DELEGATION_TABLE14_NOT_FILLED = new ErrorCode(1002020004, "软件文档评审表未填写");
+    ErrorCode DELEGATION_CANCELED = new ErrorCode(1002020005, "委托已被取消");
 
     // ========== 公司认证模块 1002022000 =========
     ErrorCode COMPANY_NOT_EXISTS = new ErrorCode(1002022000, "公司不存在");
