@@ -96,5 +96,9 @@ public class DelegationDO extends BaseDO {
      * 状态
      */
     private Integer state;
+    /**
+     * 取消原因
+     */
+    private String cancelRemark;
 
 }

@@ -61,6 +61,9 @@ public class DelegationPageReqVO extends PageParam {
     @ApiModelProperty(value = "状态")
     private Integer state;
 
+    @ApiModelProperty(value = "取消原因")
+    private String cancelRemark;
+
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @ApiModelProperty(value = "开始创建时间")
     private Date beginCreateTime;

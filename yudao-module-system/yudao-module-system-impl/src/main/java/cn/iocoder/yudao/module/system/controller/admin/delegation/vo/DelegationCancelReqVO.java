@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DelegationCancelReqVO extends DelegationEditBaseVO {
+
     @ApiModelProperty(value = "取消原因", example = "blabla", required = true)
     @NotNull(message = "取消原因不能为空")
     private String remark;

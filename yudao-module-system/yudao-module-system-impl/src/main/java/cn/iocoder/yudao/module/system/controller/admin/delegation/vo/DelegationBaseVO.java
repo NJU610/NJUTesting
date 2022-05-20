@@ -72,4 +72,7 @@ public class DelegationBaseVO {
     @ApiModelProperty(value = "测试报告id")
     private Long reportId;
 
+    @ApiModelProperty(value = "取消原因")
+    private String cancelRemark;
+
 }
