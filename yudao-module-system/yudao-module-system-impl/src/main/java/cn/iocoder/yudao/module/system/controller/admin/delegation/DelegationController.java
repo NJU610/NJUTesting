@@ -165,6 +165,22 @@ public class DelegationController {
         return success(true);
     }
 
+    @PutMapping("/cancel/client")
+    @ApiOperation(value = "客户-取消委托",
+            notes = "需要填写id和remark字段，其中id为委托编号，remark为取消原因。返回值为是否取消成功。")
+    public CommonResult<Boolean> cancelDelegationClient(@Valid @RequestBody DelegationCancelReqVO delegationCancelReqVO) {
+        delegationService.cancelDelegationClient(delegationCancelReqVO);
+        return  success(true);
+    }
+
+    @PutMapping("/cancel/admin")
+    @ApiOperation(value = "管理员-取消委托",
+            notes = "需要填写id和remark字段，其中id为委托编号，remark为取消原因。返回值为是否取消成功。")
+    public CommonResult<Boolean> cancelDelegationAdmin(@Valid @RequestBody DelegationCancelReqVO delegationCancelReqVO) {
+        delegationService.cancelDelegationAdmin(delegationCancelReqVO);
+        return  success(true);
+    }
+
     @DeleteMapping("/delete")
     @ApiOperation(value = "根据id删除委托",
             notes = "需要填写id字段。其中id为委托编号。会自动删除对应的流程和表格。返回值为是否删除成功。")
@@ -285,5 +301,6 @@ public class DelegationController {
         List<DelegationExcelVO> datas = DelegationConvert.INSTANCE.convertList02(list);
         ExcelUtils.write(response, "委托.xls", "数据", DelegationExcelVO.class, datas);
     }
+
 
 }

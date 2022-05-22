@@ -20,3 +20,5 @@
 -- DELETE FROM "system_sensitive_word";
 DELETE FROM "system_delegation";
 DELETE FROM "system_contract";
+DELETE FROM "system_sample";
+DELETE FROM "system_solution";

@@ -468,4 +468,41 @@ public class DelegationServiceImpl implements DelegationService {
         return flowLogService.listLogs(id);
     }
 
+    @Override
+    public void cancelDelegationClient(DelegationCancelReqVO delegationCancelReqVO) {
+        // 校验委托存在和状态
+        Long id = delegationCancelReqVO.getId();
+        DelegationDO delegation = delegationMapper.validateDelegationExists(id);
+        if (delegation.getState() >= DelegationStateEnum.CONTRACT_SIGN_SUCCESS.getState()) {
+            throw exception(DELEGATION_STATE_ERROR);
+        }
+        // 更新取消原因和状态
+        DelegationStateEnum initEnum = DelegationStateEnum.getByState(delegation.getState());
+        delegation.setCancelRemark(delegationCancelReqVO.getRemark());
+        delegation.setState(DelegationStateEnum.CLIENT_CANCEL_DELEGATION.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                initEnum, DelegationStateEnum.CLIENT_CANCEL_DELEGATION,
+                "客户取消委托，原因：" + delegationCancelReqVO.getRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+    }
+
+    @Override
+    public void cancelDelegationAdmin(DelegationCancelReqVO delegationCancelReqVO) {
+        // 校验委托存在
+        Long id = delegationCancelReqVO.getId();
+        DelegationDO delegation = delegationMapper.validateDelegationExists(id);
+        // 更新取消原因和状态
+        DelegationStateEnum initEnum = DelegationStateEnum.getByState(delegation.getState());
+        delegation.setCancelRemark(delegationCancelReqVO.getRemark());
+        delegation.setState(DelegationStateEnum.ADMIN_CANCEL_DELEGATION.getState());
+        delegationMapper.updateById(delegation);
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                initEnum, DelegationStateEnum.ADMIN_CANCEL_DELEGATION,
+                "管理员取消委托，原因：" + delegationCancelReqVO.getRemark(),
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+    }
+
 }

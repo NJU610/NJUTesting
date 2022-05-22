@@ -12,8 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.DELEGATION_NOT_EXISTS;
-import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.DELEGATION_STATE_ERROR;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
  * 委托 Mapper
@@ -68,12 +67,18 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
         if (delegation == null) {
             throw exception(DELEGATION_NOT_EXISTS);
         }
+        if (delegation.getCancelRemark() != null) {
+            throw exception(DELEGATION_CANCELED);
+        }
         return delegation;
     }
 
     default DelegationDO validateDelegationState(DelegationDO delegation, DelegationStateEnum ... states) {
         if (delegation == null) {
             throw exception(DELEGATION_NOT_EXISTS);
+        }
+        if (delegation.getCancelRemark() != null) {
+            throw exception(DELEGATION_CANCELED);
         }
         List<Integer> list = Arrays.stream(states).map(DelegationStateEnum::getState).collect(Collectors.toList());
         if (!list.contains(delegation.getState())) {

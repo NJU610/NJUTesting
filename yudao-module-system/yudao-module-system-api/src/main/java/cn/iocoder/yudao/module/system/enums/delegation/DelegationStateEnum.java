@@ -53,6 +53,9 @@ public enum DelegationStateEnum {
     MARKETING_DEPT_SEND_TEST_REPORT(440, "市场部发送测试报告中"),
     WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT(450, "等待客户接收测试报告中"),
     CLIENT_CONFIRM_RECEIVE_TEST_REPORT(460, "客户确认接收测试报告"),
+    CLIENT_CANCEL_DELEGATION(470,"客户取消委托"),
+    ADMIN_CANCEL_DELEGATION(480,"管理员取消委托"),
+
 
     ;
 
