@@ -58,7 +58,7 @@ spring:
   # Redis 配置。Redisson 默认的配置足够使用，一般不需要进行调优
   redis:
     host: 127.0.0.1 # 地址
-    port: 6379 # 端口
+    port: 23003 # 端口
     database: 0 # 数据库索引
 
   data:
@@ -66,6 +66,8 @@ spring:
       host: 127.0.0.1
       port: 23002
       database: nju_testing
+      username: root
+      password: NJU610root*
 
 --- #################### 定时任务相关配置 ####################
 
