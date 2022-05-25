@@ -130,6 +130,27 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        DelegationSaveTableReqVO updateReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
+            o.setDelegationId(1L);
+        });
+
+        delegationService.saveDelegationTable2(updateReqVO);
+
     }
 
     @Test
@@ -137,12 +158,54 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        DelegationSaveTableReqVO updateReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
+            o.setDelegationId(1L);
+        });
+
+        delegationService.saveDelegationTable3(updateReqVO);
+
     }
 
     @Test
     public void testSaveDelegationTable14_success() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        DelegationSaveTableReqVO updateReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
+            o.setDelegationId(1L);
+        });
+
+        delegationService.saveDelegationTable14(updateReqVO);
 
     }
 
@@ -494,6 +557,58 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
 
+    @Test
+    public void cancelDelegationClient(){
+
+        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        DelegationCancelReqVO delegationCancelReqVO = randomPojo(DelegationCancelReqVO.class,o->{
+           o.setId(1L);
+        });
+
+        delegationService.cancelDelegationClient(delegationCancelReqVO);
+    }
+
+    @Test
+    public void cancelDelegationAdmin(){
+        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        DelegationCancelReqVO delegationCancelReqVO = randomPojo(DelegationCancelReqVO.class,o->{
+            o.setId(1L);
+        });
+
+        delegationService.cancelDelegationAdmin(delegationCancelReqVO);
+    }
 
 
 }
