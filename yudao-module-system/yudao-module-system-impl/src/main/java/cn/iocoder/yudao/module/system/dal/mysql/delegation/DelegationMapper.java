@@ -37,7 +37,7 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
                 .eqIfPresent(DelegationDO::getSampleId, reqVO.getSampleId())
                 .eqIfPresent(DelegationDO::getSolutionId, reqVO.getSolutionId())
                 .eqIfPresent(DelegationDO::getReportId, reqVO.getReportId())
-                .eqIfPresent(DelegationDO::getState, reqVO.getState())
+                .in(DelegationDO::getState, reqVO.getState())
                 .betweenIfPresent(DelegationDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
                 .orderByDesc(DelegationDO::getId));
     }

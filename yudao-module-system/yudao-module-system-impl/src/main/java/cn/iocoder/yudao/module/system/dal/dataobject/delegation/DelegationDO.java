@@ -25,7 +25,7 @@ public class DelegationDO extends BaseDO {
     @TableId
     private Long id;
     /**
-     * 发起者编号
+     * 编号
      */
     private Long creatorId;
     /**

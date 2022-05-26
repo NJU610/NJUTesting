@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@ApiModel("管理后台 - 委托分页 Request VO")
+@ApiModel("委托分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -58,8 +58,8 @@ public class DelegationPageReqVO extends PageParam {
     @ApiModelProperty(value = "测试报告id")
     private Long reportId;
 
-    @ApiModelProperty(value = "状态")
-    private Integer state;
+    @ApiModelProperty(value = "状态列表")
+    private List<Integer> state;
 
     @ApiModelProperty(value = "取消原因")
     private String cancelRemark;
