@@ -1,11 +1,9 @@
 package cn.iocoder.yudao.module.system.controller.admin.permission;
 
+import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuCreateReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuPageReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuRespVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuUpdateReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.*;
 import cn.iocoder.yudao.module.system.convert.permission.FrontMenuConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 import cn.iocoder.yudao.module.system.service.permission.FrontMenuService;
@@ -73,6 +71,13 @@ public class FrontMenuController {
     public CommonResult<PageResult<FrontMenuRespVO>> getFrontMenuPage(@Valid FrontMenuPageReqVO pageVO) {
         PageResult<FrontMenuDO> pageResult = frontMenuService.getFrontMenuPage(pageVO);
         return success(FrontMenuConvert.INSTANCE.convertPage(pageResult));
+    }
+
+    @GetMapping("/list-all-simple")
+    @ApiOperation(value = "获取菜单精简信息列表", notes = "只包含被开启的菜单，用于【角色分配菜单】功能的选项。")
+    public CommonResult<List<FrontMenuSimpleRespVO>> getSimpleMenus() {
+        List<FrontMenuDO> list = frontMenuService.getFrontMenuListByStatus(CommonStatusEnum.ENABLE.getStatus());
+        return success(FrontMenuConvert.INSTANCE.convertList03(list));
     }
 
 //    @GetMapping("/export-excel")
