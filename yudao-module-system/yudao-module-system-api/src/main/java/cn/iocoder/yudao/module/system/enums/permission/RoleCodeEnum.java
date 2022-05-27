@@ -19,8 +19,8 @@ public enum RoleCodeEnum {
     TEST_DEPARTMENT_STAFF("test_department_staff", "测试部员工"),
     MARKET_DEPARTMENT_MANAGER("marketing_department_manger", "市场部主管"),
     MARKET_DEPARTMENT_STAFF("marketing_department_staff", "市场部员工"),
-    QUALITY_DEPARTMENT_MANAGER("quality_department_manager", "质量部主管"),
     QUALITY_DEPARTMENT_STAFF("quality_department_staff", "质量部员工"),
+    SIGNATORY("signatory", "签字人"),
     ;
 
     /**
