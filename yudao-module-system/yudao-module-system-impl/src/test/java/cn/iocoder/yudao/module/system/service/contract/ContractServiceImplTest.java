@@ -62,13 +62,12 @@ class ContractServiceImplTest extends BaseDbUnitTest {
     @Test
     @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void createContract() {
-        System.out.println(1);
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
-        Long deid = 1L;
 
         DelegationDO del = DelegationDO.builder()
-                .id(deid)
+                .id(1L)
                 .state(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -82,20 +81,21 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         delegationMapper.insert(del);
         ContractCreateReqVO createReqVO = randomPojo(ContractCreateReqVO.class, o->{
-            o.setDelegationId(deid);
+            o.setDelegationId(1L);
         });
 
         contractService.createContract(createReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(deid);
+        DelegationDO delegationDO = delegationMapper.selectById(1L);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
 
-        delegationMapper.deleteById(deid);
+        delegationMapper.deleteById(1L);
 
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void saveContractTable4() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -135,9 +135,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         contractService.saveContractTable4(saveReqVO);
 
         assertNotNull(contractMapper.selectById(1).getTable4Id());
+
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void saveContractTable5() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -177,9 +181,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         contractService.saveContractTable5(saveReqVO);
 
         assertNotNull(contractMapper.selectById(1).getTable5Id());
+
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void submitContractStaff() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -221,9 +229,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         DelegationDO delegationDO = delegationMapper.selectById(1L);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_AUDIT_CONTRACT.getState());
+
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void submitContractClient() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -266,9 +278,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
 
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
+
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void acceptContractClient() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -310,9 +326,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         DelegationDO delegationDO = delegationMapper.selectById(1L);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState());
+
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void rejectContractClient() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -354,9 +374,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         DelegationDO delegationDO = delegationMapper.selectById(1L);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_AUDIT_CONTRACT_FAIL.getState());
+
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void rejectContractStaff() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -398,9 +422,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL.getState());
 
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
+
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void acceptContractStaff() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -442,9 +470,12 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CONTRACT_SIGNING.getState());
 
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void uploadDocument() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -485,9 +516,13 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         DelegationDO delegationDO = delegationMapper.selectById(1L);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
+
+        delegationMapper.deleteById(1L);
+        contractMapper.deleteById(1L);
     }
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void deleteContract() {
 
         ContractDO con = ContractDO.builder()
@@ -505,5 +540,7 @@ class ContractServiceImplTest extends BaseDbUnitTest {
         contractService.deleteContract(1L);
 
         assertEquals(contractMapper.selectCount(),0L);
+
+        contractMapper.deleteById(1L);
     }
 }
