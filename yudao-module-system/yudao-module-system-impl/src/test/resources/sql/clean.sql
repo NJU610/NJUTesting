@@ -26,3 +26,5 @@ DELETE FROM "system_report";
 DELETE FROM "system_user_company";
 DELETE FROM "system_company";
 DELETE FROM "system_flow_log";
+DELETE FROM "system_front_menu";
+DELETE FROM "system_role_front_menu";
