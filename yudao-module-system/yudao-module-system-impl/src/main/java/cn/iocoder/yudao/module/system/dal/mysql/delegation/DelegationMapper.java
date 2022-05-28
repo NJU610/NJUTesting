@@ -28,7 +28,7 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
             reqVO.setOrderField("id");
         }
         if (reqVO.getAsc() == null) {
-            reqVO.setAsc(true);
+            reqVO.setAsc(false);
         }
         QueryWrapperX<DelegationDO> queryWrapper = new QueryWrapperX<DelegationDO>()
                 .eqIfPresent("creator_id", reqVO.getCreatorId())
