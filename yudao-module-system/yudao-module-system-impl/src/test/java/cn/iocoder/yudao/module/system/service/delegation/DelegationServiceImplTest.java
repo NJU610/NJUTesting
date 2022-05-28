@@ -12,6 +12,8 @@ import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import cn.iocoder.yudao.module.system.service.user.UserServiceImplTest;
+import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
+import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -51,6 +53,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
 
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 1000, duration = 2000,reporter = {HtmlReporter.class})
     public void creatDelegation() {
         // 准备参数
         DelegationCreateReqVO createReqVO = randomPojo(DelegationCreateReqVO.class, o -> {

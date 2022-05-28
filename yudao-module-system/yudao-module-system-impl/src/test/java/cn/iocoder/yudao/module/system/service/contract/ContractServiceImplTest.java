@@ -14,6 +14,8 @@ import cn.iocoder.yudao.module.system.service.delegation.DelegationServiceImpl;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
+import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 
@@ -31,6 +35,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @Import(ContractServiceImpl.class)
+//@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+
 class ContractServiceImplTest extends BaseDbUnitTest {
 
     @Resource
@@ -52,12 +58,17 @@ class ContractServiceImplTest extends BaseDbUnitTest {
     @MockBean
     private AdminUserService userService;
 
+
     @Test
+    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void createContract() {
+        System.out.println(1);
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        Long deid = 1L;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(deid)
                 .state(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -71,14 +82,17 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         delegationMapper.insert(del);
         ContractCreateReqVO createReqVO = randomPojo(ContractCreateReqVO.class, o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(deid);
         });
 
         contractService.createContract(createReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(deid);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
+
+        delegationMapper.deleteById(deid);
+
     }
 
     @Test
