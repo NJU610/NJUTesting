@@ -29,7 +29,7 @@ public interface FlowLogService {
      * @param toState 目标状态
      * @param templateParams 操作变量
      */
-    void saveLog (Long delegationId, Long operatorId, DelegationStateEnum fromState, DelegationStateEnum toState, String remark, Map<String, Object> templateParams);
+    Long saveLog (Long delegationId, Long operatorId, DelegationStateEnum fromState, DelegationStateEnum toState, String remark, Map<String, Object> templateParams);
 
 
     /**

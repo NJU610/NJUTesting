@@ -130,7 +130,32 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     void saveReportTable8() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(1L)
+                .solutionId(1L)
+                .build();
 
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        ReportDO rep = ReportDO.builder()
+                .id(1L)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
 
         ReportSaveTableReqVO saveReqVO = randomPojo(ReportSaveTableReqVO.class, o->{
             o.setReportId(1L);
@@ -147,7 +172,32 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     void saveReportTable9() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(1L)
+                .solutionId(1L)
+                .build();
 
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        ReportDO rep = ReportDO.builder()
+                .id(1L)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
 
         ReportSaveTableReqVO saveReqVO = randomPojo(ReportSaveTableReqVO.class, o->{
             o.setReportId(1L);
@@ -164,7 +214,32 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     void saveReportTable10() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(1L)
+                .solutionId(1L)
+                .build();
 
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        ReportDO rep = ReportDO.builder()
+                .id(1L)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
 
         ReportSaveTableReqVO saveReqVO = randomPojo(ReportSaveTableReqVO.class, o->{
             o.setReportId(1L);
@@ -180,6 +255,33 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @Test
     void saveReportTable11() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(1L)
+                .solutionId(1L)
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        ReportDO rep = ReportDO.builder()
+                .id(1L)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
 
         ReportSaveTableReqVO saveReqVO = randomPojo(ReportSaveTableReqVO.class, o->{
             o.setReportId(1L);

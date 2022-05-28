@@ -44,7 +44,7 @@ public class FlowLogServiceImpl implements FlowLogService {
     @Resource
     private AdminUserService userService;
 
-    public void saveLog (Long delegationId, Long operatorId,
+    public Long saveLog (Long delegationId, Long operatorId,
                          DelegationStateEnum fromState, DelegationStateEnum toState,
                          String remark, Map<String, Object> mapValue) {;
 
@@ -68,6 +68,8 @@ public class FlowLogServiceImpl implements FlowLogService {
 
         // 插入流程操作记录
         flowLogMapper.insert(flowLogDO);
+
+        return flowLogDO.getId();
 
     }
     public List<FlowLogDO> listLogs(Long delegationId) {

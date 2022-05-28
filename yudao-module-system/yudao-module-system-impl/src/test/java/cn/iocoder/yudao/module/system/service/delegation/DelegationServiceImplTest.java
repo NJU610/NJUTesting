@@ -50,9 +50,8 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     private AdminUserService userService;
 
 
-
     @Test
-    public void testCreatDelegation_success() {
+    public void creatDelegation() {
         // 准备参数
         DelegationCreateReqVO createReqVO = randomPojo(DelegationCreateReqVO.class, o -> {
             o.setName(randomString());
@@ -70,7 +69,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testUpdateDelegation_success(){
+    public void updateDelegation(){
         // 准备参数
 
         String newName = randomString();
@@ -97,7 +96,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testSubmitDelegation_success() {
+    public void submitDelegation() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
@@ -126,7 +125,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testSaveDelegationTable2_success() {
+    public void saveDelegationTable2() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -154,7 +153,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testSaveDelegationTable3_success() {
+    public void saveDelegationTable3() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -182,7 +181,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testSaveDelegationTable14_success() {
+    public void saveDelegationTable14() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -210,7 +209,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testDistributeDelegation2Mkt_success(){
+    public void distributeDelegation2Mkt(){
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -243,7 +242,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testDistributeDelegation2Test_success(){
+    public void distributeDelegation2Test(){
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
@@ -275,7 +274,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testAuditDelegationSuccessMkt_success(){
+    public void auditDelegationSuccessMkt(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
@@ -306,7 +305,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testAuditDelegationSuccessTest_success(){
+    public void auditDelegationSuccessTest(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
@@ -339,7 +338,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testAuditDelegationFailMkt(){
+    public void auditDelegationFailMkt(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
