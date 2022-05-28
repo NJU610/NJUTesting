@@ -1,8 +1,8 @@
 package cn.iocoder.yudao.module.system.service.contract;
 
+import cn.hutool.core.lang.UUID;
 import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
 import cn.iocoder.yudao.module.system.controller.admin.contract.vo.*;
-import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationSubmitReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.contract.ContractDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
@@ -10,28 +10,23 @@ import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.contract.ContractMapper;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
-import cn.iocoder.yudao.module.system.service.delegation.DelegationServiceImpl;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
-
 import java.util.Date;
 
-import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomPojo;
+import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 
 @Import(ContractServiceImpl.class)
@@ -60,14 +55,17 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
 
     @Test
-    @JunitPerfConfig(threads = 1, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     void createContract() {
+
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -81,16 +79,16 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         delegationMapper.insert(del);
         ContractCreateReqVO createReqVO = randomPojo(ContractCreateReqVO.class, o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         contractService.createContract(createReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
 
-        delegationMapper.deleteById(1L);
+        //delegationMapper.deleteById(1L);
 
     }
 
