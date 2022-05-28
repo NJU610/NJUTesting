@@ -60,6 +60,13 @@ public interface DelegationService {
     void saveDelegationTable14(@Valid DelegationSaveTableReqVO updateReqVO);
 
     /**
+     * 保存软件项目委托测试工作检查表
+     *
+     * @param updateReqVO 更新信息
+     */
+    void saveDelegationTable12(@Valid DelegationSaveTableReqVO updateReqVO);
+
+    /**
      * 分配委托给市场部人员
      *
      * @param distributeReqVO 分配信息
@@ -189,6 +196,14 @@ public interface DelegationService {
      * @return 表格内容
      */
     JSONObject getDelegationTable14(String id);
+
+    /**
+     * 获取软件项目委托测试工作检查表
+     *
+     * @param id 表格编号
+     * @return 表格内容
+     */
+    JSONObject getDelegationTable12(String id);
 
     /**
      * 获取报价单

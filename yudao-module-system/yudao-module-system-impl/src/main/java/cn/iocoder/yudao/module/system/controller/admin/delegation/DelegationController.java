@@ -77,6 +77,14 @@ public class DelegationController {
         return success(true);
     }
 
+    @PutMapping("/save/table12")
+    @ApiOperation(value = "保存软件项目委托测试工作检查表",
+            notes = "需要填写delegationId和data字段，其中delegationId为委托编号，data是json格式，包含表格内容。返回值为是否更新成功。")
+    public CommonResult<Boolean> saveDelegationTable12(@Valid @RequestBody DelegationSaveTableReqVO saveTableReqVo) {
+        delegationService.saveDelegationTable12(saveTableReqVo);
+        return success(true);
+    }
+
     @PutMapping("/submit")
     @ApiOperation(value = "客户-表格填写完毕，提交委托",
             notes = "需要填写id字段，其中id为委托编号。返回值为是否提交成功。需要前端检验数据是否填写完整。")
@@ -246,6 +254,14 @@ public class DelegationController {
     @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
     public CommonResult<JSONObject> getDelegationTable14(@RequestParam("id") String id) {
         return success(delegationService.getDelegationTable14(id));
+    }
+
+    @GetMapping("/get/table12")
+    @ApiOperation(value = "获得软件项目委托测试工作检查表",
+            notes = "需要填写id字段。其中id为表格id，从委托的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
+    @ApiImplicitParam(name = "id", value = "表格编号", required = true, dataTypeClass = String.class)
+    public CommonResult<JSONObject> getDelegationTable12(@RequestParam("id") String id) {
+        return success(delegationService.getDelegationTable12(id));
     }
 
     @GetMapping("/get/offer")

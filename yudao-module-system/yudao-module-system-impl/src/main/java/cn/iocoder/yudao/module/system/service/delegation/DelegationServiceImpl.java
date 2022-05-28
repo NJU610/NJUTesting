@@ -3,12 +3,13 @@ package cn.iocoder.yudao.module.system.service.delegation;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
-import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationTable12DO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationTable12Mapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
@@ -37,6 +38,9 @@ public class DelegationServiceImpl implements DelegationService {
     private DelegationMapper delegationMapper;
 
     @Resource
+    private DelegationTable12Mapper delegationTable12Mapper;
+
+    @Resource
     private TableMongoRepository tableMongoRepository;
 
     @Resource
@@ -58,6 +62,13 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setCreatorId(loginUserId);
         delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
         delegationMapper.insert(delegation);
+        // 创建软件项目委托测试工作检查表
+        DelegationTable12DO delegationTable12 = DelegationTable12DO
+                .builder()
+                .delegationId(delegation.getId())
+                .table12Id(tableMongoRepository.create("table12", null))
+                .build();
+        delegationTable12Mapper.insert(delegationTable12);
         // 保存日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 null, DelegationStateEnum.DELEGATE_WRITING,
@@ -163,6 +174,20 @@ public class DelegationServiceImpl implements DelegationService {
             delegationMapper.updateById(delegation);
         } else {
             tableMongoRepository.upsert("table14", delegation.getTable14Id(), updateReqVO.getData());
+        }
+    }
+
+    @Override
+    public void saveDelegationTable12(DelegationSaveTableReqVO updateReqVO) {
+        // 校验存在
+        Long delegationId = updateReqVO.getDelegationId();
+        delegationMapper.validateDelegationExists(delegationId);
+        // 保存表单
+        DelegationTable12DO delegationTable12DO = delegationTable12Mapper.selectOne("delegation_id", delegationId);
+        if (delegationTable12DO == null) {
+            throw exception(DELEGATION_TABLE_NOT_EXISTS);
+        } else {
+            tableMongoRepository.upsert("table12", delegationTable12DO.getTable12Id(), updateReqVO.getData());
         }
     }
 
@@ -442,6 +467,11 @@ public class DelegationServiceImpl implements DelegationService {
     @Override
     public JSONObject getDelegationTable14(String id) {
         return tableMongoRepository.get("table14", id);
+    }
+
+    @Override
+    public JSONObject getDelegationTable12(String id) {
+        return tableMongoRepository.get("table12", id);
     }
 
     @Override
