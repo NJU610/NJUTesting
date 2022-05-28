@@ -73,5 +73,17 @@ public interface FrontMenuService {
      */
     List<FrontMenuDO> getFrontMenuList(FrontMenuExportReqVO exportReqVO);
 
+    /**
+     * 校验前台菜单是否存在
+     * @param ids
+     */
     void validFrontMenus(Collection<Long> ids);
+
+
+    /**
+     * 通过状态获得前台菜单列表
+     * @param status
+     * @return
+     */
+    List<FrontMenuDO> getFrontMenuListByStatus(Integer status);
 }

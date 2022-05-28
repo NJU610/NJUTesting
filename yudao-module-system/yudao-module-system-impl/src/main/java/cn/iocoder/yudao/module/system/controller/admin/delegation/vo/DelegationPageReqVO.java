@@ -64,6 +64,12 @@ public class DelegationPageReqVO extends PageParam {
     @ApiModelProperty(value = "取消原因")
     private String cancelRemark;
 
+    @ApiModelProperty(value = "排序字段", example = "creator_id")
+    private String orderField;
+
+    @ApiModelProperty(value = "是否升序, true 升序, false 降序")
+    private Boolean asc;
+
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @ApiModelProperty(value = "开始创建时间")
     private Date beginCreateTime;

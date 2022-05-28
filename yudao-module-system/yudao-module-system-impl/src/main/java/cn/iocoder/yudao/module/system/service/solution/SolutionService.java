@@ -18,7 +18,7 @@ public interface SolutionService {
 
     /**
      * 创建测试方案
-     * @param createReqVO
+     * @param createReqVO 创建信息
      * @return
      */
     Long createSolution(SolutionCreateReqVO createReqVO);

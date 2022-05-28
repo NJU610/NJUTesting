@@ -2,10 +2,7 @@ package cn.iocoder.yudao.module.system.convert.permission;
 
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuCreateReqVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuExcelVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuRespVO;
-import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuUpdateReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -33,5 +30,7 @@ public interface FrontMenuConvert {
     PageResult<FrontMenuRespVO> convertPage(PageResult<FrontMenuDO> page);
 
     List<FrontMenuExcelVO> convertList02(List<FrontMenuDO> list);
+
+    List<FrontMenuSimpleRespVO> convertList03(List<FrontMenuDO> list);
 
 }

@@ -34,4 +34,9 @@ public interface FrontMenuMapper extends BaseMapperX<FrontMenuDO> {
                 .orderByDesc(FrontMenuDO::getId));
     }
 
+    default List<FrontMenuDO> selectListByStatus(Integer status) {
+        return selectList(new LambdaQueryWrapperX<FrontMenuDO>()
+                .eq(FrontMenuDO::getStatus, status)
+                .orderByDesc(FrontMenuDO::getId));
+    }
 }

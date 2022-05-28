@@ -59,7 +59,7 @@ public class ContractController {
 
     @PutMapping("/submit/staff")
     @ApiOperation(value = "市场部人员-提交合同",
-            notes = "需要填写id字段。其中id为合同id。返回值为是否保存成功。需要前端检验数据是否填写完整。")
+            notes = "需要填写id字段。其中id为合同id。返回值为是否提交成功。需要前端检验数据是否填写完整。")
     public CommonResult<Boolean> submitContractStaff(@Valid @RequestBody ContractSubmitReqVO submitReqVO) {
         contractService.submitContractStaff(submitReqVO);
         return success(true);

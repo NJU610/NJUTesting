@@ -113,4 +113,9 @@ public class FrontMenuServiceImpl implements FrontMenuService {
         });
     }
 
+    @Override
+    public List<FrontMenuDO> getFrontMenuListByStatus(Integer status) {
+        return frontMenuMapper.selectListByStatus(status);
+    }
+
 }

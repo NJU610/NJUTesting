@@ -34,7 +34,7 @@ public class FrontRoleController {
     @Resource
     private RoleService roleService;
 
-    public static final List<Long> ROLE_IDS = Arrays.asList(1L, 2L, 101L, 109L, 110L, 111L);
+    public static final List<Long> ROLE_IDS = Arrays.asList(2L, 101L, 109L, 110L, 111L);
 
     @PostMapping("/create")
     @ApiOperation("创建角色")
