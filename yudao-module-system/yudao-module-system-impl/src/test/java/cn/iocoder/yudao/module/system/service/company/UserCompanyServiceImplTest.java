@@ -1,4 +1,4 @@
-//package cn.iocoder.yudao.module.system.service.userCompany;
+package cn.iocoder.yudao.module.system.service.company;//package cn.iocoder.yudao.module.system.service.userCompany;
 //
 //import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyCreateReqVO;
 //import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyExportReqVO;
@@ -164,7 +164,7 @@
 //
 //}
 
-package cn.iocoder.yudao.module.system.service.userCompany;
+
 
 import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
 import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyCreateByCodeReqVO;

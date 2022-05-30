@@ -24,9 +24,9 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
- * 用户公司关联 Service 实现类
+ * 用户公司关联 Service 测试类
  *
- * @author qjy
+ * @author jzx
  */
 @Service
 @Validated
