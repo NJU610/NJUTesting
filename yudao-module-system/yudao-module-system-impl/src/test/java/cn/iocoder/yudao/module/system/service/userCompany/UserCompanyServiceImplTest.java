@@ -163,3 +163,266 @@
 //    }
 //
 //}
+
+package cn.iocoder.yudao.module.system.service.userCompany;
+
+import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
+import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyCreateByCodeReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyCreateReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyUpdateReqVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.company.CompanyDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.company.UserCompanyDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
+import cn.iocoder.yudao.module.system.dal.mysql.company.CompanyMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.company.UserCompanyMapper;
+import cn.iocoder.yudao.module.system.enums.permission.RoleCodeEnum;
+import cn.iocoder.yudao.module.system.service.company.UserCompanyServiceImpl;
+import cn.iocoder.yudao.module.system.service.permission.PermissionService;
+import cn.iocoder.yudao.module.system.service.permission.RoleService;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+
+import javax.annotation.Resource;
+
+import java.util.Date;
+
+import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomPojo;
+import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomString;
+import static org.junit.jupiter.api.Assertions.*;
+
+@Import(UserCompanyServiceImpl.class)
+class UserCompanyServiceImplTest extends BaseDbUnitTest {
+
+    @Resource
+    private UserCompanyMapper userCompanyMapper;
+
+    @Resource
+    private CompanyMapper companyMapper;
+
+    @Resource
+    private UserCompanyServiceImpl userCompanyService;
+
+    @MockBean
+    private RoleService roleService;
+
+    @MockBean
+    private PermissionService permissionService;
+
+    @Test
+    void createUserCompany() {
+
+//        //构造插入数据库
+//        UserCompanyDO use = UserCompanyDO.builder()
+//                .id(1L)
+//                .companyId(1L)
+//                .userId(1L)
+//                .build();
+//
+//        userCompanyMapper.insert(use);
+
+
+        //要注意一些数据库中必须存在的量
+        CompanyDO com = CompanyDO.builder()
+                .id(1L)
+                .name("小公司")
+                .address(randomString())
+                .phone(randomString())
+                .code("swg")
+                .build();
+
+        companyMapper.insert(com);
+
+        //观察assignCustomerRole得知需要一个customer
+        Mockito.when(roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode())).thenReturn(
+                new RoleDO().setId(1L).setCode("customer").setName("客户")
+        );
+
+        //构造参数
+        UserCompanyCreateReqVO createReqVO  = randomPojo(UserCompanyCreateReqVO.class, o->{
+            o.setCompanyId(1L);
+            o.setUserId(1L);
+        });
+
+        //运行该函数，简单检验返回值不为空
+        assertNotNull(userCompanyService.createUserCompany(createReqVO));
+
+    }
+
+    @Test
+    void updateUserCompany() {
+
+        UserCompanyDO use = UserCompanyDO.builder()
+                .id(1L)
+                .companyId(1L)
+                .userId(1L)
+                .build();
+
+        use.setCreateTime(new Date());
+        use.setCreateTime(new Date());
+        use.setDeleted(false);
+
+        userCompanyMapper.insert(use);
+
+
+        //插入另一个公司数据
+        CompanyDO com = CompanyDO.builder()
+                .id(2L)
+                .name("大公司")
+                .address(randomString())
+                .phone(randomString())
+                .code("swgnb")
+                .build();
+
+        companyMapper.insert(com);
+
+
+        UserCompanyUpdateReqVO updateReqVO = randomPojo(UserCompanyUpdateReqVO.class,o->{
+            o.setCompanyId(2L);
+            o.setUserId(1L);
+        });
+
+        userCompanyService.updateUserCompany(updateReqVO);
+
+        assertEquals(userCompanyMapper.selectByUser(1L).getCompanyId(),2);
+    }
+
+    @Test
+    void deleteUserCompany() {
+
+        Long count = userCompanyMapper.selectCount();
+
+        UserCompanyDO use = UserCompanyDO.builder()
+                .id(2L)
+                .companyId(2L)
+                .userId(2L)
+                .build();
+
+        use.setCreateTime(new Date());
+        use.setCreateTime(new Date());
+        use.setDeleted(false);
+
+        userCompanyMapper.insert(use);
+
+        Mockito.when(roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode())).thenReturn(
+                new RoleDO().setId(1L).setCode("customer").setName("客户")
+        );
+
+        userCompanyService.deleteUserCompany(2L);
+
+        assertEquals(count,userCompanyMapper.selectCount());
+    }
+
+    @Test
+    void getUserCompany() {
+
+    }
+
+    @Test
+    void getUserCompanyList() {
+    }
+
+    @Test
+    void getUserCompanyPage() {
+    }
+
+    @Test
+    void testGetUserCompanyList() {
+    }
+
+    @Test
+    void createUserCompanyByCode() {
+
+        CompanyDO com = CompanyDO.builder()
+                .id(1L)
+                .name("小公司")
+                .address(randomString())
+                .phone(randomString())
+                .code("swg")
+                .build();
+
+        companyMapper.insert(com);
+
+
+        UserCompanyCreateByCodeReqVO createReqVO = randomPojo(UserCompanyCreateByCodeReqVO.class, o->{
+            o.setCode("swg");
+            o.setUserId(1L);
+        });
+
+        Mockito.when(roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode())).thenReturn(
+                new RoleDO().setId(1L).setCode("customer").setName("客户")
+        );
+
+        assertNotNull(userCompanyService.createUserCompanyByCode(createReqVO));
+
+    }
+
+    @Test
+    void validateUserExists() {
+    }
+
+    @Test
+    void validateUserUnExists() {
+    }
+
+    @Test
+    void validateCompanyExists() {
+    }
+
+    @Test
+    void validateCompanyExistsByCode() {
+    }
+
+    @Test
+    void getCompanyByUser() {
+
+        CompanyDO com = CompanyDO.builder()
+                .id(1L)
+                .name("小公司")
+                .address(randomString())
+                .phone(randomString())
+                .code("swg")
+                .build();
+
+        companyMapper.insert(com);
+
+        UserCompanyDO use = UserCompanyDO.builder()
+                .id(1L)
+                .companyId(1L)
+                .userId(1L)
+                .build();
+
+        userCompanyMapper.insert(use);
+
+        assertEquals(1L,userCompanyService.getCompanyByUser(1L).getId());
+
+
+    }
+
+    @Test
+    void assignCustomerRole() {
+    }
+
+    @Test
+    void assignNormalUserRole() {
+        UserCompanyDO use = UserCompanyDO.builder()
+                .id(1L)
+                .companyId(1L)
+                .userId(1L)
+                .build();
+
+        userCompanyMapper.insert(use);
+
+        Mockito.when(roleService.getRoleByCode(RoleCodeEnum.NORMAL_USER.getCode())).thenReturn(
+                new RoleDO().setId(1L).setCode("normal_user").setName("普通用户")
+        );
+
+        userCompanyService.assignNormalUserRole(1L);
+
+    }
+
+    @Test
+    void deleteCustomerRole() {
+    }
+}

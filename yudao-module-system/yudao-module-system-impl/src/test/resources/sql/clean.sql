@@ -28,3 +28,4 @@ DELETE FROM "system_company";
 DELETE FROM "system_flow_log";
 DELETE FROM "system_front_menu";
 DELETE FROM "system_role_front_menu";
+DELETE FROM "system_delegation_table12";

@@ -1,3 +1,4 @@
+/*
 package cn.iocoder.yudao.framework.datapermission.core.db;
 
 import cn.iocoder.yudao.framework.datapermission.core.rule.DataPermissionRule;
@@ -22,13 +23,15 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.util.collection.SetUtils.asSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+*/
 /**
  * {@link DataPermissionDatabaseInterceptor} 的单元测试
  * 主要复用了 MyBatis Plus 的 TenantLineInnerInterceptorTest 的单元测试
  * 不过它的单元测试不是很规范，考虑到是复用的，所以暂时不进行修改~
  *
  * @author 芋道源码
- */
+ *//*
+
 public class DataPermissionDatabaseInterceptorTest2 extends BaseMockitoUnitTest {
 
     @InjectMocks
@@ -105,14 +108,18 @@ public class DataPermissionDatabaseInterceptorTest2 extends BaseMockitoUnitTest 
         assertSql("SELECT * FROM entity WHERE (id = ? OR name = ?)",
                 "SELECT * FROM entity WHERE (id = ? OR name = ?) AND tenant_id = 1");
 
-        /* not */
+        */
+/* not *//*
+
         assertSql("SELECT * FROM entity WHERE not (id = ? OR name = ?)",
                 "SELECT * FROM entity WHERE NOT (id = ? OR name = ?) AND tenant_id = 1");
     }
 
     @Test
     void selectSubSelectIn() {
-        /* in */
+        */
+/* in *//*
+
         assertSql("SELECT * FROM entity e WHERE e.id IN (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE e.id IN (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
         // 在最前
@@ -134,14 +141,18 @@ public class DataPermissionDatabaseInterceptorTest2 extends BaseMockitoUnitTest 
 
     @Test
     void selectSubSelectEq() {
-        /* = */
+        */
+/* = *//*
+
         assertSql("SELECT * FROM entity e WHERE e.id = (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE e.id = (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
     }
 
     @Test
     void selectSubSelectInnerNotEq() {
-        /* inner not = */
+        */
+/* inner not = *//*
+
         assertSql("SELECT * FROM entity e WHERE not (e.id = (select e1.id from entity1 e1 where e1.id = ?))",
                 "SELECT * FROM entity e WHERE NOT (e.id = (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1)) AND e.tenant_id = 1");
 
@@ -151,27 +162,37 @@ public class DataPermissionDatabaseInterceptorTest2 extends BaseMockitoUnitTest 
 
     @Test
     void selectSubSelectExists() {
-        /* EXISTS */
+        */
+/* EXISTS *//*
+
         assertSql("SELECT * FROM entity e WHERE EXISTS (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE EXISTS (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
 
 
-        /* NOT EXISTS */
+        */
+/* NOT EXISTS *//*
+
         assertSql("SELECT * FROM entity e WHERE NOT EXISTS (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE NOT EXISTS (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
     }
 
     @Test
     void selectSubSelect() {
-        /* >= */
+        */
+/* >= *//*
+
         assertSql("SELECT * FROM entity e WHERE e.id >= (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE e.id >= (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
 
-        /* <= */
+        */
+/* <= *//*
+
         assertSql("SELECT * FROM entity e WHERE e.id <= (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE e.id <= (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
 
-        /* <> */
+        */
+/* <> *//*
+
         assertSql("SELECT * FROM entity e WHERE e.id <> (select e1.id from entity1 e1 where e1.id = ?)",
                 "SELECT * FROM entity e WHERE e.id <> (SELECT e1.id FROM entity1 e1 WHERE e1.id = ? AND e1.tenant_id = 1) AND e.tenant_id = 1");
     }
@@ -298,7 +319,9 @@ public class DataPermissionDatabaseInterceptorTest2 extends BaseMockitoUnitTest 
         assertSql("SELECT * FROM t_user WHERE (id = ? OR name = ?)",
                 "SELECT * FROM t_user WHERE (id = ? OR name = ?) AND tenant_id = 1 AND dept_id IN (10, 20)");
 
-        /* not */
+        */
+/* not *//*
+
         assertSql("SELECT * FROM t_user WHERE not (id = ? OR name = ?)",
                 "SELECT * FROM t_user WHERE NOT (id = ? OR name = ?) AND tenant_id = 1 AND dept_id IN (10, 20)");
     }
@@ -368,3 +391,4 @@ public class DataPermissionDatabaseInterceptorTest2 extends BaseMockitoUnitTest 
     }
 
 }
+*/

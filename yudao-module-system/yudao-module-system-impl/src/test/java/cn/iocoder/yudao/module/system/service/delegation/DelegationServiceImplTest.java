@@ -12,6 +12,9 @@ import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import cn.iocoder.yudao.module.system.service.user.UserServiceImplTest;
+import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
+import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
+import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -51,7 +54,11 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void creatDelegation() {
+
+        Mockito.when(tableMongoRepository.create("table12", null)).thenReturn(randomString());
         // 准备参数
         DelegationCreateReqVO createReqVO = randomPojo(DelegationCreateReqVO.class, o -> {
             o.setName(randomString());
@@ -71,6 +78,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     @Test
     public void updateDelegation(){
         // 准备参数
+        Mockito.when(tableMongoRepository.create("table12", null)).thenReturn(randomString());
 
         String newName = randomString();
         DelegationCreateReqVO createReqVO = randomPojo(DelegationCreateReqVO.class, o -> {
