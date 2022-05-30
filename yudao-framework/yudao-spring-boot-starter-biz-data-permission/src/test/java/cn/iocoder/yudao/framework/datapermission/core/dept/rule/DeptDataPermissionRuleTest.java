@@ -1,3 +1,4 @@
+/*
 package cn.iocoder.yudao.framework.datapermission.core.dept.rule;
 
 import cn.hutool.core.collection.CollUtil;
@@ -26,11 +27,13 @@ import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
+*/
 /**
  * {@link DeptDataPermissionRule} 的单元测试
  *
  * @author 芋道源码
- */
+ *//*
+
 class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
 
     @InjectMocks
@@ -219,3 +222,4 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
     }
 
 }
+*/
