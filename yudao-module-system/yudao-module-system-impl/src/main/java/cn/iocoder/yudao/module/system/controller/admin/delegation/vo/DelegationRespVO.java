@@ -15,4 +15,13 @@ public class DelegationRespVO extends DelegationBaseVO {
     @ApiModelProperty(value = "编号", required = true)
     private Long id;
 
+    @ApiModelProperty(value = "委托单位")
+    private String clientUnit;
+
+    @ApiModelProperty(value = "版本号")
+    private String version;
+
+    @ApiModelProperty(value = "软件名")
+    private String softwareName;
+
 }

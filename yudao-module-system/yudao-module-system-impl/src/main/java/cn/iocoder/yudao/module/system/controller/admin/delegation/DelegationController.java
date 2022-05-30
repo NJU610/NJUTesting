@@ -204,7 +204,9 @@ public class DelegationController {
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<DelegationRespVO> getDelegation(@RequestParam("id") Long id) {
         DelegationDO delegation = delegationService.getDelegation(id);
-        return success(DelegationConvert.INSTANCE.convert(delegation));
+        DelegationRespVO delegationRespVO = DelegationConvert.INSTANCE.convert(delegation);
+        delegationService.addFields(delegationRespVO);
+        return success(delegationRespVO);
     }
 
     @GetMapping("/get/current-user")
@@ -212,7 +214,9 @@ public class DelegationController {
             notes = "获得当前用户所有未被删除的委托。返回值为委托列表。")
     public CommonResult<List<DelegationRespVO>> getDelegationByCurrentUser() {
         List<DelegationDO> delegations = delegationService.getDelegationsByCurrentUser();
-        return success(DelegationConvert.INSTANCE.convertList(delegations));
+        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
+        delegationService.addFields(delegationRespVOS);
+        return success(delegationRespVOS);
     }
 
     @GetMapping("/get/creator-id")
@@ -221,7 +225,9 @@ public class DelegationController {
     @ApiImplicitParam(name = "id", value = "用户编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<List<DelegationRespVO>> getDelegationByCreator(@RequestParam("id") Long id) {
         List<DelegationDO> delegations = delegationService.getDelegationsByCreator(id);
-        return success(DelegationConvert.INSTANCE.convertList(delegations));
+        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
+        delegationService.addFields(delegationRespVOS);
+        return success(delegationRespVOS);
     }
 
     @GetMapping("/get/not-accepted")
@@ -229,7 +235,9 @@ public class DelegationController {
             notes = "获得所有未被接收的委托。返回值为委托列表。")
     public CommonResult<List<DelegationRespVO>> getDelegationNotAccepted() {
         List<DelegationDO> delegations = delegationService.getDelegationsNotAccepted();
-        return success(DelegationConvert.INSTANCE.convertList(delegations));
+        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(delegations);
+        delegationService.addFields(delegationRespVOS);
+        return success(delegationRespVOS);
     }
 
     @GetMapping("/get/table2")
@@ -278,7 +286,9 @@ public class DelegationController {
     @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
     public CommonResult<List<DelegationRespVO>> getDelegationList(@RequestParam("ids") Collection<Long> ids) {
         List<DelegationDO> list = delegationService.getDelegationList(ids);
-        return success(DelegationConvert.INSTANCE.convertList(list));
+        List<DelegationRespVO> delegationRespVOS = DelegationConvert.INSTANCE.convertList(list);
+        delegationService.addFields(delegationRespVOS);
+        return success(delegationRespVOS);
     }
 
     @GetMapping("/get-process-list")
@@ -304,7 +314,9 @@ public class DelegationController {
             notes = "需要填写页码pageNo和每页条数pageSize，再根据需要填写其他查询字段。返回值为委托分页。")
     public CommonResult<PageResult<DelegationRespVO>> getDelegationPage(@Valid DelegationPageReqVO pageVO) {
         PageResult<DelegationDO> pageResult = delegationService.getDelegationPage(pageVO);
-        return success(DelegationConvert.INSTANCE.convertPage(pageResult));
+        PageResult<DelegationRespVO> delegationRespVOPageResult = DelegationConvert.INSTANCE.convertPage(pageResult);
+        delegationService.addFields(delegationRespVOPageResult.getList());
+        return success(delegationRespVOPageResult);
     }
 
     @GetMapping("/export-excel")

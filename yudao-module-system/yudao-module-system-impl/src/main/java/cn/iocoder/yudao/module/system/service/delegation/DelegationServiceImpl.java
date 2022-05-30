@@ -419,6 +419,34 @@ public class DelegationServiceImpl implements DelegationService {
         delegationMapper.deleteById(id);
     }
 
+    @Override
+    public void addFields(DelegationRespVO respVO) {
+        if (respVO == null) return;
+        String table2Id = respVO.getTable2Id();
+        if (table2Id != null) {
+            JSONObject table2 = tableMongoRepository.get("table2", table2Id);
+            String softwareName = table2.getString("软件名称");
+            String version = table2.getString("版本号");
+            String clientUnit = table2.getString("委托单位Ch");
+            if (respVO.getSoftwareName() == null) {
+                respVO.setSoftwareName(softwareName);
+            }
+            if (respVO.getVersion() == null) {
+                respVO.setVersion(version);
+            }
+            if (respVO.getClientUnit() == null) {
+                respVO.setClientUnit(clientUnit);
+            }
+        }
+    }
+
+    @Override
+    public void addFields(List<DelegationRespVO> respVOs) {
+        for (DelegationRespVO respVO : respVOs) {
+            addFields(respVO);
+        }
+    }
+
     //判断委托名称不重复
     public void validateDelegationNameDuplicate(Long creatorId, String name) {
         QueryWrapperX<DelegationDO> queryWrapper = new QueryWrapperX<>();

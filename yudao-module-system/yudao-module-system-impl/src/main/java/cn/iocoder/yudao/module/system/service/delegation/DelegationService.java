@@ -144,6 +144,20 @@ public interface DelegationService {
     void deleteDelegation(Long id);
 
     /**
+     * 给respvo添加字段
+     *
+     *  @param respVO 响应信息
+     */
+    void addFields(DelegationRespVO respVO);
+
+    /**
+     * 给respvo列表添加字段
+     *
+     *  @param respVOs 响应信息
+     */
+    void addFields(List<DelegationRespVO> respVOs);
+
+    /**
      * 获得委托
      *
      * @param id 编号
