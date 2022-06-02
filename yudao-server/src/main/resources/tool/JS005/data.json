@@ -1,0 +1,7 @@
+{ 
+    "_id" : "62986c701d180901c7d670a2", 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "clientUnit" : "腾讯", 
+    "softwareName" : "微信"
+}
