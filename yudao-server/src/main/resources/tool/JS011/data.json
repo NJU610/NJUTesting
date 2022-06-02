@@ -1,0 +1,31 @@
+{ 
+    "_id" : "6294f4c63537d417248315f3", 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "测试用例" : [
+        {
+            "id" : 1653929149833, 
+            "qid" : "1", 
+            "desc" : "23", 
+            "requirementitem" : "3", 
+            "initialconditions" : "4", 
+            "defectcases" : "5", 
+            "associatedcases" : "6", 
+            "time" : "890", 
+            "responsible" : "-", 
+            "suggest" : "4345"
+        },
+        {
+            "id" : 1653929149833, 
+            "qid" : "1", 
+            "desc" : "23", 
+            "requirementitem" : "3", 
+            "initialconditions" : "4", 
+            "defectcases" : "5", 
+            "associatedcases" : "6", 
+            "time" : "890", 
+            "responsible" : "-", 
+            "suggest" : "4345"
+        }
+    ]
+}
