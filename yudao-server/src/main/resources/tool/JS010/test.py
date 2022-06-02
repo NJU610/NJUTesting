@@ -9,46 +9,35 @@ from mailmerge import MailMerge  # 引用邮件处理模块
 # datafile_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js002\\js002.xlsx'  # 表格位置
 # data = xlrd.open_workbook(datafile_path)
 # table = data.sheet_by_name('这是一个合同')  # excel表名
-template = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js004\\NST－04－JS004－2011－软件委托测试合同.docx'  # 模版位置
+template = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS010\\NST－04－JS010－2011－测试报告检查表.docx'  # 模版位置
 # nrows = table.nrows
 
-with open("C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js004\\data.json", 'r', encoding='utf8') as fp:
+with open("C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS010\\data.json", 'r', encoding='utf8') as fp:
   jdata = json.load(fp)
   document = MailMerge(template)
 
   document.merge(
-    Name = jdata["项目名称"],
-    P1 = jdata["委托方(甲方)"],
-    P2 = jdata["委托方(乙方)"],
-    Place = jdata["签订地点"],
-    Date = jdata["签订日期"],
-    FirstParty = jdata["委托方(甲方)"],
+    Del = jdata["委托单位"],
     SoftName = jdata["软件名称"],
-    QuaFea = jdata["质量特性"],
-    Price = jdata["合同价款"],
-    DDL = jdata["完成天数"],
-    ChangeTimes = jdata["整改次数"],
-    ChangeDays = jdata["超过天数"],
-    PartyAName = jdata["委托方名称"],
-    DelA = jdata["授权代表"],
-    SigDateA = jdata["签章日期"],
-    ContactA = jdata["联系人2"],
-    AddrA = jdata["通讯地址2"],
-    TelA = jdata["电话2"],
-    FaxA = jdata["传真2"],
-    BankA = jdata["开户银行"],
-    NumA = jdata["账号"],
-    PostA = jdata["邮编2"], #?
-    DelB = jdata["授权代表2"],\
-    SigDateB = jdata["签章日期2"],
-    ContactB = jdata["受托方联系人"],
-    AddrB = jdata["受托方通讯地址"],
-    PostB = jdata["受托方邮编"],
-    TelB = jdata["受托方电话"],
-    FaxB = jdata["受托方传真"]
+    Reviewer = jdata["检查人"],
+    Date = jdata["日期"],
     
+    Res1 = jdata["dataSource"][0]["result"],
+    Res2 = jdata["dataSource"][1]["result"],
+    Res3 = jdata["dataSource"][2]["result"],
+    Res4 = jdata["dataSource"][3]["result"],
+    Res5 = jdata["dataSource"][4]["result"],
+    Res6 = jdata["dataSource"][5]["result"],
+    Res7 = jdata["dataSource"][6]["result"],
+    Res8 = jdata["dataSource"][7]["result"],
+    Res9 = jdata["dataSource"][8]["result"],
+    Res10 = jdata["dataSource"][9]["result"],
+    Res11 = jdata["dataSource"][10]["result"],
+    Res12 = jdata["dataSource"][11]["result"],
+    Res13 = jdata["dataSource"][12]["result"],
+    Res14 = jdata["dataSource"][13]["result"],
   )
-  o_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\JS004\\' #输出地址
+  o_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS010\\' #输出地址
   o_name = jdata["_id"] + "_" + "JS004"
   wordname = o_path + o_name + '.docx' 
   document.write(wordname)  # 创建新文件
