@@ -1,0 +1,43 @@
+{ 
+    "_id" : "62874eb123fa511f128fa888", 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha", 
+    "baseLine" : "asd", 
+    "documentOverview" : "asd", 
+    "generalTestCondition" : "asd", 
+    "hardwareEnvironment" : "ads", 
+    "label" : "sad", 
+    "otherEnvironment" : "asd", 
+    "overallDesign" : "asd", 
+    "participant" : "asd", 
+    "participantOrganization" : "asd", 
+    "plannedTests" : "asd", 
+    "quotedFile" : "asd", 
+    "softwareEnvironment" : "asd", 
+    "systemOverview" : "asd", 
+    "testCases" : "asd", 
+    "testLayer" : "asd", 
+    "testType" : "asd", 
+    "time1" : [
+        "2022-05-11", 
+        "2022-06-13"
+    ], 
+    "time2" : [
+        "2022-05-14", 
+        "2022-06-13"
+    ], 
+    "time3" : [
+        "2022-05-05", 
+        "2022-06-07"
+    ], 
+    "time4" : [
+        "2022-06-01", 
+        "2022-07-12"
+    ], 
+    "workQuantity1" : "asd", 
+    "workQuantity2" : "asd", 
+    "workQuantity3" : "asd", 
+    "workQuantity4" : "ad"
+}

@@ -1,0 +1,97 @@
+{ 
+    "_id" : ObjectId("627e13208a9cdd53dbfc299a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("627e14878a9cdd53dbfc29a7"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("627e194d8a9cdd53dbfc29af"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("627e2e768a9cdd53dbfc29b7"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("627e3f6c8a9cdd53dbfc29bf"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("6280f50e99bb8448da8fcd76"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("6280f7b499bb8448da8fcd7e"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("6280f7e299bb8448da8fcd86"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha"
+}
+{ 
+    "_id" : ObjectId("62874eb123fa511f128fa888"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "这是一个测试方案", 
+    "wu" : "haha", 
+    "baseLine" : "asd", 
+    "documentOverview" : "asd", 
+    "generalTestCondition" : "asd", 
+    "hardwareEnvironment" : "ads", 
+    "label" : "sad", 
+    "otherEnvironment" : "asd", 
+    "overallDesign" : "asd", 
+    "participant" : "asd", 
+    "participantOrganization" : "asd", 
+    "plannedTests" : "asd", 
+    "quotedFile" : "asd", 
+    "softwareEnvironment" : "asd", 
+    "systemOverview" : "asd", 
+    "testCases" : "asd", 
+    "testLayer" : "asd", 
+    "testType" : "asd", 
+    "time1" : [
+        "2022-05-11", 
+        "2022-06-13"
+    ], 
+    "time2" : [
+        "2022-05-14", 
+        "2022-06-13"
+    ], 
+    "time3" : [
+        "2022-05-05", 
+        "2022-06-07"
+    ], 
+    "time4" : [
+        "2022-06-01", 
+        "2022-07-12"
+    ], 
+    "workQuantity1" : "asd", 
+    "workQuantity2" : "asd", 
+    "workQuantity3" : "asd", 
+    "workQuantity4" : "ad"
+}

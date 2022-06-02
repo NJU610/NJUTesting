@@ -1,0 +1,2317 @@
+{ 
+    "_id" : ObjectId("6273aa8ce56d5d573d6d6dd0"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "lyw", 
+    "name" : "test table2 name"
+}
+{ 
+    "_id" : ObjectId("6277c5d5de06567ecfcf4a23"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "lyw", 
+    "name" : "table2"
+}
+{ 
+    "_id" : ObjectId("627cbc7b8a79b05d2c4795a7"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627cbf958a79b05d2c4795ab"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627cbff38a79b05d2c4795ad"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627cd561049c0f0ac980369c"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627cff31049c0f0ac98036a0"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d0035049c0f0ac98036a4"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d00c2049c0f0ac98036a8"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d00dd049c0f0ac98036ac"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d0386049c0f0ac98036b0"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d042d049c0f0ac98036b4"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d07c6049c0f0ac98036b8"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d0fa01565ff3ab4be33df"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d1155332a42477f81f3c4"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d116f332a42477f81f3c7"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d166b56f1ad5bfa458381"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d18d956f1ad5bfa458386"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627d19ec56f1ad5bfa45838b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627ddd1f69497e642520da77"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627de0a569497e642520da7d"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627de2ca69497e642520da83"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627de6bd69497e642520da89"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627de71e69497e642520da8f"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627de88569497e642520da95"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627dea2369497e642520da9b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627dec6469497e642520daa1"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627ded3d723e4f019cdd2ffe"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627ded6e723e4f019cdd3004"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627deda7723e4f019cdd300a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627dfbdc723e4f019cdd3010"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e07d718765d4a1e7d4030"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e088b18765d4a1e7d4036"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e13ea8a9cdd53dbfc299b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e147b8a9cdd53dbfc29a1"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e19428a9cdd53dbfc29a9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e2e6b8a9cdd53dbfc29b1"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627e3f608a9cdd53dbfc29b9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("627ea6a6b8628373550591ab"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linuxversion" : "35", 
+    "Windowsversion" : "12", 
+    "中间件" : "1", 
+    "主要功能及用途简介（限200字）" : "77", 
+    "代码行数" : "567", 
+    "其他支撑软件" : "4", 
+    "功能数" : "12", 
+    "功能点数" : "34", 
+    "单位性质" : "外合资企业", 
+    "受理人（签字）" : "34", 
+    "受理意见" : "受理意见1", 
+    "备注" : "23", 
+    "委托人（签字）" : "3454", 
+    "委托单位Ch" : "33", 
+    "委托单位En" : "44", 
+    "委托单位_Email" : "5", 
+    "委托单位_传真" : "1", 
+    "委托单位_地址" : "1", 
+    "委托单位_手机" : "4", 
+    "委托单位_电话" : "1", 
+    "委托单位_网址" : "6", 
+    "委托单位_联系人" : "3", 
+    "委托单位_邮编" : "2", 
+    "客户端内存要求" : "123", 
+    "密级" : "秘密", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "55", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "12", 
+    "操作系统其它版本" : "4", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "45", 
+    "文档资料" : "33", 
+    "服务器端内存要求" : "120", 
+    "服务器端硬盘要求" : "120", 
+    "架构" : [
+        "PC服务器"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "32", 
+    "版本" : "42", 
+    "版本号" : "22", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "6", 
+    "网络环境" : "22", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "11", 
+    "软件用户对象描述" : "66", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("627f9994f099f925000eb390"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "3234", 
+    "主要功能及用途简介（限200字）" : "3", 
+    "代码行数" : "3", 
+    "其他支撑软件" : "3455", 
+    "功能数" : "3", 
+    "功能点数" : "3", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-05", 
+    "受理人（签字）" : "qwe", 
+    "受理意见" : "受理意见1", 
+    "备注" : "t", 
+    "委托人_日期" : "2022-05-19", 
+    "委托人（签字）" : "ewret", 
+    "委托单位Ch" : "4", 
+    "委托单位En" : "6", 
+    "委托单位_Email" : "234", 
+    "委托单位_传真" : "234", 
+    "委托单位_地址" : "23", 
+    "委托单位_手机" : "234", 
+    "委托单位_电话" : "123", 
+    "委托单位_网址" : "234", 
+    "委托单位_联系人" : "234", 
+    "委托单位_邮编" : "1234", 
+    "客户端内存要求" : "123", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-20", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "7", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "安装手册"
+    ], 
+    "操作系统" : "123", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "566543", 
+    "文档资料" : "232", 
+    "服务器端内存要求" : "12", 
+    "服务器端硬盘要求" : "34", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "GB/T 16260.1-2006"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "成果/技术鉴定测试"
+    ], 
+    "测试项目编号" : "qwwe", 
+    "版本" : "34566543", 
+    "版本号" : "3", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "45346", 
+    "网络环境" : "324", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "12", 
+    "软件用户对象描述" : "2", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "缺陷检测率"
+    ]
+}
+{ 
+    "_id" : ObjectId("627fbef599bb8448da8fcd5c"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "213", 
+    "主要功能及用途简介（限200字）" : "ddd", 
+    "代码行数" : "4567", 
+    "其他支撑软件" : "1234", 
+    "功能数" : "12", 
+    "功能点数" : "23", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-12", 
+    "受理人（签字）" : "24354", 
+    "受理意见" : "受理意见2", 
+    "备注" : "2345", 
+    "委托人_日期" : "2022-05-12", 
+    "委托人（签字）" : "243546", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "46576", 
+    "委托单位_传真" : "123", 
+    "委托单位_地址" : "1234", 
+    "委托单位_手机" : "1234", 
+    "委托单位_电话" : "123", 
+    "委托单位_网址" : "4567", 
+    "委托单位_联系人" : "4354", 
+    "委托单位_邮编" : "1234", 
+    "客户端其他要求" : "132", 
+    "客户端内存要求" : "123", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-27", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "1232", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "123", 
+    "文档资料" : "123", 
+    "服务器端内存要求" : "1234", 
+    "服务器端硬盘要求" : "13243", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "NST-03-WI13-2011"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "22345", 
+    "版本" : "123", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "123", 
+    "网络环境" : "45", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件介质其它" : "343", 
+    "软件名称" : "dd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "需求分析报告"
+    ], 
+    "需要测试的技术指标" : [
+        "代码覆盖度"
+    ]
+}
+{ 
+    "_id" : ObjectId("627fd4d499bb8448da8fcd5f"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "sdfgh", 
+    "代码行数" : "aas", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "asd", 
+    "功能点数" : "sdf", 
+    "单位性质" : "科研院校", 
+    "受理人_日期" : "2022-05-04", 
+    "受理人（签字）" : "das", 
+    "受理意见" : "受理意见2", 
+    "备注" : "das", 
+    "委托人_日期" : "2022-05-05", 
+    "委托人（签字）" : "das", 
+    "委托单位Ch" : "asd", 
+    "委托单位En" : "asdf", 
+    "委托单位_Email" : "ad", 
+    "委托单位_传真" : "fas", 
+    "委托单位_地址" : "das", 
+    "委托单位_手机" : "da", 
+    "委托单位_电话" : "das", 
+    "委托单位_网址" : "sad", 
+    "委托单位_联系人" : "da", 
+    "委托单位_邮编" : "ads", 
+    "客户端内存要求" : "123", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-27", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "asdf", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "das", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "ads", 
+    "版本" : "dd", 
+    "版本号" : "asdd", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件介质其它" : "dd", 
+    "软件名称" : "daf", 
+    "软件用户对象描述" : "asdf", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("6280e58799bb8448da8fcd61"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "234", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "67", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "受理人（签字）" : "345", 
+    "受理意见" : "受理意见2", 
+    "备注" : "5345", 
+    "委托人（签字）" : "34", 
+    "委托单位Ch" : "dsdd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "345", 
+    "委托单位_传真" : "123", 
+    "委托单位_地址" : "234", 
+    "委托单位_手机" : "2345", 
+    "委托单位_电话" : "23", 
+    "委托单位_网址" : "234", 
+    "委托单位_联系人" : "234", 
+    "委托单位_邮编" : "234", 
+    "客户端内存要求" : "123", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-26", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "安装手册"
+    ], 
+    "操作系统" : "213", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "546", 
+    "文档资料" : "1234", 
+    "服务器端内存要求" : "1233", 
+    "服务器端硬盘要求" : "4425", 
+    "材料检查_其他" : "2345", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "34", 
+    "版本" : "435", 
+    "版本号" : "213", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "234", 
+    "网络环境" : "234", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "123", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "可靠性"
+    ]
+}
+{ 
+    "_id" : ObjectId("6280f07e99bb8448da8fcd64"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("6280f12499bb8448da8fcd6a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("6280f4f899bb8448da8fcd70"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("6280f79e99bb8448da8fcd78"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("6280f7cc99bb8448da8fcd80"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("62810ccddff996115566cd11"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "中间件" : "22", 
+    "主要功能及用途简介（限200字）" : "1234", 
+    "代码行数" : "12", 
+    "其他支撑软件" : "22", 
+    "功能数" : "12", 
+    "功能点数" : "12", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-12", 
+    "受理人（签字）" : "123", 
+    "受理意见" : "受理意见1", 
+    "备注" : "223", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "123", 
+    "委托单位Ch" : "12", 
+    "委托单位En" : "12", 
+    "委托单位_Email" : "123", 
+    "委托单位_传真" : "122", 
+    "委托单位_地址" : "22", 
+    "委托单位_手机" : "22", 
+    "委托单位_电话" : "122", 
+    "委托单位_网址" : "123", 
+    "委托单位_联系人" : "22", 
+    "委托单位_邮编" : "22", 
+    "客户端内存要求" : "123", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-06-03", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "12", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "支持手册"
+    ], 
+    "操作系统" : "123", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "22", 
+    "文档资料" : "123", 
+    "服务器端内存要求" : "123", 
+    "服务器端硬盘要求" : "123", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "NST-03-WI12-2011"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "123", 
+    "版本" : "123", 
+    "版本号" : "12", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "123", 
+    "网络环境" : "123", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "12", 
+    "软件用户对象描述" : "123", 
+    "需求文档" : [
+        "合同"
+    ], 
+    "需要测试的技术指标" : [
+        "用户文档集要求"
+    ]
+}
+{ 
+    "_id" : ObjectId("62810dfcdff996115566cd14"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "ddd", 
+    "功能点数" : "ddd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-17", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-13", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端内存要求" : "123", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-06-01", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 16260.1-2006"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件用户对象描述" : "ddd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ], 
+    "需要测试的技术指标其它" : ""
+}
+{ 
+    "_id" : ObjectId("6281f09edff996115566cd16"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "D", 
+    "主要功能及用途简介（限200字）" : "S", 
+    "代码行数" : "S", 
+    "其他支撑软件" : "D", 
+    "功能数" : "S", 
+    "功能点数" : "1", 
+    "受理人（签字）" : "D", 
+    "受理意见" : "受理意见2", 
+    "备注" : "D", 
+    "委托人（签字）" : "D", 
+    "委托单位Ch" : "S", 
+    "委托单位En" : "S", 
+    "委托单位_Email" : "D", 
+    "委托单位_传真" : "D", 
+    "委托单位_地址" : "D", 
+    "委托单位_手机" : "D", 
+    "委托单位_电话" : "D", 
+    "委托单位_网址" : "D", 
+    "委托单位_联系人" : "D", 
+    "委托单位_邮编" : "D", 
+    "客户端内存要求" : "2000", 
+    "应用软件" : "模式识别软件", 
+    "开发单位" : "S", 
+    "操作文档" : [
+        "诊断手册"
+    ], 
+    "操作系统" : "D", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "D", 
+    "文档资料" : "D", 
+    "服务器端内存要求" : "DDD", 
+    "服务器端硬盘要求" : "DD", 
+    "架构" : [
+        "B/S"
+    ], 
+    "测试依据" : [
+        "GB/T 16260.1-2006"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "S", 
+    "版本" : "D", 
+    "版本号" : "s", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "D", 
+    "网络环境" : "D", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件介质其它" : true, 
+    "软件名称" : "as", 
+    "软件用户对象描述" : "S", 
+    "需求文档" : [
+        "需求分析报告"
+    ], 
+    "需要测试的技术指标" : [
+        "可靠性"
+    ]
+}
+{ 
+    "_id" : ObjectId("62834957dff996115566cd19"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linux" : true, 
+    "Linuxversion" : "dd", 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-05-11", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "d", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-20", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端其他要求" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "NST-03-WI13-2011"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件名称其它" : "dd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "代码覆盖度"
+    ]
+}
+{ 
+    "_id" : ObjectId("6284a082dff996115566cd1c"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linuxversion" : "dd", 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-05", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见1", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-20", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "ddd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-26", 
+    "应用软件" : "行业管理软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "安装手册"
+    ], 
+    "操作系统" : "dd", 
+    "操作系统其它版本" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "其它"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "NST-03-WI12-2011"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "需求分析报告"
+    ], 
+    "需要测试的技术指标" : [
+        "用户文档集要求"
+    ]
+}
+{ 
+    "_id" : ObjectId("62874e9b23fa511f128fa882"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "name"
+}
+{ 
+    "_id" : ObjectId("62879e7915b3fe7e7e8b4b81"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linuxversion" : "d", 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "s", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-05-10", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "ss", 
+    "委托单位En" : "ss", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-20", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "ss", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "操作系统其它" : true, 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端其他要求" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "成果/技术鉴定测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "ss", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "ss", 
+    "软件用户对象描述" : "s", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "可靠性"
+    ]
+}
+{ 
+    "_id" : ObjectId("6288449865de8f331d75a9f5"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-04", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见1", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-10", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-12", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件名称其它" : "dd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628852cf65de8f331d75a9f8"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-04-27", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见1", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-04-27", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "d", 
+    "委托单位En" : "d", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-28", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "d", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010", 
+        "GB/T 16260.1-2006"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "d", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "d", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("6288773b65de8f331d75a9fb"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linux" : true, 
+    "Linuxversion" : "1", 
+    "Windowsversion" : "1", 
+    "中间件" : "1", 
+    "主要功能及用途简介（限200字）" : "1", 
+    "代码行数" : "1", 
+    "其他支撑软件" : "1", 
+    "功能数" : "1", 
+    "功能点数" : "1", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-03", 
+    "受理人（签字）" : "1", 
+    "受理意见" : "受理意见2", 
+    "备注" : "1", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "11", 
+    "委托单位Ch" : "1", 
+    "委托单位En" : "1", 
+    "委托单位_Email" : "1", 
+    "委托单位_传真" : "1", 
+    "委托单位_地址" : "1", 
+    "委托单位_手机" : "1", 
+    "委托单位_电话" : "1", 
+    "委托单位_网址" : "1", 
+    "委托单位_联系人" : "1", 
+    "委托单位_邮编" : "1", 
+    "客户端其他要求" : "1", 
+    "客户端内存要求" : "1", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-26", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "1", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "1", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "1", 
+    "文档资料" : "1", 
+    "服务器端内存要求" : "1", 
+    "服务器端硬盘要求" : "1", 
+    "材料检查_其他" : "1", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "1", 
+    "版本" : "1", 
+    "版本号" : "1", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "1", 
+    "网络环境" : "1", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "1", 
+    "软件用户对象描述" : "1", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "可靠性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628880f365de8f331d75a9fe"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "d", 
+    "代码行数" : "d", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "d", 
+    "功能点数" : "d", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-05-10", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见1", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-05", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "d", 
+    "委托单位En" : "d", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-26", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "d", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "成果/技术鉴定测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "d", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见3", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件用户对象描述" : "d", 
+    "需求文档" : [
+        "需求分析报告"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("6288819c65de8f331d75aa00"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-05-11", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-28", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "ddd", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端其他要求" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "NST-03-WI13-2011"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "代码不符合项检测率"
+    ]
+}
+{ 
+    "_id" : ObjectId("628889c265de8f331d75aa02"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "d", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "d", 
+    "代码行数" : "d", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "d", 
+    "功能点数" : "d", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-05-10", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见1", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "d", 
+    "委托单位En" : "d", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端内存要求" : "d", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-20", 
+    "应用软件" : "行业管理软件", 
+    "开发单位" : "d", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "d", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "d", 
+    "软件名称其它" : "d", 
+    "软件用户对象描述" : "d", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性", 
+        "代码覆盖度"
+    ]
+}
+{ 
+    "_id" : ObjectId("6288cd3d2f5d892bcb54c3af"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linuxversion" : "1", 
+    "Windowsversion" : "1", 
+    "中间件" : "1", 
+    "主要功能及用途简介（限200字）" : "1", 
+    "代码行数" : "1", 
+    "其他支撑软件" : "1", 
+    "功能数" : "1", 
+    "功能点数" : "1", 
+    "受理人_日期" : "2022-05-22", 
+    "受理人（签字）" : "1", 
+    "受理意见" : "受理意见1", 
+    "备注" : "1", 
+    "委托人_日期" : "2022-05-14", 
+    "委托人（签字）" : "1", 
+    "委托单位Ch" : "1", 
+    "委托单位En" : "1", 
+    "委托单位_Email" : "1", 
+    "委托单位_传真" : "1", 
+    "委托单位_地址" : "1", 
+    "委托单位_手机" : "1", 
+    "委托单位_电话" : "1", 
+    "委托单位_网址" : "1", 
+    "委托单位_联系人" : "1", 
+    "委托单位_邮编" : "1", 
+    "客户端内存要求" : "1", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-21", 
+    "应用软件" : "行业管理软件", 
+    "开发单位" : "11", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "11", 
+    "操作系统其它版本" : "1", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "1", 
+    "文档资料" : "1", 
+    "服务器端内存要求" : "1", 
+    "服务器端硬盘要求" : "1", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "1", 
+    "版本" : "1", 
+    "版本号" : "1", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "1", 
+    "网络环境" : "1", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "1", 
+    "软件用户对象描述" : "11", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("6289086e2f5d892bcb54c3b4"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-11", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-05", 
+    "委托人（签字）" : "ddd", 
+    "委托单位Ch" : "d", 
+    "委托单位En" : "d", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-06-02", 
+    "应用软件" : "行业管理软件", 
+    "开发单位" : "d", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端其他要求" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "C/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010", 
+        "GB/T 16260.1-2006"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "成果/技术鉴定测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "d", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "d", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("62890f412f5d892bcb54c3b8"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-18", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-04", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-19", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "ddd", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "安装手册", 
+        "诊断手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端其他要求" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "专项资金验收测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户指南"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "dd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "需求分析报告"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628999022f5d892bcb54c3bc"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "港澳台合资企业", 
+    "受理人_日期" : "2022-05-11", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-05", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "d", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "机密", 
+    "希望测试完成时间" : "2022-05-20", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "d", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "材料检查_其他" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "无法完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "专项资金验收测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "d", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "d", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628a0d9e2f5d892bcb54c3be"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Linuxversion" : "dd", 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-05", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-05", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "d", 
+    "委托单位En" : "d", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-28", 
+    "应用软件" : "行业管理软件", 
+    "开发单位" : "d", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "d", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "d", 
+    "软件名称其它" : "d", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "易用性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628a185d2f5d892bcb54c3c2"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : true, 
+    "Windowsversion" : "dd", 
+    "中间件" : "dd", 
+    "主要功能及用途简介（限200字）" : "dd", 
+    "代码行数" : "dd", 
+    "其他支撑软件" : "dd", 
+    "功能数" : "dd", 
+    "功能点数" : "dd", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-11", 
+    "受理人（签字）" : "dd", 
+    "受理意见" : "受理意见2", 
+    "备注" : "dd", 
+    "委托人_日期" : "2022-05-03", 
+    "委托人（签字）" : "dd", 
+    "委托单位Ch" : "dd", 
+    "委托单位En" : "dd", 
+    "委托单位_Email" : "dd", 
+    "委托单位_传真" : "dd", 
+    "委托单位_地址" : "dd", 
+    "委托单位_手机" : "dd", 
+    "委托单位_电话" : "dd", 
+    "委托单位_网址" : "dd", 
+    "委托单位_联系人" : "dd", 
+    "委托单位_邮编" : "dd", 
+    "客户端其他要求" : "dd", 
+    "客户端内存要求" : "dd", 
+    "密级" : "无密级", 
+    "希望测试完成时间" : "2022-05-20", 
+    "应用软件" : "办公软件", 
+    "开发单位" : "dd", 
+    "提交的样品" : "退还给我们", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "dd", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "dd", 
+    "文档资料" : "dd", 
+    "服务器端内存要求" : "dd", 
+    "服务器端硬盘要求" : "dd", 
+    "架构" : [
+        "B/S"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试类型" : [
+        "软件确认测试"
+    ], 
+    "测试项目编号" : "dd", 
+    "版本" : "dd", 
+    "版本号" : "dd", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "操作系统", 
+    "编程语言" : "dd", 
+    "网络环境" : "dd", 
+    "软件介质" : [
+        "U盘"
+    ], 
+    "软件名称" : "ddd", 
+    "软件用户对象描述" : "dd", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "可靠性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628b29e62f5d892bcb54c3c6"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "中间件" : "s", 
+    "主要功能及用途简介（限200字）" : "s", 
+    "代码行数" : "s", 
+    "其他支撑软件" : "s", 
+    "功能数" : "s", 
+    "功能点数" : "s", 
+    "单位性质" : "外合资企业", 
+    "受理人_日期" : "2022-05-02", 
+    "受理人（签字）" : "sa", 
+    "受理意见" : "受理意见1", 
+    "备注" : "s", 
+    "委托人_日期" : "2022-05-03", 
+    "委托人（签字）" : "as", 
+    "委托单位Ch" : "s", 
+    "委托单位En" : "s", 
+    "委托单位_Email" : "sa", 
+    "委托单位_传真" : "sa", 
+    "委托单位_地址" : "163 Xianlin Road, Qixia District", 
+    "委托单位_手机" : "NJU", 
+    "委托单位_电话" : "sa", 
+    "委托单位_网址" : "s", 
+    "委托单位_联系人" : "NJU", 
+    "委托单位_邮编" : "210023", 
+    "客户端内存要求" : "s", 
+    "应用软件" : "模式识别软件", 
+    "开发单位" : "s", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "s", 
+    "支持软件" : "数据库系统设计", 
+    "数据库" : "s", 
+    "文档资料" : "s", 
+    "服务器端内存要求" : "s", 
+    "服务器端硬盘要求" : "s", 
+    "架构" : [
+        "C/S"
+    ], 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "可执行文件"
+    ], 
+    "测试类型" : [
+        "软件确认测试", 
+        "成果/技术鉴定测试"
+    ], 
+    "测试项目编号" : "s", 
+    "版本" : "s", 
+    "版本号" : "s", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见2", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "s", 
+    "网络环境" : "as", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "s", 
+    "软件名称其它" : "sa", 
+    "软件用户对象描述" : "s", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "可靠性"
+    ]
+}
+{ 
+    "_id" : ObjectId("628b4ea82f5d892bcb54c3ca"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "Windows" : false, 
+    "中间件" : "1", 
+    "主要功能及用途简介（限200字）" : "1", 
+    "代码行数" : "1", 
+    "其他支撑软件" : "1", 
+    "功能数" : "1", 
+    "功能点数" : "1", 
+    "单位性质" : "内资企业", 
+    "受理人_日期" : "2022-05-11", 
+    "受理人（签字）" : "1", 
+    "受理意见" : "受理意见1", 
+    "备注" : "1", 
+    "委托人_日期" : "2022-05-11", 
+    "委托人（签字）" : "1", 
+    "委托单位Ch" : "1", 
+    "委托单位En" : "1", 
+    "委托单位_Email" : "1", 
+    "委托单位_传真" : "1", 
+    "委托单位_地址" : "1", 
+    "委托单位_手机" : "1", 
+    "委托单位_电话" : "1", 
+    "委托单位_网址" : "1", 
+    "委托单位_联系人" : "1", 
+    "委托单位_邮编" : "1", 
+    "客户端内存要求" : "1", 
+    "密级" : "秘密", 
+    "希望测试完成时间" : "2022-05-23", 
+    "应用软件" : "行业管理软件", 
+    "开发单位" : "1", 
+    "提交的样品" : "由本实验室销毁", 
+    "操作文档" : [
+        "操作员手册"
+    ], 
+    "操作系统" : "1", 
+    "支持软件" : "程序设计语言", 
+    "数据库" : "1", 
+    "文档资料" : "1", 
+    "服务器端其他要求" : "1", 
+    "服务器端内存要求" : "1", 
+    "服务器端硬盘要求" : "1", 
+    "架构" : [
+        "B/S", 
+        "其它"
+    ], 
+    "查杀病毒" : "已完成", 
+    "测试依据" : [
+        "GB/T 25000.51-2010"
+    ], 
+    "测试样品" : [
+        "源代码"
+    ], 
+    "测试项目编号" : "1", 
+    "版本" : "1", 
+    "版本号" : "1", 
+    "用户文档" : [
+        "用户手册"
+    ], 
+    "确认意见" : "确认意见1", 
+    "系统软件" : "中文处理系统", 
+    "编程语言" : "1", 
+    "网络环境" : "11", 
+    "软件介质" : [
+        "光盘"
+    ], 
+    "软件名称" : "1", 
+    "软件用户对象描述" : "1", 
+    "需求文档" : [
+        "项目计划任务书"
+    ], 
+    "需要测试的技术指标" : [
+        "功能性"
+    ], 
+    "value" : [
+        "成果/技术鉴定测试", 
+        "专项资金验收测试"
+    ], 
+    "test测试类型" : [
+        "软件确认测试", 
+        "成果/技术鉴定测试", 
+        "专项资金验收测试"
+    ], 
+    "测试类型" : NumberInt(1), 
+    "测试类型value" : [
+        "软件确认测试", 
+        "成果/技术鉴定测试", 
+        "专项资金验收测试"
+    ], 
+    "软件名称其它" : "123421", 
+    "测试类型其它" : "", 
+    "type" : NumberInt(1), 
+    "Linux" : true, 
+    "操作系统其它" : true, 
+    "软件介质其它" : "", 
+    "Windowsversion" : "", 
+    "操作系统其它版本" : "abc", 
+    "Linuxversion" : "ss", 
+    "测试1" : true, 
+    "测试3" : false, 
+    "测试2" : true
+}

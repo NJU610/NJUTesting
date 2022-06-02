@@ -1,0 +1,19 @@
+{ 
+    "_id" : "627e5f747459202af95d2d4d", 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "名称2", 
+    "url" : "123", 
+    "version" : "版本1", 
+    "function" : [
+        {
+            "ffunction" : "功能1", 
+            "mfunction" : [
+                {
+                    "value" : "子功能2", 
+                    "label" : "子功能说明1"
+                }
+            ]
+        }
+    ]
+}

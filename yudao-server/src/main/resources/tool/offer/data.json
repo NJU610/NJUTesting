@@ -1,0 +1,25 @@
+{ 
+    "_id" : "628900902f5d892bcb54c3b3", 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "小计" : "dd", 
+    "总计" : "dd", 
+    "报价提供人" : "dd", 
+    "报价日期" : "2022-05-05", 
+    "报价有效期" : [
+        "2022-05-11", 
+        "2022-06-16"
+    ], 
+    "税率（8%）" : "dd", 
+    "软件名称" : "name", 
+    "项目表格" : [
+        {
+            "id" : 1653145727177, 
+            "xiangmu" : "dd", 
+            "fenxiang" : "dd", 
+            "danjia" : "dd", 
+            "shuoming" : "dd", 
+            "hangheji" : "dd"
+        }
+    ]
+}

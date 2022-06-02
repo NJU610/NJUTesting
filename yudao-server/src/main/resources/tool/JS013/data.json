@@ -1,0 +1,96 @@
+{ 
+    "_id" : "62934d1b4964367efa3ba29d", 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "advice" : [
+        {
+            "id" :  20001, 
+            "duty" : "测试工程师", 
+            "advice" : "", 
+            "signature" : "", 
+            "date" : ""
+        }, 
+        {
+            "id" :  20002, 
+            "duty" : "测试室负责人", 
+            "advice" : "", 
+            "signature" : "", 
+            "date" : ""
+        }, 
+        {
+            "id" : 20003, 
+            "duty" : "质量负责人", 
+            "advice" : "", 
+            "signature" : "", 
+            "date" : ""
+        }, 
+        {
+            "id" : 20004, 
+            "duty" : "技术负责人", 
+            "advice" : "", 
+            "signature" : "", 
+            "date" : ""
+        }, 
+        {
+            "id" : 20005, 
+            "duty" : "监督人", 
+            "advice" : "", 
+            "signature" : "", 
+            "date" : ""
+        }
+    ], 
+    "contractId" : "FZURVtOxUd", 
+    "result" : [
+        {
+            "id" : 10001, 
+            "title" : "《测试方案》书写规范性", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10002, 
+            "title" : "测试环境是否具有典型意义以及是否符合用户要求", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10003, 
+            "title" : "测试内容的完整性，是否覆盖了整个系统", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10004, 
+            "title" : "测试方法的选取是否合理", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10005, 
+            "title" : "测试用例能否覆盖问题", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10006, 
+            "title" : "输入、输出数据设计合理性", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10007, 
+            "title" : "测试时间安排是否合理", 
+            "reason" : "", 
+            "state" : ""
+        }, 
+        {
+            "id" : 10008, 
+            "title" : "测试人力资源安排是否合理", 
+            "reason" : "", 
+            "state" : ""
+        }
+    ], 
+    "softName" : "软件名称", 
+    "type" : "测试类别", 
+    "version" : "1.0.0"
+}

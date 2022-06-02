@@ -1,0 +1,17 @@
+{ 
+    "_id" : "6294f4ac3537d417248315f1", 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "测试用例" : [
+        {
+            "id" : 1653929126338, 
+            "classification" : "1", 
+            "tid" : "2", 
+            "design" : "3", 
+            "statute" : "4", 
+            "result" : "5", 
+            "author" : "6", 
+            "time" : "7"
+        }
+    ]
+}
