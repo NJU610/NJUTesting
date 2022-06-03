@@ -1,9 +1,11 @@
 package cn.iocoder.yudao.module.system.dal.dataobject.delegation;
 
-import lombok.*;
-import java.util.*;
-import com.baomidou.mybatisplus.annotation.*;
 import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.*;
+
+import java.util.Date;
 
 /**
  * 委托 DO
@@ -100,5 +102,9 @@ public class DelegationDO extends BaseDO {
      * 取消原因
      */
     private String cancelRemark;
+    /**
+     * 软件项目委托测试工作检查表ID
+     */
+    private String table12Id;
 
 }
