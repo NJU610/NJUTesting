@@ -5,11 +5,9 @@ import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
-import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationTable12DO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
-import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationTable12Mapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
@@ -38,9 +36,6 @@ public class DelegationServiceImpl implements DelegationService {
     private DelegationMapper delegationMapper;
 
     @Resource
-    private DelegationTable12Mapper delegationTable12Mapper;
-
-    @Resource
     private TableMongoRepository tableMongoRepository;
 
     @Resource
@@ -62,13 +57,6 @@ public class DelegationServiceImpl implements DelegationService {
         delegation.setCreatorId(loginUserId);
         delegation.setState(DelegationStateEnum.DELEGATE_WRITING.getState());
         delegationMapper.insert(delegation);
-        // 创建软件项目委托测试工作检查表
-        DelegationTable12DO delegationTable12 = DelegationTable12DO
-                .builder()
-                .delegationId(delegation.getId())
-                .table12Id(tableMongoRepository.create("table12", null))
-                .build();
-        delegationTable12Mapper.insert(delegationTable12);
         // 保存日志
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 null, DelegationStateEnum.DELEGATE_WRITING,
@@ -181,13 +169,14 @@ public class DelegationServiceImpl implements DelegationService {
     public void saveDelegationTable12(DelegationSaveTableReqVO updateReqVO) {
         // 校验存在
         Long delegationId = updateReqVO.getDelegationId();
-        delegationMapper.validateDelegationExists(delegationId);
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
         // 保存表单
-        DelegationTable12DO delegationTable12DO = delegationTable12Mapper.selectOne("delegation_id", delegationId);
-        if (delegationTable12DO == null) {
-            throw exception(DELEGATION_TABLE_NOT_EXISTS);
+        if (delegation.getTable12Id() == null) {
+            // 没有就新建
+            delegation.setTable12Id(tableMongoRepository.create("table12", updateReqVO.getData()));
+            delegationMapper.updateById(delegation);
         } else {
-            tableMongoRepository.upsert("table12", delegationTable12DO.getTable12Id(), updateReqVO.getData());
+            tableMongoRepository.upsert("table12", delegation.getTable12Id(), updateReqVO.getData());
         }
     }
 
@@ -417,6 +406,34 @@ public class DelegationServiceImpl implements DelegationService {
         // TODO 删除所有其他附件
         // 删除
         delegationMapper.deleteById(id);
+    }
+
+    @Override
+    public void addFields(DelegationRespVO respVO) {
+        if (respVO == null) return;
+        String table2Id = respVO.getTable2Id();
+        if (table2Id != null) {
+            JSONObject table2 = tableMongoRepository.get("table2", table2Id);
+            String softwareName = table2.getString("软件名称");
+            String version = table2.getString("版本号");
+            String clientUnit = table2.getString("委托单位Ch");
+            if (respVO.getSoftwareName() == null) {
+                respVO.setSoftwareName(softwareName);
+            }
+            if (respVO.getVersion() == null) {
+                respVO.setVersion(version);
+            }
+            if (respVO.getClientUnit() == null) {
+                respVO.setClientUnit(clientUnit);
+            }
+        }
+    }
+
+    @Override
+    public void addFields(List<DelegationRespVO> respVOs) {
+        for (DelegationRespVO respVO : respVOs) {
+            addFields(respVO);
+        }
     }
 
     //判断委托名称不重复
