@@ -1,10 +1,11 @@
 package cn.iocoder.yudao.module.system.controller.admin.delegation.vo;
 
-import lombok.*;
-import java.util.*;
-import io.swagger.annotations.*;
-import javax.validation.constraints.*;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
@@ -74,5 +75,8 @@ public class DelegationBaseVO {
 
     @ApiModelProperty(value = "取消原因")
     private String cancelRemark;
+
+    @ApiModelProperty(value = "软件项目委托测试工作检查表ID")
+    private String table12Id;
 
 }

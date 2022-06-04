@@ -1,10 +1,15 @@
 package cn.iocoder.yudao.module.system.controller.admin.delegation.vo;
 
-import lombok.*;
-import java.util.*;
-import io.swagger.annotations.*;
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
@@ -42,6 +47,9 @@ public class DelegationPageReqVO extends PageParam {
 
     @ApiModelProperty(value = " 软件文档评审表ID")
     private String table14Id;
+
+    @ApiModelProperty(value = "软件项目委托测试工作检查表ID")
+    private String table12Id;
 
     @ApiModelProperty(value = "报价单ID")
     private String offerId;

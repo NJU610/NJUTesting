@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.system.service.delegation;
 
 
 
+import cn.hutool.core.lang.UUID;
 import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
@@ -76,6 +77,8 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void updateDelegation(){
         // 准备参数
         Mockito.when(tableMongoRepository.create("table12", null)).thenReturn(randomString());
@@ -104,11 +107,15 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void submitDelegation() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.DELEGATE_WRITING.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -122,23 +129,27 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
         delegationMapper.insert(del);
         DelegationSubmitReqVO submitReqVO = randomPojo(DelegationSubmitReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
         });
 
         delegationService.submitDelegation(submitReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveDelegationTable2() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -153,7 +164,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationSaveTableReqVO updateReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         delegationService.saveDelegationTable2(updateReqVO);
@@ -161,12 +172,16 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveDelegationTable3() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -181,7 +196,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationSaveTableReqVO updateReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         delegationService.saveDelegationTable3(updateReqVO);
@@ -189,12 +204,16 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveDelegationTable14() {
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -209,7 +228,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationSaveTableReqVO updateReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         delegationService.saveDelegationTable14(updateReqVO);
@@ -217,12 +236,16 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void distributeDelegation2Mkt(){
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -237,25 +260,29 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationDistributeReqVO distributeReqVO = randomPojo(DelegationDistributeReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
             o.setAcceptorId(randomLongId());
         });
 
         delegationService.distributeDelegation2Mkt(distributeReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState());
 
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void distributeDelegation2Test(){
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_TESTING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -270,23 +297,27 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationDistributeReqVO distributeReqVO = randomPojo(DelegationDistributeReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
             o.setAcceptorId(randomLongId());
         });
 
         delegationService.distributeDelegation2Test(distributeReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationSuccessMkt(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum. MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -301,23 +332,28 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationAuditReqVO auditReqVO = randomPojo(DelegationAuditReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
             o.setRemark(randomString());
         });
 
         delegationService.auditDelegationSuccessMkt(auditReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationSuccessTest(){
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum. TESTING_DEPARTMENT_AUDIT_DELEGATION.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -333,24 +369,28 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationAuditReqVO auditReqVO = randomPojo(DelegationAuditReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
             o.setRemark(randomString());
         });
 
         delegationService.auditDelegationSuccessTest(auditReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState());
 
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationFailMkt(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum. MARKETING_DEPARTMENT_AUDIT_DELEGATION.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -366,23 +406,27 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationAuditReqVO auditReqVO = randomPojo(DelegationAuditReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
             o.setRemark(randomString());
         });
 
         delegationService.auditDelegationFailMkt(auditReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
     }
     
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationFailTest(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum. TESTING_DEPARTMENT_AUDIT_DELEGATION.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -398,23 +442,27 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationAuditReqVO auditReqVO = randomPojo(DelegationAuditReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
             o.setRemark(randomString());
         });
 
         delegationService.auditDelegationFailTest(auditReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.TESTING_DEPARTMENT_AUDIT_DELEGATION_FAIL.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveOffer(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum. MARKETING_DEPARTMENT_GENERATE_OFFER.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -431,22 +479,26 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationSaveTableReqVO offerSaveReqVO = randomPojo(DelegationSaveTableReqVO.class,o->{
-           o.setDelegationId(1L);
+           o.setDelegationId(delegationId);
         });
 
         delegationService.saveOffer(offerSaveReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void submitOffer(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_OFFER.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -463,22 +515,26 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         OfferSubmitReqVO offerSubmitReqVO = randomPojo(OfferSubmitReqVO.class,o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         delegationService.submitOffer(offerSubmitReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_DEALING_OFFER.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void rejectOffer(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CLIENT_DEALING_OFFER.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -495,22 +551,26 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         OfferRejectReqVO offerRejectReqVO = randomPojo(OfferRejectReqVO.class,o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         delegationService.rejectOffer(offerRejectReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_REJECT_OFFER.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void acceptOffer(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CLIENT_DEALING_OFFER.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -527,22 +587,26 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         OfferAcceptReqVO offerAcceptReqVO = randomPojo(OfferAcceptReqVO.class,o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         delegationService.acceptOffer(offerAcceptReqVO);
 
-        DelegationDO delegationDO = delegationMapper.selectById(1L);
+        DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
         assertEquals(delegationDO.getState(),DelegationStateEnum.MARKETING_DEPARTMENT_GENERATE_CONTRACT.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void deleteDelegation(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CLIENT_DEALING_OFFER.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -558,19 +622,22 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
         delegationMapper.insert(del);
 
-        delegationService.deleteDelegation(1L);
+        delegationService.deleteDelegation(delegationId);
 
         assertEquals(delegationMapper.selectCount(),0L);
     }
 
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void cancelDelegationClient(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -585,18 +652,22 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationCancelReqVO delegationCancelReqVO = randomPojo(DelegationCancelReqVO.class,o->{
-           o.setId(1L);
+           o.setId(delegationId);
         });
 
         delegationService.cancelDelegationClient(delegationCancelReqVO);
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void cancelDelegationAdmin(){
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.WAIT_MARKETING_DEPARTMENT_ASSIGN_STAFF.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
@@ -611,7 +682,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         DelegationCancelReqVO delegationCancelReqVO = randomPojo(DelegationCancelReqVO.class,o->{
-            o.setId(1L);
+            o.setId(delegationId);
         });
 
         delegationService.cancelDelegationAdmin(delegationCancelReqVO);

@@ -1,4 +1,4 @@
-//package cn.iocoder.yudao.module.system.service.company;
+package cn.iocoder.yudao.module.system.service.company;//package cn.iocoder.yudao.module.system.service.company;
 //
 //import org.junit.jupiter.api.Disabled;
 //import org.junit.jupiter.api.Test;
@@ -181,5 +181,122 @@
 //    }
 //
 //}
+
+
+import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
+import cn.iocoder.yudao.module.system.controller.admin.company.vo.CompanyCreateReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.company.vo.CompanyUpdateReqVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.company.CompanyDO;
+import cn.iocoder.yudao.module.system.dal.mysql.company.CompanyMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
+
+import javax.annotation.Resource;
+
+import java.util.Collections;
+
+import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomPojo;
+import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+@Import(CompanyServiceImpl.class)
+class CompanyServiceImplTest extends BaseDbUnitTest {
+
+    @Resource
+    private CompanyMapper companyMapper;
+
+    @Resource
+    private CompanyService companyService;
+
+    @Test
+    void createCompany() {
+
+        CompanyCreateReqVO createReqVO = randomPojo(CompanyCreateReqVO.class,o->{
+            o.setCode("swg");
+            o.setName(randomString());
+        });
+
+        assertNotNull(companyService.createCompany(createReqVO));
+
+    }
+
+    @Test
+    void updateCompany() {
+
+        CompanyDO com = randomPojo(CompanyDO.class,o->{
+            o.setName(randomString());
+            o.setCode("swg");
+            o.setId(1L);
+        });
+
+        companyMapper.insert(com);
+
+        CompanyUpdateReqVO updateReqVO = randomPojo(CompanyUpdateReqVO.class,o->{
+            o.setId(1L);
+            o.setName("newname");
+            o.setCode("swg");
+        });
+
+        companyService.updateCompany(updateReqVO);
+
+        assertEquals(companyMapper.selectById(1L).getName(),"newname");
+    }
+
+    @Test
+    void deleteCompany() {
+
+        CompanyDO com = randomPojo(CompanyDO.class,o->{
+            o.setName(randomString());
+            o.setCode("swg");
+            o.setId(1L);
+        });
+
+        companyMapper.insert(com);
+
+        companyService.deleteCompany(1L);
+
+        assertEquals(companyMapper.selectCount(),0);
+
+    }
+
+    @Test
+    void getCompany() {
+
+        CompanyDO com = randomPojo(CompanyDO.class,o->{
+            o.setName(randomString());
+            o.setCode("swg");
+            o.setId(1L);
+        });
+
+        companyMapper.insert(com);
+
+        assertNotNull(companyService.getCompany(1L));
+
+    }
+
+    @Test
+    void getCompanyList() {
+
+        CompanyDO com = randomPojo(CompanyDO.class,o->{
+            o.setName(randomString());
+            o.setCode("swg");
+            o.setId(1L);
+        });
+
+        companyMapper.insert(com);
+
+        assertNotNull(companyService.getCompanyList(Collections.singleton(1L)));
+
+    }
+
+    @Test
+    void getCompanyPage() {
+    }
+
+    @Test
+    void testGetCompanyList() {
+    }
+}
 
 
