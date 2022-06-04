@@ -1,0 +1,18 @@
+@startuml
+title 用户公司认证
+
+actor User as user
+participant "User Agent" as userAgent
+participant "市场部主管" as marketManager
+participant "市场部工作人员" as marketWorker
+database "DB" as data
+
+autonumber
+user->userAgent:提出公司认证申请
+userAgent->marketManager:新的认证申请安排
+marketManager->marketWorker:分配审批认证申请任务
+marketWorker->data:通过申请，更新数据表中对应信息
+marketWorker->userAgent:通过申请 or 未通过申请 + 处理人 + (若未通过)理由
+userAgent->user:通过申请 or 未通过申请 + 处理人 + (若未通过)理由
+
+@enduml
