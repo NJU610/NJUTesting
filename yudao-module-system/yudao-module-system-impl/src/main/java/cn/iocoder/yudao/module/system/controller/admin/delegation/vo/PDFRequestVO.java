@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-@ApiModel("生成PDF Request VO")
+@ApiModel("通过表格编号生成PDF Request VO")
 @Data
 @EqualsAndHashCode
 @ToString
