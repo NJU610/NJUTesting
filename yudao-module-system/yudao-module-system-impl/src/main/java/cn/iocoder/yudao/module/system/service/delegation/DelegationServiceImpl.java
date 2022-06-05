@@ -5,10 +5,16 @@ import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.module.infra.api.file.FileApi;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
 import cn.iocoder.yudao.module.system.convert.delegation.DelegationConvert;
+import cn.iocoder.yudao.module.system.dal.dataobject.contract.ContractDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.report.ReportDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.solution.SolutionDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
+import cn.iocoder.yudao.module.system.dal.mysql.contract.ContractMapper;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.report.ReportMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.solution.SolutionMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
@@ -40,6 +46,15 @@ public class DelegationServiceImpl implements DelegationService {
 
     @Resource
     private DelegationMapper delegationMapper;
+
+    @Resource
+    private ContractMapper contractMapper;
+
+    @Resource
+    private SolutionMapper solutionMapper;
+
+    @Resource
+    private ReportMapper reportMapper;
 
     @Resource
     private TableMongoRepository tableMongoRepository;
@@ -559,6 +574,86 @@ public class DelegationServiceImpl implements DelegationService {
                 initEnum, DelegationStateEnum.ADMIN_CANCEL_DELEGATION,
                 "管理员取消委托，原因：" + delegationCancelReqVO.getRemark(),
                 new HashMap<String, Object>(){{put("delegation", delegation);}});
+    }
+
+    @Override
+    public String exportTable(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (Objects.equals(tableName, "table2")) {
+            tableId = delegation.getTable2Id();
+        } else if (Objects.equals(tableName, "table3")) {
+            tableId = delegation.getTable3Id();
+        } else if (Objects.equals(tableName, "table12")) {
+            tableId = delegation.getTable12Id();
+        } else if (Objects.equals(tableName, "table14")) {
+            tableId = delegation.getTable14Id();
+        } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
+            if (delegation.getContractId() == null) {
+                throw exception(TABLE_NOT_EXISTS);
+            }
+            ContractDO contract = contractMapper.selectById(delegation.getContractId());
+            if (contract == null) {
+                throw exception(CONTRACT_NOT_EXISTS);
+            }
+            if (Objects.equals(tableName, "table4")) {
+                tableId = contract.getTable4Id();
+            } else if (Objects.equals(tableName, "table5")) {
+                tableId = contract.getTable5Id();
+            }
+        } else if (Objects.equals(tableName, "table6") || Objects.equals(tableName, "table13")) {
+            if (delegation.getSolutionId() == null) {
+                throw exception(SOLUTION_NOT_EXISTS);
+            }
+            SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
+            if (solution == null) {
+                throw exception(SOLUTION_NOT_EXISTS);
+            }
+            if (Objects.equals(tableName, "table6")) {
+                tableId = solution.getTable6Id();
+            } else if (Objects.equals(tableName, "table13")) {
+                tableId = solution.getTable13Id();
+            }
+        } else if (Objects.equals(tableName, "table7") || Objects.equals(tableName, "table8") ||
+                Objects.equals(tableName, "table9") || Objects.equals(tableName, "table10") ||
+                Objects.equals(tableName, "table11")) {
+            if (delegation.getReportId() == null) {
+                throw exception(REPORT_NOT_EXISTS);
+            }
+            ReportDO report = reportMapper.selectById(delegation.getReportId());
+            if (report == null) {
+                throw exception(REPORT_NOT_EXISTS);
+            }
+            switch (tableName) {
+                case "table7":
+                    tableId = report.getTable7Id();
+                    break;
+                case "table8":
+                    tableId = report.getTable8Id();
+                    break;
+                case "table9":
+                    tableId = report.getTable9Id();
+                    break;
+                case "table10":
+                    tableId = report.getTable10Id();
+                    break;
+                case "table11":
+                    tableId = report.getTable11Id();
+                    break;
+            }
+        }
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
     }
 
     @Override
