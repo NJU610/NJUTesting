@@ -750,7 +750,7 @@ public class DelegationServiceImpl implements DelegationService {
         String type;
         String result;
         if (tableName.equals("table8") || tableName.equals("table9") || tableName.equals("table11")) {
-            type = ".xlsx";
+            type = ".xls";
         } else {
             type = ".pdf";
         }
