@@ -9,10 +9,10 @@ from mailmerge import MailMerge  # 引用邮件处理模块
 # datafile_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js002\\js002.xlsx'  # 表格位置
 # data = xlrd.open_workbook(datafile_path)
 # table = data.sheet_by_name('这是一个合同')  # excel表名
-template = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js004\\NST－04－JS004－2011－软件委托测试合同.docx'  # 模版位置
+template = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS004\\NST－04－JS004－2011－软件委托测试合同.docx'  # 模版位置
 # nrows = table.nrows
 
-with open("C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js004\\data.json", 'r', encoding='utf8') as fp:
+with open("C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS004\\data.json", 'r', encoding='utf8') as fp:
   jdata = json.load(fp)
   document = MailMerge(template)
 
@@ -39,7 +39,7 @@ with open("C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js004\\data.jso
     BankA = jdata["开户银行"],
     NumA = jdata["账号"],
     PostA = jdata["邮编2"], #?
-    DelB = jdata["授权代表2"],\
+    DelB = jdata["授权代表2"],
     SigDateB = jdata["签章日期2"],
     ContactB = jdata["受托方联系人"],
     AddrB = jdata["受托方通讯地址"],
@@ -48,7 +48,7 @@ with open("C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js004\\data.jso
     FaxB = jdata["受托方传真"]
     
   )
-  o_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\JS004\\' #输出地址
+  o_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS004\\' #输出地址
   o_name = jdata["_id"] + "_" + "JS004"
   wordname = o_path + o_name + '.docx' 
   document.write(wordname)  # 创建新文件

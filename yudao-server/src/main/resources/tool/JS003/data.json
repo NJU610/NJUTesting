@@ -1,19 +1,31 @@
 { 
-    "_id" : "627e5f747459202af95d2d4d", 
+    "_id" : "6298697f1d180901c7d6709a", 
     "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
-    "name" : "名称2", 
-    "url" : "123", 
-    "version" : "版本1", 
     "function" : [
         {
-            "ffunction" : "功能1", 
+            "ffunction" : "聊天", 
             "mfunction" : [
                 {
-                    "value" : "子功能2", 
-                    "label" : "子功能说明1"
+                    "value" : "表情", 
+                    "label" : "的hi哦按段好傻的哈斯卡拉德哈卡打的大地好傻肯定会AKLDH啊快点哈克的哈克的大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+                }, 
+                {
+                    "value" : "语音", 
+                    "label" : "的hi哦按段好傻的哈斯卡拉德哈卡打的大地好傻肯定会AKLDH啊快点哈克的哈克的大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+                }
+            ]
+        }, 
+        {
+            "ffunction" : "朋友圈", 
+            "mfunction" : [
+                {
+                    "value" : "adad", 
+                    "label" : "adaD"
                 }
             ]
         }
-    ]
+    ], 
+    "name" : "微信", 
+    "version" : "1"
 }

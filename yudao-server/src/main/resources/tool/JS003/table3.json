@@ -1,0 +1,1144 @@
+{ 
+    "_id" : ObjectId("6273aaaee56d5d573d6d6dd1"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "lyw", 
+    "name" : "test table3 name"
+}
+{ 
+    "_id" : ObjectId("6277c5e0de06567ecfcf4a24"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "lyw", 
+    "name" : "table3"
+}
+{ 
+    "_id" : ObjectId("627cbc7c8a79b05d2c4795a8"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627cbf968a79b05d2c4795ac"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627cbff48a79b05d2c4795ae"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627cd562049c0f0ac980369d"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627cff32049c0f0ac98036a1"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d0036049c0f0ac98036a5"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d00c2049c0f0ac98036a9"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d00de049c0f0ac98036ad"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d0387049c0f0ac98036b1"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d042e049c0f0ac98036b5"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d07c7049c0f0ac98036b9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d0fa11565ff3ab4be33e0"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d1155332a42477f81f3c5"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d116f332a42477f81f3c8"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d166c56f1ad5bfa458382"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d18da56f1ad5bfa458387"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627d19ed56f1ad5bfa45838c"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627ddd2069497e642520da78"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627de0a669497e642520da7e"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627de2ca69497e642520da84"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627de6be69497e642520da8a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627de71f69497e642520da90"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627de88669497e642520da96"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627dea2469497e642520da9c"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627dec6469497e642520daa2"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627ded3e723e4f019cdd2fff"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627ded6e723e4f019cdd3005"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627deda8723e4f019cdd300b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627dfbdc723e4f019cdd3011"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e07d818765d4a1e7d4031"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e088c18765d4a1e7d4037"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e13eb8a9cdd53dbfc299c"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e147c8a9cdd53dbfc29a2"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e19428a9cdd53dbfc29aa"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e2e6b8a9cdd53dbfc29b2"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e3f608a9cdd53dbfc29ba"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("627e5f747459202af95d2d4d"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "名称2", 
+    "url" : "123", 
+    "version" : "版本1", 
+    "function" : [
+        {
+            "ffunction" : "功能1", 
+            "mfunction" : [
+                {
+                    "value" : "子功能2", 
+                    "label" : "子功能说明1"
+                }
+            ]
+        }
+    ]
+}
+{ 
+    "_id" : ObjectId("627f4d5a3d2b401d68b6b766"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "1324", 
+            "mfunction" : [
+                {
+                    "value" : "234", 
+                    "label" : "35"
+                }
+            ]
+        }
+    ], 
+    "name" : "123", 
+    "version" : "345"
+}
+{ 
+    "_id" : ObjectId("627fbf1299bb8448da8fcd5d"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "343", 
+            "mfunction" : [
+                {
+                    "value" : "2435", 
+                    "label" : "32435"
+                }
+            ]
+        }
+    ], 
+    "name" : "12", 
+    "version" : "23"
+}
+{ 
+    "_id" : ObjectId("6280e59a99bb8448da8fcd62"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "333", 
+            "mfunction" : [
+                {
+                    "value" : "333", 
+                    "label" : "3333"
+                }
+            ]
+        }
+    ], 
+    "name" : "123", 
+    "version" : "23323"
+}
+{ 
+    "_id" : ObjectId("6280f07f99bb8448da8fcd65"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6280f12599bb8448da8fcd6b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6280f4f999bb8448da8fcd71"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6280f79f99bb8448da8fcd79"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6280f7cd99bb8448da8fcd81"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62810d13dff996115566cd12"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "3344", 
+            "mfunction" : [
+                {
+                    "value" : "123", 
+                    "label" : "2334"
+                }
+            ]
+        }
+    ], 
+    "name" : "12", 
+    "version" : "12"
+}
+{ 
+    "_id" : ObjectId("62810e0edff996115566cd15"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("6281f0cedff996115566cd17"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "DD", 
+            "mfunction" : [
+                {
+                    "value" : "DD", 
+                    "label" : "DD"
+                }
+            ]
+        }
+    ], 
+    "name" : "DD", 
+    "version" : "DD"
+}
+{ 
+    "_id" : ObjectId("62834966dff996115566cd1a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "dd", 
+            "mfunction" : [
+                {
+                    "value" : "dd", 
+                    "label" : "dd"
+                }
+            ]
+        }
+    ], 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("6284a090dff996115566cd1d"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "4", 
+            "mfunction" : [
+                {
+                    "value" : "5", 
+                    "label" : "6"
+                }
+            ]
+        }
+    ], 
+    "name" : "1", 
+    "version" : "2"
+}
+{ 
+    "_id" : ObjectId("62874e9c23fa511f128fa883"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62879e8415b3fe7e7e8b4b82"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "dd", 
+            "mfunction" : [
+                {
+                    "value" : "dd", 
+                    "label" : "dd"
+                }
+            ]
+        }
+    ], 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628844a465de8f331d75a9f6"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628852db65de8f331d75a9f9"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6288774c65de8f331d75a9fc"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "1"
+        }, 
+        {
+            "ffunction" : "1", 
+            "mfunction" : [
+                {
+                    "value" : "1", 
+                    "label" : "1"
+                }
+            ]
+        }
+    ], 
+    "name" : "1", 
+    "version" : "1"
+}
+{ 
+    "_id" : ObjectId("628880fa65de8f331d75a9ff"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628881a165de8f331d75aa01"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628889c765de8f331d75aa03"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("6288ccc62f5d892bcb54c3ae"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("628908742f5d892bcb54c3b5"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "dd"
+        }
+    ], 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("62890f492f5d892bcb54c3b9"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "dd"
+        }
+    ], 
+    "name" : "ddd", 
+    "version" : "dddd"
+}
+{ 
+    "_id" : ObjectId("628999142f5d892bcb54c3bd"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "mfunction" : [
+                {
+                    "value" : "dd", 
+                    "label" : "dd"
+                }
+            ]
+        }
+    ], 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628b5008a7a60370df6a1285"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b55d5c4c8b3788c4694e4"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b55efc22a950231ca31e8"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b5705096d4d5e90fc7cb7"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b5a0cc22a950231ca31f0"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b5be7abaa9d153c8e92ba"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b5beeabaa9d153c8e92c0"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b5cb61b1d2d55f5992fb3"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b5cdac22a950231ca31f8"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628b7ab21b1d2d55f5992fbb"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "1", 
+    "version" : "1"
+}
+{ 
+    "_id" : ObjectId("628b8b3d1b1d2d55f5992fbd"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd"
+}
+{ 
+    "_id" : ObjectId("628ba27a1b1d2d55f5992fbf"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("628ba4741b1d2d55f5992fc1"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("628ba80c1b1d2d55f5992fc3"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628ba9581b1d2d55f5992fc5"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd"
+}
+{ 
+    "_id" : ObjectId("628c88537237c4247c559f69"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "dd"
+}
+{ 
+    "_id" : ObjectId("628cc8177237c4247c559f72"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "cc"
+        }
+    ], 
+    "name" : "dd", 
+    "version" : "dd"
+}
+{ 
+    "_id" : ObjectId("628ce3787237c4247c559f76"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("628e3a987ee4c4083b94b0b4"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628e3aaa7ee4c4083b94b0bc"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628e4dab7ee4c4083b94b0c5"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "cc", 
+            "mfunction" : [
+                {
+                    "value" : "cc", 
+                    "label" : "dd"
+                }
+            ]
+        }
+    ], 
+    "name" : "cc", 
+    "version" : "cc"
+}
+{ 
+    "_id" : ObjectId("628f5ec02e3a493612483b49"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f67132e3a493612483b56"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f68122e3a493612483b5e"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f68d42e3a493612483b66"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f80f82e3a493612483b72"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f822222c23d2ceab3b950"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f830322c23d2ceab3b958"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f83b122c23d2ceab3b963"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("628f842322c23d2ceab3b96e"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62905aebb01eaa168f43c301"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62905d26b01eaa168f43c30e"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62905e9fb01eaa168f43c31b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62905f05b01eaa168f43c328"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("629062305aea8e07ecf53ff7"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("629063815aea8e07ecf54004"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("629068695aea8e07ecf54011"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("629069a15aea8e07ecf5401e"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6290773aed6d9e7a89c3e611"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "cc"
+        }
+    ], 
+    "name" : "cc", 
+    "version" : "cc"
+}
+{ 
+    "_id" : ObjectId("6291f7f109e0dd33d9d0db2e"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "cc"
+        }
+    ], 
+    "name" : "ddd", 
+    "version" : "ddd"
+}
+{ 
+    "_id" : ObjectId("629258074964367efa3ba274"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6292c3b44964367efa3ba277"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6292c4964964367efa3ba27a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6292d92d4964367efa3ba282"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6292d9e34964367efa3ba286"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6292dab24964367efa3ba28a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6292dd954964367efa3ba290"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629342f54964367efa3ba29a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6293515d4964367efa3ba2a6"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629352ba4964367efa3ba2a9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629374ad4964367efa3ba2b9"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("62943edf4d7203694335b52b"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629440ca4d7203694335b532"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629441794d7203694335b537"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6294484e4d7203694335b545"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("62944bfb4d7203694335b54c"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("62944c704d7203694335b54f"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6294612a4d7203694335b55d"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629493f13537d417248315c9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("629493fe3537d417248315cc"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6294cf143537d417248315d9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("6294e7733537d417248315e9"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "功能1", 
+            "mfunction" : [
+                {
+                    "value" : "子功能1", 
+                    "label" : "没有说明"
+                }
+            ]
+        }
+    ], 
+    "name" : "名称", 
+    "version" : "123"
+}
+{ 
+    "_id" : ObjectId("629582953537d417248315f9"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "name" : "名称", 
+    "version" : "版本"
+}
+{ 
+    "_id" : ObjectId("629585593537d417248315fd"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "ada", 
+            "mfunction" : [
+                {
+                    "value" : "ad", 
+                    "label" : "ad"
+                }
+            ]
+        }
+    ], 
+    "name" : "dada", 
+    "version" : "ada"
+}
+{ 
+    "_id" : ObjectId("6296204c3537d41724831603"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "dd", 
+            "mfunction" : [
+                {
+                    "value" : "aa", 
+                    "label" : "vv"
+                }
+            ]
+        }
+    ], 
+    "name" : "1231", 
+    "version" : "34"
+}
+{ 
+    "_id" : ObjectId("6297525447ca6e1a52a045ef"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO"
+}
+{ 
+    "_id" : ObjectId("629811c347ca6e1a52a045f3"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "功能1", 
+            "mfunction" : [
+                {
+                    "value" : "子功能1", 
+                    "label" : "子功能说明1"
+                }
+            ]
+        }
+    ], 
+    "name" : "软件名称应该确定", 
+    "version" : "版本号是固定的吗"
+}
+{ 
+    "_id" : ObjectId("629858e61d180901c7d67094"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "a"
+        }
+    ], 
+    "name" : "名 称 12", 
+    "version" : "1.0"
+}
+{ 
+    "_id" : ObjectId("6298697f1d180901c7d6709a"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "ffunction" : "聊天", 
+            "mfunction" : [
+                {
+                    "value" : "表情", 
+                    "label" : "的hi哦按段好傻的哈斯卡拉德哈卡打的大地好傻肯定会AKLDH啊快点哈克的哈克的大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+                }, 
+                {
+                    "value" : "语音", 
+                    "label" : "的hi哦按段好傻的哈斯卡拉德哈卡打的大地好傻肯定会AKLDH啊快点哈克的哈克的大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+                }
+            ]
+        }, 
+        {
+            "ffunction" : "朋友圈", 
+            "mfunction" : [
+                {
+                    "value" : "adad", 
+                    "label" : "adaD"
+                }
+            ]
+        }
+    ], 
+    "name" : "微信", 
+    "version" : "1"
+}
+{ 
+    "_id" : ObjectId("62999164f1f0766fd6227e0c"), 
+    "deleted" : true, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "author" : "jzx", 
+    "name" : "test"
+}
+{ 
+    "_id" : ObjectId("6299b39e27d91d0171d3366d"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "function" : [
+        {
+            "功能名称" : "d", 
+            "子功能列表" : [
+                {
+                    "子功能名称" : "d", 
+                    "子功能说明" : "c"
+                }
+            ]
+        }
+    ], 
+    "版本号" : "1.0", 
+    "软件名称" : "名 称 12"
+}
+{ 
+    "_id" : ObjectId("6299baa727d91d0171d33670"), 
+    "deleted" : false, 
+    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "版本号" : "1.0", 
+    "软件名称" : "名 称 12"
+}
