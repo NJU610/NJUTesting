@@ -1,13 +1,15 @@
 package cn.iocoder.yudao.module.system.service.delegation;
 
-import java.util.*;
-import javax.validation.*;
-import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
-import cn.iocoder.yudao.module.system.controller.admin.flow.vo.FlowLogInstanceResponseVO;
-import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
+import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import com.alibaba.fastjson.JSONObject;
+
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 委托 Service 接口
@@ -271,4 +273,12 @@ public interface DelegationService {
      * @param delegationCancelReqVO 取消信息
      */
     void cancelDelegationAdmin(DelegationCancelReqVO delegationCancelReqVO);
+
+
+    /**
+     * 为表格生成pdf
+     * @param pdfRequestVO 生成条件
+     * @return pdf文件链接
+     */
+    String exportPDFOfTable(PDFRequestVO pdfRequestVO) throws IOException;
 }
