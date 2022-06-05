@@ -633,7 +633,7 @@ public class DelegationServiceImpl implements DelegationService {
         // 执行pdf生成脚本
         Process proc;
         try {
-            String command = "python " +
+            String command = "python3 " +
                     rootPath + File.separator + script_path + File.separator + "test.py" + " " +
                     "-t " + rootPath + File.separator + script_path + File.separator + template_name + " " +
                     "-i " + rootPath + File.separator + prefix + ".json" + " " +
