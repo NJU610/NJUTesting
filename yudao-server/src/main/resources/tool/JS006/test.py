@@ -1,3 +1,4 @@
+import os
 from signal import SIGABRT
 from sqlite3 import DatabaseError
 import xlrd  # 引入Excel读取模块
@@ -5,7 +6,7 @@ import json
 import xlwt
 import getopt
 import sys
-from docx2pdf import convert
+#from docx2pdf import convert
 from mailmerge import MailMerge  # 引用邮件处理模块
 
 def main(argv):
@@ -67,7 +68,10 @@ def main(argv):
 
     wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件
+    #windows
     convert(wordname, o_path + '.pdf')
+    #linux
+    os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0,o_path.rfind('\\')] + "\\ " + o_path + ".docx")
     
 if __name__ == '__main__':
     main(sys.argv[1:])
