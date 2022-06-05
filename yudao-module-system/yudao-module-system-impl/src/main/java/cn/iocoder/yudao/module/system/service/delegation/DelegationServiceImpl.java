@@ -760,7 +760,7 @@ public class DelegationServiceImpl implements DelegationService {
             throw exception(FILE_NOT_EXISTS);
         }
         try {
-            result = fileApi.createFile( prefix + ".pdf" , Files.readAllBytes(Paths.get(filePath)));
+            result = fileApi.createFile( prefix + type , Files.readAllBytes(Paths.get(filePath)));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
