@@ -12,9 +12,10 @@ def main(argv):
       
   o_path = ""
   i_path = ""
+  template = ""
   
   try:
-    opts, args = getopt.getopt(argv,'o:i:',["o_name=","i_path="])
+    opts, args = getopt.getopt(argv,'o:i:t:',["o_name=","i_path=","template="])
   except getopt.GetoptError:
     sys.exit(2)
     
@@ -23,9 +24,11 @@ def main(argv):
           o_path = arg
       elif opt == "-i":
           i_path = arg 
+      elif opt == "-t":
+          template = arg
 
   
-  template = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\NST－04－JS006－2011－软件测试方案.docx'  # 模版位置
+  #template = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\NST－04－JS006－2011－软件测试方案.docx'  # 模版位置
   with open(i_path, 'r', encoding='utf8') as fp:
     jdata = json.load(fp)
     

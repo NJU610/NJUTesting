@@ -61,4 +61,4 @@ def main(argv):
 if __name__ == '__main__':
    main(sys.argv[1:])
    
-   #python c:/Users/Yongp/Desktop/Classified/NJUTesting/yudao-server/src/main/resources/tool/main.py -t 'JS006' -o 'output' -i "C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\data.json" 
+   #python c:/Users/Yongp/Desktop/Classified/NJUTesting/yudao-server/src/main/resources/tool/main.py -t 'JS006' -o 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\output' -i "C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\data.json" 
