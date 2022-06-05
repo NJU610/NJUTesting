@@ -330,7 +330,13 @@ public class DelegationController {
         ExcelUtils.write(response, "委托.xls", "数据", DelegationExcelVO.class, datas);
     }
 
-    @GetMapping(value = "/export-pdf")
+    @GetMapping("/export-pdf-by-delegation")
+    @ApiOperation("通过委托编号导出表格pdf")
+    public CommonResult<String> exportTable(@Valid DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        return success(delegationService.exportTable(exportTableReqVO));
+    }
+
+    @GetMapping("/export-pdf")
     @ApiOperation("通过表格编号导出表格pdf")
     public CommonResult<String> exportPDFOfTable(@Valid PDFRequestVO pdfRequestVO) throws IOException {
         return success(delegationService.exportPDFOfTable(pdfRequestVO));
