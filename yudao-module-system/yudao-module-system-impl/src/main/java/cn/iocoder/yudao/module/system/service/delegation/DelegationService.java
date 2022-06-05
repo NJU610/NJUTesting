@@ -274,6 +274,13 @@ public interface DelegationService {
      */
     void cancelDelegationAdmin(DelegationCancelReqVO delegationCancelReqVO);
 
+    /**
+     * 导出委托表格
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable(DelegationExportTableReqVO exportTableReqVO) throws IOException;
 
     /**
      * 为表格生成pdf
