@@ -69,7 +69,7 @@ def main(argv):
     wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件
     #windows
-    convert(wordname, o_path + '.pdf')
+    #convert(wordname, o_path + '.pdf')
     #linux
     os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0,o_path.rfind('\\')] + "\\ " + o_path + ".docx")
     
