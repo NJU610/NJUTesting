@@ -677,9 +677,10 @@ public class DelegationServiceImpl implements DelegationService {
         String rootPath = null;
         rootPath = classPathResource.getFile().getAbsolutePath();
         System.out.println(rootPath);
+        String fileRootPath = "/root/test";
 
         // 将json写入文件
-        File newFile = new File(classPathResource.getFile(), prefix + ".json");
+        File newFile = new File(fileRootPath, prefix + ".json");
         assert newFile.createNewFile();
         FileOutputStream outputStream = new FileOutputStream(newFile);
         outputStream.write(json.getBytes());
@@ -731,8 +732,8 @@ public class DelegationServiceImpl implements DelegationService {
             String command = "python3 " +
                     rootPath + File.separator + script_path + File.separator + "test.py" + " " +
                     "-t " + rootPath + File.separator + script_path + File.separator + template_name + " " +
-                    "-i " + rootPath + File.separator + prefix + ".json" + " " +
-                    "-o " + rootPath + File.separator + prefix;
+                    "-i " + fileRootPath + File.separator + prefix + ".json" + " " +
+                    "-o " + fileRootPath + File.separator + prefix;
             System.out.println(command);
             proc = Runtime.getRuntime().exec(command);
 
@@ -755,7 +756,7 @@ public class DelegationServiceImpl implements DelegationService {
         } else {
             type = ".pdf";
         }
-        String filePath = rootPath + File.separator + prefix + type;
+        String filePath = fileRootPath + File.separator + prefix + type;
         File file = new File(filePath);
         if (!file.exists()) {
             throw exception(FILE_NOT_EXISTS);
@@ -774,7 +775,7 @@ public class DelegationServiceImpl implements DelegationService {
             add(".json");
         }};
         for(String delete : deleteList) {
-            File deleteFile = new File(rootPath + File.separator + prefix + delete);
+            File deleteFile = new File(fileRootPath + File.separator + prefix + delete);
             if (deleteFile.exists()) {
                 deleteFile.delete();
             }
