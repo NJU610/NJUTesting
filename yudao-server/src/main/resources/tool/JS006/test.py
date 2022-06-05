@@ -71,7 +71,7 @@ def main(argv):
     #windows
     #convert(wordname, o_path + '.pdf')
     #linux
-    os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0,o_path.rfind('\\')] + "\\ " + o_path + ".docx")
+    os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('\\')] + "\\ " + o_path + ".docx")
     
 if __name__ == '__main__':
     main(sys.argv[1:])
