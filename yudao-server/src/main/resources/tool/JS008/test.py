@@ -4,6 +4,8 @@ import xlwt
 import getopt
 import sys
 
+#-t 'C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS004\NST－04－JS004－2011－软件委托测试合同.docx' -i 'C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS008\data.json' -o 'C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS008\output'
+
 def main(argv):
       
   o_path = ""
@@ -11,10 +13,11 @@ def main(argv):
   template = ""
   
   try:
-    opts, args = getopt.getopt(argv,'o:i:t',["ofile=","ifile=","template="])
+    opts, args = getopt.getopt(argv,'o:i:t:',["ofile=","ifile=","template="])
   except getopt.GetoptError:
     sys.exit(2)
     
+  
   for opt, arg in opts:
       if opt in ("-o", "--ofile"):
           o_path = arg
