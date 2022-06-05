@@ -15,16 +15,16 @@ def main(argv):
   template = ""
   
   try:
-    opts, args = getopt.getopt(argv,'o:i:t:',["o_name=","i_path=","template="])
+    opts, args = getopt.getopt(argv,'o:i:t:',["ofile=","ifile=","template="])
   except getopt.GetoptError:
     sys.exit(2)
     
   for opt, arg in opts:
-      if opt == "-o":
+      if opt in ("-o", "--ofile"):
           o_path = arg
-      elif opt == "-i":
+      elif opt in ("-i", "--ifile"):
           i_path = arg 
-      elif opt == "-t":
+      elif opt in ("-t", "--template"):
           template = arg
 
   
