@@ -7,14 +7,14 @@ def main(argv):
     table = ''
     output = ''
     try:
-      opts, _ = getopt.getopt(argv,'-h-t:-o:-i:',["help","table","ofilt","ifile"])
+      opts, _ = getopt.getopt(argv,'-h-t:-o:-i:',["help","table","ofile","ifile"])
       print(opts)
     except getopt.GetoptError:
-      print("main.py -t <table> -o <outputfile> -i <inputfilepath>")
+      print("main.py -t <table> -o <output> -i <input>")
       sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print("main.py -t <table> -o <outputfilename> -i <inputfilepath>")
+            print("main.py -t <table> -o <output> -i <input>")
             sys.exit()
         elif opt in ("-t", "--table"):
             table = arg

@@ -10,7 +10,7 @@ from mailmerge import MailMerge  # 引用邮件处理模块
 
 def main(argv):
       
-  o_name = ""
+  o_path = ""
   i_path = ""
   
   try:
@@ -20,7 +20,7 @@ def main(argv):
     
   for opt, arg in opts:
       if opt == "-o":
-          o_name = arg
+          o_path = arg
       elif opt == "-i":
           i_path = arg 
 
@@ -61,11 +61,10 @@ def main(argv):
       En3 = jdata["time3"][1],
       En4 = jdata["time4"][1]
     )
-    o_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\' #输出地址
 
-    wordname = o_path + o_name + '.docx' 
+    wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件
-    convert(wordname, o_path + o_name + '.pdf')
+    convert(wordname, o_path + '.pdf')
     
 if __name__ == '__main__':
     main(sys.argv[1:])
