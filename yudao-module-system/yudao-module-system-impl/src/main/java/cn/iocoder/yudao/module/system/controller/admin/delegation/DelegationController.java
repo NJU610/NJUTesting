@@ -323,12 +323,23 @@ public class DelegationController {
     @ApiOperation("导出委托 Excel")
     @OperateLog(type = EXPORT)
     public void exportDelegationExcel(@Valid DelegationExportReqVO exportReqVO,
-              HttpServletResponse response) throws IOException {
+                                      HttpServletResponse response) throws IOException {
         List<DelegationDO> list = delegationService.getDelegationList(exportReqVO);
         // 导出 Excel
         List<DelegationExcelVO> datas = DelegationConvert.INSTANCE.convertList02(list);
         ExcelUtils.write(response, "委托.xls", "数据", DelegationExcelVO.class, datas);
     }
 
+    @GetMapping("/export-pdf-by-delegation")
+    @ApiOperation("通过委托编号导出表格pdf")
+    public CommonResult<String> exportTable(@Valid DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        return success(delegationService.exportTable(exportTableReqVO));
+    }
+
+    @GetMapping("/export-pdf")
+    @ApiOperation("通过表格编号导出表格pdf")
+    public CommonResult<String> exportPDFOfTable(@Valid PDFRequestVO pdfRequestVO) throws IOException {
+        return success(delegationService.exportPDFOfTable(pdfRequestVO));
+    }
 
 }
