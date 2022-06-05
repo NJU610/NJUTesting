@@ -2,6 +2,8 @@
     "_id" : "62986c701d180901c7d670a2", 
     "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
+    "保密协议项目名称" : "软件1", 
+    "保密协议委托方名称" : "委托人",
     "clientUnit" : "腾讯", 
     "softwareName" : "微信"
 }
