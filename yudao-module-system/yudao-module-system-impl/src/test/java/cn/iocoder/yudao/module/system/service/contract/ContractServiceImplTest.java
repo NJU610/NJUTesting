@@ -536,7 +536,7 @@ class ContractServiceImplTest extends BaseDbUnitTest {
 
         DelegationDO delegationDO = delegationMapper.selectById(delegationId);
 
-        assertEquals(delegationDO.getState(),DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
+        assertEquals(delegationDO.getState(),DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID.getState());
 
     }
 
