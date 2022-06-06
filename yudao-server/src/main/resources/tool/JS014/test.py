@@ -32,11 +32,12 @@ def main(argv):
     document = MailMerge(template)
 
     document.merge(
-      SoftwareName = jdata["softName"],
+      SoftwareName = jdata["softwareName"],
       SoftwareVer = jdata["version"],
-      Delegation = jdata["organization"],
+      Delegation = jdata["clientUnit"],
       Viewer = jdata["reviewer"],
-      checker = jdata["checker"],
+      #checker = jdata["checker"],
+      Time = jdata["time"],
       
       Res1 = jdata["dataSource"][0]["result"],
       Res2 = jdata["dataSource"][1]["result"],

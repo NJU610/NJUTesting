@@ -3,6 +3,7 @@ from sqlite3 import DatabaseError
 import xlrd  # 引入Excel读取模块
 import json
 import xlwt
+import sys
 #from docx2pdf import convert
 import os
 from mailmerge import MailMerge  # 引用邮件处理模块

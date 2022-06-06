@@ -36,7 +36,12 @@ def main(argv):
     document = MailMerge(template)
 
     document.merge(
-      
+      Client = jdata["委托单位"],
+      SoftName = jdata["软件名称"],
+      DelA = jdata["甲方法人代表"],
+      DelB = jdata["乙方法人代表"],
+      TimeA = jdata["甲方_日期"],
+      TimeB = jdata["乙方_日期"]
     )
 
     wordname = o_path + '.docx' 
