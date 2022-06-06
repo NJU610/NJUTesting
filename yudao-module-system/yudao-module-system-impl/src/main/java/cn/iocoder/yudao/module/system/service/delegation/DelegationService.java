@@ -139,6 +139,13 @@ public interface DelegationService {
     void acceptOffer(@Valid OfferAcceptReqVO offerAcceptReqVO);
 
     /**
+     * 测试部主管填写项目编号
+     *
+     * @param reqVO 填写信息
+     */
+    void fillProjectId(@Valid DelegationFillProjReqVO reqVO);
+
+    /**
      * 删除委托
      *
      * @param id 编号

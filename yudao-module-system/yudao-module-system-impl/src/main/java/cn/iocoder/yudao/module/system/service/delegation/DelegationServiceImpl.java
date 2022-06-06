@@ -20,7 +20,6 @@ import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -414,6 +413,28 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
+    public void fillProjectId(DelegationFillProjReqVO reqVO) {
+        // 校验存在和状态
+        Long delegationId = reqVO.getId();
+        String projectId = reqVO.getProjectId();
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID);
+        // 更新项目编号和状态
+        delegation.setProjectId(projectId);
+        delegation.setState(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
+        delegationMapper.updateById(delegation);
+        // 更新table2
+        tableMongoRepository.upsert("table2", delegation.getTable2Id(), new HashMap<String, Object>(){{
+            put("测试项目编号", projectId);
+        }});
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID, DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO,
+                "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 填写了项目编号",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+    }
+
+    @Override
     public void deleteDelegation(Long id) {
         // 校验存在
         DelegationDO delegation = delegationMapper.validateDelegationExists(id);
@@ -673,13 +694,13 @@ public class DelegationServiceImpl implements DelegationService {
         String json = jsonObject.toJSONString();
 
         // 获取生成文件路径的根目录
-        ClassPathResource classPathResource = new ClassPathResource("/tool");
-        String rootPath = null;
-        rootPath = classPathResource.getFile().getAbsolutePath();
+        //ClassPathResource classPathResource = new ClassPathResource("/tool");
+        String rootPath = "/root/.jenkins/workspace/njutesting/yudao-server/src/main/resources/tool";
+        //rootPath = classPathResource.getFile().getAbsolutePath();
         System.out.println(rootPath);
 
         // 将json写入文件
-        File newFile = new File(classPathResource.getFile(), prefix + ".json");
+        File newFile = new File(rootPath, prefix + ".json");
         assert newFile.createNewFile();
         FileOutputStream outputStream = new FileOutputStream(newFile);
         outputStream.write(json.getBytes());
@@ -751,7 +772,7 @@ public class DelegationServiceImpl implements DelegationService {
         String type;
         String result;
         if (tableName.equals("table8") || tableName.equals("table9") || tableName.equals("table11")) {
-            type = ".xlsx";
+            type = ".xls";
         } else {
             type = ".pdf";
         }
@@ -761,7 +782,7 @@ public class DelegationServiceImpl implements DelegationService {
             throw exception(FILE_NOT_EXISTS);
         }
         try {
-            result = fileApi.createFile( prefix + ".pdf" , Files.readAllBytes(Paths.get(filePath)));
+            result = fileApi.createFile( prefix + type , Files.readAllBytes(Paths.get(filePath)));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

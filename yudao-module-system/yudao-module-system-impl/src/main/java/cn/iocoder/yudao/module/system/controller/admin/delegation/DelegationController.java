@@ -13,6 +13,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.flow.FlowLogDO;
 import cn.iocoder.yudao.module.system.service.delegation.DelegationService;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -187,6 +188,14 @@ public class DelegationController {
     public CommonResult<Boolean> cancelDelegationAdmin(@Valid @RequestBody DelegationCancelReqVO delegationCancelReqVO) {
         delegationService.cancelDelegationAdmin(delegationCancelReqVO);
         return  success(true);
+    }
+
+    @PutMapping("/fill-project-id")
+    @ApiOperation(value = "测试部主管-填写项目编号",
+            notes = "需要填写id和projectId字段，其中id为委托编号，projectId为项目编号。返回值为是否更新成功。")
+    public CommonResult<Boolean> fillProjectId(@Valid @RequestBody DelegationFillProjReqVO delegationFillProjReqVO) {
+        delegationService.fillProjectId(delegationFillProjReqVO);
+        return success(true);
     }
 
     @DeleteMapping("/delete")

@@ -106,5 +106,9 @@ public class DelegationDO extends BaseDO {
      * 软件项目委托测试工作检查表ID
      */
     private String table12Id;
+    /**
+     * 项目id
+     */
+    private String projectId;
 
 }
