@@ -419,6 +419,12 @@ public class DelegationServiceImpl implements DelegationService {
         String projectId = reqVO.getProjectId();
         DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
                 DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID);
+        // 校验项目编号是否重复
+        QueryWrapperX<DelegationDO> queryWrapperX = new QueryWrapperX<>();
+        queryWrapperX.eqIfPresent("project_id", projectId);
+        if (delegationMapper.selectCount(queryWrapperX) > 0) {
+            throw exception(DELEGATION_PROJECT_ID_DUPLICATE);
+        }
         // 更新项目编号和状态
         delegation.setProjectId(projectId);
         delegation.setState(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
