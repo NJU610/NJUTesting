@@ -6,7 +6,8 @@ import json
 import xlwt
 import getopt
 import sys
-#from docx2pdf import convert
+from docx2pdf import convert
+import platform
 from mailmerge import MailMerge  # 引用邮件处理模块
 
 def main(argv):
@@ -27,8 +28,8 @@ def main(argv):
           i_path = arg 
       elif opt in ("-t", "--template"):
           template = arg
-
   
+  #-t "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS006\NST－04－JS006－2011－软件测试方案.docx" -i "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS006\data.json" -o "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS006\output"
   #template = 'C:\\Users\\Yongp\\Desktop\\Classified\\NJUTesting\\yudao-server\\src\\main\\resources\\tool\\JS006\\NST－04－JS006－2011－软件测试方案.docx'  # 模版位置
   with open(i_path, 'r', encoding='utf8') as fp:
     jdata = json.load(fp)
@@ -68,10 +69,10 @@ def main(argv):
 
     wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件
-    #windows
-    #convert(wordname, o_path + '.pdf')
-    #linux
-    os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
+    if platform.system() == "Windows":
+          convert(wordname, o_path + '.pdf')
+    else:
+          os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
     
 if __name__ == '__main__':
     main(sys.argv[1:])

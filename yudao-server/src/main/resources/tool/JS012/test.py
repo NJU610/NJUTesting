@@ -34,7 +34,38 @@ def main(argv):
     document = MailMerge(template)
 
     document.merge(
-
+      SoftName = jdata["软件名称"],
+      Version = jdata["版本号"],
+      Applicator = jdata["申报单位"],
+      StartTime = jdata["起始时间"],
+      ExpectedTime = jdata["预计完成时间"],
+      Tester = jdata["主测人"],
+      FinTime = jdata["实际完成时间"],
+      
+      Confirm1 = jdata["1-1"],
+      Confirm1 = jdata["1-2"],
+      Confirm1 = jdata["1-3"],
+      Confirm1 = jdata["2-1"],
+      Confirm1 = jdata["2-2"],
+      Confirm1 = jdata["3-1"],
+      Confirm1 = jdata["3-2"],
+      Confirm1 = jdata["4"],
+      Confirm1 = jdata["5-1"],
+      Confirm1 = jdata["5-2"],
+      Confirm1 = jdata["5-3"],
+      Confirm1 = jdata["5-4"],
+      Confirm1 = jdata["5-5"],
+      Confirm1 = jdata["6-1"],
+      Confirm1 = jdata["7-1"],
+      Confirm1 = jdata["7-2"],
+      Confirm1 = jdata["7-3"],
+      Confirm1 = jdata["8-1"],
+      Confirm1 = jdata["8-2"],
+      Confirm1 = jdata["8-3"],
+      Confirm1 = jdata["8-4"],
+      Confirm1 = jdata["9-1"],
+      Confirm1 = jdata["9-2"],
+      Confirm1 = jdata["9-3"],
     )
 
     wordname = o_path + '.docx' 

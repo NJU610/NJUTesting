@@ -1,17 +1,17 @@
 { 
-    "_id" : "62934d1b4964367efa3ba29d", 
+    "_id" : "629ccedd57ef8f314e50737c", 
     "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
     "advice" : [
         {
-            "id" :  20001, 
+            "id" : 20001, 
             "duty" : "测试工程师", 
             "advice" : "", 
             "signature" : "", 
             "date" : ""
         }, 
         {
-            "id" :  20002, 
+            "id" : 20002, 
             "duty" : "测试室负责人", 
             "advice" : "", 
             "signature" : "", 
@@ -39,7 +39,6 @@
             "date" : ""
         }
     ], 
-    "contractId" : "FZURVtOxUd", 
     "result" : [
         {
             "id" : 10001, 
@@ -90,7 +89,8 @@
             "state" : ""
         }
     ], 
-    "softName" : "软件名称", 
-    "type" : "测试类别", 
-    "version" : "1.0.0"
+    "测试类别" : "测试类别", 
+    "版本号" : "1.0.01.0.0", 
+    "软件名称" : "测试软件软件名称", 
+    "项目编号" : "wSQJRKvJPz"
 }

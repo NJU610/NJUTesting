@@ -1,25 +1,33 @@
 { 
-    "_id" : "628900902f5d892bcb54c3b3", 
-    "deleted" : true, 
+    "_id" : "62986b511d180901c7d6709c", 
+    "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
-    "小计" : "dd", 
-    "总计" : "dd", 
-    "报价提供人" : "dd", 
-    "报价日期" : "2022-05-05", 
+    "softwareName" : "微信", 
+    "小计" : "133123", 
+    "总计" : "31313131", 
+    "报价提供人" : "shichangbu2", 
+    "报价日期" : "2022-06-02", 
     "报价有效期" : [
-        "2022-05-11", 
-        "2022-06-16"
+        "2022-06-11", 
+        "2022-07-05"
     ], 
-    "税率（8%）" : "dd", 
-    "软件名称" : "name", 
+    "税率（8%）" : "1231232131", 
     "项目表格" : [
         {
-            "id" : 1653145727177, 
-            "xiangmu" : "dd", 
-            "fenxiang" : "dd", 
-            "danjia" : "dd", 
-            "shuoming" : "dd", 
-            "hangheji" : "dd"
+            "id" : 1654156077415, 
+            "xiangmu" : "dadasd", 
+            "fenxiang" : "adad", 
+            "danjia" : "1323131", 
+            "shuoming" : "dadad", 
+            "hangheji" : "dadadad"
+        }, 
+        {
+            "id" : 1654156092275,
+            "xiangmu" : "qeqeqw", 
+            "fenxiang" : "adada", 
+            "danjia" : "13131", 
+            "shuoming" : "adad", 
+            "hangheji" : "adadadad"
         }
     ]
 }

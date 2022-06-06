@@ -2,13 +2,14 @@ from signal import SIGABRT
 from sqlite3 import DatabaseError
 import xlrd  # 引入Excel读取模块
 import json
+import platform
 import getopt
 import sys
 import xlwt
-#from docx2pdf import convert
+from docx2pdf import convert
 import os
 from mailmerge import MailMerge  # 引用邮件处理模块
-
+# -i "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS007\data.json" -t "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS007\NST－04－JS007－2011－软件测试报告.docx" -o "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS007\output"
 def main(argv):
       
   o_path = ""
@@ -262,9 +263,10 @@ def main(argv):
         wordname = o_path + '.docx' 
         document.write(wordname)  # 创建新文件
         
-        #convert(wordname, o_path + '.pdf')
-
-        os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
+        if platform.system() == 'Windows':
+            convert(wordname, o_path + '.pdf')
+        else:   
+            os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
 
       
 
