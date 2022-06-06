@@ -30,6 +30,7 @@ public enum DelegationStateEnum {
     MARKETING_DEPARTMENT_AUDIT_CONTRACT_SUCCESS(210, "市场部审核合同通过"),
     CONTRACT_SIGNING(220, "合同签署中"),
     CONTRACT_SIGN_SUCCESS(230, "合同签署成功"),
+    WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID(235, "等待测试部主管填写项目编号中"),
     //CLIENT_SENDING_SAMPLE(240, "客户发送样品中"),
     CLIENT_UPLOAD_SAMPLE_INFO(250, "用户上传样品中"),
     CHECKING_SAMPLE(260, "测试部/市场部验收样品中"),

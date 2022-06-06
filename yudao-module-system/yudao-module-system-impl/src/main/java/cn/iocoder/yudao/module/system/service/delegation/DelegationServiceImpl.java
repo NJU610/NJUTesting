@@ -413,6 +413,28 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
+    public void fillProjectId(DelegationFillProjReqVO reqVO) {
+        // 校验存在和状态
+        Long delegationId = reqVO.getId();
+        String projectId = reqVO.getProjectId();
+        DelegationDO delegation = delegationMapper.validateDelegationState(delegationId,
+                DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID);
+        // 更新项目编号和状态
+        delegation.setProjectId(projectId);
+        delegation.setState(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState());
+        delegationMapper.updateById(delegation);
+        // 更新table2
+        tableMongoRepository.upsert("table2", delegation.getTable2Id(), new HashMap<String, Object>(){{
+            put("测试项目编号", projectId);
+        }});
+        // 保存日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID, DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO,
+                "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 填写了项目编号",
+                new HashMap<String, Object>(){{put("delegation", delegation);}});
+    }
+
+    @Override
     public void deleteDelegation(Long id) {
         // 校验存在
         DelegationDO delegation = delegationMapper.validateDelegationExists(id);

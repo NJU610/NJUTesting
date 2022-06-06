@@ -79,4 +79,7 @@ public class DelegationBaseVO {
     @ApiModelProperty(value = "软件项目委托测试工作检查表ID")
     private String table12Id;
 
+    @ApiModelProperty(value = "项目id")
+    private String projectId;
+
 }

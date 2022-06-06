@@ -72,6 +72,9 @@ public class DelegationPageReqVO extends PageParam {
     @ApiModelProperty(value = "取消原因")
     private String cancelRemark;
 
+    @ApiModelProperty(value = "项目id")
+    private String projectId;
+
     @ApiModelProperty(value = "排序字段", example = "creator_id")
     private String orderField;
 
