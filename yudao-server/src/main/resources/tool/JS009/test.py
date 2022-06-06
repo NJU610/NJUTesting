@@ -4,6 +4,8 @@ import xlwt
 import getopt
 import sys
 
+#-t 'C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS009\NST－04－JS004－2011－软件委托测试合同.docx' -i 'C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS009\data.json' -o 'C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS009\output'
+
 def main(argv):
       
   o_path = ""

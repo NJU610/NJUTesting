@@ -5,7 +5,11 @@ import json
 import xlwt
 import getopt
 import sys
-from docx2pdf import convert
+
+#linux
+#from docx2pdf import convert
+import os
+
 from mailmerge import MailMerge  # 引用邮件处理模块
 
 # datafile_path = 'C:\\Users\\Yongp\\Desktop\\Classified\\contract_word\\js002\\js002.xlsx'  # 表格位置
@@ -530,7 +534,8 @@ def main(argv):
             )
             wordname = o_path + '.docx' 
             document.write(wordname)  # 创建新文件
-            convert(wordname, o_path + '.pdf')
+            #convert(wordname, o_path + '.pdf')
+            os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
             
       
 
