@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.service.sample;
 
+import cn.hutool.core.lang.UUID;
 import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
 import cn.iocoder.yudao.module.system.controller.admin.contract.vo.ContractSaveTableReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.sample.vo.SampleAuditReqVO;
@@ -17,6 +18,9 @@ import cn.iocoder.yudao.module.system.enums.sample.SampleStateEnum;
 import cn.iocoder.yudao.module.system.service.contract.ContractServiceImpl;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
+import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
+import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -52,18 +56,22 @@ class SampleServiceImplTest extends BaseDbUnitTest {
     private AdminUserService userService;
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void createSample() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
                 .launchTime(new Date())
                 .name(randomString())
-                .contractId(1L)
+                .contractId(contractId)
                 .build();
 
         del.setCreateTime(new Date());
@@ -73,27 +81,33 @@ class SampleServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         SampleCreateReqVO createReqVO = randomPojo(SampleCreateReqVO.class, o->{
-            o.setDelegationId(1L);
+            o.setDelegationId(delegationId);
         });
 
         samplesService.createSample(createReqVO);
 
-        assertNotNull(delegationMapper.selectById(1).getSampleId());
+        assertNotNull(delegationMapper.selectById(delegationId).getSampleId());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void updateSample() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long sampleId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
                 .launchTime(new Date())
                 .name(randomString())
-                .contractId(1L)
-                .sampleId(1L)
+                .contractId(contractId)
+                .sampleId(sampleId)
                 .build();
 
         del.setCreateTime(new Date());
@@ -103,7 +117,7 @@ class SampleServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         SampleDO sam = SampleDO.builder()
-                .id(1L)
+                .id(sampleId)
                 .state(SampleStateEnum.UNSENT.getState())
                 .build();
 
@@ -111,28 +125,34 @@ class SampleServiceImplTest extends BaseDbUnitTest {
 
         String randomString = randomString();
         SampleUpdateReqVO updateReqVO = randomPojo(SampleUpdateReqVO.class, o->{
-            o.setId(1L);
+            o.setId(sampleId);
             o.setInformation(randomString);
         });
 
         samplesService.updateSample(updateReqVO);
 
-        assertEquals(sampleMapper.selectById(1).getInformation(),randomString);
+        assertEquals(sampleMapper.selectById(sampleId).getInformation(),randomString);
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void submitSample() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long sampleId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CLIENT_UPLOAD_SAMPLE_INFO.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
                 .launchTime(new Date())
                 .name(randomString())
-                .contractId(1L)
-                .sampleId(1L)
+                .contractId(contractId)
+                .sampleId(sampleId)
                 .build();
 
         del.setCreateTime(new Date());
@@ -142,36 +162,41 @@ class SampleServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         SampleDO sam = SampleDO.builder()
-                .id(1L)
+                .id(sampleId)
                 .state(SampleStateEnum.UNSENT.getState())
                 .build();
 
         sampleMapper.insert(sam);
 
         SampleSubmitReqVO submitReqVO = randomPojo(SampleSubmitReqVO.class, o->{
-            o.setId(1L);
+            o.setId(sampleId);
         });
 
         samplesService.submitSample(submitReqVO);
 
-        assertEquals(delegationMapper.selectById(1).getState(),DelegationStateEnum.CHECKING_SAMPLE.getState());
-        assertEquals(sampleMapper.selectById(1).getState(),SampleStateEnum.SENT.getState());
+        assertEquals(delegationMapper.selectById(delegationId).getState(),DelegationStateEnum.CHECKING_SAMPLE.getState());
+        assertEquals(sampleMapper.selectById(sampleId).getState(),SampleStateEnum.SENT.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void auditSampleSuccess() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long sampleId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CHECKING_SAMPLE.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
                 .launchTime(new Date())
                 .name(randomString())
-                .contractId(1L)
-                .sampleId(1L)
+                .contractId(contractId)
+                .sampleId(sampleId)
                 .build();
 
         del.setCreateTime(new Date());
@@ -181,36 +206,41 @@ class SampleServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         SampleDO sam = SampleDO.builder()
-                .id(1L)
+                .id(sampleId)
                 .state(SampleStateEnum.SENT.getState())
                 .build();
 
         sampleMapper.insert(sam);
 
         SampleAuditReqVO auditReqVO = randomPojo(SampleAuditReqVO.class, o->{
-            o.setId(1L);
+            o.setId(sampleId);
         });
 
         samplesService.auditSampleSuccess(auditReqVO);
 
-        assertEquals(delegationMapper.selectById(1).getState(),DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION.getState());
+        assertEquals(delegationMapper.selectById(delegationId).getState(),DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION.getState());
 
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void auditSampleFail() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long sampleId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
 
         DelegationDO del = DelegationDO.builder()
-                .id(1L)
+                .id(delegationId)
                 .state(DelegationStateEnum.CHECKING_SAMPLE.getState())
                 .table2Id(randomString())
                 .table3Id(randomString())
                 .launchTime(new Date())
                 .name(randomString())
-                .contractId(1L)
-                .sampleId(1L)
+                .contractId(contractId)
+                .sampleId(sampleId)
                 .build();
 
         del.setCreateTime(new Date());
@@ -220,39 +250,51 @@ class SampleServiceImplTest extends BaseDbUnitTest {
         delegationMapper.insert(del);
 
         SampleDO sam = SampleDO.builder()
-                .id(1L)
+                .id(sampleId)
                 .state(SampleStateEnum.SENT.getState())
                 .build();
 
         sampleMapper.insert(sam);
 
         SampleAuditReqVO auditReqVO = randomPojo(SampleAuditReqVO.class, o->{
-            o.setId(1L);
+            o.setId(sampleId);
         });
 
         samplesService.auditSampleFail(auditReqVO);
 
-        assertEquals(delegationMapper.selectById(1).getState(),DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE.getState());
+        assertEquals(delegationMapper.selectById(delegationId).getState(),DelegationStateEnum.SAMPLE_CHECK_FAIL_MODIFY_SAMPLE.getState());
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void deleteSample() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long sampleId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         SampleDO sam = SampleDO.builder()
-                .id(1L)
+                .id(sampleId)
                 .state(SampleStateEnum.SENT.getState())
                 .build();
 
         sampleMapper.insert(sam);
 
-        samplesService.deleteSample(1L);
+        samplesService.deleteSample(sampleId);
 
         assertEquals(sampleMapper.selectCount(),0);
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void getSample() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long sampleId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
         SampleDO sam = SampleDO.builder()
-                .id(1L)
+                .id(sampleId)
                 .state(SampleStateEnum.SENT.getState())
                 .build();
 
@@ -262,19 +304,25 @@ class SampleServiceImplTest extends BaseDbUnitTest {
 
         sampleMapper.insert(sam);
 
-        SampleDO getSam = samplesService.getSample(1L) ;
+        SampleDO getSam = samplesService.getSample(sampleId) ;
         assertEquals(getSam,sam);
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void getSampleList() {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void getSamplePage() {
     }
 
     @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void testGetSampleList() {
     }
 }

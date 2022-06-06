@@ -4,6 +4,7 @@ package cn.iocoder.yudao.module.system.service.delegation;
 
 import cn.hutool.core.lang.UUID;
 import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
+import cn.iocoder.yudao.module.infra.api.file.FileApi;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
@@ -52,6 +53,9 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
     @MockBean
     private AdminUserService userService;
+
+    @MockBean
+    private FileApi fileApi;
 
 
     @Test
