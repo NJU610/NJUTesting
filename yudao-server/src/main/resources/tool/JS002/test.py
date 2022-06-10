@@ -140,43 +140,43 @@ def main(argv):
                   if i == "用户文档集要求":
                         _TechTar12 = "✓"        
 
-            #系统软件
+            #软件类型
             _Syssoft1 = "○"
             _Syssoft2 = "○"
             _Syssoft3 = "○"
             _Syssoft4 = "○"
             _Syssoft5 = "○"
-            if "系统软件" in jdata.keys():
-                  if(jdata["系统软件"] == "操作系统"):
+            if "软件类型" in jdata.keys():
+                  if(jdata["软件类型"] == "操作系统"):
                         _Syssoft1 = "✓" 
-                  elif(jdata["系统软件"] == "中文处理系统"):
+                  elif(jdata["软件类型"] == "中文处理系统"):
                         _Syssoft2 = "✓" 
-                  elif(jdata["系统软件"] == "网络系统"):
+                  elif(jdata["软件类型"] == "网络系统"):
                         _Syssoft3 = "✓" 
-                  elif(jdata["系统软件"] == "嵌入式操作系统"):
+                  elif(jdata["软件类型"] == "嵌入式操作系统"):
                         _Syssoft4 = "✓" 
-                  elif(jdata["系统软件"] == "其他"):
+                  elif(jdata["软件类型"] == "其他"):
                         _Syssoft5 = "✓"     
                   
-            #支持软件
+            #软件类型
             _SptSoft1 = "○"
             _SptSoft2 = "○"
             _SptSoft3 = "○"
             _SptSoft4 = "○"
             _SptSoft5 = "○"
             _SptSoft6 = "○"
-            if "支持软件" in jdata.keys():
-                  if(jdata["支持软件"] == "程序设计语言"):
+            if "软件类型" in jdata.keys():
+                  if(jdata["软件类型"] == "程序设计语言"):
                         _SptSoft1 = "✓" 
-                  elif(jdata["支持软件"] == "数据库系统设计"):
+                  elif(jdata["软件类型"] == "数据库系统设计"):
                         _SptSoft2 = "✓" 
-                  elif(jdata["支持软件"] == "工具软件"):
+                  elif(jdata["软件类型"] == "工具软件"):
                         _SptSoft3 = "✓"       
-                  elif(jdata["支持软件"] == "网络通信软件"):
+                  elif(jdata["软件类型"] == "网络通信软件"):
                         _SptSoft4 = "✓" 
-                  elif(jdata["支持软件"] == "中间件"):
+                  elif(jdata["软件类型"] == "中间件"):
                         _SptSoft5 = "✓" 
-                  elif(jdata["支持软件"] == "其他"):
+                  elif(jdata["软件类型"] == "其他"):
                         _SptSoft6 = "✓" 
                   
             #应用软件
@@ -193,32 +193,32 @@ def main(argv):
             _AppSoft11 = "○"
             _AppSoft12 = "○"
             _AppSoft13 = "○"
-            if "应用软件" in jdata.keys():
-                  if jdata["应用软件"] == "行业管理软件":
+            if "软件类型" in jdata.keys():
+                  if jdata["软件类型"] == "行业管理软件":
                         _AppSoft1 = "✓" 
-                  elif jdata["应用软件"] == "办公软件":
+                  elif jdata["软件类型"] == "办公软件":
                         _AppSoft2 = "✓"
-                  elif jdata["应用软件"] == "模式识别软件":
+                  elif jdata["软件类型"] == "模式识别软件":
                         _AppSoft3 = "✓"
-                  elif jdata["应用软件"] == "图形图像软件":
+                  elif jdata["软件类型"] == "图形图像软件":
                         _AppSoft4 = "✓"      
-                  elif jdata["应用软件"] == "控制软件":
+                  elif jdata["软件类型"] == "控制软件":
                         _AppSoft5 = "✓"
-                  elif jdata["应用软件"] == "网络应用软件":
+                  elif jdata["软件类型"] == "网络应用软件":
                         _AppSoft6 = "✓"
-                  elif jdata["应用软件"] == "信息管理软件":
+                  elif jdata["软件类型"] == "信息管理软件":
                         _AppSoft7 = "✓"
-                  elif jdata["应用软件"] == "数据库管理应用软件":
+                  elif jdata["软件类型"] == "数据库管理应用软件":
                         _AppSoft8 = "✓"
-                  elif jdata["应用软件"] == "安全与保密软件":
+                  elif jdata["软件类型"] == "安全与保密软件":
                         _AppSoft9 = "✓"
-                  elif jdata["应用软件"] == "嵌入式应用软件":
+                  elif jdata["软件类型"] == "嵌入式应用软件":
                         _AppSoft10 = "✓"
-                  elif jdata["应用软件"] == "教育软件":
+                  elif jdata["软件类型"] == "教育软件":
                         _AppSoft11 = "✓"
-                  elif jdata["应用软件"] == "游戏软件":
+                  elif jdata["软件类型"] == "游戏软件":
                         _AppSoft12 = "✓"
-                  elif jdata["应用软件"] == "其他":
+                  elif jdata["软件类型"] == "其他":
                         _AppSoft13 = "✓"
                   
             #客户端操作系统
@@ -288,6 +288,18 @@ def main(argv):
                         _TestSample1 = "✓"
                   if i == "可执行文件":
                         _TestSample2 = "✓"
+            
+            #构架
+            _CS = "□"
+            _BS = "□"
+            _goujiaOther = "□"
+            for i in jdata["构架"]:
+                  if i == "C/S":
+                        _CS = "✓"
+                  if i == "B/S":
+                        _BS = "✓"
+                  if i == "其它":
+                        _goujiaOther = "✓"
             
             #需求文档
             _ReqDoc1 = "□"
@@ -408,8 +420,8 @@ def main(argv):
             Remark = jdata["备注"],
             SigB = jdata["受理人（签字）"],
             SigA = jdata["委托人（签字）"],
-            DataB = jdata["受理人_日期"],
-            DataA = jdata["委托人_日期"],
+            DateB = jdata["受理人_日期"],
+            DateA = jdata["委托人_日期"],
             
             #单位性质
             Department1 = _Department1,
@@ -447,14 +459,14 @@ def main(argv):
             TechTar12 = _TechTar12,
             TechTarOther = _TechTarOther,
             
-            #系统软件
+            #软件类型
             SysSoft1 = _Syssoft1,
             SysSoft2 = _Syssoft2,
             SysSoft3 = _Syssoft3,
             SysSoft4 = _Syssoft4,
             SysSoft5 = _Syssoft5,
             
-            #支持软件
+            #软件类型
             SptSoft1 = _SptSoft1,
             SptSoft2 = _SptSoft2,
             SptSoft3 = _SptSoft3,
@@ -523,6 +535,11 @@ def main(argv):
             OpDoc3 = _OpDoc3,
             OpDoc4 = _OpDoc4,
             
+            #构架
+            CS = _CS,
+            BS = _BS,
+            goujiaOther = _goujiaOther,
+            
             #其他材料检查
             MatCheckOther = _MatCheckOther,
             
@@ -536,6 +553,8 @@ def main(argv):
             DealAdvice1 = _DealAdvice1,
             DealAdvice2 = _DealAdvice2,
             DealAdvice3 = _DealAdvice3,
+            
+            
             )
             wordname = o_path + '.docx' 
             document.write(wordname)  # 创建新文件
