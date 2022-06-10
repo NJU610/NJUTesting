@@ -1,6 +1,5 @@
 from signal import SIGABRT
 from sqlite3 import DatabaseError
-from tkinter import PROJECTING
 import xlrd  # 引入Excel读取模块
 import json
 import xlwt
