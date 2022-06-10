@@ -622,6 +622,8 @@ public class DelegationServiceImpl implements DelegationService {
             tableId = delegation.getTable12Id();
         } else if (Objects.equals(tableName, "table14")) {
             tableId = delegation.getTable14Id();
+        } else if (Objects.equals(tableName, "offer")) {
+            tableId = delegation.getOfferId();
         } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
             if (delegation.getContractId() == null) {
                 throw exception(TABLE_NOT_EXISTS);
