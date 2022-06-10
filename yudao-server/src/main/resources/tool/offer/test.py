@@ -61,7 +61,7 @@ def main(argv):
     
     document.merge(
       
-      SoftName = jdata["softwareName"],
+      SoftName = jdata["软件名称"],
       Privider = jdata["报价提供人"],
       Date = jdata["报价日期"],
       StartDate = jdata["报价有效期"][0],

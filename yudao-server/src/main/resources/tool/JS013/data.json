@@ -1,42 +1,42 @@
 { 
-    "_id" : "629ccedd57ef8f314e50737c", 
+    "_id" : "62a17c311f5d8b57947779e8", 
     "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
     "advice" : [
         {
             "id" : 20001, 
             "duty" : "测试工程师", 
-            "advice" : "", 
-            "signature" : "", 
-            "date" : ""
+            "advice" : "么意见", 
+            "signature" : "测试工程师", 
+            "date" : "2022-06-01"
         }, 
         {
             "id" : 20002, 
             "duty" : "测试室负责人", 
-            "advice" : "", 
-            "signature" : "", 
-            "date" : ""
+            "advice" : "没有意见", 
+            "signature" : "负责人", 
+            "date" : "2022-06-02"
         }, 
         {
             "id" : 20003, 
             "duty" : "质量负责人", 
-            "advice" : "", 
-            "signature" : "", 
-            "date" : ""
+            "advice" : "就这样吧", 
+            "signature" : "质量", 
+            "date" : "2022-06-01"
         }, 
         {
             "id" : 20004, 
             "duty" : "技术负责人", 
-            "advice" : "", 
-            "signature" : "", 
-            "date" : ""
+            "advice" : "还行", 
+            "signature" : "技术", 
+            "date" : "2022-06-02"
         }, 
         {
             "id" : 20005, 
             "duty" : "监督人", 
-            "advice" : "", 
-            "signature" : "", 
-            "date" : ""
+            "advice" : "我才不管", 
+            "signature" : "监督人", 
+            "date" : "2022-06-23"
         }
     ], 
     "result" : [
@@ -44,53 +44,53 @@
             "id" : 10001, 
             "title" : "《测试方案》书写规范性", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10002, 
             "title" : "测试环境是否具有典型意义以及是否符合用户要求", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10003, 
             "title" : "测试内容的完整性，是否覆盖了整个系统", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10004, 
             "title" : "测试方法的选取是否合理", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10005, 
             "title" : "测试用例能否覆盖问题", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10006, 
             "title" : "输入、输出数据设计合理性", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10007, 
             "title" : "测试时间安排是否合理", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }, 
         {
             "id" : 10008, 
             "title" : "测试人力资源安排是否合理", 
             "reason" : "", 
-            "state" : ""
+            "state" : "closed"
         }
     ], 
-    "测试类别" : "测试类别", 
-    "版本号" : "1.0.01.0.0", 
-    "软件名称" : "测试软件软件名称", 
-    "项目编号" : "wSQJRKvJPz"
+    "测试类别" : "d", 
+    "版本号" : "1.0", 
+    "软件名称" : "名 称 12", 
+    "项目编号" : "000299"
 }

@@ -7,8 +7,9 @@ import getopt
 import sys
 
 #linux
-#from docx2pdf import convert
+from docx2pdf import convert
 import os
+import platform
 
 from mailmerge import MailMerge  # 引用邮件处理模块
 
@@ -19,6 +20,7 @@ from mailmerge import MailMerge  # 引用邮件处理模块
 # nrows = table.nrows
 
 # C:/Users/Yongp/AppData/Local/Programs/Python/Python310/python.exe c:/Users/Yongp/Desktop/Classified/NJUTesting/yudao-server/src/main/resources/tool/JS002/test.py -t 'c:/Users/Yongp/Desktop/Classified/NJUTesting/yudao-server/src/main/resources/tool/JS002/NST－04－JS002－2011－软件项目委托测试申请表-空白表.docx' -o 'c:/Users/Yongp/Desktop/Classified/NJUTesting/yudao-server/src/main/resources/tool/JS002/output' -i 'c:/Users/Yongp/Desktop/Classified/NJUTesting/yudao-server/src/main/resources/tool/JS002/data.json'
+# -t "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS002\NST－04－JS002－2011－软件项目委托测试申请表-空白表.docx" -i "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS002\data.json" -o "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS002\\output"
 
 def main(argv):
       
@@ -144,17 +146,18 @@ def main(argv):
             _Syssoft3 = "○"
             _Syssoft4 = "○"
             _Syssoft5 = "○"
-            if(jdata["系统软件"] == "操作系统"):
-                  _Syssoft1 = "✓" 
-            elif(jdata["系统软件"] == "中文处理系统"):
-                  _Syssoft2 = "✓" 
-            elif(jdata["系统软件"] == "网络系统"):
-                  _Syssoft3 = "✓" 
-            elif(jdata["系统软件"] == "嵌入式操作系统"):
-                  _Syssoft4 = "✓" 
-            elif(jdata["系统软件"] == "其他"):
-                  _Syssoft5 = "✓"     
-            
+            if "系统软件" in jdata.keys():
+                  if(jdata["系统软件"] == "操作系统"):
+                        _Syssoft1 = "✓" 
+                  elif(jdata["系统软件"] == "中文处理系统"):
+                        _Syssoft2 = "✓" 
+                  elif(jdata["系统软件"] == "网络系统"):
+                        _Syssoft3 = "✓" 
+                  elif(jdata["系统软件"] == "嵌入式操作系统"):
+                        _Syssoft4 = "✓" 
+                  elif(jdata["系统软件"] == "其他"):
+                        _Syssoft5 = "✓"     
+                  
             #支持软件
             _SptSoft1 = "○"
             _SptSoft2 = "○"
@@ -162,18 +165,19 @@ def main(argv):
             _SptSoft4 = "○"
             _SptSoft5 = "○"
             _SptSoft6 = "○"
-            if(jdata["支持软件"] == "程序设计语言"):
-                  _SptSoft1 = "✓" 
-            elif(jdata["支持软件"] == "数据库系统设计"):
-                  _SptSoft2 = "✓" 
-            elif(jdata["支持软件"] == "工具软件"):
-                  _SptSoft3 = "✓"       
-            elif(jdata["支持软件"] == "网络通信软件"):
-                  _SptSoft4 = "✓" 
-            elif(jdata["支持软件"] == "中间件"):
-                  _SptSoft5 = "✓" 
-            elif(jdata["支持软件"] == "其他"):
-                  _SptSoft6 = "✓" 
+            if "支持软件" in jdata.keys():
+                  if(jdata["支持软件"] == "程序设计语言"):
+                        _SptSoft1 = "✓" 
+                  elif(jdata["支持软件"] == "数据库系统设计"):
+                        _SptSoft2 = "✓" 
+                  elif(jdata["支持软件"] == "工具软件"):
+                        _SptSoft3 = "✓"       
+                  elif(jdata["支持软件"] == "网络通信软件"):
+                        _SptSoft4 = "✓" 
+                  elif(jdata["支持软件"] == "中间件"):
+                        _SptSoft5 = "✓" 
+                  elif(jdata["支持软件"] == "其他"):
+                        _SptSoft6 = "✓" 
                   
             #应用软件
             _AppSoft1 = "○"
@@ -189,32 +193,33 @@ def main(argv):
             _AppSoft11 = "○"
             _AppSoft12 = "○"
             _AppSoft13 = "○"
-            if jdata["应用软件"] == "行业管理软件":
-                  _AppSoft1 = "✓" 
-            elif jdata["应用软件"] == "办公软件":
-                  _AppSoft2 = "✓"
-            elif jdata["应用软件"] == "模式识别软件":
-                  _AppSoft3 = "✓"
-            elif jdata["应用软件"] == "图形图像软件":
-                  _AppSoft4 = "✓"      
-            elif jdata["应用软件"] == "控制软件":
-                  _AppSoft5 = "✓"
-            elif jdata["应用软件"] == "网络应用软件":
-                  _AppSoft6 = "✓"
-            elif jdata["应用软件"] == "信息管理软件":
-                  _AppSoft7 = "✓"
-            elif jdata["应用软件"] == "数据库管理应用软件":
-                  _AppSoft8 = "✓"
-            elif jdata["应用软件"] == "安全与保密软件":
-                  _AppSoft9 = "✓"
-            elif jdata["应用软件"] == "嵌入式应用软件":
-                  _AppSoft10 = "✓"
-            elif jdata["应用软件"] == "教育软件":
-                  _AppSoft11 = "✓"
-            elif jdata["应用软件"] == "游戏软件":
-                  _AppSoft12 = "✓"
-            elif jdata["应用软件"] == "其他":
-                  _AppSoft13 = "✓"
+            if "应用软件" in jdata.keys():
+                  if jdata["应用软件"] == "行业管理软件":
+                        _AppSoft1 = "✓" 
+                  elif jdata["应用软件"] == "办公软件":
+                        _AppSoft2 = "✓"
+                  elif jdata["应用软件"] == "模式识别软件":
+                        _AppSoft3 = "✓"
+                  elif jdata["应用软件"] == "图形图像软件":
+                        _AppSoft4 = "✓"      
+                  elif jdata["应用软件"] == "控制软件":
+                        _AppSoft5 = "✓"
+                  elif jdata["应用软件"] == "网络应用软件":
+                        _AppSoft6 = "✓"
+                  elif jdata["应用软件"] == "信息管理软件":
+                        _AppSoft7 = "✓"
+                  elif jdata["应用软件"] == "数据库管理应用软件":
+                        _AppSoft8 = "✓"
+                  elif jdata["应用软件"] == "安全与保密软件":
+                        _AppSoft9 = "✓"
+                  elif jdata["应用软件"] == "嵌入式应用软件":
+                        _AppSoft10 = "✓"
+                  elif jdata["应用软件"] == "教育软件":
+                        _AppSoft11 = "✓"
+                  elif jdata["应用软件"] == "游戏软件":
+                        _AppSoft12 = "✓"
+                  elif jdata["应用软件"] == "其他":
+                        _AppSoft13 = "✓"
                   
             #客户端操作系统
             _OtherOS = ""
@@ -534,8 +539,10 @@ def main(argv):
             )
             wordname = o_path + '.docx' 
             document.write(wordname)  # 创建新文件
-            #convert(wordname, o_path + '.pdf')
-            os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
+            if platform.system() == "Windows":
+                  convert(wordname, o_path + '.pdf')
+            else:
+                  os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
             
       
 

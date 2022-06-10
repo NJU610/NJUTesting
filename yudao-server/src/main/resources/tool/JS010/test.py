@@ -5,10 +5,12 @@ import json
 import xlwt
 import sys
 import getopt
-#from docx2pdf import convert
+from docx2pdf import convert
+import platform
 import os
 from mailmerge import MailMerge  # 引用邮件处理模块
 
+#-t "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS010\NST－04－JS010－2011－测试报告检查表.docx" -i "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS010\data.json" -o "C:\Users\Yongp\Desktop\Classified\NJUTesting\yudao-server\src\main\resources\tool\JS010\output"
 def main(argv):
       
   o_path = ""
@@ -54,8 +56,10 @@ def main(argv):
     )
     wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件
-    #convert(wordname, o_path + '.pdf')
-    os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")    
+    if platform.system() == "Windows":
+          convert(wordname, o_path + '.pdf')
+    else:
+          os.system("libreoffice --invisible --convert-to pdf --outdir " + o_path[0:o_path.rfind('/')+1]+" "  + o_path + ".docx")
     
     
 if __name__ == '__main__':

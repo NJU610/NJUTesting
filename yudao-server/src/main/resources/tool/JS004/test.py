@@ -23,7 +23,6 @@ def main(argv):
   except getopt.GetoptError:
     sys.exit(2)
   for opt, arg in opts:
-      print(opt)
       if opt in ("-o", "--ofile"):
           o_path = arg
       elif opt in ("-i", "--ifile"):
@@ -48,7 +47,7 @@ def main(argv):
       DDL = jdata["完成天数"],
       ChangeTimes = jdata["整改次数"],
       ChangeDays = jdata["超过天数"],
-      PartyAName = jdata["委托方名称"],
+      PartyAName = jdata["委托方单位全称"],
       DelA = jdata["委托方授权代表"],
       SigDateA = jdata["委托方签章日期"],
       ContactA = jdata["委托方联系人"],

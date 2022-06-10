@@ -1,43 +1,42 @@
 { 
-    "_id" : "62874eb123fa511f128fa888", 
+    "_id" : "62a17b411f5d8b57947779e7", 
     "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
-    "name" : "这是一个测试方案", 
-    "wu" : "haha", 
-    "baseLine" : "asd", 
-    "documentOverview" : "asd", 
-    "generalTestCondition" : "asd", 
-    "hardwareEnvironment" : "ads", 
-    "label" : "sad", 
-    "otherEnvironment" : "asd", 
-    "overallDesign" : "asd", 
-    "participant" : "asd", 
-    "participantOrganization" : "asd", 
-    "plannedTests" : "asd", 
-    "quotedFile" : "asd", 
-    "softwareEnvironment" : "asd", 
-    "systemOverview" : "asd", 
-    "testCases" : "asd", 
-    "testLayer" : "asd", 
-    "testType" : "asd", 
+    "1-1 标识" : "标识", 
+    "1-2 系统概述" : "系统概述", 
+    "1-3 文档概述" : "文档概述", 
+    "3-1 硬件" : "硬件123", 
+    "3-2 软件" : "软件456", 
+    "3-3 其他" : "其他789", 
+    "3-4 参与组织" : "组织79", 
+    "3-5 人员" : "人员123", 
+    "4-1 总体设计" : "总体设计1", 
+    "4-1-1 测试级别" : "测试级别1", 
+    "4-1-2 测试类别" : "类别1", 
+    "4-1-3 一般测试条件" : "条件1", 
+    "4-2 计划执行的测试" : "测试2", 
+    "4-3 测试用例" : "用例1", 
     "time1" : [
-        "2022-05-11", 
-        "2022-06-13"
+        "2022-05-03", 
+        "2022-06-08"
     ], 
     "time2" : [
-        "2022-05-14", 
-        "2022-06-13"
-    ], 
-    "time3" : [
-        "2022-05-05", 
+        "2022-05-03", 
         "2022-06-07"
     ], 
-    "time4" : [
-        "2022-06-01", 
-        "2022-07-12"
+    "time3" : [
+        "2022-05-04", 
+        "2022-06-08"
     ], 
-    "workQuantity1" : "asd", 
-    "workQuantity2" : "asd", 
-    "workQuantity3" : "asd", 
-    "workQuantity4" : "ad"
+    "time4" : [
+        "2022-06-22", 
+        "2022-07-19"
+    ], 
+    "workQuantity1" : "12", 
+    "workQuantity2" : "45", 
+    "workQuantity3" : "33", 
+    "workQuantity4" : "33", 
+    "基线" : "基线", 
+    "引用文件" : "dd", 
+    "需求的可追踪性" : "没有可追踪性"
 }

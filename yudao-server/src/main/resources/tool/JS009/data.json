@@ -1,23 +1,23 @@
 { 
-    "_id" : "6294f4bb3537d417248315f2", 
+    "_id" : "62a17ca51f5d8b57947779ea", 
     "deleted" : false, 
     "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
     "测试用例" : [
         {
-            "id" : 1653929133784, 
-            "classification" : "1", 
-            "tid" : "2", 
-            "design" : "3", 
-            "statute" : "4", 
-            "preconditions" : "5", 
-            "result" : "6", 
-            "author" : "7", 
-            "reality" : "8", 
-            "accord" : "9", 
-            "bugid" : "10", 
-            "executor" : "11", 
-            "time" : "12", 
-            "confirmor" : "12"
+            "id" : 1654750319307, 
+            "classification" : "不知道", 
+            "tid" : "0001", 
+            "design" : "懒得说没", 
+            "statute" : "不想说明", 
+            "preconditions" : "没有条件", 
+            "result" : "没有", 
+            "author" : "张三", 
+            "reality" : "没有", 
+            "bugid" : "0",
+            "accord" : "一致", 
+            "executor" : "李华", 
+            "time" : "2022-6-9", 
+            "confirmor" : "去热"
         }
     ]
 }
