@@ -253,11 +253,10 @@ def main(argv):
             _SampleManagement1 = "○"
             _SampleManagement2 = "○"
             if "提交的样品" in jdata.keys():
-                  for i in jdata["提交的样品"]:
-                        if i == "由本实验室销毁":
-                              _SampleManagement1 = "✓"
-                        elif i == "退还给我们":
-                              _SampleManagement2 = "✓"
+                  if jdata["提交的样品"] == "由本实验室销毁":
+                        _SampleManagement1 = "✓"
+                  elif jdata["提交的样品"] == "退还给我们":
+                        _SampleManagement2 = "✓"
             
             #密级
             _Secret1 = "○"
