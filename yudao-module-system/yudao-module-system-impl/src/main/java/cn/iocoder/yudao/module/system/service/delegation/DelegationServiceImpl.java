@@ -622,6 +622,8 @@ public class DelegationServiceImpl implements DelegationService {
             tableId = delegation.getTable12Id();
         } else if (Objects.equals(tableName, "table14")) {
             tableId = delegation.getTable14Id();
+        } else if (Objects.equals(tableName, "offer")) {
+            tableId = delegation.getOfferId();
         } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
             if (delegation.getContractId() == null) {
                 throw exception(TABLE_NOT_EXISTS);
@@ -745,8 +747,8 @@ public class DelegationServiceImpl implements DelegationService {
             put("table10", "NST－04－JS010－2011－测试报告检查表.docx");
             put("table11", "NST－04－JS011－2011－软件测试问题清单（电子记录）.xlsx");
             put("table12", "NST－04－JS012－2011－软件项目委托测试工作检查表.docx");
-            put("table13", "NST－04－JS013－2011 - 测试方案评审表.docx");
-            put("table14", "NST－04－JS014－2011 - 软件文档评审表.docx");
+            put("table13", "NST－04－JS013－2011-测试方案评审表.docx");
+            put("table14", "NST－04－JS014－2011-软件文档评审表.docx");
             put("offer", "报价单.docx");
 
         }};
