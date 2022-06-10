@@ -61,13 +61,15 @@ def main(argv):
     document.merge(
       
       SoftName = jdata["软件名称"],
-      Privider = jdata["报价提供人"],
+      Provider = jdata["报价提供人"],
       Date = jdata["报价日期"],
       StartDate = jdata["报价有效期"][0],
       EndDate = jdata["报价有效期"][1],
       Subtotal = jdata["小计"],
       Total = jdata["总计"],
       Tax = jdata["税率（8%）"],
+      Sig = jdata["sign"],
+      
       
       Project1 = _Project1,
       Item1 = _Item1,
