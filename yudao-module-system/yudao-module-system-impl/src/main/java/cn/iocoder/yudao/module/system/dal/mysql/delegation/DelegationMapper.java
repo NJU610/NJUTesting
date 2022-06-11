@@ -1,16 +1,18 @@
 package cn.iocoder.yudao.module.system.dal.mysql.delegation;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
+import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationExportReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationPageReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import org.apache.ibatis.annotations.Mapper;
-import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
@@ -44,6 +46,7 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
                 .eqIfPresent("sample_id", reqVO.getSampleId())
                 .eqIfPresent("solution_id", reqVO.getSolutionId())
                 .eqIfPresent("report_id", reqVO.getReportId())
+                .eqIfPresent("project_id", reqVO.getProjectId())
                 .inIfPresent("state", reqVO.getState())
                 .betweenIfPresent("create_time", reqVO.getBeginCreateTime(), reqVO.getEndCreateTime());
         if (reqVO.getAsc()) {
