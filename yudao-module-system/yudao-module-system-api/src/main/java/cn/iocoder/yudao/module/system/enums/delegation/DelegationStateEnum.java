@@ -56,7 +56,7 @@ public enum DelegationStateEnum {
     CLIENT_CONFIRM_RECEIVE_TEST_REPORT(460, "客户确认接收测试报告"),
     CLIENT_CANCEL_DELEGATION(470,"客户取消委托"),
     ADMIN_CANCEL_DELEGATION(480,"管理员取消委托"),
-
+    CLIENT_AUTO_CONFIRM_RECEIVE_TEST_REPORT(490, "客户未确认接收测试报告，到期自动确认"),
 
     ;
 

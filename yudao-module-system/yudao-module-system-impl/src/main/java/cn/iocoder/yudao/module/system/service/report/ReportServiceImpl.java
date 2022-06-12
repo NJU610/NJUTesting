@@ -5,14 +5,18 @@ import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
+import cn.iocoder.yudao.module.system.service.job.ReceiveReportJob;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
 import com.alibaba.fastjson.JSONObject;
+import org.quartz.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.*;
+import java.util.Calendar;
+
 import cn.iocoder.yudao.module.system.controller.admin.report.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.report.ReportDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
@@ -48,6 +52,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Resource
     private AdminUserService userService;
+
+    @Resource
+    private Scheduler scheduler;
 
     @Override
     public Long createReport(ReportCreateReqVO createReqVO) {
@@ -362,6 +369,35 @@ public class ReportServiceImpl implements ReportService {
                         put("report", reportMapper.selectById(reportId));
                     }
                 });
+        // 添加到任务队列
+        addJob(delegation.getId());
+    }
+
+    private void addJob(Long delegationId) {
+        JobDetail jobDetail = JobBuilder.newJob(ReceiveReportJob.class)
+                .withIdentity("receive_report_job" + delegationId,
+                        "receive_job")
+                .usingJobData("delegation_id", delegationId)
+                .build();
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.add(Calendar.DATE, 7);
+        Date date = calendar.getTime();
+        SimpleTrigger simpleTrigger = TriggerBuilder.newTrigger()
+                .withIdentity("receive_report_trigger" + delegationId,
+                        "receive_trigger")
+                .startAt(date)
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(0)
+                        .withRepeatCount(0))
+                .build();
+        try {
+            scheduler.scheduleJob(jobDetail, simpleTrigger);
+            scheduler.start();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
