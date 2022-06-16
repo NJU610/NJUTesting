@@ -891,7 +891,18 @@ public class DelegationServiceImpl implements DelegationService {
         }
         pdfRequestVO.setTableId(tableId);
         return exportPDFOfTable(pdfRequestVO);
+    }
 
+    public String exportTablePro(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
         if (Objects.equals(tableName, "table2")) {
             tableId = delegation.getTable2Id();
         } else if (Objects.equals(tableName, "table3")) {
@@ -962,7 +973,5 @@ public class DelegationServiceImpl implements DelegationService {
         pdfRequestVO.setTableId(tableId);
         return exportPDFOfTable(pdfRequestVO);
     }
-
-
 
 }
