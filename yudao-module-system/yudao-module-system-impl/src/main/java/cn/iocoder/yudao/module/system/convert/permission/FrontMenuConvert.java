@@ -26,7 +26,7 @@ public interface FrontMenuConvert {
 
     default FrontMenuDO convert(FrontMenuCreateReqVO bean) {
         FrontMenuDO menu = new FrontMenuDO();
-        BeanUtil.copyProperties(bean, menu);
+        BeanUtil.copyProperties(bean, menu, "parentKeys");
         try {
             menu.setParentKeys(OBJECT_MAPPER.writeValueAsString(bean.getParentKeys()));
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public interface FrontMenuConvert {
 
     default FrontMenuDO convert(FrontMenuUpdateReqVO bean) {
         FrontMenuDO menu = new FrontMenuDO();
-        BeanUtil.copyProperties(bean, menu);
+        BeanUtil.copyProperties(bean, menu, "parentKeys");
         try {
             menu.setParentKeys(OBJECT_MAPPER.writeValueAsString(bean.getParentKeys()));
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public interface FrontMenuConvert {
 
     default FrontMenuRespVO convert(FrontMenuDO bean) {
         FrontMenuRespVO menu = new FrontMenuRespVO();
-        BeanUtil.copyProperties(bean, menu);
+        BeanUtil.copyProperties(bean, menu, "parentKeys");
         try {
             menu.setParentKeys(OBJECT_MAPPER.readValue(bean.getParentKeys(), List.class));
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public interface FrontMenuConvert {
 
     default FrontMenuSimpleRespVO convert02(FrontMenuDO bean) {
         FrontMenuSimpleRespVO menu = new FrontMenuSimpleRespVO();
-        BeanUtil.copyProperties(bean, menu);
+        BeanUtil.copyProperties(bean, menu, "parentKeys");
         try {
             menu.setParentKeys(OBJECT_MAPPER.readValue(bean.getParentKeys(), List.class));
         } catch (Exception e) {
