@@ -1,7 +1,6 @@
 package cn.iocoder.yudao.module.system.convert.permission;
 
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
@@ -26,7 +25,10 @@ public interface FrontMenuConvert {
 
     default FrontMenuDO convert(FrontMenuCreateReqVO bean) {
         FrontMenuDO menu = new FrontMenuDO();
-        BeanUtil.copyProperties(bean, menu, "parentKeys");
+        menu.setHideInMenu(bean.getHideInMenu());
+        menu.setStatus(bean.getStatus());
+        menu.setName(bean.getName());
+        menu.setPath(bean.getPath());
         try {
             menu.setParentKeys(OBJECT_MAPPER.writeValueAsString(bean.getParentKeys()));
         } catch (Exception e) {
@@ -36,7 +38,11 @@ public interface FrontMenuConvert {
 
     default FrontMenuDO convert(FrontMenuUpdateReqVO bean) {
         FrontMenuDO menu = new FrontMenuDO();
-        BeanUtil.copyProperties(bean, menu, "parentKeys");
+        menu.setId(bean.getId());
+        menu.setHideInMenu(bean.getHideInMenu());
+        menu.setStatus(bean.getStatus());
+        menu.setName(bean.getName());
+        menu.setPath(bean.getPath());
         try {
             menu.setParentKeys(OBJECT_MAPPER.writeValueAsString(bean.getParentKeys()));
         } catch (Exception e) {
@@ -46,7 +52,11 @@ public interface FrontMenuConvert {
 
     default FrontMenuRespVO convert(FrontMenuDO bean) {
         FrontMenuRespVO menu = new FrontMenuRespVO();
-        BeanUtil.copyProperties(bean, menu, "parentKeys");
+        menu.setId(bean.getId());
+        menu.setHideInMenu(bean.getHideInMenu());
+        menu.setStatus(bean.getStatus());
+        menu.setName(bean.getName());
+        menu.setPath(bean.getPath());
         try {
             menu.setParentKeys(OBJECT_MAPPER.readValue(bean.getParentKeys(), List.class));
         } catch (Exception e) {
@@ -56,7 +66,11 @@ public interface FrontMenuConvert {
 
     default FrontMenuSimpleRespVO convert02(FrontMenuDO bean) {
         FrontMenuSimpleRespVO menu = new FrontMenuSimpleRespVO();
-        BeanUtil.copyProperties(bean, menu, "parentKeys");
+        menu.setId(bean.getId());
+        menu.setName(bean.getName());
+        menu.setPath(bean.getPath());
+        menu.setHideInMenu(bean.getHideInMenu());
+        menu.setStatus(bean.getStatus());
         try {
             menu.setParentKeys(OBJECT_MAPPER.readValue(bean.getParentKeys(), List.class));
         } catch (Exception e) {
