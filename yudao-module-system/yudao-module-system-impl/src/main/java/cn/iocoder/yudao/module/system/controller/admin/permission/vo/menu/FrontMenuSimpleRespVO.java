@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @ApiModel("前台菜单精简信息 Response VO")
 @Data
@@ -32,5 +33,8 @@ public class FrontMenuSimpleRespVO {
 
     @ApiModelProperty(value = "状态", required = true, example = "1", notes = "见 CommonStatusEnum 枚举")
     private Integer status;
+
+    @ApiModelProperty(value = "关联数组", required = true, example = "[\"111\",\"222\"]")
+    private List<String> parentKeys;
 
 }

@@ -15,6 +15,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.yudao.module.system.enums.permission.MenuIdEnum;
 import cn.iocoder.yudao.module.system.enums.sms.SmsSceneEnum;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -26,6 +27,8 @@ import java.util.*;
 public interface AuthConvert {
 
     AuthConvert INSTANCE = Mappers.getMapper(AuthConvert.class);
+
+    ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Mapping(source = "updateTime", target = "updateTime", ignore = true) // 字段相同，但是含义不同，忽略
     LoginUser convert0(AdminUserDO bean);
@@ -123,6 +126,24 @@ public interface AuthConvert {
     SmsCodeUseReqDTO convert(AuthRegisterReqVO reqVO, Integer scene, String usedIp);
     UserCreateReqVO convert(AuthRegisterReqVO reqVO);
 
-    List<AuthSimpleMenuRespVO> convertList(List<FrontMenuDO> menus);
+    default AuthSimpleMenuRespVO convert(FrontMenuDO bean) {
+        AuthSimpleMenuRespVO menu = new AuthSimpleMenuRespVO();
+        menu.setId(bean.getId());
+        menu.setPath(bean.getPath());
+        menu.setName(bean.getName());
+        menu.setHideInMenu(bean.getHideInMenu());
+        try {
+            menu.setParentKeys(OBJECT_MAPPER.readValue(bean.getParentKeys(), List.class));
+        } catch (Exception e) {
+
+        }
+        return menu;
+    }
+
+    default List<AuthSimpleMenuRespVO> convertList(List<FrontMenuDO> menus) {
+        List<AuthSimpleMenuRespVO> list = new ArrayList<>();
+        menus.forEach(menu -> list.add(AuthConvert.INSTANCE.convert(menu)));
+        return list;
+    }
 
 }
