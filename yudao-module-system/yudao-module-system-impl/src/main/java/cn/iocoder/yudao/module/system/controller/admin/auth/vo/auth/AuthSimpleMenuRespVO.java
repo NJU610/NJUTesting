@@ -17,6 +17,9 @@ import java.util.List;
 @Builder
 public class AuthSimpleMenuRespVO {
 
+    @ApiModelProperty(value = "编号", required = true)
+    private Long id;
+
     @ApiModelProperty(value = "菜单名称", required = true, example = "用户管理")
     private String name;
 

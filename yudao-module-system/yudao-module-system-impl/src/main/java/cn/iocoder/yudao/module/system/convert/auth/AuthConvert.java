@@ -128,6 +128,7 @@ public interface AuthConvert {
 
     default AuthSimpleMenuRespVO convert(FrontMenuDO bean) {
         AuthSimpleMenuRespVO menu = new AuthSimpleMenuRespVO();
+        menu.setId(bean.getId());
         menu.setPath(bean.getPath());
         menu.setName(bean.getName());
         menu.setHideInMenu(bean.getHideInMenu());
