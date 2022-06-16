@@ -40,5 +40,9 @@ public class FrontMenuDO extends BaseDO {
      * 菜单状态（0正常 1停用）
      */
     private Integer status;
+    /**
+     * 关联数组
+     */
+    private String parentKeys;
 
 }

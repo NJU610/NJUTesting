@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @ApiModel("登录用户简化菜单信息 Response VO")
 @Data
 @NoArgsConstructor
@@ -23,4 +25,7 @@ public class AuthSimpleMenuRespVO {
 
     @ApiModelProperty(value = "路由参数", example = "1", notes = "路由参数")
     private Integer hideInMenu;
+
+    @ApiModelProperty(value = "关联数组", required = true, example = "[\"111\",\"222\"]")
+    private List<String> parentKeys;
 }

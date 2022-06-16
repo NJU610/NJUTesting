@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
 * 前台菜单 Base VO，提供给添加、修改、详细的子 VO 使用
@@ -27,4 +28,7 @@ public class FrontMenuBaseVO {
 
     @ApiModelProperty(value = "状态", required = true, example = "1", notes = "见 CommonStatusEnum 枚举")
     private Integer status;
+
+    @ApiModelProperty(value = "关联数组", required = true, example = "[\"111\",\"222\"]")
+    private List<String> parentKeys;
 }
