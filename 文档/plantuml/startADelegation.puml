@@ -1,0 +1,33 @@
+@startuml 用户发起委托申请
+title 委托申请
+
+
+actor user
+entity web
+database DB
+database MongoDB
+actor 市场部主管
+actor 测试部主管
+user -> web : “发起委托"按钮
+web -> DB : 查询用户id, 查看是否已认证
+DB --> web : 用户未认证, 返回null
+web --> user : 提示尚未认证, 无法发起委托
+DB --> web : 用户已认证, 可以发起委托
+web -> user : 进入发起委托界面
+web -> MongoDB : 创建一个新的空委托(包括《软件项目委托测试申请表》、《委托测试软件功能列表》)
+user -> web : 填写相关信息
+user --> web : "保存"按钮
+web --> MongoDB : 将用户填写的内容写入数据库
+web --> user : 保存成功提示信息并退出当前委托界面
+user --> web : "提交"按钮
+loop 提交失败
+    web -> web : 检查用户必填内容是否已填完
+    web --> user : 尚有内容未填完, 返回继续填写
+    user --> web : 返回继续填写
+    user --> web : "提交"按钮
+end
+web --> MongoDB : 将用户填写的内容写入数据库
+web --> user : 提交成功
+web --> 市场部主管 : 新的审核委托任务待分配
+web --> 测试部主管 : 新的审核任务待分配
+@enduml

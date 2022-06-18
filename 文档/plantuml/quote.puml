@@ -1,0 +1,26 @@
+@startuml 报价
+title 报价
+
+actor 市场部工作人员A
+entity web
+actor user
+database MongoDB
+database DB
+
+市场部工作人员A -> web : “报价”按钮
+市场部工作人员A -> web : 填写报价单
+市场部工作人员A -> web : 提交报价
+web -> MongoDB : 保存报价单内容
+web -> user : 向用户展示报价
+loop 用户不接受报价
+    web -> 市场部工作人员A : 用户不接受报价, 重新修改
+    市场部工作人员A -> web : 填写报价单
+    市场部工作人员A -> web : 提交报价
+    web -> MongoDB : 保存报价单内容
+    web -> user : 向用户展示报价
+end
+user -> web : 接受报价
+web -> DB : 修改委托状态
+web -> 市场部工作人员A : 用户已接受报价, 需拟定合同草稿
+
+@enduml

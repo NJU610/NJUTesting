@@ -1,0 +1,33 @@
+@startuml 用户上传样品
+title 上传样品
+
+
+actor user
+entity web
+database DB
+actor 测试部工作人员
+database cloud
+user --> user : 线下寄样品
+user --> cloud : 线上传输样品
+user -> web : "上传样品"按钮
+web -> user : 进入样品信息上传界面
+user -> web : 输入样品信息
+user -> web : 提交
+web -> DB : 添加样品信息
+web -> 测试部工作人员 : 有新的样品待验收
+loop 验收不通过
+    测试部工作人员 -> web : 验收不通过
+    web -> user : 验收不通过, 重新上传
+    user --> user : 线下寄样品
+    user --> cloud : 线上传输样品
+    user -> web : "上传样品"按钮
+    web -> user : 进入样品信息上传界面
+    user -> web : 输入样品信息
+    user -> web : 提交
+    web -> DB : 添加样品信息
+    web -> 测试部工作人员 : 有新的样品待验收
+end
+测试部工作人员 -> web : 验收通过
+web -> user : 样品验收通过
+web -> 测试部工作人员 : 进入编写测试方案阶段
+@enduml

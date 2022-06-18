@@ -1,0 +1,26 @@
+@startuml 合同初稿
+title 合同初稿
+
+actor 市场部工作人员A
+entity web
+actor user
+database MongoDB
+database DB
+
+市场部工作人员A -> web : “合同”按钮
+市场部工作人员A -> web : 填写合同
+市场部工作人员A -> web : 提交合同
+web -> MongoDB : 保存合同单内容
+web -> user : 向用户展示合同
+loop 用户不接受合同
+    web -> 市场部工作人员A : 用户不接受合同, 重新修改
+    市场部工作人员A -> web : 填写合同单
+    市场部工作人员A -> web : 提交合同
+    web -> MongoDB : 保存合同单内容
+    web -> user : 向用户展示合同
+end
+user -> web : 接受合同
+web -> DB : 修改委托状态
+web -> 市场部工作人员A : 用户已接受合同, 等待用户填写相关内容
+
+@enduml

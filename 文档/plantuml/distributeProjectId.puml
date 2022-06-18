@@ -1,0 +1,24 @@
+@startuml 分配项目编号
+title 测试部主管分配项目编号
+
+actor 测试部主管
+
+database DB
+actor user
+entity web
+
+web -> 测试部主管 : edit text界面:为当前委托分配项目编号
+测试部主管 -> web : 输入项目编号projectId
+web -> DB : 检查projectId是否已存在
+loop 输入的projectId已存在
+    DB -->web : 输入的projectId已存在
+    web --> 测试部主管 :输入的projectId已存在, 请重新输入
+    测试部主管 -> web : 输入项目编号projectId
+    web -> DB : 检查projectId是否已存在
+end
+DB --> web : 查询结果为空
+web --> 测试部主管: 可以为该委托分配该项目编号,分配成功
+web --> user : 测试部主管已分配项目编号为projectId
+
+
+@enduml

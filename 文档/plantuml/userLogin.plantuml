@@ -1,0 +1,24 @@
+@startuml user登录
+title user登录
+
+
+actor user
+entity web
+database DB
+
+user -> web : 用户名/手机号/邮箱
+user -> web : 密码
+user -> web : "登录"按钮
+web -> DB : 查询<用户名/手机号/邮箱, 密码>
+loop 查询结果为空
+    DB -> web : null
+    web -> user : 登录失败，用户名/手机号/邮箱不存在或密码错误
+    user -> web : 用户名/手机号/邮箱
+    user -> web : 密码
+    user -> web : "登录"按钮
+    web -> DB : 查询<用户名/手机号/邮箱, 密码>
+end
+DB -> web : 查询成功
+web -> user : 登录成功，进入用户界面
+
+@enduml

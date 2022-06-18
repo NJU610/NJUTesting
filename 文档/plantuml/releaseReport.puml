@@ -1,0 +1,13 @@
+@startuml
+actor 市场部工作人员
+actor web
+actor user
+
+市场部工作人员 -> web : 发布最终报告
+web -> user : 最终报告已发布, 等待确认
+alt 用户在deadline之前确认
+    用户 -> web: 确认
+else
+    web -> web : 自动确认
+end
+@enduml

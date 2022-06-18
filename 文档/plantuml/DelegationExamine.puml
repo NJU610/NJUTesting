@@ -1,0 +1,40 @@
+@startuml 审核委托
+title 审核委托
+
+
+actor 市场部主管
+actor 测试部主管
+actor 市场部工作人员A
+actor 测试部工作人员B
+entity web
+database DB
+database MongoDB
+web -> 市场部主管 : 新的审核任务待分配
+市场部主管 -> 市场部工作人员A : 分配委托审核任务
+测试部主管 -> 测试部工作人员B : 分配委托审核任务
+MongoDB -> web : 委托具体信息
+web -> 市场部工作人员A : 查看委托具体信息
+市场部工作人员A -> web : 审核委托
+loop 市场部审核不通过
+    web -> user : 审核未通过, 重新填写
+    user -> web : 重新填写委托并提交
+    MongoDB -> web : 委托具体信息
+    web -> 市场部工作人员A : 查看委托具体信息
+    市场部工作人员A -> web : 审核委托
+end
+市场部工作人员A -> web : 审核通过
+web -> DB : 修改委托状态为市场部审核通过, 待测试部审核
+MongoDB -> web : 委托具体信息
+web -> 测试部工作人员B : 查看委托具体信息
+测试部工作人员B -> web : 审核委托
+loop 测试部审核不通过
+    web -> user : 审核未通过, 重新填写
+    user -> web : 重新填写委托并提交
+    MongoDB -> web : 委托具体信息
+    web -> 测试部工作人员B : 查看委托具体信息
+    测试部工作人员B -> web : 审核委托
+end
+测试部工作人员B -> web : 审核通过
+web -> DB : 修改委托状态
+web -> 市场部工作人员A : 新的报价任务
+@enduml

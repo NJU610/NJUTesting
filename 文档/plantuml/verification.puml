@@ -1,0 +1,37 @@
+@startuml 用户发起认证申请
+title 认证申请
+
+
+actor user
+entity web
+database DB
+actor 市场部主管
+actor 市场部工作人员A
+user -> web : “用户管理/我的账号信息/公司认证"按钮
+web -> user : 进入认证申请界面
+user -> web : 公司名
+user -> web : 公司地址
+user -> web : 其他信息
+web -> DB : 添加新的认证申请
+web -> 市场部主管 : 新的待分配认证申请
+市场部主管 -> 市场部工作人员A : 分配认证申请
+市场部工作人员A --> web: 通过申请
+市场部工作人员A --> user : 生成一个认证码
+web --> user : 提示用户输入认证码
+web --> DB : 在对应认证申请信息中添加认证码
+user --> web : 输入认证码
+user --> web : 提交
+loop 认证码错误
+    web --> DB : 查询<认证申请id, 认证码>
+    DB --> web : 没有对应的认证码，返回null
+    web --> user : 认证码输入错误,重新输入
+    user --> web : 输入认证码
+    user --> web : 提交
+end
+DB --> web : 查询成功, 认证码正确
+web --> DB : 添加<user, 认证>信息, 修改认证申请为已完成(通过)
+web --> user : 认证成功
+市场部工作人员A --> web: 不通过申请
+web --> DB : 修改认证申请为已完成(未通过)
+web --> user : 认证失败(理由)
+@enduml

@@ -1,0 +1,32 @@
+@startuml 用户注册
+title 用户注册
+
+
+actor user
+entity web
+database DB
+
+user -> web : "注册"按钮
+web -> user : 进入注册界面
+user -> web : 用户名
+user -> web : 手机号
+user -> web : 邮箱
+user -> web : 密码
+user -> web : 确认密码
+user -> web : 提交
+web -> DB : 查询<用户名, 手机号, 邮箱>是否已有
+loop 注册失败,重新注册
+    DB -> web : 用户名/手机号/邮箱已存在
+    user -> web : 用户名
+    user -> web : 手机号
+    user -> web : 邮箱
+    user -> web : 密码
+    user -> web : 确认密码
+    user -> web : 提交
+    web -> DB : 查询<用户名, 手机号, 邮箱>是否已有
+end
+DB -> web : 查询结果为空, 可以注册
+web -> DB : 添加<用户名, 手机号, 邮箱, 密码>
+web -> user : 注册成功
+
+@enduml
