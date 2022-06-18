@@ -72,6 +72,36 @@ public class FlowLogServiceImpl implements FlowLogService {
         return flowLogDO.getId();
 
     }
+
+    public Long saveLogByProject (Long ProjectId,
+                           Long operatorId,
+                           DelegationStateEnum fromState,
+                           DelegationStateEnum toState,
+                           String remark,
+                           Map<String, Object> mapValue){
+        // 将 mapValue 转换为 json
+        String stringMapValue;
+        try {
+            stringMapValue = mapValue == null ? null : new ObjectMapper().writeValueAsString(mapValue);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        // 创建流程操作记录
+        FlowLogDO flowLogDO = new FlowLogDO()
+                .setDelegationId(ProjectId)
+                .setFromState(Optional.ofNullable(fromState).map(DelegationStateEnum::getState).orElse(null))
+                .setToState(Optional.ofNullable(toState).map(DelegationStateEnum::getState).orElse(null))
+                .setOperatorId(operatorId)
+                .setOperateTime(new Date())
+                .setRemark(remark)
+                .setMapValue(stringMapValue);
+
+        // 插入流程操作记录
+        flowLogMapper.insert(flowLogDO);
+
+        return flowLogDO.getId();
+    }
     public List<FlowLogDO> listLogs(Long delegationId) {
         return flowLogMapper.selectList("delegation_id", delegationId);
     }

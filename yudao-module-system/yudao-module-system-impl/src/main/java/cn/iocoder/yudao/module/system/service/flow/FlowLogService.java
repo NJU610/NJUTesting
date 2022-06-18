@@ -30,7 +30,13 @@ public interface FlowLogService {
      * @param templateParams 操作变量
      */
     Long saveLog (Long delegationId, Long operatorId, DelegationStateEnum fromState, DelegationStateEnum toState, String remark, Map<String, Object> templateParams);
-
+    //委托id替换成项目id
+    Long saveLogByProject (Long ProjectId,
+                           Long operatorId,
+                           DelegationStateEnum fromState,
+                           DelegationStateEnum toState,
+                           String remark,
+                           Map<String, Object> templateParams);
 
     /**
      * 获得日志列表
