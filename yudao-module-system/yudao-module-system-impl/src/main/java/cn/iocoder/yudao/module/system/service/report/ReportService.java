@@ -72,27 +72,32 @@ public interface ReportService {
      * @param acceptReqVO 审核信息
      */
     void acceptReportManager(@Valid ReportAcceptReqVO acceptReqVO);
-
+    //以项目为单位
+    void acceptReportManagerByProject(@Valid ReportAcceptReqVO acceptReqVO);
     /**
      * 测试部主管审核测试报告不通过
      *
      * @param rejectReqVO 审核信息
      */
     void rejectReportManager(@Valid ReportRejectReqVO rejectReqVO);
-
+    //以项目为单位
+    void rejectReportManagerByProject(@Valid ReportRejectReqVO rejectReqVO);
     /**
      * 客户审核测试报告通过
      *
      * @param acceptReqVO 审核信息
      */
     void acceptReportClient(@Valid ReportAcceptReqVO acceptReqVO);
-
+    //以项目为单位
+    void acceptReportClientByProject(@Valid ReportAcceptReqVO acceptReqVO);
     /**
      * 客户审核测试报告不通过
      *
      * @param rejectReqVO 审核信息
      */
     void rejectReportClient(@Valid ReportRejectReqVO rejectReqVO);
+    //以项目为单位
+    void rejectReportClientByProject(@Valid ReportRejectReqVO rejectReqVO);
 
     /**
      * 授权签字人审核测试报告通过
@@ -100,6 +105,8 @@ public interface ReportService {
      * @param acceptReqVO 审核信息
      */
     void acceptReportSignatory(@Valid ReportAcceptReqVO acceptReqVO);
+    //以项目为单位
+    void acceptReportSignatoryByProject(@Valid ReportAcceptReqVO acceptReqVO);
 
     /**
      * 授权签字人审核测试报告不通过
@@ -107,7 +114,8 @@ public interface ReportService {
      * @param rejectReqVO 审核信息
      */
     void rejectReportSignatory(@Valid ReportRejectReqVO rejectReqVO);
-
+    //以项目为单位
+    void rejectReportSignatoryByProject(@Valid ReportRejectReqVO rejectReqVO);
     /**
      * 测试部测试文档归档
      *
