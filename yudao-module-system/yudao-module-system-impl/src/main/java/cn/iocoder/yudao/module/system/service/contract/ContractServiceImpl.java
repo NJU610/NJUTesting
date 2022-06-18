@@ -306,4 +306,147 @@ public class ContractServiceImpl implements ContractService {
         return contractMapper.selectList(exportReqVO);
     }
 
+    public void uploadDocumentComply(ContractUploadDocReqVO uploadReqVO, ContractSubmitReqVO submitReqVO) {
+        // 校验合同是否存在
+        Long contractId = submitReqVO.getId();
+        this.validateContractExists(contractId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
+                DelegationStateEnum.CLIENT_WRITING_CONTRACT,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL);
+        // 更新状态
+        DelegationStateEnum oldEnum = DelegationStateEnum.getByState(delegation.getState());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        String remark;
+        assert oldEnum != null;
+        if (Objects.equals(oldEnum.getState(), DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState())) {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "提交了合同，市场部审核中";
+        } else {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "重新提交了合同，市场部审核中";
+        }
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                oldEnum, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT,
+                remark,
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+
+        // 更新url
+        ContractDO updateObj = ContractConvert.INSTANCE.convert(uploadReqVO);
+        contractMapper.updateById(updateObj);
+        // 更新状态
+        delegation.setState(DelegationStateEnum.CONTRACT_SIGN_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGNING, DelegationStateEnum.CONTRACT_SIGN_SUCCESS,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 已上传合同扫描件，合同签署成功",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+        delegation.setState(DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGN_SUCCESS, DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID,
+                "测试中心：等待测试部主管填写项目编号中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+    }
+
+    public void uploadDocumentPro(ContractUploadDocReqVO uploadReqVO, ContractSubmitReqVO submitReqVO) {
+        // 校验合同是否存在
+        Long contractId = submitReqVO.getId();
+        this.validateContractExists(contractId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
+                DelegationStateEnum.CLIENT_WRITING_CONTRACT,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL);
+        // 更新状态
+        DelegationStateEnum oldEnum = DelegationStateEnum.getByState(delegation.getState());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        String remark;
+        assert oldEnum != null;
+        if (Objects.equals(oldEnum.getState(), DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState())) {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "提交了合同，市场部审核中";
+        } else {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "重新提交了合同，市场部审核中";
+        }
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                oldEnum, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT,
+                remark,
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+
+        // 更新url
+        ContractDO updateObj = ContractConvert.INSTANCE.convert(uploadReqVO);
+        contractMapper.updateById(updateObj);
+        // 更新状态
+        delegation.setState(DelegationStateEnum.CONTRACT_SIGN_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGNING, DelegationStateEnum.CONTRACT_SIGN_SUCCESS,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 已上传合同扫描件，合同签署成功",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+        delegation.setState(DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGN_SUCCESS, DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID,
+                "测试中心：等待测试部主管填写项目编号中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+    }
+
+    public void uploadDocumentPlus(ContractUploadDocReqVO uploadReqVO, ContractSubmitReqVO submitReqVO) {
+        // 校验合同是否存在
+        Long contractId = submitReqVO.getId();
+        this.validateContractExists(contractId);
+        // 校验状态
+        DelegationDO delegation = delegationMapper.validateDelegationStateByContract(contractId,
+                DelegationStateEnum.CLIENT_WRITING_CONTRACT,
+                DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT_FAIL);
+        // 更新状态
+        DelegationStateEnum oldEnum = DelegationStateEnum.getByState(delegation.getState());
+        delegation.setState(DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        String remark;
+        assert oldEnum != null;
+        if (Objects.equals(oldEnum.getState(), DelegationStateEnum.CLIENT_WRITING_CONTRACT.getState())) {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "提交了合同，市场部审核中";
+        } else {
+            remark = "客户：" + userService.getUser(getLoginUserId()).getNickname() + "重新提交了合同，市场部审核中";
+        }
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                oldEnum, DelegationStateEnum.MARKETING_DEPARTMENT_AUDIT_CONTRACT,
+                remark,
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+
+        // 更新url
+        ContractDO updateObj = ContractConvert.INSTANCE.convert(uploadReqVO);
+        contractMapper.updateById(updateObj);
+        // 更新状态
+        delegation.setState(DelegationStateEnum.CONTRACT_SIGN_SUCCESS.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGNING, DelegationStateEnum.CONTRACT_SIGN_SUCCESS,
+                "市场部：" + userService.getUser(getLoginUserId()).getNickname() + " 已上传合同扫描件，合同签署成功",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+        delegation.setState(DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID.getState());
+        delegationMapper.updateById(delegation);
+        // 更新日志
+        flowLogService.saveLog(delegation.getId(), getLoginUserId(),
+                DelegationStateEnum.CONTRACT_SIGN_SUCCESS, DelegationStateEnum.WAITING_TESTING_DEPT_MANAGER_FILL_PROJECT_ID,
+                "测试中心：等待测试部主管填写项目编号中",
+                new HashMap<String, Object>(){{put("delegation", delegation);put("contract", contractMapper.selectById(contractId));}});
+
+    }
+
 }

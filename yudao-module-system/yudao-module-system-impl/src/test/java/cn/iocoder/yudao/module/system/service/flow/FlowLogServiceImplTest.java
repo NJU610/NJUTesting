@@ -60,6 +60,21 @@ class FlowLogServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    void saveLogByProject() {
+
+        DelegationDO del = DelegationDO.builder()
+                .id(1L)
+                .build();
+
+        flowLogService.saveLogByProject(1L,1L, DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION,
+                DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION,"nju_test",
+                new HashMap<String, Object>(){{put("project", del);}});
+
+        assertEquals(flowLogMapper.selectCount(),1);
+
+    }
+
+    @Test
     void listLogs() {
 
         DelegationDO del = DelegationDO.builder()
