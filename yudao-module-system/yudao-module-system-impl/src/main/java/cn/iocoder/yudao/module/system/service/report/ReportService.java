@@ -65,7 +65,8 @@ public interface ReportService {
      * @param submitReqVO 提交信息
      */
     void submitReport(@Valid ReportSubmitReqVO submitReqVO);
-
+    //以项目为单位
+    void submitReportByProject(@Valid ReportSubmitReqVO submitReqVO);
     /**
      * 测试部主管审核测试报告通过
      *
@@ -122,14 +123,16 @@ public interface ReportService {
      * @param archiveReqVO 归档信息
      */
     void archiveReport(@Valid ReportArchiveReqVO archiveReqVO);
-
+    //以项目为单位
+    void archiveReportByProject(@Valid ReportArchiveReqVO archiveReqVO);
     /**
      * 市场部发送测试报告
      *
      * @param sendReqVO 发送信息
      */
     void sendReport(@Valid ReportSendReqVO sendReqVO);
-
+    //以项目为单位
+    void sendReportByProject(@Valid ReportSendReqVO sendReqVO);
     /**
      * 客户确认接收测试报告
      *
