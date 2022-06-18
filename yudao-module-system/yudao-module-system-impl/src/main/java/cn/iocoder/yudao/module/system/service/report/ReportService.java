@@ -23,7 +23,8 @@ public interface ReportService {
      * @return 编号
      */
     Long createReport(@Valid ReportCreateReqVO createReqVO);
-
+    //以项目为单位
+    Long createReportByProject(@Valid ReportCreateReqVO createReqVO);
     /**
      * 保存软件测试报告
      *
@@ -139,7 +140,8 @@ public interface ReportService {
      * @param receiveReqVO 接收信息
      */
     void receiveReport(@Valid ReportReceiveReqVO receiveReqVO);
-
+    //以项目为单位
+    void receiveReportByProject(@Valid ReportReceiveReqVO receiveReqVO);
     /**
      * 删除测试报告
      *
