@@ -304,8 +304,8 @@ def main(argv):
             _ReqDoc1 = "□"
             _ReqDoc2 = "□"
             _ReqDoc3 = "□"
-            if "测试文档" in jdata.keys():
-                  for i in jdata["测试文档"]:
+            if "需求文档" in jdata.keys():
+                  for i in jdata["需求文档"]:
                         if i == "项目计划任务书":
                               _ReqDoc1 = "✓"
                         if i == "需求分析报告":
