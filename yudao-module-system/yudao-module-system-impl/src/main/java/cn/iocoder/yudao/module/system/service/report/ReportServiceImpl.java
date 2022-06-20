@@ -712,8 +712,9 @@ public class ReportServiceImpl implements ReportService {
         }
         DelegationDO delegation = delegationMapper.validateDelegationStateByReport(reportId,
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT);
-        // 更新意见
+        // 更新测试部主管id和审核意见
         if (remark != null) {
+            report.setTestingDeptManagerId(getLoginUserId());
             report.setManagerRemark(remark);
             reportMapper.updateById(report);
         }
@@ -771,8 +772,9 @@ public class ReportServiceImpl implements ReportService {
         // 校验状态
         DelegationDO delegation = delegationMapper.validateDelegationStateByReport(reportId,
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS);
-        // 更新意见
+        // 更新签字人id和审核意见
         if (remark != null) {
+            report.setSignatoryId(getLoginUserId());
             report.setSignatoryRemark(remark);
             reportMapper.updateById(report);
         }
