@@ -826,4 +826,110 @@ public class ReportServiceImpl implements ReportService {
         return reportMapper.selectList(exportReqVO);
     }
 
+    private void saveTableTemplate(ReportSaveTableReqVO saveReqVO, String name) {
+        // 校验报告是否存在
+        Long reportId = saveReqVO.getReportId();
+        ReportDO report = this.validateReportExists(reportId);
+        // 保存表单
+        if (report.getTable8Id() == null) {
+            report.setTable8Id(tableMongoRepository.create(name,
+                    saveReqVO.getData()));
+            reportMapper.updateById(report);
+        } else {
+            tableMongoRepository.upsert(name,
+                    report.getTable8Id(),
+                    saveReqVO.getData());
+        }
+    }
+
+    private void saveTableByName(ReportSaveTableReqVO saveReqVO, String name){
+        char id = name.charAt(name.length() - 1);
+        switch(id){
+            case '7': {
+                // 校验报告是否存在
+                Long reportId = saveReqVO.getReportId();
+                ReportDO report = this.validateReportExists(reportId);
+                // 保存表单
+                if (report.getTable7Id() == null) {
+                    report.setTable7Id(tableMongoRepository.create("table7",
+                            saveReqVO.getData()));
+                    reportMapper.updateById(report);
+                } else {
+                    tableMongoRepository.upsert("table7",
+                            report.getTable7Id(),
+                            saveReqVO.getData());
+                }
+                break;
+            }
+
+            case '8': {
+                // 校验报告是否存在
+                Long reportId = saveReqVO.getReportId();
+                ReportDO report = this.validateReportExists(reportId);
+                // 保存表单
+                if (report.getTable8Id() == null) {
+                    report.setTable8Id(tableMongoRepository.create("table8",
+                            saveReqVO.getData()));
+                    reportMapper.updateById(report);
+                } else {
+                    tableMongoRepository.upsert("table8",
+                            report.getTable8Id(),
+                            saveReqVO.getData());
+                }
+                break;
+            }
+
+            case '9':{
+                // 校验报告是否存在
+                Long reportId = saveReqVO.getReportId();
+                ReportDO report = this.validateReportExists(reportId);
+                // 保存表单
+                if (report.getTable9Id() == null) {
+                    report.setTable9Id(tableMongoRepository.create("table9",
+                            saveReqVO.getData()));
+                    reportMapper.updateById(report);
+                } else {
+                    tableMongoRepository.upsert("table9",
+                            report.getTable9Id(),
+                            saveReqVO.getData());
+                }
+                break;
+            }
+
+            case '0':{
+                // 校验报告是否存在
+                Long reportId = saveReqVO.getReportId();
+                ReportDO report = this.validateReportExists(reportId);
+                // 保存表单
+                if (report.getTable10Id() == null) {
+                    report.setTable10Id(tableMongoRepository.create("table10",
+                            saveReqVO.getData()));
+                    reportMapper.updateById(report);
+                } else {
+                    tableMongoRepository.upsert("table10",
+                            report.getTable10Id(),
+                            saveReqVO.getData());
+                }
+                break;
+            }
+
+            case '1':{
+                // 校验报告是否存在
+                Long reportId = saveReqVO.getReportId();
+                ReportDO report = this.validateReportExists(reportId);
+                // 保存表单
+                if (report.getTable11Id() == null) {
+                    report.setTable11Id(tableMongoRepository.create("table11",
+                            saveReqVO.getData()));
+                    reportMapper.updateById(report);
+                } else {
+                    tableMongoRepository.upsert("table11",
+                            report.getTable11Id(),
+                            saveReqVO.getData());
+                }
+                break;
+            }
+
+        }
+    }
 }
