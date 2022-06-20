@@ -826,7 +826,7 @@ public class ReportServiceImpl implements ReportService {
         return reportMapper.selectList(exportReqVO);
     }
 
-    private void saveTableTemplate(ReportSaveTableReqVO saveReqVO, String name) {
+    public void saveTableTemplate(ReportSaveTableReqVO saveReqVO, String name) {
         // 校验报告是否存在
         Long reportId = saveReqVO.getReportId();
         ReportDO report = this.validateReportExists(reportId);
@@ -842,7 +842,7 @@ public class ReportServiceImpl implements ReportService {
         }
     }
 
-    private void saveTableByName(ReportSaveTableReqVO saveReqVO, String name){
+    public void saveTableByName(ReportSaveTableReqVO saveReqVO, String name){
         char id = name.charAt(name.length() - 1);
         switch(id){
             case '7': {
