@@ -100,6 +100,11 @@ public class CompanyServiceImpl implements CompanyService {
         return companyMapper.selectList(exportReqVO);
     }
 
+    @Override
+    public List<CompanyDO> getCompanyListAll() {
+        return companyMapper.selectList();
+    }
+
     public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO) {
         List<CompanyDO> list = companyMapper.selectList(exportReqVO);
         Collections.shuffle(list);
@@ -159,5 +164,5 @@ public class CompanyServiceImpl implements CompanyService {
         return list;
     }
 
-    
+
 }
