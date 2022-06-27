@@ -59,6 +59,45 @@ public interface CompanyService {
      */
     PageResult<CompanyDO> getCompanyPage(CompanyPageReqVO pageReqVO);
 
+
+    /**
+     *根据名称获得公司分页
+     *
+     * @param pageReqVO 分页查询
+     * @param name 公司名称
+     * @return
+     */
+    PageResult<CompanyDO> getCompanyPageByName(CompanyPageReqVO pageReqVO, String name);
+
+    /**
+     *根据名称列表获得公司分页
+     *
+     *
+     * @param pageReqVO 分页查询
+     * @param nameList 公司名称列表
+     * @return
+     */
+    PageResult<CompanyDO> getCompanyPageByNameList(CompanyPageReqVO pageReqVO, ArrayList<String> nameList);
+
+    /**
+     *根据名称获得公司分页
+     *
+     * @param pageReqVO 分页查询
+     * @param code 公司代码
+     * @return
+     */
+    PageResult<CompanyDO> getCompanyPageByCode(CompanyPageReqVO pageReqVO, String code);
+
+    /**
+     *根据名称列表获得公司分页
+     *
+     *
+     * @param pageReqVO 分页查询
+     * @param codeList 公司代码列表
+     * @return
+     */
+    PageResult<CompanyDO> getCompanyPageByCodeList(CompanyPageReqVO pageReqVO, ArrayList<String> codeList);
+
     /**
      * 获得公司列表, 用于 Excel 导出
      *
@@ -74,4 +113,39 @@ public interface CompanyService {
      * @return 公司列表
      */
     List<CompanyDO> getCompanyListAll();
+
+    /**
+     * 根据公司名称获得公司
+     *
+     * @param name 公司名称
+     */
+    List<CompanyDO> getCompanyListByName(String name);
+
+    /**
+     * 根据公司名称获得公司
+     *
+     * @param name 公司名称
+     */
+    List<CompanyDO> getCompanyListByName(CompanyExportReqVO reqVO, String name);
+
+    /**
+    * 根据公司名称列表获得公司列表
+    *
+    * @param names 公司名称列表
+    */
+    List<CompanyDO> getCompanyListByNameList(CompanyExportReqVO reqVO, ArrayList<String> names);
+
+    /**
+     * 根据公司代码获得公司列表
+     *
+     * @param code 公司名称列表
+     */
+    List<CompanyDO> getCompanyListByCode(CompanyExportReqVO reqVO, String code);
+
+    /**
+     * 根据公司代码列表获得公司列表
+     *
+     * @param codes 公司名称列表
+     */
+    List<CompanyDO> getCompanyListByCodeList(CompanyExportReqVO reqVO, ArrayList<String> codes);
 }
