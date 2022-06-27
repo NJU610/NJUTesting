@@ -675,8 +675,13 @@ class ReportServiceImplTest extends BaseDbUnitTest {
             o.setId(reportId);
         });
 
-        reportService.acceptReportManagerByProject(acceptReqVO);
+        reportService.acceptReportManager(acceptReqVO);
 
+//        ReportRejectReqVO rejectReqVO = randomPojo(ReportRejectReqVO.class, o->{
+//            o.setId(reportId);
+//        });
+//
+//        reportService.rejectReportManager(rejectReqVO);
 
         assertEquals(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS.getState(),delegationMapper.selectById(delegationId).getState());
     }
@@ -684,7 +689,7 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void acceptReportManagerByProject() {
+    void acceptReportManager_Reject() {
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -725,14 +730,20 @@ class ReportServiceImplTest extends BaseDbUnitTest {
 
         reportMapper.insert(rep);
 
-        ReportAcceptReqVO acceptReqVO = randomPojo(ReportAcceptReqVO.class, o->{
+//        ReportAcceptReqVO acceptReqVO = randomPojo(ReportAcceptReqVO.class, o->{
+//            o.setId(reportId);
+//        });
+//
+//        reportService.acceptReportManager(acceptReqVO);
+
+        ReportRejectReqVO rejectReqVO = randomPojo(ReportRejectReqVO.class,
+                o->{
             o.setId(reportId);
         });
 
-        reportService.acceptReportManagerByProject(acceptReqVO);
+        reportService.rejectReportManager(rejectReqVO);
 
-
-        assertEquals(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS.getState(),delegationMapper.selectById(delegationId).getState());
+        assertNotEquals(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
     @Test
@@ -783,65 +794,12 @@ class ReportServiceImplTest extends BaseDbUnitTest {
             o.setId(reportId);
         });
 
-        reportService.rejectReportManagerByProject(rejectReqVO);
+        reportService.rejectReportManager(rejectReqVO);
 
 
         assertEquals(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void rejectReportManagerByProject() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .reportId(reportId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .table7Id(randomString())
-                .table8Id(randomString())
-                .table9Id(randomString())
-                .table10Id(randomString())
-                .table11Id(randomString())
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportRejectReqVO rejectReqVO = randomPojo(ReportRejectReqVO.class, o->{
-            o.setId(reportId);
-        });
-
-        reportService.rejectReportManagerByProject(rejectReqVO);
-
-
-        assertEquals(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL.getState(),delegationMapper.selectById(delegationId).getState());
-    }
 
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
@@ -887,11 +845,12 @@ class ReportServiceImplTest extends BaseDbUnitTest {
 
         reportMapper.insert(rep);
 
-        ReportAcceptReqVO acceptReqVO = randomPojo(ReportAcceptReqVO.class, o->{
+        ReportAcceptReqVO acceptReqVO = randomPojo(ReportAcceptReqVO.class,
+                o->{
             o.setId(reportId);
         });
 
-        reportService.acceptReportClientByProject(acceptReqVO);
+        reportService.acceptReportClient(acceptReqVO);
 
 
         assertEquals(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS.getState(),delegationMapper.selectById(delegationId).getState());
@@ -900,7 +859,7 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void acceptReportClientByProject() {
+    void acceptReportClient_Reject() {
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -941,14 +900,19 @@ class ReportServiceImplTest extends BaseDbUnitTest {
 
         reportMapper.insert(rep);
 
-        ReportAcceptReqVO acceptReqVO = randomPojo(ReportAcceptReqVO.class, o->{
+//        ReportAcceptReqVO acceptReqVO = randomPojo(ReportAcceptReqVO.class, o->{
+//            o.setId(reportId);
+//        });
+//
+//        reportService.acceptReportClient(acceptReqVO);
+
+        ReportRejectReqVO rejectReqVO= randomPojo(ReportRejectReqVO.class, o->{
             o.setId(reportId);
         });
 
-        reportService.acceptReportClientByProject(acceptReqVO);
+        reportService.rejectReportClient(rejectReqVO);
 
-
-        assertEquals(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS.getState(),delegationMapper.selectById(delegationId).getState());
+        assertNotEquals(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
     @Test
@@ -995,69 +959,18 @@ class ReportServiceImplTest extends BaseDbUnitTest {
 
         reportMapper.insert(rep);
 
-        ReportRejectReqVO rejectReqVO= randomPojo(ReportRejectReqVO.class, o->{
+        ReportRejectReqVO rejectReqVO= randomPojo(ReportRejectReqVO.class,
+                o->{
             o.setId(reportId);
         });
 
-        reportService.rejectReportClientByProject(rejectReqVO);
+        reportService.rejectReportClient(rejectReqVO);
 
 
         assertEquals(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void rejectReportClientByProject() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .reportId(reportId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .table7Id(randomString())
-                .table8Id(randomString())
-                .table9Id(randomString())
-                .table10Id(randomString())
-                .table11Id(randomString())
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportRejectReqVO rejectReqVO= randomPojo(ReportRejectReqVO.class, o->{
-            o.setId(reportId);
-        });
-
-        reportService.rejectReportClientByProject(rejectReqVO);
-
-
-        assertEquals(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL.getState(),delegationMapper.selectById(delegationId).getState());
-    }
 
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
@@ -1107,7 +1020,7 @@ class ReportServiceImplTest extends BaseDbUnitTest {
             o.setId(reportId);
         });
 
-        reportService.acceptReportSignatoryByProject(acceptReqVO);
+        reportService.acceptReportSignatory(acceptReqVO);
 
 
         assertEquals(DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE.getState(),delegationMapper.selectById(delegationId).getState());
@@ -1116,7 +1029,7 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void acceptReportSignatoryByProject() {
+    void acceptReportSignatory_reject() {
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -1157,14 +1070,19 @@ class ReportServiceImplTest extends BaseDbUnitTest {
 
         reportMapper.insert(rep);
 
-        ReportAcceptReqVO acceptReqVO= randomPojo(ReportAcceptReqVO.class, o->{
+//        ReportAcceptReqVO acceptReqVO= randomPojo(ReportAcceptReqVO.class, o->{
+//            o.setId(reportId);
+//        });
+//
+//        reportService.acceptReportSignatory(acceptReqVO);
+
+        ReportRejectReqVO rejectReqVO = randomPojo(ReportRejectReqVO.class, o->{
             o.setId(reportId);
         });
 
-        reportService.acceptReportSignatoryByProject(acceptReqVO);
+        reportService.rejectReportSignatory(rejectReqVO);
 
-
-        assertEquals(DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE.getState(),delegationMapper.selectById(delegationId).getState());
+        assertNotEquals(DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
     @Test
@@ -1215,65 +1133,12 @@ class ReportServiceImplTest extends BaseDbUnitTest {
             o.setId(reportId);
         });
 
-        reportService.rejectReportSignatoryByProject(rejectReqVO);
+        reportService.rejectReportSignatory(rejectReqVO);
 
 
         assertEquals(DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void rejectReportSignatoryByProject() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .reportId(reportId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .table7Id(randomString())
-                .table8Id(randomString())
-                .table9Id(randomString())
-                .table10Id(randomString())
-                .table11Id(randomString())
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportRejectReqVO rejectReqVO = randomPojo(ReportRejectReqVO.class, o->{
-            o.setId(reportId);
-        });
-
-        reportService.rejectReportSignatoryByProject(rejectReqVO);
-
-
-        assertEquals(DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL.getState(),delegationMapper.selectById(delegationId).getState());
-    }
 
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
