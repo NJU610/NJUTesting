@@ -57,7 +57,7 @@ public class SmsCodeServiceImpl implements SmsCodeService {
             }
             if (System.currentTimeMillis() - lastSmsCode.getCreateTime().getTime()
                     < smsCodeProperties.getSendFrequency().toMillis()) { // 发送过于频繁
-                throw ServiceExceptionUtil.exception(SMS_CODE_SEND_TOO_FAST);
+//                throw ServiceExceptionUtil.exception(SMS_CODE_SEND_TOO_FAST);
             }
             // TODO 芋艿：提升，每个 IP 每天可发送数量
             // TODO 芋艿：提升，每个 IP 每小时可发送数量
