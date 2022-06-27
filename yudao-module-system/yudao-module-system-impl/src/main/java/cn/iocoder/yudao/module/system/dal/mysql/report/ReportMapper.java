@@ -55,6 +55,18 @@ public interface ReportMapper extends BaseMapperX<ReportDO> {
                         endTime)) > 0;
     }
 
+    default boolean existsByTestManager(Long managerId) {
+        return selectCount(new LambdaQueryWrapperX<ReportDO>()
+                .eq(ReportDO::getTestingDeptManagerId,
+                        managerId)) > 0;
+    }
+
+    default boolean existsBySignatory(Long signatoryId) {
+        return selectCount(new LambdaQueryWrapperX<ReportDO>()
+                .eq(ReportDO::getSignatoryId,
+                        signatoryId)) > 0;
+    }
+
     default PageResult<ReportDO> selectPage(ReportPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<ReportDO>()
                 .eqIfPresent(ReportDO::getTable7Id, reqVO.getTable7Id())

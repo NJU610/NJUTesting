@@ -129,7 +129,7 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
     }
 
     default DelegationDO selectByProject(Long projectId) {
-        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
-                .eq(DelegationDO::getProjectId, projectId));
+        return selectOne("project_id", projectId);
+
     }
 }

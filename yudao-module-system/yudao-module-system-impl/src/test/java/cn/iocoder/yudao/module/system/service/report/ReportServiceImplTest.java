@@ -520,56 +520,6 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void saveTableByName() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportSaveTableReqVO saveReqVO = randomPojo(ReportSaveTableReqVO.class, o->{
-            o.setReportId(reportId);
-        });
-
-        Mockito.when(tableMongoRepository.create(any(),any())).thenReturn(randomString());
-        reportService.saveTableByName(saveReqVO,
-                "table10");
-
-
-        assertNotNull(reportMapper.selectById(reportId).getTable10Id());
-    }
-
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void submitReport() {
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;

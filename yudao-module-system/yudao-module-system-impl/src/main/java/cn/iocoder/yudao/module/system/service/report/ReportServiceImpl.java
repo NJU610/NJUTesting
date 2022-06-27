@@ -4,6 +4,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.project.ProjectDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
+import cn.iocoder.yudao.module.system.dal.mysql.project.ProjectMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import cn.iocoder.yudao.module.system.service.flow.FlowLogService;
 import cn.iocoder.yudao.module.system.service.job.ReceiveReportJob;
@@ -40,6 +41,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Resource
     private ReportMapper reportMapper;
+
+    @Resource
+    private ProjectMapper projectMapper;
 
     @Resource
     private DelegationMapper delegationMapper;
@@ -205,16 +209,17 @@ public class ReportServiceImpl implements ReportService {
                 report.getTable11Id() == null) {
             throw exception(REPORT_TABLE_NOT_FILLED);
         }
-        DelegationDO project = delegationMapper.validateDelegationStateByReport(reportId,
+        DelegationDO delegation = delegationMapper.validateDelegationStateByReport(reportId,
                 DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT,
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL,
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL,
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL);
         // 更新状态
-        DelegationStateEnum fromState = DelegationStateEnum.getByState(project.getState());
+        ProjectDO project = projectMapper.selectByDelegation(delegation.getId());
+        DelegationStateEnum fromState = DelegationStateEnum.getByState(delegation.getState());
         // delegation.setState(DelegationStateEnum.TESTING_DEPT_GENERATE_TEST_REPORT.getState());
-        project.setState(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT.getState());
-        delegationMapper.updateById(project);
+        delegation.setState(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT.getState());
+        delegationMapper.updateById(delegation);
         // 保存日志
         flowLogService.saveLog(project.getId(), getLoginUserId(),
                 fromState, DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
@@ -222,6 +227,7 @@ public class ReportServiceImpl implements ReportService {
                 new HashMap<String, Object>() {
                     {
                         put("project", project);
+                        put("delegation", delegation);
                         put("report", report);
                     }
                 });
