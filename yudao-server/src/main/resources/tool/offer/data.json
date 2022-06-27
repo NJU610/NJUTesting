@@ -1,28 +1,39 @@
-{ 
-    "_id" : "62a2cee911d36f6554650bec", 
-    "deleted" : false, 
-    "_class" : "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO", 
-    "reason" : "", 
-    "sign" : "", 
-    "小计" : "220", 
-    "总计" : "237.6", 
-    "报价提供人" : "市场部员工2", 
-    "报价日期" : "2022-06-10", 
-    "报价有效期" : [
-        "2022-06-09", 
-        "2022-07-15"
-    ], 
-    "税率（8%）" : "17.6", 
-    "软件名称" : "vscode", 
-    "项目表格" : [
+{
+    "_id": {
+        "$oid": "62b97436ade4d33481d52476"
+    },
+    "deleted": false,
+    "_class": "cn.iocoder.yudao.module.system.dal.dataobject.table.TableMongoCreateDO",
+    "reason": "",
+    "sign": "",
+    "小计": "2600",
+    "总计": "3000",
+    "报价提供人": "林某",
+    "报价日期": "2022-06-10",
+    "报价有效期": [
+        "2022-06-01",
+        "2022-06-08"
+    ],
+    "税率（8%）": "200",
+    "软件名称": "微信",
+    "项目表格": [
         {
-            "id" :1654839091318, 
-            "index" : 0, 
-            "xiangmu" : "项目1", 
-            "fenxiang" : "分项1", 
-            "danjia" : "220", 
-            "shuoming" : "", 
-            "hangheji" : "220"
+            "id": 1656320962326,
+            "index": 0,
+            "xiangmu": "聊天",
+            "fenxiang": "2",
+            "danjia": "1000",
+            "shuoming": "聊天功能测试",
+            "hangheji": "2000"
+        },
+        {
+            "id": 1656320994901,
+            "index": 1,
+            "xiangmu": "零钱",
+            "fenxiang": "1",
+            "danjia": "500",
+            "shuoming": "零钱功能测试",
+            "hangheji": "500"
         }
     ]
 }

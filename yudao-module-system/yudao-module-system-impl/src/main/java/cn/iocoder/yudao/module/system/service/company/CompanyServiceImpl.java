@@ -92,7 +92,32 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public PageResult<CompanyDO> getCompanyPage(CompanyPageReqVO pageReqVO) {
-        return companyMapper.selectPage(pageReqVO);
+        return companyMapper
+                .selectPage(pageReqVO);
+    }
+
+    @Override
+    public PageResult<CompanyDO> getCompanyPageByName(CompanyPageReqVO pageReqVO, String name) {
+        return companyMapper
+                .selectPageByName(pageReqVO, name);
+    }
+
+    @Override
+    public PageResult<CompanyDO> getCompanyPageByNameList(CompanyPageReqVO pageReqVO, ArrayList<String> nameList) {
+        return companyMapper
+                .selectPageByNameList(pageReqVO, nameList);
+    }
+
+    @Override
+    public PageResult<CompanyDO> getCompanyPageByCode(CompanyPageReqVO pageReqVO, String code) {
+        return companyMapper
+                .selectPageByCode(pageReqVO, code);
+    }
+
+    @Override
+    public PageResult<CompanyDO> getCompanyPageByCodeList(CompanyPageReqVO pageReqVO, ArrayList<String> codeList) {
+        return companyMapper
+                .selectPageByCodeList(pageReqVO, codeList);
     }
 
     @Override
@@ -117,42 +142,6 @@ public class CompanyServiceImpl implements CompanyService {
         return list.subList(0, num);
     }
 
-    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start) {
-        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
-        Collections.shuffle(list);
-        return list.subList(start, start + num);
-    }
-
-    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end) {
-        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
-        Collections.shuffle(list);
-        return list.subList(start, end);
-    }
-
-    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step) {
-        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
-        Collections.shuffle(list);
-        return list.subList(start, end);
-    }
-
-    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step, int offset) {
-        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
-        Collections.shuffle(list);
-        return list.subList(start, end);
-    }
-
-    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step, int offset, int length) {
-        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
-        Collections.shuffle(list);
-        return list.subList(start, end);
-    }
-
-    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step, int offset, int length, int offset2) {
-        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
-        Collections.shuffle(list);
-        return list.subList(start, end);
-    }
-
     public List<CompanyDO> getCompanyListByName(CompanyExportReqVO exportReqVO) {
         List<CompanyDO> list = companyMapper.selectList(exportReqVO);
         Collections.sort(list, new Comparator<CompanyDO>() {
@@ -165,4 +154,58 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
 
+
+    @Override
+    public List<CompanyDO> getCompanyListByName(String name) {
+        return companyMapper
+                .selectListByName(name);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByNameList(CompanyExportReqVO reqVO, ArrayList<String> names){
+        return companyMapper
+                .selectListByNameList(reqVO,names);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByName(CompanyExportReqVO reqVO, String name){
+        return companyMapper
+                .selectListByName(reqVO,name);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListById(CompanyExportReqVO reqVO, String id){
+        return companyMapper
+                .selectListById(reqVO,id);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByIdList(CompanyExportReqVO reqVO, ArrayList<String> ids){
+        return companyMapper
+                .selectListByIdList(reqVO,ids);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByAddress(CompanyExportReqVO reqVO, String address){
+        return companyMapper
+                .selectListByAddress(reqVO,address);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByAddressList(CompanyExportReqVO reqVO, ArrayList<String> addresses){
+        return companyMapper
+                .selectListByAddressList(reqVO,addresses);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByCode(CompanyExportReqVO reqVO, String code){
+        return companyMapper
+                .selectListByCode(reqVO,code);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByCodeList(CompanyExportReqVO reqVO, ArrayList<String> codes){
+        return companyMapper
+                .selectListByCodeList(reqVO,codes);
+    }
 }

@@ -67,6 +67,8 @@ public class SolutionServiceImpl implements SolutionService {
         return solutionId;
     }
 
+
+
     @Override
     public void saveSolutionTable6(SolutionSaveTableReqVO saveReqVO) {
         // 校验测试方案是否存在
@@ -175,6 +177,7 @@ public class SolutionServiceImpl implements SolutionService {
         SolutionDO updateObj = SolutionConvert.INSTANCE.convert(updateReqVO);
         solutionMapper.updateById(updateObj);
     }
+
 
     @Override
     public void deleteSolution(Long id) {

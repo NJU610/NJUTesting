@@ -55,7 +55,7 @@ def main(argv):
       _Item2 = jdata["项目表格"][1]["fenxiang"]
       _Price2 = jdata["项目表格"][1]["danjia"]
       _Brief2 = jdata["项目表格"][1]["shuoming"]
-      _LTotal2 = jdata["项目表格"][1]["hangheji"], 
+      _LTotal2 = jdata["项目表格"][1]["hangheji"]
   
     
     document.merge(
@@ -80,7 +80,7 @@ def main(argv):
       Item2 = _Item2,
       Price2 = _Price2,
       Brief2 = _Brief2,
-      LTotal = _LTotal2
+      LTotal2 = _LTotal2
     )
     wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件
