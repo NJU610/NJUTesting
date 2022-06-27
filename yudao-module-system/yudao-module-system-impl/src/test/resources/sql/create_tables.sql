@@ -454,6 +454,7 @@ CREATE TABLE IF NOT EXISTS "system_delegation" (
     "market_remark" varchar(1024),
     "testing_remark" varchar(1024),
     "table14_id" varchar(1024),
+--     "table12_id" varchar(1024),
     "offer_id" varchar(255),
     "offer_remark" varchar(1024),
     "contract_id" bigint(20),
