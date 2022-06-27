@@ -30,6 +30,7 @@ def main(argv):
 
       try:
             opts, args = getopt.getopt(argv,'o:i:t:',["ofile=","ifile=","template="])
+            
       except getopt.GetoptError:
             sys.exit(2)
 
@@ -69,9 +70,9 @@ def main(argv):
             _DepartmentOther = "○"
             if(jdata["单位性质"] == "内资企业"):
                   _Department1 = "✓" 
-            elif(jdata["单位性质"] == "外(合)资企业"):
+            elif(jdata["单位性质"] == "外合资企业"):
                   _Department2 = "✓"  
-            elif(jdata["单位性质"] == "港澳台(合)资企业"):
+            elif(jdata["单位性质"] == "港澳台合资企业"):
                   _Department3 = "✓" 
             elif(jdata["单位性质"] == "科研院校"):
                   _Department4 = "✓"  
