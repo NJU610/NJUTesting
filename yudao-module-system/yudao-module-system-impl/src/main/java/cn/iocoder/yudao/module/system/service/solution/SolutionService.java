@@ -17,48 +17,6 @@ import com.alibaba.fastjson.JSONObject;
 public interface SolutionService {
 
     /**
-     * 创建测试方案
-     * @param createReqVO 创建信息
-     * @return
-     */
-    Long createSolution(SolutionCreateReqVO createReqVO);
-
-    /**
-     * 保存软件测试方案表格
-     *
-     * @param saveReqVO 填写信息
-     */
-    void saveSolutionTable6(@Valid SolutionSaveTableReqVO saveReqVO);
-
-    /**
-     * 保存测试方案评审表
-     *
-     * @param saveReqVO 填写信息
-     */
-    void saveSolutionTable13(@Valid SolutionSaveTableReqVO saveReqVO);
-
-    /**
-     * 提交软件测试方案表
-     *
-     * @param submitReqVO 提交信息
-     */
-    void submitSolutionTable6(@Valid SolutionSubmitReqVO submitReqVO);
-
-    /**
-     * 审核通过
-     *
-     * @param submitReqVO 提交信息
-     */
-    void auditSuccess(@Valid SolutionSubmitReqVO submitReqVO);
-
-    /**
-     * 审核不通过
-     *
-     * @param submitReqVO 提交信息
-     */
-    void auditFail(@Valid SolutionSubmitReqVO submitReqVO);
-
-    /**
      * 获取软件测试方案表格
      *
      * @param id 表格编号
