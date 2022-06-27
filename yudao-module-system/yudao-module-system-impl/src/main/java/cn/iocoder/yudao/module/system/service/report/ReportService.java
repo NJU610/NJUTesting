@@ -176,19 +176,5 @@ public interface ReportService {
      */
     List<ReportDO> getReportList(ReportExportReqVO exportReqVO);
 
-    //以项目为单位
-    Long createReportByProject(@Valid ReportCreateReqVO createReqVO);
-
-    //以项目为单位
-    void submitReportByProject(@Valid ReportSubmitReqVO submitReqVO);
-
-    //以项目为单位
-    void sendReportByProject(@Valid ReportSendReqVO sendReqVO);
-
-    //以项目为单位
-    void receiveReportByProject(@Valid ReportReceiveReqVO receiveReqVO);
-
-    //以项目为单位
-    void archiveReportByProject(@Valid ReportArchiveReqVO archiveReqVO);
 
 }

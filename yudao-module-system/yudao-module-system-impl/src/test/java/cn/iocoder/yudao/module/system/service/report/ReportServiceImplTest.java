@@ -473,6 +473,57 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
+    void saveTableTemplate8() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
+        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(delegationId)
+                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_SOLUTION.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(contractId)
+                .solutionId(solutionId)
+                .reportId(reportId)
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        ReportDO rep = ReportDO.builder()
+                .id(reportId)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
+
+        ReportSaveTableReqVO saveReqVO = randomPojo(ReportSaveTableReqVO.class, o->{
+            o.setReportId(reportId);
+        });
+
+        Mockito.when(tableMongoRepository.create(any(),any())).thenReturn(randomString());
+        reportService.saveTableTemplate(saveReqVO, "table8");
+
+
+        assertNotNull(reportMapper.selectById(reportId).getTable7Id());
+
+    }
+
+    @Test
+    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void saveTableTemplate11() {
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -574,60 +625,6 @@ class ReportServiceImplTest extends BaseDbUnitTest {
 
     }
 
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void submitReportByProject() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.TESTING_DEPT_WRITING_TEST_REPORT.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .reportId(reportId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .table7Id(randomString())
-                .table8Id(randomString())
-                .table9Id(randomString())
-                .table10Id(randomString())
-                .table11Id(randomString())
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportSubmitReqVO submitReqVO = randomPojo(ReportSubmitReqVO.class, o->{
-            o.setId(reportId);
-        });
-
-        reportService.submitReportByProject(submitReqVO);
-
-
-        assertEquals(DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
-
-    }
 
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
@@ -1196,59 +1193,7 @@ class ReportServiceImplTest extends BaseDbUnitTest {
         assertEquals(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void archiveReportByProject() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .reportId(reportId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .table7Id(randomString())
-                .table8Id(randomString())
-                .table9Id(randomString())
-                .table10Id(randomString())
-                .table11Id(randomString())
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportArchiveReqVO archiveReqVO = randomPojo(ReportArchiveReqVO.class, o->{
-            o.setId(reportId);
-        });
-
-        reportService.archiveReportByProject(archiveReqVO);
-
-
-        assertEquals(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
-    }
 
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
@@ -1304,59 +1249,6 @@ class ReportServiceImplTest extends BaseDbUnitTest {
         assertEquals(DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
     }
 
-    @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
-    @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
-    void sendReportByProject() {
-        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
-
-        DelegationDO del = DelegationDO.builder()
-                .id(delegationId)
-                .state(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState())
-                .table2Id(randomString())
-                .table3Id(randomString())
-                .launchTime(new Date())
-                .name(randomString())
-                .contractId(contractId)
-                .solutionId(solutionId)
-                .reportId(reportId)
-                .build();
-
-        del.setCreateTime(new Date());
-        del.setUpdateTime(new Date());
-        del.setDeleted(false);
-
-        delegationMapper.insert(del);
-
-        ReportDO rep = ReportDO.builder()
-                .id(reportId)
-                .table7Id(randomString())
-                .table8Id(randomString())
-                .table9Id(randomString())
-                .table10Id(randomString())
-                .table11Id(randomString())
-                .build();
-
-        rep.setUpdateTime(new Date());
-        rep.setCreateTime(new Date());
-        rep.setDeleted(false);
-
-        reportMapper.insert(rep);
-
-        ReportSendReqVO sendReqVO = randomPojo(ReportSendReqVO.class, o->{
-            o.setId(reportId);
-        });
-
-        reportService.sendReportByProject(sendReqVO);
-
-
-        assertEquals(DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
-    }
 
     @Test
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
@@ -1532,17 +1424,204 @@ class ReportServiceImplTest extends BaseDbUnitTest {
     @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     void getReportTable() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
+        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(delegationId)
+                .state(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(contractId)
+                .solutionId(solutionId)
+                .reportId(reportId)
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        String table7_id = randomString();
+        String table8_id = randomString();
+        String table9_id = randomString();
+        String table10_id = randomString();
+        String table11_id = randomString();
+
+        ReportDO rep = ReportDO.builder()
+                .id(reportId)
+                .table7Id(table7_id)
+                .table8Id(table8_id)
+                .table9Id(table9_id)
+                .table10Id(table10_id)
+                .table11Id(table11_id)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
+
+        ReportSendReqVO sendReqVO = randomPojo(ReportSendReqVO.class, o->{
+            o.setId(reportId);
+        });
+
+        reportService.sendReport(sendReqVO);
+
+        assertEquals(DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
+
+        assertNotNull(reportService.getReportTable("table7", table7_id));
+
+        assertNotNull(reportService.getReportTable("table8", table8_id));
+
+        assertNotNull(reportService.getReportTable("table9", table9_id));
+
+        assertNotNull(reportService.getReportTable("table10", table10_id));
+
+        assertNotNull(reportService.getReportTable("table11", table11_id));
     }
 
     @Test
     void getReportList() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
+        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(delegationId)
+                .state(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(contractId)
+                .solutionId(solutionId)
+                .reportId(reportId)
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        String table7_id = randomString();
+        String table8_id = randomString();
+        String table9_id = randomString();
+        String table10_id = randomString();
+        String table11_id = randomString();
+
+        ReportDO rep = ReportDO.builder()
+                .id(reportId)
+                .table7Id(table7_id)
+                .table8Id(table8_id)
+                .table9Id(table9_id)
+                .table10Id(table10_id)
+                .table11Id(table11_id)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
+
+        ReportSendReqVO sendReqVO = randomPojo(ReportSendReqVO.class, o->{
+            o.setId(reportId);
+        });
+
+        reportService.sendReport(sendReqVO);
+
+        assertEquals(DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
+
+        ReportExportReqVO exportReqVO = randomPojo(ReportExportReqVO.class, o->{
+            o.setTable7Id(table7_id);
+            o.setTable8Id(table8_id);
+            o.setTable9Id(table9_id);
+            o.setTable10Id(table10_id);
+            o.setTable11Id(table11_id);
+        });
+
+        assertNotNull(reportService.getReportList(exportReqVO));
     }
 
     @Test
     void getReportPage() {
+        long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long contractId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long solutionId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long reportId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+
+        Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
+
+        DelegationDO del = DelegationDO.builder()
+                .id(delegationId)
+                .state(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState())
+                .table2Id(randomString())
+                .table3Id(randomString())
+                .launchTime(new Date())
+                .name(randomString())
+                .contractId(contractId)
+                .solutionId(solutionId)
+                .reportId(reportId)
+                .build();
+
+        del.setCreateTime(new Date());
+        del.setUpdateTime(new Date());
+        del.setDeleted(false);
+
+        delegationMapper.insert(del);
+
+        String table7_id = randomString();
+        String table8_id = randomString();
+        String table9_id = randomString();
+        String table10_id = randomString();
+        String table11_id = randomString();
+
+        ReportDO rep = ReportDO.builder()
+                .id(reportId)
+                .table7Id(table7_id)
+                .table8Id(table8_id)
+                .table9Id(table9_id)
+                .table10Id(table10_id)
+                .table11Id(table11_id)
+                .build();
+
+        rep.setUpdateTime(new Date());
+        rep.setCreateTime(new Date());
+        rep.setDeleted(false);
+
+        reportMapper.insert(rep);
+
+        ReportSendReqVO sendReqVO = randomPojo(ReportSendReqVO.class, o->{
+            o.setId(reportId);
+        });
+
+        reportService.sendReport(sendReqVO);
+
+        assertEquals(DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT.getState(),delegationMapper.selectById(delegationId).getState());
+
+        ReportPageReqVO pageReqVO = randomPojo(ReportPageReqVO.class, o->{
+            o.setTable7Id(table7_id);
+            o.setTable8Id(table8_id);
+            o.setTable9Id(table9_id);
+            o.setTable10Id(table10_id);
+            o.setTable11Id(table11_id);
+        });
+
+        assertNotNull(reportService.getReportPage(pageReqVO));
     }
 
-    @Test
-    void testGetReportList() {
-    }
+
 }
