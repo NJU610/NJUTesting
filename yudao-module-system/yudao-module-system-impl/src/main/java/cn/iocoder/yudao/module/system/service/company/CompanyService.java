@@ -136,6 +136,40 @@ public interface CompanyService {
     List<CompanyDO> getCompanyListByNameList(CompanyExportReqVO reqVO, ArrayList<String> names);
 
     /**
+     * 根据id获得公司
+     *
+     *
+     *
+     * @param id 表id
+     */
+    List<CompanyDO> getCompanyListById(CompanyExportReqVO reqVO, String id);
+
+    /**
+     * 根据id列表获得公司列表
+     *
+     *
+     * @param ids id列表
+     */
+    List<CompanyDO> getCompanyListByIdList(CompanyExportReqVO reqVO, ArrayList<String> ids);
+
+    /**
+     * 根据公司地址获得公司
+     *
+     *
+     * @param address 公司地址
+     */
+    List<CompanyDO> getCompanyListByAddress(CompanyExportReqVO reqVO, String address);
+
+
+    /**
+     * 根据公司地址列表获得公司列表
+     *
+     *
+     * @param addresses 公司地址列表
+     */
+    List<CompanyDO> getCompanyListByAddressList(CompanyExportReqVO reqVO, ArrayList<String> addresses);
+
+    /**
      * 根据公司代码获得公司列表
      *
      * @param code 公司名称列表

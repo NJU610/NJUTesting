@@ -174,6 +174,30 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public List<CompanyDO> getCompanyListById(CompanyExportReqVO reqVO, String id){
+        return companyMapper
+                .selectListById(reqVO,id);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByIdList(CompanyExportReqVO reqVO, ArrayList<String> ids){
+        return companyMapper
+                .selectListByIdList(reqVO,ids);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByAddress(CompanyExportReqVO reqVO, String address){
+        return companyMapper
+                .selectListByAddress(reqVO,address);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByAddressList(CompanyExportReqVO reqVO, ArrayList<String> addresses){
+        return companyMapper
+                .selectListByAddressList(reqVO,addresses);
+    }
+
+    @Override
     public List<CompanyDO> getCompanyListByCode(CompanyExportReqVO reqVO, String code){
         return companyMapper
                 .selectListByCode(reqVO,code);

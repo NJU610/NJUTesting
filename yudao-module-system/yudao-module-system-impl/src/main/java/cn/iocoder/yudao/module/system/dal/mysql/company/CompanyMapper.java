@@ -94,6 +94,25 @@ public interface CompanyMapper extends BaseMapperX<CompanyDO> {
                 .orderByDesc(CompanyDO::getId));
     }
 
+    default List<CompanyDO> selectListById(CompanyExportReqVO reqVO, String id){
+        return selectList(new LambdaQueryWrapperX<CompanyDO>()
+                .eqIfPresent(CompanyDO::getId, id)
+                .eqIfPresent(CompanyDO::getAddress, reqVO.getAddress())
+                .eqIfPresent(CompanyDO::getPhone, reqVO.getPhone())
+                .eqIfPresent(CompanyDO::getCode, reqVO.getCode())
+                .betweenIfPresent(CompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(CompanyDO::getId));
+    }
+
+    default List<CompanyDO> selectListByAddress(CompanyExportReqVO reqVO, String address){
+        return selectList(new LambdaQueryWrapperX<CompanyDO>()
+                .eqIfPresent(CompanyDO::getAddress, address)
+                .eqIfPresent(CompanyDO::getPhone, reqVO.getPhone())
+                .eqIfPresent(CompanyDO::getCode, reqVO.getCode())
+                .betweenIfPresent(CompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(CompanyDO::getId));
+    }
+
     default List<CompanyDO> selectListByName(String name) {
         return selectList(new LambdaQueryWrapperX<CompanyDO>()
                 .like(CompanyDO::getName, name));
@@ -125,4 +144,24 @@ public interface CompanyMapper extends BaseMapperX<CompanyDO> {
                 .betweenIfPresent(CompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
                 .orderByDesc(CompanyDO::getId));
     }
+
+    default List<CompanyDO> selectListByIdList(CompanyExportReqVO reqVO, ArrayList<String> idList) {
+        return selectList(new LambdaQueryWrapperX<CompanyDO>()
+                .in(CompanyDO::getId, idList)
+                .eqIfPresent(CompanyDO::getAddress, reqVO.getAddress())
+                .eqIfPresent(CompanyDO::getPhone, reqVO.getPhone())
+                .eqIfPresent(CompanyDO::getCode, reqVO.getCode())
+                .betweenIfPresent(CompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(CompanyDO::getId));
+    }
+
+    default List<CompanyDO> selectListByAddressList(CompanyExportReqVO reqVO, ArrayList<String> addressList) {
+        return selectList(new LambdaQueryWrapperX<CompanyDO>()
+                .in(CompanyDO::getAddress, addressList)
+                .eqIfPresent(CompanyDO::getPhone, reqVO.getPhone())
+                .eqIfPresent(CompanyDO::getCode, reqVO.getCode())
+                .betweenIfPresent(CompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(CompanyDO::getId));
+    }
+
 }
