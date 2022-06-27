@@ -55,7 +55,7 @@ def main(argv):
       _Item2 = jdata["项目表格"][1]["fenxiang"]
       _Price2 = jdata["项目表格"][1]["danjia"]
       _Brief2 = jdata["项目表格"][1]["shuoming"]
-      _LTotal2 = jdata["项目表格"][1]["hangheji"], 
+      _LTotal2 = jdata["项目表格"][1]["hangheji"]
   
     
     document.merge(
