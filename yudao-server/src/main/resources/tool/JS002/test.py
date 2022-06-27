@@ -156,7 +156,7 @@ def main(argv):
                         _Syssoft3 = "✓" 
                   elif(jdata["软件类型"] == "嵌入式操作系统"):
                         _Syssoft4 = "✓" 
-                  elif(jdata["软件类型"] == "其他"):
+                  elif(jdata["软件类型"] == "系统软件其他"):
                         _Syssoft5 = "✓"     
                   
             #软件类型
@@ -177,7 +177,7 @@ def main(argv):
                         _SptSoft4 = "✓" 
                   elif(jdata["软件类型"] == "中间件"):
                         _SptSoft5 = "✓" 
-                  elif(jdata["软件类型"] == "其他"):
+                  elif(jdata["软件类型"] == "支持软件其他"):
                         _SptSoft6 = "✓" 
                   
             #应用软件
@@ -219,7 +219,7 @@ def main(argv):
                         _AppSoft11 = "✓"
                   elif jdata["软件类型"] == "游戏软件":
                         _AppSoft12 = "✓"
-                  elif jdata["软件类型"] == "其他":
+                  elif jdata["软件类型"] == "应用软件其他":
                         _AppSoft13 = "✓"
                   
             #客户端操作系统

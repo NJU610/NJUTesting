@@ -33,12 +33,11 @@ def main(argv):
   with open(i_path, 'r', encoding='utf8') as fp:
     jdata = json.load(fp)
     document = MailMerge(template)
-
     document.merge(
       Name = jdata["项目名称"],
       P1 = jdata["委托方(甲方)"],
       P2 = jdata["委托方(乙方)"],
-      Place = jdata["签订地点"],
+      Place = jdata["签订地点"],    
       Date = jdata["签订日期"],
       FirstParty = jdata["委托方(甲方)"],
       SoftName = jdata["软件名称"],
