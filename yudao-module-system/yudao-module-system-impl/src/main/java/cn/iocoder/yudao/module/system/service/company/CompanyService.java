@@ -67,4 +67,11 @@ public interface CompanyService {
      */
     List<CompanyDO> getCompanyList(CompanyExportReqVO exportReqVO);
 
+
+    /**
+     * 获得公司列表
+     *
+     * @return 公司列表
+     */
+    List<CompanyDO> getCompanyListAll();
 }

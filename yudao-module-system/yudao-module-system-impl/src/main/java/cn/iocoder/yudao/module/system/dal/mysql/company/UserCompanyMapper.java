@@ -28,10 +28,30 @@ public interface UserCompanyMapper extends BaseMapperX<UserCompanyDO> {
                 .eq(UserCompanyDO::getUserId, userId)) > 0;
     }
 
+    default boolean existsByCompany(Long CompanyId) {
+        return selectCount(new LambdaQueryWrapperX<UserCompanyDO>()
+                .eq(UserCompanyDO::getCompanyId,
+                        CompanyId)) > 0;
+    }
+
+    default boolean existsById(Long Id) {
+        return selectCount(new LambdaQueryWrapperX<UserCompanyDO>()
+                .eq(UserCompanyDO::getId,
+                        Id)) > 0;
+    }
+
     default int UpdateByUser(UserCompanyDO userCompanyDO) {
         return update(userCompanyDO, new LambdaQueryWrapperX<UserCompanyDO>()
                 .eq(UserCompanyDO::getUserId, userCompanyDO.getUserId()));
     }
+
+    default int UpdateById(UserCompanyDO userCompanyDO) {
+        return update(userCompanyDO,
+                new LambdaQueryWrapperX<UserCompanyDO>()
+                .eq(UserCompanyDO::getId,
+                        userCompanyDO.getId()));
+    }
+
 
     default PageResult<UserCompanyDO> selectPage(UserCompanyPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<UserCompanyDO>()

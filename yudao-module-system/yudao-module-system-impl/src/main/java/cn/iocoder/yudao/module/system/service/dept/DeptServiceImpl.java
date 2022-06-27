@@ -304,4 +304,20 @@ public class DeptServiceImpl implements DeptService {
         return deptMapper.selectBatchIds(ids);
     }
 
+
+    public String printDept(Long id) {
+        DeptDO dept = deptMapper.selectById(id);
+        if (dept == null) {
+            throw exception(DEPT_NOT_FOUND);
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(dept.getName());
+        DeptDO parent = deptMapper.selectById(dept.getParentId());
+        while (parent != null) {
+            sb.insert(0, parent.getName() + ">");
+            parent = deptMapper.selectById(parent.getParentId());
+        }
+        return sb.toString();
+    }
+
 }

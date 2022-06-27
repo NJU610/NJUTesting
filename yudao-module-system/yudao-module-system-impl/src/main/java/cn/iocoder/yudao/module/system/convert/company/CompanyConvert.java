@@ -27,6 +27,8 @@ public interface CompanyConvert {
 
     List<CompanyRespVO> convertList(List<CompanyDO> list);
 
+    List<CompanySimpleRespVO> convertList03(List<CompanyDO> list);
+
     PageResult<CompanyRespVO> convertPage(PageResult<CompanyDO> page);
 
     List<CompanyExcelVO> convertList02(List<CompanyDO> list);

@@ -23,8 +23,7 @@ public interface ReportService {
      * @return 编号
      */
     Long createReport(@Valid ReportCreateReqVO createReqVO);
-    //以项目为单位
-    Long createReportByProject(@Valid ReportCreateReqVO createReqVO);
+
     /**
      * 保存软件测试报告
      *
@@ -66,40 +65,34 @@ public interface ReportService {
      * @param submitReqVO 提交信息
      */
     void submitReport(@Valid ReportSubmitReqVO submitReqVO);
-    //以项目为单位
-    void submitReportByProject(@Valid ReportSubmitReqVO submitReqVO);
+
     /**
      * 测试部主管审核测试报告通过
      *
      * @param acceptReqVO 审核信息
      */
     void acceptReportManager(@Valid ReportAcceptReqVO acceptReqVO);
-    //以项目为单位
-    void acceptReportManagerByProject(@Valid ReportAcceptReqVO acceptReqVO);
+
     /**
      * 测试部主管审核测试报告不通过
      *
      * @param rejectReqVO 审核信息
      */
     void rejectReportManager(@Valid ReportRejectReqVO rejectReqVO);
-    //以项目为单位
-    void rejectReportManagerByProject(@Valid ReportRejectReqVO rejectReqVO);
+
     /**
      * 客户审核测试报告通过
      *
      * @param acceptReqVO 审核信息
      */
     void acceptReportClient(@Valid ReportAcceptReqVO acceptReqVO);
-    //以项目为单位
-    void acceptReportClientByProject(@Valid ReportAcceptReqVO acceptReqVO);
+
     /**
      * 客户审核测试报告不通过
      *
      * @param rejectReqVO 审核信息
      */
     void rejectReportClient(@Valid ReportRejectReqVO rejectReqVO);
-    //以项目为单位
-    void rejectReportClientByProject(@Valid ReportRejectReqVO rejectReqVO);
 
     /**
      * 授权签字人审核测试报告通过
@@ -107,8 +100,6 @@ public interface ReportService {
      * @param acceptReqVO 审核信息
      */
     void acceptReportSignatory(@Valid ReportAcceptReqVO acceptReqVO);
-    //以项目为单位
-    void acceptReportSignatoryByProject(@Valid ReportAcceptReqVO acceptReqVO);
 
     /**
      * 授权签字人审核测试报告不通过
@@ -116,32 +107,28 @@ public interface ReportService {
      * @param rejectReqVO 审核信息
      */
     void rejectReportSignatory(@Valid ReportRejectReqVO rejectReqVO);
-    //以项目为单位
-    void rejectReportSignatoryByProject(@Valid ReportRejectReqVO rejectReqVO);
+
     /**
      * 测试部测试文档归档
      *
      * @param archiveReqVO 归档信息
      */
     void archiveReport(@Valid ReportArchiveReqVO archiveReqVO);
-    //以项目为单位
-    void archiveReportByProject(@Valid ReportArchiveReqVO archiveReqVO);
+
     /**
      * 市场部发送测试报告
      *
      * @param sendReqVO 发送信息
      */
     void sendReport(@Valid ReportSendReqVO sendReqVO);
-    //以项目为单位
-    void sendReportByProject(@Valid ReportSendReqVO sendReqVO);
+
     /**
      * 客户确认接收测试报告
      *
      * @param receiveReqVO 接收信息
      */
     void receiveReport(@Valid ReportReceiveReqVO receiveReqVO);
-    //以项目为单位
-    void receiveReportByProject(@Valid ReportReceiveReqVO receiveReqVO);
+
     /**
      * 删除测试报告
      *
@@ -188,5 +175,38 @@ public interface ReportService {
      * @return 测试报告列表
      */
     List<ReportDO> getReportList(ReportExportReqVO exportReqVO);
+
+    //以项目为单位
+    Long createReportByProject(@Valid ReportCreateReqVO createReqVO);
+
+    //以项目为单位
+    void submitReportByProject(@Valid ReportSubmitReqVO submitReqVO);
+
+    //以项目为单位
+    void acceptReportManagerByProject(@Valid ReportAcceptReqVO acceptReqVO);
+
+    //以项目为单位
+    void rejectReportManagerByProject(@Valid ReportRejectReqVO rejectReqVO);
+
+    //以项目为单位
+    void acceptReportClientByProject(@Valid ReportAcceptReqVO acceptReqVO);
+
+    //以项目为单位
+    void rejectReportClientByProject(@Valid ReportRejectReqVO rejectReqVO);
+
+    //以项目为单位
+    void acceptReportSignatoryByProject(@Valid ReportAcceptReqVO acceptReqVO);
+
+    //以项目为单位
+    void rejectReportSignatoryByProject(@Valid ReportRejectReqVO rejectReqVO);
+
+    //以项目为单位
+    void sendReportByProject(@Valid ReportSendReqVO sendReqVO);
+
+    //以项目为单位
+    void receiveReportByProject(@Valid ReportReceiveReqVO receiveReqVO);
+
+    //以项目为单位
+    void archiveReportByProject(@Valid ReportArchiveReqVO archiveReqVO);
 
 }

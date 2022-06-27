@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.system.service.company;
 import cn.iocoder.yudao.module.system.controller.admin.company.vo.*;
 import cn.iocoder.yudao.module.system.dal.dataobject.company.CompanyDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.permission.RoleDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.UserRoleDO;
 import cn.iocoder.yudao.module.system.dal.mysql.company.CompanyMapper;
 import cn.iocoder.yudao.module.system.enums.permission.RoleCodeEnum;
 import cn.iocoder.yudao.module.system.service.permission.PermissionService;
@@ -135,6 +136,12 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         }
     }
 
+    public void validateUserUnExistsById(Long Id){
+        if (userCompanyMapper.existsById(Id)){
+            throw exception(USER_COMPANY_EXISTS);
+        }
+    }
+
     public void validateCompanyExists(Long companyId) {
         CompanyDO company = companyMapper.selectById(companyId);
         if (company == null) {
@@ -149,6 +156,13 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         }
     }
 
+    public void validateCompanyExistsByName(String name) {
+
+        if ( companyMapper.existsByName(name) == false) {
+            throw exception(COMPANY_NOT_EXISTS);
+        }
+    }
+
     public CompanyDO getCompanyByUser(Long userId) {
         UserCompanyDO userCompany = userCompanyMapper.selectByUser(userId);
         if (userCompany == null) {
@@ -156,6 +170,11 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         }
         return companyMapper.selectById(userCompany.getCompanyId());
     }
+
+    public UserCompanyDO getUserCompanyByUser(Long userId){
+        return userCompanyMapper.selectByUser(userId);
+    }
+
 
     public void assignCustomerRole(Long id){
         RoleDO customer = roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode());

@@ -157,4 +157,92 @@ public class FlowLogServiceImpl implements FlowLogService {
     public List<FlowLogDO> getFlowLogList(FlowLogExportReqVO exportReqVO) {
         return flowLogMapper.selectList(exportReqVO);
     }
+
+    public List<List<Integer>> findAllSolution(List<List<Integer>> board) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (board == null || board.size() != 9 || board.get(0).size() != 9) {
+            return result;
+        }
+        findSolution(board, 0, 0, result);
+        return result;
+    }
+
+    public void findSolution(List<List<Integer>> board, int row, int col, List<List<Integer>> result) {
+        if (row == 9) {
+            result.add(new ArrayList(board));
+            return;
+        }
+        if (col == 9) {
+            findSolution(board, row + 1, 0, result);
+            return;
+        }
+        if (board.get(row).get(col) != 0) {
+            findSolution(board, row, col + 1, result);
+            return;
+        }
+        for (int i = 1; i <= 9; i++) {
+            if (isValid(board, row, col, i)) {
+                board.get(row).set(col, i);
+                findSolution(board, row, col + 1, result);
+                board.get(row).set(col, 0);
+            }
+        }
+    }
+
+    public boolean isValid(List<List<Integer>> board, int row, int col, int num) {
+        for (int i = 0; i < 9; i++) {
+            if (board.get(row).get(i) == num) {
+                return false;
+            }
+        }
+        for (int i = 0; i < 9; i++) {
+            if (board.get(i).get(col) == num) {
+                return false;
+            }
+        }
+        int boxRow = row / 3;
+        int boxCol = col / 3;
+        for (int i = boxRow * 3; i < boxRow * 3 + 3; i++) {
+            for (int j = boxCol * 3; j < boxCol * 3 + 3; j++) {
+                if (board.get(i).get(j) == num) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean hasSolution(List<List<Integer>> board) {
+        return findAllSolution(board).size() > 0;
+    }
+
+    public void printBoard(List<List<Integer>> board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(board.get(i).get(j) + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public List<List<Integer>> generateSudoku() {
+        List<List<Integer>> board = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j < 9; j++) {
+                row.add(0);
+            }
+            board.add(row);
+        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int num = (int) (Math.random() * 9 + 1);
+                while (!isValid(board, i, j, num)) {
+                    num = (int) (Math.random() * 9 + 1);
+                }
+                board.get(i).set(j, num);
+            }
+        }
+        return board;
+    }
 }

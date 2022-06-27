@@ -316,7 +316,19 @@ class UserCompanyServiceImplTest extends BaseDbUnitTest {
 
     @Test
     void getUserCompany() {
+        UserCompanyDO use = UserCompanyDO.builder()
+                .id(1L)
+                .companyId(1L)
+                .userId(1L)
+                .build();
 
+        use.setCreateTime(new Date());
+        use.setCreateTime(new Date());
+        use.setDeleted(false);
+
+        userCompanyMapper.insert(use);
+
+        //assertEquals(use, userCompanyService.getUserCompany(1L));
     }
 
     @Test

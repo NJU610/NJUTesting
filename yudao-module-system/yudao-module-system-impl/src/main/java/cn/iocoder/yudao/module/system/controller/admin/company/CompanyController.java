@@ -1,5 +1,9 @@
 package cn.iocoder.yudao.module.system.controller.admin.company;
 
+import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
+import cn.iocoder.yudao.module.system.controller.admin.permission.vo.menu.FrontMenuSimpleRespVO;
+import cn.iocoder.yudao.module.system.convert.permission.FrontMenuConvert;
+import cn.iocoder.yudao.module.system.dal.dataobject.permission.FrontMenuDO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -88,6 +92,13 @@ public class CompanyController {
         // 导出 Excel
         List<CompanyExcelVO> datas = CompanyConvert.INSTANCE.convertList02(list);
         ExcelUtils.write(response, "公司.xls", "数据", CompanyExcelVO.class, datas);
+    }
+
+    @GetMapping("/list-all-simple")
+    @ApiOperation(value = "获取公司精简信息列表", notes = "管理员使用，用于【分配用户认证的公司】功能的选项。")
+    public CommonResult<List<CompanySimpleRespVO>> getSimpleMenus() {
+        List<CompanyDO> list = companyService.getCompanyListAll();
+        return success(CompanyConvert.INSTANCE.convertList03(list));
     }
 
 }

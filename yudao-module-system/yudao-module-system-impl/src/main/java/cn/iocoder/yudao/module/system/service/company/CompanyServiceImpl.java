@@ -100,4 +100,69 @@ public class CompanyServiceImpl implements CompanyService {
         return companyMapper.selectList(exportReqVO);
     }
 
+    @Override
+    public List<CompanyDO> getCompanyListAll() {
+        return companyMapper.selectList();
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list;
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(0, num);
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(start, start + num);
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(start, end);
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(start, end);
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step, int offset) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(start, end);
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step, int offset, int length) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(start, end);
+    }
+
+    public List<CompanyDO> getCompanyListByRandom(CompanyExportReqVO exportReqVO, int num, int start, int end, int step, int offset, int length, int offset2) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.shuffle(list);
+        return list.subList(start, end);
+    }
+
+    public List<CompanyDO> getCompanyListByName(CompanyExportReqVO exportReqVO) {
+        List<CompanyDO> list = companyMapper.selectList(exportReqVO);
+        Collections.sort(list, new Comparator<CompanyDO>() {
+            @Override
+            public int compare(CompanyDO o1, CompanyDO o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        return list;
+    }
+
+
 }
