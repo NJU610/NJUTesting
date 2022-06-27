@@ -354,6 +354,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         }
         // 执行登陆
         LoginUser loginUser = AuthConvert.INSTANCE.convert(user);
+        loginUser.setRoleIds(this.getUserRoleIds(loginUser.getId()));
 
         // 缓存登录用户到 Redis 中，返回 sessionId 编号
         return createUserSessionAfterLoginSuccess(loginUser, LoginLogTypeEnum.LOGIN_SMS, clientIP, userAgent);
