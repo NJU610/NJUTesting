@@ -80,7 +80,7 @@ def main(argv):
       Item2 = _Item2,
       Price2 = _Price2,
       Brief2 = _Brief2,
-      LTotal = _LTotal2
+      LTotal2 = _LTotal2
     )
     wordname = o_path + '.docx' 
     document.write(wordname)  # 创建新文件

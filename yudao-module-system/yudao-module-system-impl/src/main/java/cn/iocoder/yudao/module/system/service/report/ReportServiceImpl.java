@@ -184,7 +184,7 @@ public class ReportServiceImpl implements ReportService {
         flowLogService.saveLog(delegation.getId(), getLoginUserId(),
                 fromState, DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
                 "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 提交了测试报告，测试部主管审核中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", report);
@@ -218,7 +218,7 @@ public class ReportServiceImpl implements ReportService {
         flowLogService.saveLog(project.getId(), getLoginUserId(),
                 fromState, DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
                 "测试部：" + userService.getUser(getLoginUserId()).getNickname() + " 提交了测试报告，测试部主管审核中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", report);
@@ -240,7 +240,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
                 "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过，客户审核中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -262,7 +262,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
                 "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过，客户审核中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -284,7 +284,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL,
                 "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过，测试部修改测试文档中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -306,7 +306,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT,
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_FAIL,
                 "测试部主管：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过，测试部修改测试文档中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -328,7 +328,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
                 "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过，授权签字人审核测试报告中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -350,7 +350,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
                 "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过，授权签字人审核测试报告中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -372,7 +372,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL,
                 "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过，测试部修改测试文档中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -394,7 +394,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_MANAGER_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_FAIL,
                 "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过，测试部修改测试文档中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -417,7 +417,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS,
                 "授权签字人：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过。",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", report);
@@ -431,7 +431,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE,
                 "测试部测试文档归档，处理样品中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", report);
@@ -454,7 +454,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS,
                 "授权签字人：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告通过。",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", project);
                         put("report", report);
@@ -468,7 +468,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE,
                 "测试部测试文档归档，处理样品中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", report);
@@ -490,7 +490,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL,
                 "授权签字人：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过， 测试部修改测试文档中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -512,7 +512,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.CLIENT_AUDIT_TEST_REPORT_SUCCESS,
                 DelegationStateEnum.SIGNATORY_AUDIT_TEST_REPORT_FAIL,
                 "授权签字人：" + userService.getUser(getLoginUserId()).getNickname() + " 审核测试报告不通过， 测试部修改测试文档中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -536,7 +536,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE,
                 DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT,
                 "测试部：" + userService.getUser(getLoginUserId()).getNickname() + "归档测试报告并处理样品完成，市场部发送测试报告中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", report);
@@ -550,7 +550,7 @@ public class ReportServiceImpl implements ReportService {
         Long reportId = archiveReqVO.getId();
         ReportDO report = this.validateReportExists(reportId);
         // 校验状态
-        DelegationDO project  = delegationMapper.validateDelegationStateByReport(reportId,
+        DelegationDO project = delegationMapper.validateDelegationStateByReport(reportId,
                 DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE);
         // 更新状态
         project.setState(DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT.getState());
@@ -560,7 +560,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.TESTING_DEPT_ARCHIVE_TEST_REPORT_AND_PROCESS_SAMPLE,
                 DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT,
                 "测试部：" + userService.getUser(getLoginUserId()).getNickname() + "归档测试报告并处理样品完成，市场部发送测试报告中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", report);
@@ -584,7 +584,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT,
                 DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT,
                 "市场部：" + userService.getUser(getLoginUserId()).getNickname() + "发送测试报告，等待客户接收测试报告中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -610,7 +610,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.MARKETING_DEPT_SEND_TEST_REPORT,
                 DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT,
                 "市场部：" + userService.getUser(getLoginUserId()).getNickname() + "发送测试报告，等待客户接收测试报告中",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -663,7 +663,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT,
                 DelegationStateEnum.CLIENT_CONFIRM_RECEIVE_TEST_REPORT,
                 "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 确认接收测试报告",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("delegation", delegation);
                         put("report", reportMapper.selectById(reportId));
@@ -687,7 +687,7 @@ public class ReportServiceImpl implements ReportService {
                 DelegationStateEnum.WAIT_FOR_CLIENT_RECEIVE_TEST_REPORT,
                 DelegationStateEnum.CLIENT_CONFIRM_RECEIVE_TEST_REPORT,
                 "客户：" + userService.getUser(getLoginUserId()).getNickname() + " 确认接收测试报告",
-                new HashMap<String, Object>(){
+                new HashMap<String, Object>() {
                     {
                         put("project", project);
                         put("report", reportMapper.selectById(reportId));
@@ -844,94 +844,4 @@ public class ReportServiceImpl implements ReportService {
         }
     }
 
-    public void saveTableByName(ReportSaveTableReqVO saveReqVO, String name){
-        char id = name.charAt(name.length() - 1);
-        switch(id){
-            case '7': {
-                // 校验报告是否存在
-                Long reportId = saveReqVO.getReportId();
-                ReportDO report = this.validateReportExists(reportId);
-                // 保存表单
-                if (report.getTable7Id() == null) {
-                    report.setTable7Id(tableMongoRepository.create("table7",
-                            saveReqVO.getData()));
-                    reportMapper.updateById(report);
-                } else {
-                    tableMongoRepository.upsert("table7",
-                            report.getTable7Id(),
-                            saveReqVO.getData());
-                }
-                break;
-            }
-
-            case '8': {
-                // 校验报告是否存在
-                Long reportId = saveReqVO.getReportId();
-                ReportDO report = this.validateReportExists(reportId);
-                // 保存表单
-                if (report.getTable8Id() == null) {
-                    report.setTable8Id(tableMongoRepository.create("table8",
-                            saveReqVO.getData()));
-                    reportMapper.updateById(report);
-                } else {
-                    tableMongoRepository.upsert("table8",
-                            report.getTable8Id(),
-                            saveReqVO.getData());
-                }
-                break;
-            }
-
-            case '9':{
-                // 校验报告是否存在
-                Long reportId = saveReqVO.getReportId();
-                ReportDO report = this.validateReportExists(reportId);
-                // 保存表单
-                if (report.getTable9Id() == null) {
-                    report.setTable9Id(tableMongoRepository.create("table9",
-                            saveReqVO.getData()));
-                    reportMapper.updateById(report);
-                } else {
-                    tableMongoRepository.upsert("table9",
-                            report.getTable9Id(),
-                            saveReqVO.getData());
-                }
-                break;
-            }
-
-            case '0':{
-                // 校验报告是否存在
-                Long reportId = saveReqVO.getReportId();
-                ReportDO report = this.validateReportExists(reportId);
-                // 保存表单
-                if (report.getTable10Id() == null) {
-                    report.setTable10Id(tableMongoRepository.create("table10",
-                            saveReqVO.getData()));
-                    reportMapper.updateById(report);
-                } else {
-                    tableMongoRepository.upsert("table10",
-                            report.getTable10Id(),
-                            saveReqVO.getData());
-                }
-                break;
-            }
-
-            case '1':{
-                // 校验报告是否存在
-                Long reportId = saveReqVO.getReportId();
-                ReportDO report = this.validateReportExists(reportId);
-                // 保存表单
-                if (report.getTable11Id() == null) {
-                    report.setTable11Id(tableMongoRepository.create("table11",
-                            saveReqVO.getData()));
-                    reportMapper.updateById(report);
-                } else {
-                    tableMongoRepository.upsert("table11",
-                            report.getTable11Id(),
-                            saveReqVO.getData());
-                }
-                break;
-            }
-
-        }
-    }
 }
