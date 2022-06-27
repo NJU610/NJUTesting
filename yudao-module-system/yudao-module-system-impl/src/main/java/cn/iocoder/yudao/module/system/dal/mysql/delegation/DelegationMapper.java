@@ -6,6 +6,7 @@ import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationExportReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationPageReqVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.company.UserCompanyDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import org.apache.ibatis.annotations.Mapper;
@@ -127,4 +128,8 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
         return validateDelegationState(delegation, states);
     }
 
+    default DelegationDO selectByProject(Long projectId) {
+        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getProjectId, projectId));
+    }
 }

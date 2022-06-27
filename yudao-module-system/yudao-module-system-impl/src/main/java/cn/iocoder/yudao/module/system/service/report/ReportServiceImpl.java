@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.system.service.report;
 
 import cn.iocoder.yudao.module.system.dal.dataobject.delegation.DelegationDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.project.ProjectDO;
 import cn.iocoder.yudao.module.system.dal.mongo.table.TableMongoRepository;
 import cn.iocoder.yudao.module.system.dal.mysql.delegation.DelegationMapper;
 import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
