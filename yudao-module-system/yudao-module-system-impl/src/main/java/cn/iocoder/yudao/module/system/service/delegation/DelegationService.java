@@ -290,6 +290,118 @@ public interface DelegationService {
     String exportTable(DelegationExportTableReqVO exportTableReqVO) throws IOException;
 
     /**
+     * 导出委托表格2
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable2(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格3
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable3(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格12
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable12(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格14
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable14(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托offer
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportOffer(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格4
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable4(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格5
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable5(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格6
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable6(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格13
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable13(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格7
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable7(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格8
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable8(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格9
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable9(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格10
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable10(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
+     * 导出委托表格11
+     *
+     * @param exportTableReqVO 导出信息
+     * @return pdf文件链接
+     */
+    String exportTable11(DelegationExportTableReqVO exportTableReqVO) throws IOException;
+
+    /**
      * 为表格生成pdf
      * @param pdfRequestVO 生成条件
      * @return pdf文件链接

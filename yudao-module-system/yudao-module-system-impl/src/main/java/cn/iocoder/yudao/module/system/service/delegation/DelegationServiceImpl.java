@@ -686,6 +686,335 @@ public class DelegationServiceImpl implements DelegationService {
     }
 
     @Override
+    public String exportTable2(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        tableId = delegation.getTable2Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable3(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        tableId = delegation.getTable3Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable12(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        tableId = delegation.getTable12Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable14(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        tableId = delegation.getTable14Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportOffer(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        tableId = delegation.getOfferId();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable4(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getContractId() == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        ContractDO contract = contractMapper.selectById(delegation.getContractId());
+        if (contract == null) {
+            throw exception(CONTRACT_NOT_EXISTS);
+        }
+        tableId = contract.getTable4Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable5(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getContractId() == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        ContractDO contract = contractMapper.selectById(delegation.getContractId());
+        if (contract == null) {
+            throw exception(CONTRACT_NOT_EXISTS);
+        }
+        tableId = contract.getTable5Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable6(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getSolutionId() == null) {
+            throw exception(SOLUTION_NOT_EXISTS);
+        }
+        SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
+        if (solution == null) {
+            throw exception(SOLUTION_NOT_EXISTS);
+        }
+        tableId = solution.getTable6Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable13(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getSolutionId() == null) {
+            throw exception(SOLUTION_NOT_EXISTS);
+        }
+        SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
+        if (solution == null) {
+            throw exception(SOLUTION_NOT_EXISTS);
+        }
+        tableId = solution.getTable13Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable7(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getReportId() == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        ReportDO report = reportMapper.selectById(delegation.getReportId());
+        if (report == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        tableId = report.getTable7Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable8(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getReportId() == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        ReportDO report = reportMapper.selectById(delegation.getReportId());
+        if (report == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        tableId = report.getTable8Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable9(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getReportId() == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        ReportDO report = reportMapper.selectById(delegation.getReportId());
+        if (report == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        tableId = report.getTable9Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable10(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getReportId() == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        ReportDO report = reportMapper.selectById(delegation.getReportId());
+        if (report == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        tableId = report.getTable10Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
+    public String exportTable11(DelegationExportTableReqVO exportTableReqVO) throws IOException {
+        // 校验存在
+        Long delegationId = exportTableReqVO.getDelegationId();
+        String tableName = exportTableReqVO.getTableName();
+        String tableId = null;
+        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
+        // 构建PDFRequestVO
+        PDFRequestVO pdfRequestVO = new PDFRequestVO();
+        pdfRequestVO.setTableName(tableName);
+        // 获取表格编号
+        if (delegation.getReportId() == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        ReportDO report = reportMapper.selectById(delegation.getReportId());
+        if (report == null) {
+            throw exception(REPORT_NOT_EXISTS);
+        }
+        tableId = report.getTable11Id();
+        if (tableId == null) {
+            throw exception(TABLE_NOT_EXISTS);
+        }
+        pdfRequestVO.setTableId(tableId);
+        return exportPDFOfTable(pdfRequestVO);
+    }
+
+    @Override
     public String exportPDFOfTable(PDFRequestVO pdfRequestVO) throws IOException {
         // 获取传入参数
         String tableId = pdfRequestVO.getTableId();
@@ -812,831 +1141,5 @@ public class DelegationServiceImpl implements DelegationService {
         return result;
     }
 
-    public String exportTableImply(DelegationExportTableReqVO exportTableReqVO) throws IOException {
-        // 校验存在
-        Long delegationId = exportTableReqVO.getDelegationId();
-        String tableName = exportTableReqVO.getTableName();
-        String tableId = null;
-        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
-        // 构建PDFRequestVO
-        PDFRequestVO pdfRequestVO = new PDFRequestVO();
-        pdfRequestVO.setTableName(tableName);
-        // 获取表格编号
-        if (Objects.equals(tableName, "table2")) {
-            tableId = delegation.getTable2Id();
-        } else if (Objects.equals(tableName, "table3")) {
-            tableId = delegation.getTable3Id();
-        } else if (Objects.equals(tableName, "table12")) {
-            tableId = delegation.getTable12Id();
-        } else if (Objects.equals(tableName, "table14")) {
-            tableId = delegation.getTable14Id();
-        } else if (Objects.equals(tableName, "offer")) {
-            tableId = delegation.getOfferId();
-        } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
-            if (delegation.getContractId() == null) {
-                throw exception(TABLE_NOT_EXISTS);
-            }
-            ContractDO contract = contractMapper.selectById(delegation.getContractId());
-            if (contract == null) {
-                throw exception(CONTRACT_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table4")) {
-                tableId = contract.getTable4Id();
-            } else if (Objects.equals(tableName, "table5")) {
-                tableId = contract.getTable5Id();
-            }
-        } else if (Objects.equals(tableName, "table6") || Objects.equals(tableName, "table13")) {
-            if (delegation.getSolutionId() == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
-            if (solution == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table6")) {
-                tableId = solution.getTable6Id();
-            } else if (Objects.equals(tableName, "table13")) {
-                tableId = solution.getTable13Id();
-            }
-        } else if (Objects.equals(tableName, "table7") || Objects.equals(tableName, "table8") ||
-                Objects.equals(tableName, "table9") || Objects.equals(tableName, "table10") ||
-                Objects.equals(tableName, "table11")) {
-            if (delegation.getReportId() == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            ReportDO report = reportMapper.selectById(delegation.getReportId());
-            if (report == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            switch (tableName) {
-                case "table7":
-                    tableId = report.getTable7Id();
-                    break;
-                case "table8":
-                    tableId = report.getTable8Id();
-                    break;
-                case "table9":
-                    tableId = report.getTable9Id();
-                    break;
-                case "table10":
-                    tableId = report.getTable10Id();
-                    break;
-                case "table11":
-                    tableId = report.getTable11Id();
-                    break;
-            }
-        }
-        if (tableId == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        pdfRequestVO.setTableId(tableId);
-        return exportPDFOfTable(pdfRequestVO);
-    }
 
-    public String exportPDFOfTableImply(PDFRequestVO pdfRequestVO) throws IOException {
-        // 获取传入参数
-        String tableId = pdfRequestVO.getTableId();
-        String tableName = pdfRequestVO.getTableName();
-
-        // 为文件生成一个带信息的id
-        String prefix = tableName + "_" + tableId + "_" + System.currentTimeMillis();
-
-        // 获取表格数据
-        JSONObject jsonObject = tableMongoRepository.get(tableName, tableId);
-        if (jsonObject == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        String json = jsonObject.toJSONString();
-
-        // 获取生成文件路径的根目录
-        //ClassPathResource classPathResource = new ClassPathResource("/tool");
-        String rootPath = "/root/.jenkins/workspace/njutesting/yudao-server/src/main/resources/tool";
-        //rootPath = classPathResource.getFile().getAbsolutePath();
-        System.out.println(rootPath);
-
-        // 将json写入文件
-        File newFile = new File(rootPath, prefix + ".json");
-        assert newFile.createNewFile();
-        FileOutputStream outputStream = new FileOutputStream(newFile);
-        outputStream.write(json.getBytes());
-        outputStream.close();
-
-        // 生成文件的脚本地址
-        HashMap<String, String> map = new HashMap<String, String>(){{
-            put("table2", "JS002");
-            put("table3", "JS003");
-            put("table4", "JS004");
-            put("table5", "JS005");
-            put("table6", "JS006");
-            put("table7", "JS007");
-            put("table8", "JS008");
-            put("table9", "JS009");
-            put("table10", "JS010");
-            put("table11", "JS011");
-            put("table12", "JS012");
-            put("table13", "JS013");
-            put("table14", "JS014");
-            put("offer", "offer");
-
-        }};
-        String script_path = map.get(tableName);
-
-        // 获得模板名称
-        HashMap<String, String> map2 = new HashMap<String, String>(){{
-            put("table2", "NST－04－JS002－2011－软件项目委托测试申请表-空白表.docx");
-            put("table3", "NST－04－JS003－2011－委托测试软件功能列表.docx");
-            put("table4", "NST－04－JS004－2011－软件委托测试合同.docx");
-            put("table5", "NST－04－JS005－2011－软件项目委托测试保密协议.docx");
-            put("table6", "NST－04－JS006－2011－软件测试方案.docx");
-            put("table7", "NST－04－JS007－2011－软件测试报告.docx");
-            put("table8", "NST－04－JS008－2011－测试用例（电子记录）.xlsx");
-            put("table9", "NST－04－JS009－2011－软件测试记录（电子记录）.xlsx");
-            put("table10", "NST－04－JS010－2011－测试报告检查表.docx");
-            put("table11", "NST－04－JS011－2011－软件测试问题清单（电子记录）.xlsx");
-            put("table12", "NST－04－JS012－2011－软件项目委托测试工作检查表.docx");
-            put("table13", "NST－04－JS013－2011-测试方案评审表.docx");
-            put("table14", "NST－04－JS014－2011-软件文档评审表.docx");
-            put("offer", "报价单.docx");
-
-        }};
-        String template_name = map2.get(tableName);
-
-        // 执行pdf生成脚本
-        Process proc;
-        try {
-            String command = "python3 " +
-                    rootPath + File.separator + script_path + File.separator + "test.py" + " " +
-                    "-t " + rootPath + File.separator + script_path + File.separator + template_name + " " +
-                    "-i " + rootPath + File.separator + prefix + ".json" + " " +
-                    "-o " + rootPath + File.separator + prefix;
-            System.out.println(command);
-            proc = Runtime.getRuntime().exec(command);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-            in.close();
-            proc.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 写入文件
-        String type;
-        String result;
-        if (tableName.equals("table8") || tableName.equals("table9") || tableName.equals("table11")) {
-            type = ".xls";
-        } else {
-            type = ".pdf";
-        }
-        String filePath = rootPath + File.separator + prefix + type;
-        File file = new File(filePath);
-        if (!file.exists()) {
-            throw exception(FILE_NOT_EXISTS);
-        }
-        try {
-            result = fileApi.createFile( prefix + type , Files.readAllBytes(Paths.get(filePath)));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        // 删除临时文件
-        List<String> deleteList = new ArrayList<String>(){{
-            add(".docx");
-            add(".xlsx");
-            add(".pdf");
-            add(".json");
-        }};
-        for(String delete : deleteList) {
-            File deleteFile = new File(rootPath + File.separator + prefix + delete);
-            if (deleteFile.exists()) {
-                deleteFile.delete();
-            }
-        }
-
-        return result;
-    }
-
-    public String exportPDFOfTablePro(PDFRequestVO pdfRequestVO) throws IOException {
-        // 获取传入参数
-        String tableId = pdfRequestVO.getTableId();
-        String tableName = pdfRequestVO.getTableName();
-
-        // 为文件生成一个带信息的id
-        String prefix = tableName + "_" + tableId + "_" + System.currentTimeMillis();
-
-        // 获取表格数据
-        JSONObject jsonObject = tableMongoRepository.get(tableName, tableId);
-        if (jsonObject == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        String json = jsonObject.toJSONString();
-
-        // 获取生成文件路径的根目录
-        //ClassPathResource classPathResource = new ClassPathResource("/tool");
-        String rootPath = "/root/.jenkins/workspace/njutesting/yudao-server/src/main/resources/tool";
-        //rootPath = classPathResource.getFile().getAbsolutePath();
-        System.out.println(rootPath);
-
-        // 将json写入文件
-        File newFile = new File(rootPath, prefix + ".json");
-        assert newFile.createNewFile();
-        FileOutputStream outputStream = new FileOutputStream(newFile);
-        outputStream.write(json.getBytes());
-        outputStream.close();
-
-        // 生成文件的脚本地址
-        HashMap<String, String> map = new HashMap<String, String>(){{
-            put("table2", "JS002");
-            put("table3", "JS003");
-            put("table4", "JS004");
-            put("table5", "JS005");
-            put("table6", "JS006");
-            put("table7", "JS007");
-            put("table8", "JS008");
-            put("table9", "JS009");
-            put("table10", "JS010");
-            put("table11", "JS011");
-            put("table12", "JS012");
-            put("table13", "JS013");
-            put("table14", "JS014");
-            put("offer", "offer");
-
-        }};
-        String script_path = map.get(tableName);
-
-        // 获得模板名称
-        HashMap<String, String> map2 = new HashMap<String, String>(){{
-            put("table2", "NST－04－JS002－2011－软件项目委托测试申请表-空白表.docx");
-            put("table3", "NST－04－JS003－2011－委托测试软件功能列表.docx");
-            put("table4", "NST－04－JS004－2011－软件委托测试合同.docx");
-            put("table5", "NST－04－JS005－2011－软件项目委托测试保密协议.docx");
-            put("table6", "NST－04－JS006－2011－软件测试方案.docx");
-            put("table7", "NST－04－JS007－2011－软件测试报告.docx");
-            put("table8", "NST－04－JS008－2011－测试用例（电子记录）.xlsx");
-            put("table9", "NST－04－JS009－2011－软件测试记录（电子记录）.xlsx");
-            put("table10", "NST－04－JS010－2011－测试报告检查表.docx");
-            put("table11", "NST－04－JS011－2011－软件测试问题清单（电子记录）.xlsx");
-            put("table12", "NST－04－JS012－2011－软件项目委托测试工作检查表.docx");
-            put("table13", "NST－04－JS013－2011-测试方案评审表.docx");
-            put("table14", "NST－04－JS014－2011-软件文档评审表.docx");
-            put("offer", "报价单.docx");
-
-        }};
-        String template_name = map2.get(tableName);
-
-        // 执行pdf生成脚本
-        Process proc;
-        try {
-            String command = "python3 " +
-                    rootPath + File.separator + script_path + File.separator + "test.py" + " " +
-                    "-t " + rootPath + File.separator + script_path + File.separator + template_name + " " +
-                    "-i " + rootPath + File.separator + prefix + ".json" + " " +
-                    "-o " + rootPath + File.separator + prefix;
-            System.out.println(command);
-            proc = Runtime.getRuntime().exec(command);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-            in.close();
-            proc.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 写入文件
-        String type;
-        String result;
-        if (tableName.equals("table8") || tableName.equals("table9") || tableName.equals("table11")) {
-            type = ".xls";
-        } else {
-            type = ".pdf";
-        }
-        String filePath = rootPath + File.separator + prefix + type;
-        File file = new File(filePath);
-        if (!file.exists()) {
-            throw exception(FILE_NOT_EXISTS);
-        }
-        try {
-            result = fileApi.createFile( prefix + type , Files.readAllBytes(Paths.get(filePath)));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        // 删除临时文件
-        List<String> deleteList = new ArrayList<String>(){{
-            add(".docx");
-            add(".xlsx");
-            add(".pdf");
-            add(".json");
-        }};
-        for(String delete : deleteList) {
-            File deleteFile = new File(rootPath + File.separator + prefix + delete);
-            if (deleteFile.exists()) {
-                deleteFile.delete();
-            }
-        }
-
-        return result;
-    }
-
-    public String exportPDFOfTableUltra(PDFRequestVO pdfRequestVO) throws IOException {
-        // 获取传入参数
-        String tableId = pdfRequestVO.getTableId();
-        String tableName = pdfRequestVO.getTableName();
-
-        // 为文件生成一个带信息的id
-        String prefix = tableName + "_" + tableId + "_" + System.currentTimeMillis();
-
-        // 获取表格数据
-        JSONObject jsonObject = tableMongoRepository.get(tableName, tableId);
-        if (jsonObject == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        String json = jsonObject.toJSONString();
-
-        // 获取生成文件路径的根目录
-        //ClassPathResource classPathResource = new ClassPathResource("/tool");
-        String rootPath = "/root/.jenkins/workspace/njutesting/yudao-server/src/main/resources/tool";
-        //rootPath = classPathResource.getFile().getAbsolutePath();
-        System.out.println(rootPath);
-
-        // 将json写入文件
-        File newFile = new File(rootPath, prefix + ".json");
-        assert newFile.createNewFile();
-        FileOutputStream outputStream = new FileOutputStream(newFile);
-        outputStream.write(json.getBytes());
-        outputStream.close();
-
-        // 生成文件的脚本地址
-        HashMap<String, String> map = new HashMap<String, String>(){{
-            put("table2", "JS002");
-            put("table3", "JS003");
-            put("table4", "JS004");
-            put("table5", "JS005");
-            put("table6", "JS006");
-            put("table7", "JS007");
-            put("table8", "JS008");
-            put("table9", "JS009");
-            put("table10", "JS010");
-            put("table11", "JS011");
-            put("table12", "JS012");
-            put("table13", "JS013");
-            put("table14", "JS014");
-            put("offer", "offer");
-
-        }};
-        String script_path = map.get(tableName);
-
-        // 获得模板名称
-        HashMap<String, String> map2 = new HashMap<String, String>(){{
-            put("table2", "NST－04－JS002－2011－软件项目委托测试申请表-空白表.docx");
-            put("table3", "NST－04－JS003－2011－委托测试软件功能列表.docx");
-            put("table4", "NST－04－JS004－2011－软件委托测试合同.docx");
-            put("table5", "NST－04－JS005－2011－软件项目委托测试保密协议.docx");
-            put("table6", "NST－04－JS006－2011－软件测试方案.docx");
-            put("table7", "NST－04－JS007－2011－软件测试报告.docx");
-            put("table8", "NST－04－JS008－2011－测试用例（电子记录）.xlsx");
-            put("table9", "NST－04－JS009－2011－软件测试记录（电子记录）.xlsx");
-            put("table10", "NST－04－JS010－2011－测试报告检查表.docx");
-            put("table11", "NST－04－JS011－2011－软件测试问题清单（电子记录）.xlsx");
-            put("table12", "NST－04－JS012－2011－软件项目委托测试工作检查表.docx");
-            put("table13", "NST－04－JS013－2011-测试方案评审表.docx");
-            put("table14", "NST－04－JS014－2011-软件文档评审表.docx");
-            put("offer", "报价单.docx");
-
-        }};
-        String template_name = map2.get(tableName);
-
-        // 执行pdf生成脚本
-        Process proc;
-        try {
-            String command = "python3 " +
-                    rootPath + File.separator + script_path + File.separator + "test.py" + " " +
-                    "-t " + rootPath + File.separator + script_path + File.separator + template_name + " " +
-                    "-i " + rootPath + File.separator + prefix + ".json" + " " +
-                    "-o " + rootPath + File.separator + prefix;
-            System.out.println(command);
-            proc = Runtime.getRuntime().exec(command);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-            in.close();
-            proc.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 写入文件
-        String type;
-        String result;
-        if (tableName.equals("table8") || tableName.equals("table9") || tableName.equals("table11")) {
-            type = ".xls";
-        } else {
-            type = ".pdf";
-        }
-        String filePath = rootPath + File.separator + prefix + type;
-        File file = new File(filePath);
-        if (!file.exists()) {
-            throw exception(FILE_NOT_EXISTS);
-        }
-        try {
-            result = fileApi.createFile( prefix + type , Files.readAllBytes(Paths.get(filePath)));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        // 删除临时文件
-        List<String> deleteList = new ArrayList<String>(){{
-            add(".docx");
-            add(".xlsx");
-            add(".pdf");
-            add(".json");
-        }};
-        for(String delete : deleteList) {
-            File deleteFile = new File(rootPath + File.separator + prefix + delete);
-            if (deleteFile.exists()) {
-                deleteFile.delete();
-            }
-        }
-
-        return result;
-    }
-
-    public String exportPDFOfTableMax(PDFRequestVO pdfRequestVO) throws IOException {
-        // 获取传入参数
-        String tableId = pdfRequestVO.getTableId();
-        String tableName = pdfRequestVO.getTableName();
-
-        // 为文件生成一个带信息的id
-        String prefix = tableName + "_" + tableId + "_" + System.currentTimeMillis();
-
-        // 获取表格数据
-        JSONObject jsonObject = tableMongoRepository.get(tableName, tableId);
-        if (jsonObject == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        String json = jsonObject.toJSONString();
-
-        // 获取生成文件路径的根目录
-        //ClassPathResource classPathResource = new ClassPathResource("/tool");
-        String rootPath = "/root/.jenkins/workspace/njutesting/yudao-server/src/main/resources/tool";
-        //rootPath = classPathResource.getFile().getAbsolutePath();
-        System.out.println(rootPath);
-
-        // 将json写入文件
-        File newFile = new File(rootPath, prefix + ".json");
-        assert newFile.createNewFile();
-        FileOutputStream outputStream = new FileOutputStream(newFile);
-        outputStream.write(json.getBytes());
-        outputStream.close();
-
-        // 生成文件的脚本地址
-        HashMap<String, String> map = new HashMap<String, String>(){{
-            put("table2", "JS002");
-            put("table3", "JS003");
-            put("table4", "JS004");
-            put("table5", "JS005");
-            put("table6", "JS006");
-            put("table7", "JS007");
-            put("table8", "JS008");
-            put("table9", "JS009");
-            put("table10", "JS010");
-            put("table11", "JS011");
-            put("table12", "JS012");
-            put("table13", "JS013");
-            put("table14", "JS014");
-            put("offer", "offer");
-
-        }};
-        String script_path = map.get(tableName);
-
-        // 获得模板名称
-        HashMap<String, String> map2 = new HashMap<String, String>(){{
-            put("table2", "NST－04－JS002－2011－软件项目委托测试申请表-空白表.docx");
-            put("table3", "NST－04－JS003－2011－委托测试软件功能列表.docx");
-            put("table4", "NST－04－JS004－2011－软件委托测试合同.docx");
-            put("table5", "NST－04－JS005－2011－软件项目委托测试保密协议.docx");
-            put("table6", "NST－04－JS006－2011－软件测试方案.docx");
-            put("table7", "NST－04－JS007－2011－软件测试报告.docx");
-            put("table8", "NST－04－JS008－2011－测试用例（电子记录）.xlsx");
-            put("table9", "NST－04－JS009－2011－软件测试记录（电子记录）.xlsx");
-            put("table10", "NST－04－JS010－2011－测试报告检查表.docx");
-            put("table11", "NST－04－JS011－2011－软件测试问题清单（电子记录）.xlsx");
-            put("table12", "NST－04－JS012－2011－软件项目委托测试工作检查表.docx");
-            put("table13", "NST－04－JS013－2011-测试方案评审表.docx");
-            put("table14", "NST－04－JS014－2011-软件文档评审表.docx");
-            put("offer", "报价单.docx");
-
-        }};
-        String template_name = map2.get(tableName);
-
-        // 执行pdf生成脚本
-        Process proc;
-        try {
-            String command = "python3 " +
-                    rootPath + File.separator + script_path + File.separator + "test.py" + " " +
-                    "-t " + rootPath + File.separator + script_path + File.separator + template_name + " " +
-                    "-i " + rootPath + File.separator + prefix + ".json" + " " +
-                    "-o " + rootPath + File.separator + prefix;
-            System.out.println(command);
-            proc = Runtime.getRuntime().exec(command);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-            in.close();
-            proc.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 写入文件
-        String type;
-        String result;
-        if (tableName.equals("table8") || tableName.equals("table9") || tableName.equals("table11")) {
-            type = ".xls";
-        } else {
-            type = ".pdf";
-        }
-        String filePath = rootPath + File.separator + prefix + type;
-        File file = new File(filePath);
-        if (!file.exists()) {
-            throw exception(FILE_NOT_EXISTS);
-        }
-        try {
-            result = fileApi.createFile( prefix + type , Files.readAllBytes(Paths.get(filePath)));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        // 删除临时文件
-        List<String> deleteList = new ArrayList<String>(){{
-            add(".docx");
-            add(".xlsx");
-            add(".pdf");
-            add(".json");
-        }};
-        for(String delete : deleteList) {
-            File deleteFile = new File(rootPath + File.separator + prefix + delete);
-            if (deleteFile.exists()) {
-                deleteFile.delete();
-            }
-        }
-
-        return result;
-    }
-
-    public String exportTablePro(DelegationExportTableReqVO exportTableReqVO) throws IOException {
-        // 校验存在
-        Long delegationId = exportTableReqVO.getDelegationId();
-        String tableName = exportTableReqVO.getTableName();
-        String tableId = null;
-        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
-        // 构建PDFRequestVO
-        PDFRequestVO pdfRequestVO = new PDFRequestVO();
-        pdfRequestVO.setTableName(tableName);
-        // 获取表格编号
-        if (Objects.equals(tableName, "table2")) {
-            tableId = delegation.getTable2Id();
-        } else if (Objects.equals(tableName, "table3")) {
-            tableId = delegation.getTable3Id();
-        } else if (Objects.equals(tableName, "table12")) {
-            tableId = delegation.getTable12Id();
-        } else if (Objects.equals(tableName, "table14")) {
-            tableId = delegation.getTable14Id();
-        } else if (Objects.equals(tableName, "offer")) {
-            tableId = delegation.getOfferId();
-        } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
-            if (delegation.getContractId() == null) {
-                throw exception(TABLE_NOT_EXISTS);
-            }
-            ContractDO contract = contractMapper.selectById(delegation.getContractId());
-            if (contract == null) {
-                throw exception(CONTRACT_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table4")) {
-                tableId = contract.getTable4Id();
-            } else if (Objects.equals(tableName, "table5")) {
-                tableId = contract.getTable5Id();
-            }
-        } else if (Objects.equals(tableName, "table6") || Objects.equals(tableName, "table13")) {
-            if (delegation.getSolutionId() == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
-            if (solution == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table6")) {
-                tableId = solution.getTable6Id();
-            } else if (Objects.equals(tableName, "table13")) {
-                tableId = solution.getTable13Id();
-            }
-        } else if (Objects.equals(tableName, "table7") || Objects.equals(tableName, "table8") ||
-                Objects.equals(tableName, "table9") || Objects.equals(tableName, "table10") ||
-                Objects.equals(tableName, "table11")) {
-            if (delegation.getReportId() == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            ReportDO report = reportMapper.selectById(delegation.getReportId());
-            if (report == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            switch (tableName) {
-                case "table7":
-                    tableId = report.getTable7Id();
-                    break;
-                case "table8":
-                    tableId = report.getTable8Id();
-                    break;
-                case "table9":
-                    tableId = report.getTable9Id();
-                    break;
-                case "table10":
-                    tableId = report.getTable10Id();
-                    break;
-                case "table11":
-                    tableId = report.getTable11Id();
-                    break;
-            }
-        }
-        if (tableId == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        pdfRequestVO.setTableId(tableId);
-        return exportPDFOfTable(pdfRequestVO);
-    }
-
-    public String exportTableProMax(DelegationExportTableReqVO exportTableReqVO) throws IOException {
-        // 校验存在
-        Long delegationId = exportTableReqVO.getDelegationId();
-        String tableName = exportTableReqVO.getTableName();
-        String tableId = null;
-        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
-        // 构建PDFRequestVO
-        PDFRequestVO pdfRequestVO = new PDFRequestVO();
-        pdfRequestVO.setTableName(tableName);
-        // 获取表格编号
-        if (Objects.equals(tableName, "table2")) {
-            tableId = delegation.getTable2Id();
-        } else if (Objects.equals(tableName, "table3")) {
-            tableId = delegation.getTable3Id();
-        } else if (Objects.equals(tableName, "table12")) {
-            tableId = delegation.getTable12Id();
-        } else if (Objects.equals(tableName, "table14")) {
-            tableId = delegation.getTable14Id();
-        } else if (Objects.equals(tableName, "offer")) {
-            tableId = delegation.getOfferId();
-        } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
-            if (delegation.getContractId() == null) {
-                throw exception(TABLE_NOT_EXISTS);
-            }
-            ContractDO contract = contractMapper.selectById(delegation.getContractId());
-            if (contract == null) {
-                throw exception(CONTRACT_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table4")) {
-                tableId = contract.getTable4Id();
-            } else if (Objects.equals(tableName, "table5")) {
-                tableId = contract.getTable5Id();
-            }
-        } else if (Objects.equals(tableName, "table6") || Objects.equals(tableName, "table13")) {
-            if (delegation.getSolutionId() == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
-            if (solution == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table6")) {
-                tableId = solution.getTable6Id();
-            } else if (Objects.equals(tableName, "table13")) {
-                tableId = solution.getTable13Id();
-            }
-        } else if (Objects.equals(tableName, "table7") || Objects.equals(tableName, "table8") ||
-                Objects.equals(tableName, "table9") || Objects.equals(tableName, "table10") ||
-                Objects.equals(tableName, "table11")) {
-            if (delegation.getReportId() == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            ReportDO report = reportMapper.selectById(delegation.getReportId());
-            if (report == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            switch (tableName) {
-                case "table7":
-                    tableId = report.getTable7Id();
-                    break;
-                case "table8":
-                    tableId = report.getTable8Id();
-                    break;
-                case "table9":
-                    tableId = report.getTable9Id();
-                    break;
-                case "table10":
-                    tableId = report.getTable10Id();
-                    break;
-                case "table11":
-                    tableId = report.getTable11Id();
-                    break;
-            }
-        }
-        if (tableId == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        pdfRequestVO.setTableId(tableId);
-        return exportPDFOfTable(pdfRequestVO);
-    }
-
-    public String exportTableProPlus(DelegationExportTableReqVO exportTableReqVO) throws IOException {
-        // 校验存在
-        Long delegationId = exportTableReqVO.getDelegationId();
-        String tableName = exportTableReqVO.getTableName();
-        String tableId = null;
-        DelegationDO delegation = delegationMapper.validateDelegationExists(delegationId);
-        // 构建PDFRequestVO
-        PDFRequestVO pdfRequestVO = new PDFRequestVO();
-        pdfRequestVO.setTableName(tableName);
-        // 获取表格编号
-        if (Objects.equals(tableName, "table2")) {
-            tableId = delegation.getTable2Id();
-        } else if (Objects.equals(tableName, "table3")) {
-            tableId = delegation.getTable3Id();
-        } else if (Objects.equals(tableName, "table12")) {
-            tableId = delegation.getTable12Id();
-        } else if (Objects.equals(tableName, "table14")) {
-            tableId = delegation.getTable14Id();
-        } else if (Objects.equals(tableName, "offer")) {
-            tableId = delegation.getOfferId();
-        } else if (Objects.equals(tableName, "table4") || Objects.equals(tableName, "table5")) {
-            if (delegation.getContractId() == null) {
-                throw exception(TABLE_NOT_EXISTS);
-            }
-            ContractDO contract = contractMapper.selectById(delegation.getContractId());
-            if (contract == null) {
-                throw exception(CONTRACT_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table4")) {
-                tableId = contract.getTable4Id();
-            } else if (Objects.equals(tableName, "table5")) {
-                tableId = contract.getTable5Id();
-            }
-        } else if (Objects.equals(tableName, "table6") || Objects.equals(tableName, "table13")) {
-            if (delegation.getSolutionId() == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            SolutionDO solution = solutionMapper.selectById(delegation.getSolutionId());
-            if (solution == null) {
-                throw exception(SOLUTION_NOT_EXISTS);
-            }
-            if (Objects.equals(tableName, "table6")) {
-                tableId = solution.getTable6Id();
-            } else if (Objects.equals(tableName, "table13")) {
-                tableId = solution.getTable13Id();
-            }
-        } else if (Objects.equals(tableName, "table7") || Objects.equals(tableName, "table8") ||
-                Objects.equals(tableName, "table9") || Objects.equals(tableName, "table10") ||
-                Objects.equals(tableName, "table11")) {
-            if (delegation.getReportId() == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            ReportDO report = reportMapper.selectById(delegation.getReportId());
-            if (report == null) {
-                throw exception(REPORT_NOT_EXISTS);
-            }
-            switch (tableName) {
-                case "table7":
-                    tableId = report.getTable7Id();
-                    break;
-                case "table8":
-                    tableId = report.getTable8Id();
-                    break;
-                case "table9":
-                    tableId = report.getTable9Id();
-                    break;
-                case "table10":
-                    tableId = report.getTable10Id();
-                    break;
-                case "table11":
-                    tableId = report.getTable11Id();
-                    break;
-            }
-        }
-        if (tableId == null) {
-            throw exception(TABLE_NOT_EXISTS);
-        }
-        pdfRequestVO.setTableId(tableId);
-        return exportPDFOfTable(pdfRequestVO);
-    }
 }
