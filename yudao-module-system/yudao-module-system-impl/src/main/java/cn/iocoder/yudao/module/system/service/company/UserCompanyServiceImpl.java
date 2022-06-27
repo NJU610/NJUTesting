@@ -175,6 +175,13 @@ public class UserCompanyServiceImpl implements UserCompanyService {
         return userCompanyMapper.selectByUser(userId);
     }
 
+    public List<UserCompanyDO> getUserCompanyListByCompany(UserCompanyExportReqVO exportReqVO){
+        return userCompanyMapper.selectListByCompany(exportReqVO);
+    }
+
+    public List<UserCompanyDO> getUserCompanyListByTime(UserCompanyExportReqVO exportReqVO){
+        return userCompanyMapper.selectListByTime(exportReqVO);
+    }
 
     public void assignCustomerRole(Long id){
         RoleDO customer = roleService.getRoleByCode(RoleCodeEnum.CUSTOMER.getCode());

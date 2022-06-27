@@ -183,24 +183,6 @@ public interface ReportService {
     void submitReportByProject(@Valid ReportSubmitReqVO submitReqVO);
 
     //以项目为单位
-    void acceptReportManagerByProject(@Valid ReportAcceptReqVO acceptReqVO);
-
-    //以项目为单位
-    void rejectReportManagerByProject(@Valid ReportRejectReqVO rejectReqVO);
-
-    //以项目为单位
-    void acceptReportClientByProject(@Valid ReportAcceptReqVO acceptReqVO);
-
-    //以项目为单位
-    void rejectReportClientByProject(@Valid ReportRejectReqVO rejectReqVO);
-
-    //以项目为单位
-    void acceptReportSignatoryByProject(@Valid ReportAcceptReqVO acceptReqVO);
-
-    //以项目为单位
-    void rejectReportSignatoryByProject(@Valid ReportRejectReqVO rejectReqVO);
-
-    //以项目为单位
     void sendReportByProject(@Valid ReportSendReqVO sendReqVO);
 
     //以项目为单位

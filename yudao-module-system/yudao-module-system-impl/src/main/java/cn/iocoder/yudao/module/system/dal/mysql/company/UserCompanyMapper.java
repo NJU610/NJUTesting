@@ -69,4 +69,31 @@ public interface UserCompanyMapper extends BaseMapperX<UserCompanyDO> {
                 .orderByDesc(UserCompanyDO::getId));
     }
 
+    default List<UserCompanyDO> selectListByUser(UserCompanyExportReqVO reqVO) {
+        return selectList(new LambdaQueryWrapperX<UserCompanyDO>()
+                .eqIfPresent(UserCompanyDO::getUserId, reqVO.getUserId())
+                .betweenIfPresent(UserCompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(UserCompanyDO::getId));
+    }
+
+    default List<UserCompanyDO> selectListByCompany(UserCompanyExportReqVO reqVO) {
+        return selectList(new LambdaQueryWrapperX<UserCompanyDO>()
+                .eqIfPresent(UserCompanyDO::getCompanyId, reqVO.getCompanyId())
+                .betweenIfPresent(UserCompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(UserCompanyDO::getId));
+    }
+
+    default List<UserCompanyDO> selectListByTime(UserCompanyExportReqVO reqVO) {
+        return selectList(new LambdaQueryWrapperX<UserCompanyDO>()
+                .betweenIfPresent(UserCompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(UserCompanyDO::getId));
+    }
+
+    default List<UserCompanyDO> selectListByUserTime(UserCompanyExportReqVO reqVO) {
+        return selectList(new LambdaQueryWrapperX<UserCompanyDO>()
+                .eqIfPresent(UserCompanyDO::getUserId, reqVO.getUserId())
+                .betweenIfPresent(UserCompanyDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(UserCompanyDO::getId));
+    }
+
 }

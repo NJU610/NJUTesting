@@ -4,6 +4,7 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
+import cn.iocoder.yudao.module.system.controller.admin.company.vo.UserCompanyExportReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationExportReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.delegation.vo.DelegationPageReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.company.UserCompanyDO;
@@ -12,6 +13,7 @@ import cn.iocoder.yudao.module.system.enums.delegation.DelegationStateEnum;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -129,7 +131,62 @@ public interface DelegationMapper extends BaseMapperX<DelegationDO> {
     }
 
     default DelegationDO selectByProject(Long projectId) {
-        return selectOne("project_id", projectId);
+        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getProjectId, projectId)
+        );
 
     }
+
+    default DelegationDO selectByCreator(Long creatorId) {
+        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getCreatorId, creatorId)
+        );
+    }
+
+    default DelegationDO selectBylaunchTime(Date launchTime) {
+        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getLaunchTime, launchTime)
+        );
+    }
+
+    default DelegationDO selectByUrl(String url) {
+        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getUrl, url)
+        );
+    }
+
+    default DelegationDO selectByName(String name) {
+        return selectOne(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getName, name)
+        );
+    }
+
+    default boolean ValidateExitByName(String name) {
+        return selectCount(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getName, name)
+        ) > 0;
+    }
+
+    default boolean ValidateExitByUrl(String url) {
+        return selectCount(new LambdaQueryWrapperX<DelegationDO>()
+                .eq(DelegationDO::getUrl, url)
+        ) > 0;
+    }
+
+    //获取某市场部工作人员所负责的所有委托项目
+    default List<DelegationDO> selectListByMarketDeptStaffId(DelegationExportReqVO reqVO) {
+        return selectList(new LambdaQueryWrapperX<DelegationDO>()
+                .eqIfPresent(DelegationDO::getMarketDeptStaffId, reqVO.getMarketDeptStaffId())
+                .betweenIfPresent(DelegationDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(DelegationDO::getId));
+    }
+
+    //获取某测试部工作人员所负责的所有委托项目
+    default List<DelegationDO> selectListByTestingDeptStaffId(DelegationExportReqVO reqVO) {
+        return selectList(new LambdaQueryWrapperX<DelegationDO>()
+                .eqIfPresent(DelegationDO::getTestingDeptStaffId, reqVO.getTestingDeptStaffId())
+                .betweenIfPresent(DelegationDO::getCreateTime, reqVO.getBeginCreateTime(), reqVO.getEndCreateTime())
+                .orderByDesc(DelegationDO::getId));
+    }
+
 }
