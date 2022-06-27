@@ -37,6 +37,53 @@ public class SolutionController {
     @Resource
     private SolutionService solutionService;
 
+    @PostMapping("/create")
+    @ApiOperation(value = "测试部人员-创建测试方案",
+            notes = "测试部人员首次创建测试方案时调用，之后修改测试方案时调用update和submit接口。返回值为测试方案编号。")
+    public CommonResult<Long> createSolution(@Valid @RequestBody SolutionCreateReqVO createReqVO) {
+        return success(solutionService.createSolution(createReqVO));
+    }
+
+    @PutMapping("/save/table6")
+    @ApiOperation(value = "测试部人员-保存软件测试方案表格",
+            notes = "需要填写solutionId和data字段，其中solutionId为测试方案编号，data是json格式，包含表格内容。返回值为是否保存成功。")
+    public CommonResult<Boolean> saveSolutionTable6(@Valid @RequestBody SolutionSaveTableReqVO saveTableReqVO) {
+        solutionService.saveSolutionTable6(saveTableReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/save/table13")
+    @ApiOperation(value = "质量部人员-保存测试方案评审表",
+            notes = "需要填写solutionId和data字段，其中solutionId为测试方案编号，data是json格式，包含表格内容。返回值为是否保存成功。")
+    public CommonResult<Boolean> saveSolutionTable13(@Valid @RequestBody SolutionSaveTableReqVO saveTableReqVO) {
+        solutionService.saveSolutionTable13(saveTableReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/submit/table6")
+    @ApiOperation(value = "测试部人员-提交软件测试方案表",
+            notes = "需要填写solutionId字段，其中solutionId为测试方案编号。返回值为是否更新成功。")
+    public CommonResult<Boolean> submitSolutionTable6(@Valid @RequestBody SolutionSubmitReqVO submitReqVO) {
+        solutionService.submitSolutionTable6(submitReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/audit/success")
+    @ApiOperation(value = "质量部人员-测试方案审核通过",
+            notes = "需要填写solutionId字段，其中solutionId为测试方案编号。需要先保存测试方案评审表。返回值为是否更新成功。")
+    public CommonResult<Boolean> auditSuccess(@Valid @RequestBody SolutionSubmitReqVO submitReqVO) {
+        solutionService.auditSuccess(submitReqVO);
+        return success(true);
+    }
+
+    @PutMapping("/audit/fail")
+    @ApiOperation(value = "质量部人员-测试方案审核未通过",
+            notes = "需要填写solutionId字段，其中solutionId为测试方案编号。需要先保存测试方案评审表。返回值为是否更新成功。")
+    public CommonResult<Boolean> auditFail(@Valid @RequestBody SolutionSubmitReqVO submitReqVO) {
+        solutionService.auditFail(submitReqVO);
+        return success(true);
+    }
+
     @GetMapping("/get/table6")
     @ApiOperation(value = "获得软件测试方案表格",
             notes = "需要填写id字段。其中id为表格编号，从合同的返回值中获取。返回值为json格式，存放在data字段中，包含表格内容。")
