@@ -543,15 +543,59 @@ public class ReportServiceImpl implements ReportService {
         Long reportId = saveReqVO.getReportId();
         ReportDO report = this.validateReportExists(reportId);
         // 保存表单
-        if (report.getTable8Id() == null) {
-            report.setTable8Id(tableMongoRepository.create(name,
-                    saveReqVO.getData()));
+        if (getReportId(report, name) == null) {
+            switch (name){
+                case "table7": report.setTable7Id(tableMongoRepository.create(name,
+                        saveReqVO.getData()));
+                    break;
+                case "table8": report.setTable8Id(tableMongoRepository.create(name,
+                        saveReqVO.getData()));
+                    break;
+                case "table9": report.setTable9Id(tableMongoRepository.create(name,
+                        saveReqVO.getData()));
+                    break;
+                case "table10": report.setTable10Id(tableMongoRepository.create(name,
+                        saveReqVO.getData()));
+                    break;
+                case "table11": report.setTable11Id(tableMongoRepository.create(name,
+                        saveReqVO.getData()));
+                    break;
+            }
             reportMapper.updateById(report);
         } else {
-            tableMongoRepository.upsert(name,
-                    report.getTable8Id(),
-                    saveReqVO.getData());
+            switch (name){
+                case "table7": tableMongoRepository.upsert(name,
+                        report.getTable7Id(),
+                        saveReqVO.getData());
+                    break;
+                case "table8": tableMongoRepository.upsert(name,
+                        report.getTable8Id(),
+                        saveReqVO.getData());
+                    break;
+                case "table9": tableMongoRepository.upsert(name,
+                        report.getTable9Id(),
+                        saveReqVO.getData());
+                    break;
+                case "table10": tableMongoRepository.upsert(name,
+                        report.getTable10Id(),
+                        saveReqVO.getData());
+                    break;
+                case "table11": tableMongoRepository.upsert(name,
+                        report.getTable11Id(),
+                        saveReqVO.getData());
+                    break;
+            }
         }
     }
 
+    private String getReportId(ReportDO report, String name){
+        switch(name){
+            case "table7": return report.getTable7Id();
+            case "table8": return report.getTable8Id();
+            case "table9": return report.getTable9Id();
+            case "table10": return report.getTable10Id();
+            case "table11": return report.getTable11Id();
+            default : return null;
+        }
+    }
 }
