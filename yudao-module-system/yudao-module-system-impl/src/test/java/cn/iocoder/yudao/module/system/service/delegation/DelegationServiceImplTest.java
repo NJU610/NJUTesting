@@ -59,7 +59,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void creatDelegation() {
 
@@ -81,7 +81,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void updateDelegation(){
         // 准备参数
@@ -111,7 +111,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void submitDelegation() {
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -144,7 +144,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveDelegationTable2() {
 
@@ -176,7 +176,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveDelegationTable3() {
 
@@ -208,7 +208,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveDelegationTable14() {
 
@@ -240,7 +240,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void distributeDelegation2Mkt(){
 
@@ -277,7 +277,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void distributeDelegation2Test(){
 
@@ -313,7 +313,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationSuccessMkt(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -348,7 +348,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationSuccessTest(){
 
@@ -386,7 +386,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationFailMkt(){
         Mockito.when(userService.getUser(any())).thenReturn(new AdminUserDO());
@@ -422,7 +422,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
     
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void auditDelegationFailTest(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -458,7 +458,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void saveOffer(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -494,7 +494,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void submitOffer(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -530,7 +530,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void rejectOffer(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -566,7 +566,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void acceptOffer(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -602,7 +602,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void deleteDelegation(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -633,7 +633,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
 
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void cancelDelegationClient(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
@@ -663,7 +663,7 @@ class DelegationServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @JunitPerfConfig(threads = 8, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
+    @JunitPerfConfig(threads = 50, warmUp = 0, duration = 1000,reporter = {HtmlReporter.class})
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void cancelDelegationAdmin(){
         long delegationId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
