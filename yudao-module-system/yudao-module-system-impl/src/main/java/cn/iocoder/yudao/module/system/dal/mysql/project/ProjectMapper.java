@@ -16,6 +16,7 @@ import cn.iocoder.yudao.module.system.controller.admin.report.vo.*;
  *
  * @author zcq
  */
+@Mapper
 public interface ProjectMapper extends BaseMapperX<ProjectDO>{
 
     default boolean existsByDelegation(Long delegationId) {
